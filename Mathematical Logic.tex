@@ -1,0 +1,110 @@
+% Copyright (C) He Guanyuming 2020
+% The file is licensed under the MIT license.
+
+\section{Mathematical Logic}
+
+\subsection{Mathematical Statements}
+
+\declareexercise{a.1.1}
+It is ( (both $X, Y$ are false) or (both $X, Y$ are true) ).
+
+\declareexercise{a.1.2}
+It is ( ($Y$ can be true even if $X$ is false) or ($Y$ can be false even if $X$ is true) ).
+
+\declareexercise{a.1.3}
+Yes. That's the definition of logical equivalent.
+
+\declareexercise{a.1.4}
+No. It is still possible that (even if $X$ is false, $Y$ is still true).
+
+Consider a statement $Y$ that satisfies:
+\begin{enumerate}
+\item If $X$, then $Y$.
+\item If $X$ is false, then $Y$ or (exclusively) $Y$ is false.
+\end{enumerate}
+
+$X,Y$ satisfy the description in the exercise, but they are not logical equivalent.
+
+\declareexercise{a.1.5}
+Yes. (Now I'm using the symbols defined in the A.2 for the sake of simplification)
+$X \Longleftrightarrow Y$ means $X \Longrightarrow Y \wedge \neg X \Longrightarrow \neg Y$. So does $Y$ and 
+$Z$. So 
+\begin{align*}
+(X \Longrightarrow Y \Longrightarrow Z \wedge \neg X \Longrightarrow \neg Y \Longrightarrow \neg Z)
+&\Longrightarrow \\
+(X \Longrightarrow Z \wedge \neg X \Longrightarrow \neg Z)
+\end{align*}
+, which means $X$ and $Z$ are logical equivalent.
+
+(Note that $A \Longrightarrow B$ can also be interpreted as a statement, meaning ``If $A$ is true, then $B$ 
+is true'', just like we did in this example.)
+
+\declareexercise{a.1.6}
+Yes. $(X \Longrightarrow Y \Longrightarrow Z) \Longrightarrow (X \Longrightarrow Z)$. 
+
+Now we are proving that 
+$Z \Longrightarrow X \equiv \neg X \Longrightarrow \neg Z$. Assume that $\neg X \wedge Z$. Since 
+$Z \Longrightarrow X$, we have a contradiction: $X \wedge \neg X$.
+
+So $X \Longrightarrow Z \wedge \neg X \Longrightarrow \neg Z$. Therefore, $X,Z$ are logical equivalent. 
+Besides, we can conclude that $Y \Longrightarrow X$. Thus $X,Y$ are also logical equivalent.
+
+\subsection{Implication}
+Why did Tao say
+\begin{quotation}
+If $X$, then $Y$ can also be written as ``$X$ can only be true when $Y$ is true''
+\end{quotation}?
+
+Assume the $X \wedge \neg Y$, but $X \Longrightarrow Y$. So we have a contradiction 
+$Y \wedge \neg Y$.
+
+Define ``when $x \neq 2$, $X:x=2 \Longrightarrow x^2=4$ is vacuously true'' to ensure that $X$ is 
+always true regardless of the value of $x$.
+
+\subsection{Nested Quantifiers}
+\declareexercise{a.5.1}
+\textbf{(a)} Let $P$ be $y^2=x$ is true for each positive number $y$. And this statement means $P$ is 
+true for each positive number $x$. 
+
+\emph{Gaming metaphor}: Me and my friend each randomly pick up a positive, say $x$ and $y$, and check 
+if $y^2=x$.
+
+The statement is false.
+
+\textbf{(b)} There is at least one positive number $x$ such that for every positive number $y$, 
+$y^2=x$.
+
+\emph{Gaming metaphor}: I have to pick up a positive number $x$ such that whatever positive number $y$ 
+my friend picks up, $y^2=x$ is always true.
+
+The statement is false.
+
+\textbf{(c)} There is at least two positive numbers $x,y$ such that $y^2=x$.
+
+\emph{Gaming metaphor}: Me and my friend each have to pick up a positive number, say $x$ and $y$, such 
+that $y^2=x$.
+
+The statement is true. For example, $1^2=1$.
+
+\textbf{(d)} The statement $\exists x > 0, y^2=x$ is true for every $y>0$.
+
+\emph{Gaming metaphor}: For each positive number $y$ my friend picks up, I have to pick up a positive 
+number $x$ such that $y^2=x$.
+
+The statement is true, because $y^2$ is also positive.
+
+\textbf{(e)} There is at least one positive number $y$ such that for every positive number $x$, $y^2=x$ 
+is always true.
+
+\emph{Gaming metaphor}: I have to find a number $y>0$ such that regardless of what number $x$ my friend 
+picks up, $y^2=x$ is always true.
+
+The statement is false.
+
+\subsection{Equality}
+\declareexercise{a.7.1}
+\begin{proof}
+Let $F(x) := x+c$. By axiom 4, $F(a)=F(b)$. That is, $a+c=b+c$. Similarly, by letting $G(x) := a+x$, 
+we have $a+c=a+d$, which, according to axiom 2, becomes $a+d=a+c$. Now we have $a+d=a+c, a+c=b+c$. 
+According to axiom 3, we can conclude that $a+d=b+c$.
+\end{proof}

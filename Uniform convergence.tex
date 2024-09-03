@@ -1,0 +1,31 @@
+\section{Uniform convergence}
+\subsection{Limiting value of functions}
+\declareexercise{ii.3.1.1}
+\begin{description}
+	\item[If] Suppose that $\lim_{x\to x_0;x\in E\setminus\{x_0\}} f(x)$ exists and equals to $f(x_0)$. This means that, for every $\varepsilon > 0$, there exists $\delta > 0$ such that $x \in \{x \in E\setminus\{x_0\} : d_X(x,x_0) < \delta\} \to d_Y(f(x),f(x_0)) < \varepsilon$.
+	
+	However, considering that $d_Y(f(x_0),f(x_0)) = 0 < \varepsilon$ for every $\varepsilon > 0$, we may conclude that $x \in \{x \in E : d_X(x,x_0) < \delta\} \to d_Y(f(x),f(x_0)) < \varepsilon$. By definition, this means that $\lim_{x\to x_0;x\in E} f(x) = f(x_0)$.
+	
+	\item[Only If] Suppose that $\lim_{x\to x_0;x\in E} f(x)$ exists. Say it equals to $L$. Then, for every $\varepsilon > 0$, there exists $\delta > 0$ such that $x \in \{x \in E : d_X(x,x_0) < \delta\} \to d_Y(f(x),L) < \varepsilon$. 
+	
+	In particular, since $d_X(x_0,x_0) = 0$, which is smaller than any $\delta > 0$, I conclude that $d_Y(f(x_0), L)$ is smaller than any $\varepsilon > 0$, which means it equals to $0$.
+	
+	Given any $\delta > 0$ and any $x \in \{x \in E\setminus\{x_0\} : d_X(x,x_0) < \delta\}$, consider the triangular in equality:
+	$$
+	d_Y(f(x),f(x_0)) \le d_Y(f(x),L) + d_Y(L, f(x_0)) = d_Y(f(x),L)
+	$$
+	Hence, if $d_Y(f(x),L) < \varepsilon$, then $d_Y(f(x),f(x_0)) < \varepsilon$. Because of the existence of $\lim_{x\to x_0;x\in E} f(x)$, we can always find $\delta > 0$ to get some $x$ to satisfy the $\varepsilon$. It means that $\lim_{x\to x_0;x\in E\setminus\{x_0\}} f(x) = f(x_0)$, as desired.
+\end{description}
+
+Note that $f(x_0) = L$ immediately follows from $d_Y(f(x_0),L) = 0$. Then, I have finished all the proofs.
+
+One might be eager to arrive at the conclusion that the two definitions of limit are the same, as we are able to say now
+\begin{quotation}
+	$\lim_{x\to x_0;x\in E\setminus\{x_0\}} = f(x_0)$ if and only if $\lim_{x\to x_0;x\in E} = f(x_0)$.
+\end{quotation}
+However, it is not exactly the case, because when saying $\lim \cdots = L$, we are saying two things:
+\begin{enumerate}
+	\item $\lim \cdots$ exists.
+	\item It equals to $L$.
+\end{enumerate}
+Hence, when $\lim_{x\to x_0;x\in E\setminus\{x_0\}} = L \ne f(x_0)$, $\lim_{x\to x_0;x\in E}$ does NOT exist!

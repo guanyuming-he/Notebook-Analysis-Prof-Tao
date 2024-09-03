@@ -1,0 +1,13 @@
+\section{Continuous Functions on $\setr$}
+\subsection{Subsets of the real line}
+
+\declareexercise{9.1.5}
+\begin{description}
+	\item[If] Suppose that, taking values entirely from $X$, there exists a sequence \taoseq{a_n} that converges to $x$, that is, it is eventually \eclose\ to every \pose. Now we show that $x$ is an adherent point of $X$, that is, $x$ is \eadherent\ to $X$ for every \pose.
+	
+	Given any \pose, we need to find $x_\varepsilon \in X$ such that $|x_\varepsilon - x| < \varepsilon$. Because \taoseq{a_n} converges to $x$, for this $\varepsilon$ we can find $N_\varepsilon > 0$ such that $|a_n - x| < \varepsilon$ for all $n \ge N$. Since \taoseq{a_n} takes value from $X$ entirely, any such $a_n$ suffices.
+	
+	\item[Only If] Now suppose that $x$ is an adherent point of $X$. Therefore, for every \pose, the set $X_\varepsilon = \{a \in X\colon |a-x| < \varepsilon\}$ is non-empty. 
+	
+	Consider the sequence $\taoseq{a_n}[1]\colon a_n \in X_{1/n}$. The existence of this sequence is obtained by using the axiom of choice. Then, it is easy to verify that \taoseq{a_n}[1] is indeed convergent to $x$.
+\end{description}

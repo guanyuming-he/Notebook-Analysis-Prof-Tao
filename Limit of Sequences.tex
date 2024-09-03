@@ -1,0 +1,62 @@
+\section{Limits of Sequences}
+\subsection{Convergence and limit laws}
+\declareexercise{6.1.1}
+Let $m=n+q$, then we may induct on $q$.
+
+\declareexercise{6.1.2}
+\noindent given any $\varepsilon>0 \equiv \forall \varepsilon>0$\\
+eventually $\varepsilon$-close $\equiv \exists N\geq m(n\geq N \to |a_n - L| <\varepsilon)$
+
+\declareexercise{6.1.3}
+Base on \exerciseref{6.1.2}, if $\{a_n\}^\infty_{n=m}$ is convergent, then for any $\varepsilon>0$, we can find $N$ such that $\forall n\geq N( |a_n-L|<\varepsilon)$. Thus, $\forall n\geq \max(N,m') (|a_n-L|< \varepsilon)$, which means that $\{a_n\}^\infty_{n=m'}$ is convergent.
+
+It is easy to prove the converse.
+
+\declareexercise{6.1.4}
+$\{a_{n+k}\}^\infty_{n=m}$ is essentially $\{a_{n}\}^\infty_{n=m+k}$. So it is immediately derived from the previous exercise.
+
+\declareexercise{6.1.5}
+\[
+|a_p-a_q| \leq |a_p-L| + |L-a_q| \leq 2\varepsilon
+\]
+
+\declareexercise{6.1.6}
+$\forall m \geq 1, a_m = \LIM a_m$. $a_m - L = \LIM{a_m} - \LIM{a_n} = \LIM{(a_m-a_n)}$. Suppose that $a_m$ is not eventually $\varepsilon$-close to $L$ for all $\varepsilon>0$, then $\exists \epsilon >0(\forall N \geq 1(\exists M \geq N(|\LIM{(a_m-a_n)}|>\epsilon)))$. Since that $\{a_n\}$ is a Cauchy sequence, $\exists P(\forall m,n\geq P(|a_m-a_n|\leq \epsilon))$. Given these $m,n$, we have
+\[
+|\LIM{(a_m-a_n)}| = \LIM{|a_m-a_n|} \leq \LIM \epsilon = \epsilon
+\]
+, a contradiction.
+
+\subsection{The extended real number system}
+\declareexercise{6.2.1}
+These statements are already proven for real numbers. Now we only consider the statements when at least some of $x,y,z$ are $+,-\infty$.
+
+(a) Obviously true for $+,-\infty$.
+
+(b) If $y \ne x = - \infty$  then $x < y$; if $y \ne x = + \infty$, then $x > y$. If $x$ is real, then $x < y$ if $y = \infty$, $x > y$ if $y = -\infty$. If $x = y$, then $x = y$.
+
+(c) If $x = y = z$ or at least two are equal, then the transitivity is obvious. Now let $x \ne y \ne z$, and we have $x,y \ne + \infty, y,z \ne - \infty$ (so $y$ is real now). If $x = - \infty$  then by definition we have $x < z$. If $x \ne - \infty$, then $z = + \infty$ (remember that we ignore when $x,y,z$ are all real), and we still have $x < z$.
+
+(d) It is trivial when $x = y$. If $x = - \infty$, then $-x = +\infty$, and by definition we know $-y< -x$ whatever $-y$ is. If $x \ne -\infty$, then $y = +\infty$, and $-y = - \infty$, thus we have $-y < -x$ whatever $-x$ is.
+
+\declareexercise{6.2.2}
+These statements are already proven for real numbers. Now we only consider the statements when at least some of $E$ are not real. Also in the below three arguments for (a), (b), (c), respectively, we consider $E$ as non-empty.
+
+(a) If $+ \infty \in E$, then $\sup E = + \infty$, and $\forall x \in E, x \le \infty$. For $\inf E = - \sup (-E)$, since that $- \infty \in -E$, $\inf E = - \sup (-E - \{-\infty\}) = \inf (E - \{+ \infty\})$. If $E - \{+ \infty\}$ consists of only reals, then we are done. Otherwise, $\inf E = - \infty$, and we are also done. 
+
+If $- \infty \in E$, we have already shown the $\inf$ part, and we know that for all $x \in E - \{-\infty\}$ (a set doesn't contain $- \infty$), $x \le \sup (E - \{-\infty\})$. But by definition, $\sup E = \sup (E - \{-\infty\})$, so we are done.
+
+(b) If $+ \infty \in E$, then it is the only upper bound of $E$, and it is $\sup E$. If $- \infty \in E$, then this, however, does not change $\sup E$. We can also show that it also does not change any upper bound of $E$, since $- \infty$ is less or equal to any extended real number. Therefore, we are done.
+
+(c) The argument for (b) applies similarly here, if we exchange $-\infty$ with $\infty$.
+
+If otherwise $E$ is empty, then (a) instead becomes vacuously true, and (b) and (c) are obvious.
+
+\subsection{Suprema and Infima of sequences}
+\declareexercise{6.3.1}
+Since that 1 is an element of this set, then 1 must be smaller than or equal to all the upper bounds. In addition, 1 is the biggest number in the set, so for all elements in the set, it is less than or equal to 1. The two facts together make 1 the least upper bound of the set.
+
+The infimum of the sequence is the supremum of the minus sequence. 0 is obviously an upper bound of the minus sequence. On the other hand, for any number < 0, there are elements of the minus sequence that can exceed beyond it. So no number smaller than 0 can be an supremum for the minus sequence, and thus 0 is the infimum of the sequence.
+
+\declareexercise{6.3.2}
+

@@ -1,0 +1,41 @@
+% In contrast to mymath.sty, which provides general math typing from AMS,
+% this package focuses on defining the various specific notations that Prof. Tao uses.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{realanalysis}
+
+\RequirePackage{mymath}
+
+% For writting successors of natural numbers.
+% I intend to make it like a function for better semantics
+% Note that the plus signs are put into brackets so that TeX will treat them as ordinary symbols.
+% See The TeXbook, p. 134
+\newcommand{\successor}[1]{#1{+}{+}}
+
+% For writing sequences of many kinds in Prof. Tao's notation.
+% For example, (a_nb_n)^\infty_{n=m}
+% #1: sequence element notation
+% #2: start index
+% #3: end index
+% #4: subscript
+\NewDocumentCommand{\taoseq}{m O{0} O{\infty} O{n}}{\ensuremath{(#1)^#3_{#4=#2}}}
+
+% For LIM in section 5
+\DeclareMathOperator*{\LIMo}{LIM}
+\newcommand{\LIM}[1]{\LIMo_{n \to \infty}{#1}}
+
+% Epsilon close, $\epsilon$ > 0$, etc.
+\newcommand{\eclose}{$\varepsilon$-close}
+\newcommand{\eadherent}{$\varepsilon$-adherent}
+% positive epsilon.
+\newcommand{\pose}{\ensuremath{\varepsilon > 0}}
+
+% Various sets
+\newcommand{\setr}{\ensuremath{\mathbf{R}}}
+\newcommand{\setq}{\ensuremath{\mathbf{Q}}}
+\newcommand{\setz}{\ensuremath{\mathbf{Z}}}
+\newcommand{\setn}{\ensuremath{\mathbf{N}}}
+\newcommand{\setnp}{\ensuremath{\mathbf{N}^+}}
+
+
+% Used for \foreach loop
+\RequirePackage{pgffor}

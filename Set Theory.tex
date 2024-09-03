@@ -1,0 +1,1970 @@
+% Copyright (C) He Guanyuming 2020
+% The file is licensed under the MIT license.
+
+\chapter{Set Theory}
+Before I start, I would like to write an honest opinion of mine: many definitions and axioms of the set theory involve the encapsulation and manipulation of basic logic constructs: $\forall, \exists, \wedge, \vee, \to, \dots$
+
+As a result, the proofs in this chapter will also include rely on them heavily.
+
+Some additional notes:
+\begin{enumerate}
+	\item $p \leftrightarrow q$ is defined as $p \to q \wedge p \leftarrow q$.
+\end{enumerate}
+
+\section{Fundamentals}
+\begin{why}{29}\label{why.unique.empty.set}
+If $\varnothing$ and $\varnothing'$ are both empty sets, then they are equal.
+\end{why}
+\begin{proof}
+	Observe that 
+	\[
+	\forall x (x \in \varnothing \leftrightarrow x \in \varnothing')
+	\]
+	because in either direction the statement is vacuously true.
+\end{proof}
+
+\begin{why}{30}
+	Let $A = \{a\}, A' = \{a\}$, then $A = A'$.
+\end{why}
+\begin{proof}
+	Let $x$ by any object. By the property of $=$, we have exclusively either $x=a$ or $x \ne a$.
+	
+	\begin{itemize}
+		\item If $x = a$, then $x \in A \leftrightarrow x \in A'$ is true.
+		\item If $x \ne a$, then $x \in A \leftrightarrow x \in A'$ is vacuously true.		
+	\end{itemize}
+
+	Therefore, $x \in A \leftrightarrow x \in A'$ is always true. By the definition of set equality, $A = A'$.
+\end{proof}
+
+\begin{why}{30}
+	Let $A = \{a,b\}, A' = \{b,a\}$, then $A = A'$.
+\end{why}
+\begin{proof}
+	Let $x$ by any object. $x = a \vee x = b$ is a statement, so it is either exclusively true or false.
+	
+	\begin{itemize}
+		\item If $x = a \vee x = b$ is true, then $x \in A \leftrightarrow x \in A'$ is true.
+		\item If $x = a \vee x = b$ is not true, then $x \in A \leftrightarrow x \in A'$ is vacuously true.		
+	\end{itemize}
+	
+	Therefore, $x \in A \leftrightarrow x \in A'$ is always true. By the definition of set equality, $A = A'$.
+\end{proof}
+
+\begin{why}{30}
+	Let $A = \{a\}, A' = \{a,a\}$, then $A = A'$.
+\end{why}
+\begin{proof}
+	Observe that $x \in A'$ iff $x = a$. Then, apply the proof of $\{a\} = \{a\}$ here.
+\end{proof}
+
+\begin{exercise}{3.1.1}
+	Let $a,b,c,d$ be objects such that $\{a,b\} = \{c,d\}$, then at least one of
+	\begin{enumerate}
+		\item $a = c \wedge b = d$
+		\item $a = d \wedge b = c$
+	\end{enumerate}
+	is true.
+\end{exercise}
+\begin{proof}
+	I tried going straight to show all possibilities, but that yielded too many cases.
+	
+	Therefore, I prove by contradiction. Suppose for the sake of contradiction that neither of the two statements is true. In particular, $a \ne c \wedge a \ne d$.
+	
+	Then, we must have $\{a,b\} \ne \{c,d\}$, because $a \in \{a,b\}$ but $a \notin \{c, d\}$, which means $a \in \{a,b\} \to a \in \{c,d\}$ is false. This gives a contradiction.
+\end{proof}
+
+\begin{exercise}{3.1.2}
+	$\varnothing, \{\varnothing\}, \{\{\varnothing\}\}$, and $\{\varnothing,\{\varnothing\}\}$ are all distinct.
+\end{exercise}
+\begin{proof}
+	First, because all except $\varnothing$ contain some element, they are all non-empty, by Axiom 3.2 and 3.3.
+	
+	Now, we show that $\{\varnothing\}, \{\{\varnothing\}\}$, and $\{\varnothing,\{\varnothing\}\}$ are distinct. 
+	
+	Observe that $\{\varnothing\} \notin \{\varnothing\}$, but it is in both $\{\{\varnothing\}\}$, and $\{\varnothing,\{\varnothing\}\}$. Therefore, $\{\varnothing\}$ is distinct from the rest two.
+	
+	Now, we only need to show that $\{\{\varnothing\}\} \ne \{\varnothing,\{\varnothing\}\}$. This is done by noticing that $\varnothing$ is in the latter, but not in the former.
+\end{proof}
+
+\begin{why}{30}
+	Let $A,B,A'$ be sets. If $A = A'$, then $A \cup B = A' = B$.
+\end{why}
+\begin{proof}\leavevmode
+	\begin{enumerate}
+		\item Let $x$ be any element in $A \cup B$. According to Axiom 3.5, $x \in A \vee x \in B$. 
+		\begin{enumerate}
+			\item If $x \in A$, then by Axiom 3.2, $x \in A'$, then $x \in A' \vee x \in B$, which, according to Axiom 3.5 again, means $x \in A' \cup B$. 
+			\item If $x \in B$, then $x \in A' \vee x \in B$, which, according to Axiom 3.5 again, means $x \in A' \cup B$.
+		\end{enumerate}
+		
+		\item Let $x$ be any element in $A' \cup B$. According to Axiom 3.5, $x \in A' \vee x \in B$. 
+		\begin{enumerate}
+			\item If $x \in A'$, then by Axiom 3.2, $x \in A$, then $x \in A \vee x \in B$, which, according to Axiom 3.5 again, means $x \in A \cup B$. 
+			\item If $x \in B$, then $x \in A \vee x \in B$, which, according to Axiom 3.5 again, means $x \in A \cup B$.
+		\end{enumerate}
+	\end{enumerate}
+\end{proof}
+
+\begin{exercise}{3.1.3}
+\begin{enumerate}
+	\item $A \cup B = B \cup A$.
+	\item $\{a,b\} = \{a\} \cup \{b\}$
+\end{enumerate}
+\end{exercise}
+\begin{proof}\leavevmode
+	\begin{enumerate}
+		\item This follows from the commutativity of logical or.
+		\item By Axiom 3.4, $x \in \{a,b\}$ iff $x = a$ or $x = b$. By Axiom 3.5, $x \in \{a\} \cup \{b\}$ iff $x \in \{a\}$ or $x \in \{b\}$.
+		
+		However, by Axiom 3.4 again, $x \in \{a\}$ iff $x = a$; $x \in \{b\}$ iff $x = b$. Hence, the two logical statements are equivalent.
+	\end{enumerate}
+\end{proof}
+
+\begin{why}{32}
+	For any set $A$,
+	\begin{itemize}
+		\item $A \subseteq A$.
+		\item $\varnothing \subseteq A$.
+	\end{itemize}
+\end{why}
+\begin{proof}\leavevmode
+	\begin{itemize}
+		\item For all $x$, $x \in A \to x \in A$ is true.
+		\item For all $x$, $x \in \varnothing \to x \in A$ is vacuously true.
+	\end{itemize}
+\end{proof}
+
+\begin{exercise}{3.1.4}
+	\begin{enumerate}
+		\item {\bf Antisymmetry.} If $A \subseteq B$ and $B \subseteq A$, then $A = B$. 
+		\item If $A \subsetneq B$ and $B \subsetneq C$, then $A \subsetneq C$.
+	\end{enumerate}
+\end{exercise}
+\begin{proof}\leavevmode
+	\begin{enumerate}
+		\item $A \subseteq B$ means that every element in $A$ is an element in $B$; $B \subseteq A$ means vice versa. Combining the two, we have the definition of $A = B$.		
+		\item Prof.~Tao already showed that $A \subseteq C$. Now we only need to show that $A \ne C$. 
+		
+		Because $A \subsetneq B$, $A \ne B$. Hence, there exists such an element $x$ that is not in both. However, as everyone in $A$ is in $B$, we can only have $x \in B \wedge x \notin A$.
+		
+		Because $B \subseteq C$, we must also have $x \in C$. Therefore, $A \ne C$, as $x \in A$.
+	\end{enumerate}
+\end{proof}
+
+\begin{why}{33}
+	$\{x \in A : P(x)\} \subseteq A$.
+\end{why}
+\begin{proof}
+	By Axiom 3.6, for any $y \in \{x \in A : P(x)\}$, we have $y \in A$.
+\end{proof}
+\begin{why}{33}
+	If $A = A'$, then $\{x \in A : P(x)\} = \{x \in A' : P(x)\}$.
+\end{why}
+\begin{proof}
+	By Axiom 3.6,
+	\begin{enumerate}
+		\item For any $y \in \{x \in A : P(x)\}$, $y \in A \wedge P(y)$. 
+		
+		Because $A = A'$, $y \in A' \wedge P(y)$. By Axiom 3.6 again, $y \in \{x \in A' : P(x)\}$.
+		\item For any $y \in \{x \in A' : P(x)\}$, $y \in A' \wedge P(y)$. 
+		
+		Because $A = A'$, $y \in A \wedge P(y)$. By Axiom 3.6 again, $y \in \{x \in A : P(x)\}$.
+	\end{enumerate}
+\end{proof}
+
+\begin{why}{34}
+	$\varnothing$ and $\varnothing$ are disjoint, but not distinct.
+\end{why}
+\begin{proof}\leavevmode
+	\begin{itemize}
+		\item They are disjoint, because no element $x$ can satisfy $x \in \varnothing \wedge x \in \varnothing$.
+		\item They are not distinct, because we showed earlier that any empty set is the same as $\varnothing$.
+	\end{itemize}
+\end{proof}
+
+\begin{exercise}{3.1.5}
+These are logically equivalent:
+\begin{enumerate}
+	\item $A \subseteq B$.
+	\item $A \cup B = B$.
+	\item $A \cap B = A$.
+\end{enumerate}
+\end{exercise}
+\begin{proof}\leavevmode
+	\begin{enumerate}
+		\item If $A \subseteq B$, then
+		\begin{enumerate}
+			\item For every $x \in B$, by Axiom 3.5, $x \in A \cup B$. For every $y \in A \cup B$, by Axiom 3.5, $y$ in $A$ or $B$. But when $y \in A$, $y$ also $\in B$, as $A \subseteq B$. 
+			
+			Hence, $A \cup B = B$.
+			\item For every $x \in A \cap B$, by definition, $x \in A$ and $B$, then $x \in A$. For every $y \in A$, by the definition of subsets, $y \in B$. Hence $y \in A \wedge y \in B$, and $y \in A \cap B$ follows. 
+			
+			Therefore, $A \cap B = A$.
+		\end{enumerate}
+	
+		\item If $A \cup B = B$, then
+		\begin{enumerate}
+			\item For every $x \in A$, by Axiom 3.5, $x \in A \cup B$. By hypothesis, $x \in B$. 
+			
+			By the definition of subsets, $A \subseteq B$.
+			
+			\item For every $x \in A \cap B$, by definition, $x \in A$. For every $y \in A$, by Axiom 3.5, $y \in A \cup B$. By hypothesis, $y \in B$. Hence $y \in A \wedge y \in B$.
+			
+			Therefore, $A \cap B = A$.
+		\end{enumerate}
+	
+		\item If $A \cap B = A$, then
+		\begin{enumerate}
+			\item For every $x \in A$, by hypothesis, $x \in A \cap B$. By the definition of intersection, $x \in B$. 
+			
+			By the definition of subsets, $A \subseteq B$.
+			
+			\item For every $x \in A \cup B$, by axiom 3.5, $x \in A$ or $B$. If $x \in A$, then by hypothesis, $x \in A \cap B$, and by the definition of intersection, $x \in B$. If $x \in B$, then $x \in B$.
+			
+			For every $y \in B$, by Axiom 3.5, $y \in A \cup B$.
+			
+			Therefore, $A \cup B = B$.
+		\end{enumerate}
+	\end{enumerate}
+\end{proof}
+
+\begin{exercise}{3.1.6}
+	Let $A,B,C,X$ be any sets that $A,B,C \subseteq X$, then:
+	\begin{enumabc}
+		\item $A \cup \varnothing = A$, and $A \cap \varnothing = \varnothing$.
+		\item $A \cup X = X$, and $A \cap X = A$.
+		\item $A \cap A = A = A \cup A$.
+		\item $A \cap B = B \cap A$, and $A \cup B = B \cup A$.
+		\item $(A \cup B) \cup C = A \cup (B \cup C)$, and $(A \cap B) \cap C = A \cap (B \cap C)$.
+		\item $A \cup (B \cap C) = (A \cup B) \cap (A \cup C)$, and $A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$.
+		\item $A \cup (X \setminus A) = X$, and $A \cap (X \setminus A) = \varnothing$. 
+		\item $X \setminus (A \cup B) = (X \setminus A) \cap (X \setminus B)$, and $X \setminus (A \cap B) = (X \setminus A) \cup (X \setminus B)$.
+	\end{enumabc}
+\end{exercise}
+\begin{proof}
+	We might see that these properties of sets have a clear correspondence with some facts about logical statements, since many concepts in set theory are defined using logical primitives:
+	\begin{enumabc}
+		\item $p \vee \false \equiv p$, and $p \wedge \false \equiv \false$.
+		
+		\item $p \vee \true \equiv \true$, and $p \wedge \true \equiv p$.
+		
+		\item $p \wedge p \equiv p \equiv p \vee p$.
+		
+		\item $p \wedge q \equiv q \wedge p$, and $p \vee q \equiv q \vee p$.
+		
+		\item $(p \wedge q) \wedge r \equiv p \wedge (q \wedge r)$, and $(p \vee q) \vee r \equiv p \vee (q \vee r)$
+		
+		\item $p \wedge (q \vee r) \equiv (p \wedge q) \vee (p \wedge r)$, and $p \vee (q \wedge r) \equiv (p \vee q) \wedge (p \vee r)$.
+		
+		We see that the facts start getting not obvious. To prove them, one can use truth tables, but I will omit that here. In fact, the process of using truth tables, formally, corresponds to the way that we divide and conquer different situations to prove the corresponding statements about sets. The former approach just seems more systematic.
+		
+		For example, if we consider $x \in A$, we are also considering $p = \true$ and the lines in the truth table.
+		
+		\item $p \vee (\neg p) \equiv \true$, and $p \wedge (\neg p) \equiv \false$.
+		
+		\item $\neg(p \vee q) \equiv \neg p \wedge \neg q$, and $\neg (p \wedge q) \equiv \neg p \vee \neg q$.
+	\end{enumabc}
+
+	We will use these facts about logical statements to prove the proposition.
+	\begin{enumabc}
+		\item Given any $x$, let $p := x \in A$, and we have $\false \equiv x \in \varnothing$. We give an example of how to prove the statement and everything below is done similarly.
+		
+		For example, to prove $A \cup \varnothing = A$, we need to show that
+		\[
+			\forall x(x \in A \cup \varnothing \leftrightarrow x \in A)
+		\]
+		, which is, by Axiom 3.5,
+		\[
+			\forall x((x \in A \vee x \in \varnothing) \leftrightarrow x \in A)
+		\]
+		Substitute $p$ and $\false$ in, we have
+		\[
+			\forall x((p \vee \false) \leftrightarrow p)
+		\]
+		Which immediately follows from $p \vee \false \equiv p$.
+		
+		\item Given any $x$, 
+		\begin{enumerate}
+			\item If $x \in X$, then let $p := x \in A$, and $\true \equiv x \in X$.
+			\item If $x \notin X$, then $x \in A \equiv x \in X \equiv \false$, and the two implication statements between them are all vacuously true.
+		\end{enumerate}
+	
+		\item Given any $x$, let $p := x \in A$.
+		
+		\item Given any $x$, let $p := x \in A;\ q := x \in B$.
+		
+		\item Given any $x$, let $p := x \in A;\ q := x \in B;\ r := x \in C$.
+		
+		\item Given any $x$, let $p := x \in A;\ q := x \in B;\ r := x \in C$.
+		
+		\item There are two situations.
+		\begin{enumerate}
+			\item If $x \notin X$, then $x \in X \setminus \text{anything}$ is false, by the definition of the difference of sets. Therefore, all implication statements are vacuously true.
+			
+			\item If $x \in X$, then $x \in X \equiv \true; x \in \varnothing \equiv \false$. 
+			
+			In addition, for subset $A \subseteq X$, let $p := x \in A$. By definition of the difference of sets, $\neg p \equiv x \in X \setminus A$.
+		\end{enumerate}
+	
+			\item There are two situations.
+			\begin{enumerate}
+				\item If $x \notin X$, then $x \in X \setminus \text{anything}$ is false, by the definition of the difference of sets. Therefore, all implication statements are vacuously true.
+				
+				\item If $x \in X$, then, let $p := x \in A$; $q := x \in B$. By the definition of the difference of sets, $\neg p \equiv x \in X \setminus A$; $\neg q \equiv x \in X \setminus B$.
+			\end{enumerate}
+	\end{enumabc}
+\end{proof}
+
+\begin{why}{35}
+	Let $A = \{3,5,9\}$. Let $P(x,y)$ be $y = \successor{x}$. Then, $\{x:P(x,y)\ \text{for some}\ x \in A\} = \{4,6,10\}$.
+\end{why}
+\begin{proof}
+	Clearly, $4,6,10$ are some $y$'s that satisfy $P(x,y)$ for some $x \in A$. Namely, $P(3,4), P(5,6), P(9,10)$ are true.
+	
+	Now we show that they are the only elements in $\{x:P(x,y)\ \text{for some}\ x \in A\}$. Let $e \in \{x:P(x,y)\ \text{for some}\ x \in A\}$, then, by Axiom 3.7, there exists $x \in A$ such that $P(x,e)$. $x$ can only be one of $3,5,9$, and because $P(x,y)$ is true for at most one $y$ for a $x$, we see that $4,6,10$ are the only possible numbers.
+\end{proof}
+
+\begin{why}{36}
+	These two sets are exactly the same:
+	\[
+	\{8-n: n \in \setn, 0 \le n \le 5\}, \quad \{8-m: m \in \setn, 0 \le m \le 5\}
+	\]
+\end{why}
+\begin{proof}
+	We have used the Axiom of specification (first), and the Axiom of replacement (second) to create the two sets. In the progress, we see that $m$ and $n$ are merely placeholders for an element in $\setn$. So they are really irrelevant to the result.
+\end{proof}
+
+\begin{exercise}{3.1.7}
+	\begin{enumerate}
+		\item $A \cap B \subseteq A$ and $A \cap B \subseteq B$.
+		\item $C \subseteq A \wedge C \subseteq B$ iff $C \subseteq A \cap B$.
+		\item $A \subseteq A \cup B$ and $B \subseteq A \cup B$.
+		\item $A \subseteq C \wedge B \subseteq C$ iff $A \cup B \subseteq C$.
+	\end{enumerate}
+\end{exercise}
+\begin{proof}\leavevmode
+	\begin{enumerate}
+		\item Let $x$ by any object. If $x \in A \cap B$, then by definition $x \in A$ and $x \in B$. Hence, $A \cap B$ is a subset of both $A$ and $B$.
+		
+		\item If $C \subseteq A,B$, then for any element $x \in C$, $x \in A$ and $x \in B$, which by definition gives $x \in A \cap B$.
+		
+		If $C \subseteq A \cap B$, then for any element $x \in C$, $x \in A \cap B$. By definition, $x \in A$ and $x \in B$. $x \in A$ gives $C \subseteq A$, and $x \in B$ gives $C \subseteq B$.
+		
+		\item If $x \in A$, then $x \in A \vee x \in B$ is true. Then, $A \subseteq A \cup B$. Similarly, $B \subseteq A \cup B$.
+		
+		\item If $A,B \subseteq C$, then for any element $x \in A \cup B$, we have $x \in C$ either way.
+		
+		If $A \cup B \subseteq C$, then for any element $x \in A$, by the last item, $x \in A \cup B$. By the definition of subsets, $x \in C$. Similarly, $x \in B \to x \in C$.
+	\end{enumerate}
+\end{proof}
+
+\begin{exercise}{3.1.8}
+	\begin{enumerate}
+		\item $A = A \cap (A \cup B)$.
+		\item $A = A \cup (A \cap B)$.
+	\end{enumerate}
+\end{exercise}
+\begin{proof}\leavevmode
+	\begin{enumerate}
+		\item Let $x \in A \cap (A \cup B)$. By definition, $x \in A$. 
+		
+		Let $x \in A$. By \exerciseref{3.1.7}, $x \in A \cup B$. Because we have both, by the definition of intersection, we have $x \in A \cap (A \cup B)$.
+		
+		\item Let $x \in A \cup (A \cap B)$. By definition, $x \in A \vee x \in (A \cap B)$. Therefore, if $x \notin A$, then $x$ must be in $A \cap B$, which shows that $x$ still $\in A$, a contradiction.
+		
+		Let $x \in A$, then by Axiom 3.5, $x \in A \cup (A \cap B)$. 
+	\end{enumerate}
+\end{proof}
+
+\begin{exercise}{3.1.9}
+	If $A \cup B = X$ and $A \cap B = \varnothing$, then
+	\begin{enumerate}
+		\item $A = X \setminus B$,
+		\item and $B = X \setminus A$.
+	\end{enumerate}
+\end{exercise}
+\begin{proof}\leavevmode
+	\begin{enumerate}
+		\item If $x \in A$, then $x \in A \cup B$, by Axiom 3.5. Then, $x \in X$. But $x \notin B$, because $A \cap B = \varnothing$ (so everyone in $A$ is not in $B$). Hence, $x \in X \setminus B$.
+		
+		If $x \in X \setminus B$, then $x \in X$, so $x \in A \cup B$, so $x \in A \vee X \in B$. But $x \notin B$ by the difference, then $x$ can only be in $A$.
+		
+		\item Using the commutativity of $\cap$ and $\cup$, the proof follows similarly.
+	\end{enumerate}
+\end{proof}
+
+\begin{exercise}{3.1.10}
+	\begin{enumerate}
+		\item $A\setminus B$, $A\cap B$, and $B \setminus A$ are disjoint.
+		\item The union of the three equals $A \cup B$.
+	\end{enumerate}
+\end{exercise}
+\begin{proof}\leavevmode
+	\begin{enumerate}
+		\item If $x \in A \cap B$, then $x \in A \wedge x \in B$. This means, by definition, $x$ cannot be in any of the two differences between $A$ and $B$.
+		
+		If $x \in A \setminus B$, then $x \notin B$. But for $x$ to be in $B \setminus A$, $x$ must be in $B$. Hence, the two differences are also disjoint.
+		
+		\item Let $x \in A \cup B$. Consider $p := x \in A;\ q := x \in B$. Then,
+		\begin{enumerate}
+			\item If $p = \true, q = \true$, then $x \in A \cap B$, and is in the union of the three.
+			\item If $p = \true, q = \false$, then $x \in A \setminus B$, and is in the union of the three.
+			\item If $p = \false, q = \true$, then $x \in B \setminus A$, and is in the union of the three.
+			\item If $p = \false, q = \false$, then it is a contradiction to our premise $x \in A \cup B$.
+		\end{enumerate}
+	
+		Let $x$ be in the union of the three.
+		\begin{enumerate}
+			\item If $x \in A \setminus B$, then $x \in A$, then $x \in A \cup B$.
+			\item If $x \in B \setminus A$, then $x \in B$, then $x \in A \cup B$.
+			\item If $x \in A \cap B$, then $x \in A$, then $x \in A \cup B$.
+		\end{enumerate}
+	\end{enumerate}
+\end{proof}
+
+\begin{exercise}{3.1.11}
+	The axiom of replacement implies the axiom of specification.
+\end{exercise}
+\begin{proof}
+	Let $X$ be a set. Let $Q(x)$ be a property pertaining to any $x \in X$.
+	
+	Define $P(x,y)$ pertaining to any $x \in X$ and any $y$, such that
+	\begin{enumerate}
+		\item If $Q(x)$ is true, then $P(x,x)$ is true; and $P(x,y)$ is false for all $y \ne x$.
+		\item If $Q(x)$ is false, then $P(x,y)$ is false for all $y$. In particular, $P(x,x)$ is false.
+	\end{enumerate}
+
+	Using the axiom of replacement, we see that the set $\{y: x \in X, P(x,y)\}$ exists.
+
+	Now we show that it would be equal to what would be created by the axiom of specification, $\{x \in X: Q(x)\}$.
+	\begin{enumerate}
+		\item If $y \in \{y: x \in X, P(x,y)\}$, then by the axiom of replacement, there exists some $x \in X$ such that $P(x,y)$. If $Q(x)$, then we must have $x = y$. If $\neg Q(x)$, then a contradiction. Hence, $y = x$ for some $x \in X \wedge Q(x)$, which means $y \in \{x \in X: Q(x)\}$.
+		
+		\item If $y \in \{x \in X: Q(x)\}$, then $y \in X \wedge Q(y)$. By the definition of $P$, $P(y,y)$ is true, and $P(y,x)$ is false for all $x \ne y$. By the axiom of replacement, $y \in \{y: x \in X, P(x,y)\}$.
+	\end{enumerate}
+\end{proof}
+
+\begin{exercise}{3.1.12}
+	Suppose $A,B,A',B'$ are such sets that $A' \subseteq A, B' \subseteq B$. Then,
+	\begin{enumerate}
+		\item $A' \cup B' \subseteq A \cup B$. $A' \cap B' \subseteq A \cap B$.
+		\item Show, using a counterexample, that $A' \setminus B' \subseteq A \setminus B$ is not the case. In addition, can you find a modification of this statement involving the set difference operation $\setminus$ that is true given the stated hypotheses? Justify your answer.
+	\end{enumerate}
+\end{exercise}
+\begin{proof}\leavevmode
+	\begin{enumerate}
+		\item Let $x$ be any object. Let $p := x \in A,\ q := x \in B,\ p' := x \in A',\ q' := x \in B'$. Then, by the definition of subsets, we have $p' \to p$ and $q' \to q$.
+		
+		Hence, what we need to prove are immediate consequence of
+		\[
+		p' \vee q' \to p \vee q, \quad p' \wedge q' \to p \wedge q
+		\]
+		
+		\item Let $A = \{1,2,3\}, B = \{2,3,4\}, A' = \{1,2\}, B' = \{3\}$. Then, $A \setminus B = \{1\}$, but $A' \setminus B' = \{1,2\}$.
+		
+		I discovered a good way to find a statement that works. Consider again the four statements $p,q,p',q'$ using the above definition. Then $A \setminus B$ and $A' \setminus B'$ correspond to, respectively,
+		\[
+		p \wedge \neg q,\ \text{and}\ p' \wedge \neg q'
+		\]
+		
+		The problem here is, while $q' \to q$, it is not the case that $\neg q' \to \neg q$. So from $p' \wedge \neg q'$ we cannot imply $p \wedge \neg q$. (And neither can we imply the other way!)
+		
+		However, we do have $\neg p \to \neg p'$ and $\neg q \to \neg q'$. Therefore, to make an implication, we will have to swap one statement with another: now consider
+		\[
+		p \wedge \neg q',\ \text{and}\ p' \wedge \neg q
+		\]
+		Because $p' \to p$ and $\neg q \to \neg q'$, we have the latter implying the former. Hence, I propose
+		\[
+		A' \setminus B \subseteq A \setminus B'
+		\]
+		, whose proof follows the above reasoning.
+	\end{enumerate}
+\end{proof}
+
+\begin{exercise}{3.1.13}
+	A set $A$ does not have any non-empty proper subset iff $A$ is a singleton set.
+\end{exercise}
+\begin{proof}
+	\fbox{\em If.} Suppose $A$ is a singleton set $\{x\}$. Let $B$ be a proper subset of $A$. Suppose for the sake of contradiction that $B$ is non-empty, that is, $\exists y \in B$. Then, by the definition of subsets, $y \in A$. Because $A$ is a singleton, we have $y = x$.
+	
+	This means that $x \in B$, or, in other words, $\{x\} \subseteq B$. Hence, we have $B \subseteq A \wedge A \subseteq B$, and it follows that $A = B$, a contradiction.
+	
+	\fbox{\em Only If.} Suppose that all proper subsets of $A$ are empty. By Why~\ref{why.unique.empty.set}, they are the same set: $\varnothing$. Because $\varnothing$ is a proper subset of $A$, we know that $A$ is non-empty.
+	
+	Hence, there exists some $x \in A$. We show that it is the only element in $A$. Actually, we have $\{x\} \subseteq A$. But $\{x\}$ cannot be a proper subset, as it is non-empty. Therefore, we must have $\{x\} = A$, as desired.
+\end{proof}
+
+\section{Russell's paradox}
+
+\begin{exercise}{3.2.1}
+	If we assumed the Axiom of universal specification, then we could have all the axioms 3.3--3.8, (for 3.8, assuming all natural numbers are objects).
+\end{exercise}
+\begin{proof}
+\fbox{\em Axiom 3.3: The empty set.} To prove the existence of the empty set, simply choose a property that is false for all objects.
+
+\fbox{\em Axiom 3.4: Singleton and pair sets.} Choose a property $P(x)$ that is true iff $x = a$ for the singleton set $\{a\}$, and iff $x = a \vee x = b$, for the pair set $\{a,b\}$.
+
+\fbox{\em Axiom 3.5: Union sets.} Let $P(x) := x \in A \vee x \in B$ for $A \cup B$.
+
+\fbox{\em Axiom 3.6: Specification.} Let the property be $P(x):= x \in A \wedge Q(x)$, for $\{x \in A : Q(x)\}$.
+
+\fbox{\em Axiom 3.7: Replacement.} Let the property be $P(y):= \exists x(x \in A \wedge Q(x,y))$, for $\{y: x \in A: Q(x,y)\}$.
+
+\fbox{\em Axiom 3.8: Infinity.} Let the property be $P(n):= (n \text{ is a natural number})$.
+\end{proof}
+
+\begin{exercise}{3.2.2}
+	Let $A,B$ be sets. Then, (with the axiom of regularity)
+	\begin{enumerate}
+		\item $A \notin A$.
+		\item Either $A \notin B$, or $B \notin A$.
+	\end{enumerate}
+\end{exercise}
+\begin{proof}\leavevmode
+	\begin{enumerate}
+		\item Suppose for the sake of contradiction that $A \in A$ for some set $A$. This means that the set $\{A\} \subseteq A$. Now consider the set $\{A\}$.
+		
+		According to the axiom of regularity, its only element, is either not a set (excluded), or is disjoint from it, that is, $A \cap \{A\} = \varnothing$. But this is a contradiction, because we already have $\{A\} \subseteq A$, so there is some element (namely, $A$), that is contained in both $\{A\}$ and $A$.
+		
+		\item Suppose for the sake of contradiction that there exist such sets $A,B$ that $A \in B$ and $B \in A$. Now, we consider, somewhat similarly, the pair set $\{A,B\}$.
+		
+		Obviously, both elements in $\{A,B\}$ are sets. So one of them has to be disjoint from it. However,
+		\begin{enumerate}
+			\item $B \in A \cap \{A,B\}$
+			\item $A \in B \cap \{A,B\}$ 	
+		\end{enumerate}
+		, a contradiction with the axiom of regularity.
+	\end{enumerate}
+\end{proof}
+
+\begin{exercise}{3.2.3}
+	(Assuming the other axioms of the set theory.) The axiom of universal specification is equivalent to the existence of a universal set $\Omega$ that contains all objects.
+\end{exercise}
+\begin{proof}
+	\fbox{\em If.} If there exists such a set as $\Omega$, then for any property $P(x)$ pertaining to all objects $x$, we can construct the set for the axiom of universal specification using $\Omega$ and the axiom of specification.
+	
+	\fbox{\em Only If.} If the axiom of universal specification is assumed, then we can simply choose a property $P(x)$ which is true for all objects to have $\Omega$.
+\end{proof}
+
+\section{Functions}
+\begin{why}{42}
+	If $x'=x$, then $f(x')=f(x)$.
+\end{why}
+\begin{proof}
+	The reason is, the property $P(x,y)$ obeys the axiom of substitution, and for the same $x$, the $y$ is unique.
+\end{proof}
+
+\begin{why}{43}
+	For the same set $X$, all functions from $\varnothing$ to $X$ are equal.
+\end{why}
+\begin{proof}\leavevmode
+	\begin{enumerate}
+		\item The domains and codomains obviously match.
+		\item $\forall x(x \in \varnothing \to (f(x) = f'(x)))$ is vacuously true.
+	\end{enumerate}
+\end{proof}
+
+\begin{exercise}{3.3.1}
+	\begin{enumerate}
+		\item The equality of functions is reflexive, symmetric, and transitive.
+		\item Let $f = \tilde{f}, g = \tilde{g}$ be functions. And $f,\tilde{f}: X \to Y$, $g,\tilde{g}: Y \to Z$. Then, $g \circ f = \tilde{g} \circ \tilde{f}$.
+	\end{enumerate}
+\end{exercise}
+\begin{proof}\leavevmode
+	\begin{enumerate}
+		\item 
+			\fbox{\em Reflexivity.} Let $f: X \to Y$ be any function. 
+			
+			Because of the reflexivity of the equality on sets, $X = X$ and $Y = Y$. Therefore, $f$ and $f$ have equal domain and codomains. Because of the reflexivity of objects, $f(x) = f(x)$, for all $x \in X$. By definition, $f = f$.
+			
+			\fbox{\em Symmetry.} Let $f: X \to Y,f': X' \to Y'$ be functions such that $f = f'$. 
+			
+			Then, by definition, $X = X', Y = Y'$, and $\forall x \in (X=X'), (f(x) = f'(x))$. Because of the symmetry of equality of objects (note that sets are also objects), $X' = X, Y' = Y$, and $\forall x \in (X=X'), (f'(x) = f(x))$. Therefore, by definition, $f' = f$.
+			
+			\fbox{\em Transitivity.} Let $f_0: X_0\to Y_0,\ f_1:X_1\to Y_1,\ f_2:X_2\to Y_2$ be such functions that $f_0 = f_1$ and $f_1 = f_2$.
+			
+			Then, by the definition of function equality, $X_0 = X_1 \wedge X_1 = X_2$, and $Y_0 = Y_1 \wedge Y_1 = Y_2$. By the transitivity of equality of objects, we have $X_0 = X_2$ and $Y_0 = Y_2$. Similarly, we can obtain $\forall x \in (X_0 = X_2), (f_0(x) = f_2(x))$. Therefore, by definition, we have $f_0 = f_2$.
+		
+		\item 
+			By the reflexivity of the equality of sets, $X = X$ and $Z = Z$. Thus, the domains and codomains match.
+			
+			Now, let $x$ be any element in $X$. We show it is always true that $(g \circ f)(x) = (\tilde{g} \circ \tilde{f})(x)$.
+			
+			By the definition of composition, $(\tilde{g} \circ \tilde{f})(x) = \tilde{g}(\tilde{f}(x))$. By the definition of function equality, $\tilde{f}(x) = f(x)$. By the axiom of substitution on objects $\tilde{f}(x),f(x)$, we can then say $\tilde{g}(\tilde{f}(x)) = \tilde{g}(f(x))$. By the definition of function equality, we have $\tilde{g}(f(x)) = g(f(x))$. By the transitivity of object equality, we can then conclude $\tilde{g}(\tilde{f}(x)) = g(f(x))$, as desired.
+	\end{enumerate}
+\end{proof}
+
+\begin{exercise}{3.3.2}
+	Let $f: X \to Y, g: Y \to Z$ be functions.
+	\begin{enumerate}
+		\item If $f,g$ are both injective, then so is $g \circ f$.
+		\item If $f,g$ are both surjective, then so is $g \circ f$.
+	\end{enumerate}
+\end{exercise}
+\begin{proof}\leavevmode
+	\begin{enumerate}
+		\item Let $x, x'$ be any two elements in $X$. If $x \ne x'$, then by the definition of injectivity, $f(x) \ne f(x')$. By the definition again,
+		$g(f(x)) \ne g(f(x'))$. This, by the definition of composition, means that $(g \circ f)(x) \ne (g \circ f)(x')$, as desired.
+		
+		\item Let $z$ be any element in $Z$. Because $g$ is surjective, there exists $y \in Y$ such that $g(y) = z$. Because $f$ is surjective, there exists $x \in X$ such that $f(x) = y$. 
+		By the axiom of substitution, $z = g(y) = g(f(x))$, as desired.
+	\end{enumerate}
+\end{proof}
+
+\begin{exercise}{3.3.3}
+	When is the empty function into a given set $X$ injective, surjective, and bijective?
+\end{exercise}
+\begin{proof}
+	Be careful how you intrepret the definition of injectivity. I didn't know how, so I had asked a \href{https://math.stackexchange.com/questions/3800240/how-to-interpret-the-definition-of-injectivity}{question} at Stack Exchange regarding this problem.
+
+	\fbox{\em Injective.} For such a function $f: \varnothing \to X$ to be injective, we must have
+	\[
+	\forall x \forall x'\Big[(x \in \varnothing \wedge x' \in \varnothing) \to \big(x \ne x' \to f(x) \ne f(x')\big)\Big]
+	\]
+	, which is always vacuously true.
+	
+	\fbox{\em Surjective.} For such a function $f: \varnothing \to X$ to be surjective, we must have
+	\[
+	\forall y\Big[y \in X \to \big(\exists x(x \in \varnothing \wedge f(x) = y)\big)\Big]
+	\]
+	, which is false (because $x \in \varnothing$ is false), unless $y \in X$ is false. In that case, $X = \varnothing$.
+	
+	\fbox{\em Bijective.} Is true if $X = \varnothing$. Because only then can the function be surjective.
+\end{proof}
+
+I am tempted to discover and prove something stronger, because such boring situations involving these boring sets will be encountered a lot, later when we talk more about injectivity and surjectivity.
+\begin{thm}\label{my.boring.inj.surj.thm}
+	Let $f: X \to Y$ be a function, then
+	\begin{enumerate}
+		\item If $X = \varnothing$ or is a singleton $\{x\}$, then $f$ must be injective.
+		\item If $Y = \varnothing$ or is a singleton $\{y\}$, then $f$ must be surjective.
+	\end{enumerate}
+\end{thm}
+\begin{proof}\leavevmode
+	\begin{enumerate}
+		\item If $X = \varnothing$, then it's already proven in \exerciseref{3.3.3}.
+		
+		If $X$ is a singleton set, then for $x,x' \in X$, $x \ne x' \to f(x) \ne f(x')$ is always vacuously true. Thus, $f$ is injective.
+		
+		\item If $Y = \varnothing$, then $y \in Y \to \exists x(\dots)$ is always vacuously true.
+		
+		If $Y = \{y\}$, then we have two situations.
+		\begin{enumerate}
+			\item If $X = \varnothing$, then as shown in \exerciseref{3.3.3}, $f$ is surjective.
+			\item If $X \ne \varnothing$, then there exists some $x \in X$. By the definition of functions, $f(x)$ must be in $Y$. Because $Y$ is a singleton, we must have $f(x) = y$. Because $Y$ is a singleton again, its only single element is mapped to by $f$, and thus $f$ is surjective.
+		\end{enumerate}
+	\end{enumerate}
+\end{proof}
+
+\begin{exercise}{3.3.4}
+	Let $f,\tilde{f}: X \to Y$, $g,\tilde{g}: Y \to Z$ be functions. Then,
+	\begin{enumerate}
+		\item If $g \circ f = g \circ \tilde{f}$ and $g$ is injective, then $f = \tilde{f}$.
+		\item If $g \circ f = \tilde{g} \circ f$ and $f$ is surjective, then $g = \tilde{g}$.
+	\end{enumerate}
+\end{exercise}
+\begin{proof}\leavevmode
+	The domains and codomains always match by the premise. We only need to prove that that function values equal.
+	\begin{enumerate}
+		\item By the definition of function equality, for all $x \in X$, $(g \circ f)(x) = (g \circ \tilde{f})(x)$. By the definition of composition, $g(f(x)) = g(\tilde{f}(x))$. Because $g$ is injective, we must have $f(x) = \tilde{f}(x)$ for all $x \in X$.
+		
+		\item To show that $g = \tilde{g}$, we have to show that $g(y) = \tilde{g}(y)$ for all $y \in Y$. Note that now the variable takes value in $Y$, instead of in $X$. 
+		
+		Suppose for the sake of contradiction that $g \ne \tilde{g}$, then, (because the domains and codomains already match,) there must exist at least one $y\in Y$ such that $g(y) \ne \tilde{g}(y)$. Because $f$ is surjective, we must also have some $x \in X$ such that $f(x) = y$. 
+		
+		Now consider $(g \circ f)(x)$ and $(\tilde{g}\circ f)(x)$, they equal to, by the definition of composition, $g(y)$ and $\tilde{g}(y)$, respectively. But they should be equal by the premise, a contradiction.
+		
+		Note that proof by contradiction is used here but not above. This is because we can apply injectivity nicely from the opposite direction of function composition above, but we cannot apply surjectivity  the same way down here, since it tells nothing about equality. Hence, if one way is hard to walk, then we tend to another.
+	\end{enumerate}
+
+	We cannot have each desired statement if we do not assume injectivity/\discretionary{}{}{}surjectivity:
+	\begin{enumerate}
+		\item If $g$ is not injective, then there can be some $y \ne y' \in Y$ such that $g(y) = g(y')$. If for some $x$, $f(x) = y$ while $\tilde{f}(x) = y'$, then we can still have the composition equal.
+		
+		\item If $f$ is not surjective, then there exists some $y \in Y$ that is not mapped to by $f$. For these $y$'s, $g(y)$ and $\tilde{g}(y)$ can be different without affecting its composition with $f$.
+	\end{enumerate}
+\end{proof}
+
+\begin{exercise}{3.3.5}
+	Let $f: X \to Y$, $g: Y \to Z$ be functions. Show that,
+	\begin{enumerate}
+		\item If $g \circ f$ is injective, then so must $f$.
+		\item If $g \circ f$ is surjective, then so must $g$.
+	\end{enumerate}
+\end{exercise}
+\begin{proof}\leavevmode
+	\begin{enumerate}
+		\item First, if $X = \varnothing$ or $\{x\}$, then $f$ must be injective, by My Theorem~\ref{my.boring.inj.surj.thm}.
+		
+		Suppose for the sake of contradiction that $f$ is not injective. Then, there must exist such $x,x' \in X$ that $x \ne x'$ but $f(x) = f(x')$. By the axiom of substitution, this implies that $g(f(x)) = g(f(x'))$, a contradiction with our premise.
+		
+		\item This time we don't have to exclude the situation, nor do we have to use consider the special situations. Just expand the definition of composition to get that $g(f(x))$ can reach every element in $Y$, so in particular $g$ has to be able to do that.
+	\end{enumerate}
+\end{proof}
+
+\begin{exercise}{3.3.6}
+	Let $f: X\to Y$ be a bijective function, and $f^{-1}: Y \to X$ be its inverse. Then,
+	\begin{enumerate}
+		\item For all $x \in X$, $f^{-1}(f(x)) = x$; for all $y \in Y$, $f(f^{-1}(y)) = y$.
+		\item $f^{-1}$ is invertible. And $(f^{-1})^{-1} = f$.
+	\end{enumerate}
+\end{exercise}
+\begin{proof}\leavevmode
+	\begin{enumerate}
+		\item For all $x \in X$, by the definition of functions, there exists a unique $y \in Y$ that $f(x) = y$. By the definition of $f^{-1}$, $f^{-1}(y) = x$. By the axiom of substitution, $f^{-1}(f(x)) = x$.
+		
+		For all $y \in Y$, by the bijectivity of $f$, there exists a unique $x$ such that $f(x) = y$. By the definition of $f^{-1}$, we have $f^{-1}(y) = x$. By the axiom of substitution, $f(f^{-1}(y)) = x$.
+		
+		\item To show that $f^{-1}$ is invertible, we need to show that it's bijective.
+		
+		Let $y,y' \in Y$ be two elements. (If $Y$ is empty then $f^{-1}$ is injective, by My Theorem~\ref{my.boring.inj.surj.thm}.) Denote $x := f^{-1}(y)$ and $x' = f^{-1}(y')$. Suppose they are equal. By the axiom of substitution, we then have $f(x) = f(x')$. By the definition of the inverse, we see that $f(x) = y$ and $f(x') = y'$, then $y = y'$. Hence, $f^{-1}$ is injective.
+		
+		Now we show that it is surjective. Let $x \in X$ be any element in $X$. (If $X$ is empty, then $f^{-1}$ is surjective, by My Theorem~\ref{my.boring.inj.surj.thm}.) Then $y := f(x) \in Y$, by the definition of functions. By the definition of $f^{-1}$, we must have $f^{-1}(y) = x$, as desired.
+	\end{enumerate}
+\end{proof}
+
+\begin{exercise}{3.3.7}
+	Let $f: X \to Y$, $g: Y \to Z$ be functions. If $f,g$ are both bijective, then
+	\begin{enumerate}
+		\item So is $g \circ f$.
+		\item $(g \circ f)^{-1} = f^{-1} \circ g^{-1}$.
+	\end{enumerate}
+\end{exercise}
+\begin{proof}\leavevmode
+	\begin{enumerate}
+		\item If $X$ is empty, then by My Theorem~\ref{my.boring.inj.surj.thm}, $g \circ f$ is injective. Otherwise, let $x,x'$ be any elements in $X$. Suppose $(g \circ f)(x) = (g \circ f)(x)$, then $g(f(x)) = g(f(x'))$, by the definition of composition. By the injectivity of $g$, we must have $f(x) = f(x')$. By the injectivity of $f$, we musth then have $x = x'$. Hence, $g \circ f$ is injective.
+		
+		If $Z$ is empty, then by My Theorem~\ref{my.boring.inj.surj.thm}, $g \circ f$ is surjective. Otherwise, let $z$ be any element in $Z$. By the surjectivity of $g$, there exists $y \in Y$ such that $g(y) = z$. By the surjectivity of $f$, there exists such $x \in X$ that $f(x) = y$. By the axiom of substitution, $g(f(x)) = z$. By the definition of composition, $g \circ f(x) = z$. Hence, $g \circ f$ is surjective.
+		
+		\item First, we have $g^{-1}: Z \to Y$ and $f^{-1}: Y \to X$, by the definition of inverses. By the definition of composition, $f^{-1} \circ g^{-1}$ is from $Z$ to $X$, the same as $(g \circ f)^{-1}$.
+		
+		Now, we show that their values are also equal. Let $z$ be any element in $Z$. Denote $g^{-1}(z) = y$ and $f^{-1}(y) = x$, and we have $(f^{-1} \circ g^{-1})(z) = f^{-1}(g^{-1}(z)) = x$.
+		
+		By the definition of inverses, we must have $f(x) = y$ and $g(y) = z$, which means, by the axiom of substitution, $g(f(x)) = z$, that is, $(g \circ f)(x) = z$. By the definition of inverses, this means that $(g \circ f)^{-1}(z) = x$. As $z$ is any element in $Z$, the two functions are equal.
+	\end{enumerate}
+\end{proof}
+
+\begin{exercise}{3.3.8}
+	If $X \subseteq Y$ are such sets, then let $\iota_{X \to Y}$ be defined as $X \to Y,\ x \mapsto x$. Then,
+	\begin{enumerate}
+		\item If $X \subseteq Y \subseteq Z$, then $\iota_{Y \to Z} \circ \iota_{X \to Y} = \iota_{X \to Z}$.
+		\item Let $f$ be any function from $A$ to $B$. Then, $f = f \circ \iota_{A \to A} = \iota_{B \to B} \circ f$.
+		\item If $f: A \to B$ is bijective, then $f \circ f^{-1} = \iota_{B \to B}$, and $f^{-1} \circ f = \iota_{A \to A}$.
+		\item Let $X,Y$ be disjoint sets. Let $f: X \to Z$ and $g: Y \to Z$ be functions. Then, there exists a \emph{unique} function $h: X \cup Y \to Z$ such that $f = h \circ \iota_{X \to X \cup Y}$ and $g = h \circ \iota_{X \to X \cup Y}$.
+		\item We can remove the limitation for $X,Y$ to be disjoint, if we have $f(x) = g(x)$ for all $x \in X \cap Y$.
+	\end{enumerate}
+\end{exercise}
+\begin{proof}\leavevmode
+	\begin{enumerate}
+		\item First, it is clear that they have the same domain and codomain.
+		
+		To show that they are equal, consider all $x \in X$ and the value 
+		\begin{align*}
+			&(\iota_{Y \to Z} \circ \iota_{X \to Y})(x) \\
+			&= \iota_{Y \to Z}(\iota_{X \to Y}(x)) 		&\text{def.~of composition}\\
+			&= \iota_{Y \to Z}(x) 						&\text{def.~of}\ \iota_{X \to Y}\\
+			&= x 										&\text{def.~of}\ \iota_{Y \to Z}\\
+			&= \iota_{X \to X}(x)						&\text{def.~of}\ \iota_{X \to X}
+		\end{align*}
+		, as desired.
+		
+		\item First, it is clear that they have the same domain and codomain.
+		
+		To show that they are equal, consider all $a \in A$ and the value
+		\begin{align*}
+			&(f \circ \iota_{A \to A})(a) \\
+			&= f(\iota_{A \to A}(a)) 		&\text{def.~of composition}\\
+			&= f(a) 						&\text{def.~of}\ \iota_{A \to A}\\
+			&= \iota_{B \to B}(f(a))		&\text{def.~of}\ \iota_{B \to B}\\
+			&= (\iota_{B \to B} \circ f)(a)	&\text{def.~of composition}\\
+		\end{align*}
+		, as desired.
+		
+		\item First, it is clear that the domains and codomains match.
+		
+		To show that $f^{-1} \circ f = \iota_{A \to A}$, consider, for all $x \in A$, the value $(f^{-1} \circ f)(x)$. It equals to $x$ by \exerciseref{3.3.6}, and thus equals to $\iota_{A \to A}(x)$ by definition, as desired.
+		
+		To show that $f \circ f^{-1} = \iota_{B \to B}$, consider, for all $y \in B$, the value $(f \circ f^{-1})(y)$. It equals to $y$ by \exerciseref{3.3.6}, and thus equals to $\iota_{B \to B}(y)$ by definition, as desired.
+		
+		\item \fbox{\em Existence.} Define $h: X \cup Y \to Z$ as
+		\[
+		\begin{cases}
+			a \mapsto f(a) &a \in X \\
+			a \mapsto g(a) &a \in Y
+		\end{cases}
+		\]
+		Now we show that it is a valid definition of a function. To show this, we need to show that for all $a \in X \cup Y$, there is a unique value $b \in Z$ such that $h(a) = b$.
+		
+		By the definition of $X \cup Y$, $a$ is either in $X$ or $Y$, but not both, since they are disjoint. If $a \in X$, then there is a value, namely $f(a)$. But because $f$ is a function, the value is unique. Similarly, we can show the statement when $a \in Y$.
+		
+		\fbox{\em Uniqueness.} Now we know that the definition gives a valid function, we show that it is unique. Suppose that we define another function $h'$ using the same definition. We will show that $h = h'$.
+		
+		Obviously, they have the same domain and codomain by definition. Now we consider, for all $a \in X \cup Y$, their values. By definition, if $a \in X$, then $h(a) = f(a) = h'(a)$. Similarly, if $a \in Y$, then $h(a) = g(a) = h'(a)$. Because $a$ is either in $X$ or $Y$, we have verified all the possible $a$'s, and hence, $h = h'$, as desired.
+		
+		\fbox{\em The two compositions.} Now we consider
+		\begin{enumerate}
+			\item $h \circ \iota_{X \to X \cup Y}$ and $f$. Obviously, they have the same domain and codomain.
+			
+			For all $x \in X$, 
+			\begin{align*}
+				&(h \circ \iota_{X \to X \cup Y})(x) \\
+				&= h(\iota_{X \to X \cup Y}(x)) 	&\text{def.~of composition}\\
+				&= h(x) 							&\text{def.~of}\ \iota_{X \to X \cup Y}\\
+				&= f(x)								&\text{def.~of}\ h \wedge x \in X
+			\end{align*}
+			, as desired.
+			
+			\item $h \circ \iota_{Y \to X \cup Y}$ and $g$. Obviously, they have the same domain and codomain.
+			
+			For all $y \in Y$, 
+			\begin{align*}
+				&(h \circ \iota_{Y \to X \cup Y})(y) \\
+				&= h(\iota_{Y \to X \cup Y}(y)) 	&\text{def.~of composition}\\
+				&= h(y) 							&\text{def.~of}\ \iota_{Y \to X \cup Y}\\
+				&= g(y)								&\text{def.~of}\ h \wedge y \in Y
+			\end{align*}
+			, as desired.
+		\end{enumerate}
+		
+		\item \fbox{\em Existence.} Define $h: X \cup Y \to Z$ as
+		\[
+		\begin{cases}
+			a \mapsto f(a), &a \in X \\
+			a \mapsto f(a), &a \in X \cap Y \\
+			a \mapsto g(a), &a \in Y
+		\end{cases}
+		\]
+		Now we show that it is a valid definition of a function. To show this, we need to show that for all $a \in X \cup Y$, there is a unique value $b \in Z$ such that $h(a) = b$.
+		
+		This time, we have to consider different sets of values. We let $\Omega := X \cup Y$. By \exerciseref{3.1.7} (3), $X,Y \subseteq \Omega$. Hence, by \exerciseref{3.1.6} (g), $X \cup (\Omega \setminus X) = \Omega$.
+		
+		Now we consider two situations,
+		\begin{enumerate}
+			\item When $a \in X$. Then, by definition, $h(a) = f(a)$, whether $a \in X \cap Y$ or not.
+			\item When $a \in \Omega \setminus X$. Then, $a$ has to be in $Y$, because $\Omega = X \cup Y$. By definition, $h(a) = g(a)$.
+		\end{enumerate}
+		Using the same reasoning as above, we see that for each $a$, $h(a)$ is unique. Hence, this is a valid definition of a function.
+		
+		\fbox{\em Uniqueness.} Now we know that the definition gives a valid function, we show that it is unique. Suppose that we define another function $h'$ using the same definition. We will show that $h = h'$.
+		
+		Obviously, they have the same domain and codomain by definition. Now we consider, for all $a \in X \cup Y$, their values. 
+		
+		By definition, if $a \in X$, then $h(a) = f(a) = h'(a)$. Similarly, if $a \in \Omega \setminus X$, then $h(a) = g(a) = h'(a)$. Because $a$ is either in $X$ or $\Omega \setminus X$, we have verified all the possible $a$'s, and hence, $h = h'$, as desired.
+		
+		\fbox{\em The two compositions.} Now we consider
+		\begin{enumerate}
+			\item $h \circ \iota_{X \to X \cup Y}$ and $f$. Obviously, they have the same domain and codomain.
+			
+			For all $x \in X$, 
+			\begin{align*}
+				&(h \circ \iota_{X \to X \cup Y})(x) \\
+				&= h(\iota_{X \to X \cup Y}(x)) 	&\text{def.~of composition}\\
+				&= h(x) 							&\text{def.~of}\ \iota_{X \to X \cup Y}\\
+				&= f(x)								&\text{def.~of}\ h \wedge x \in X
+			\end{align*}
+			, as desired.
+			
+			\item $h \circ \iota_{Y \to X \cup Y}$ and $g$. Obviously, they have the same domain and codomain.
+			
+			For all $y \in Y$, 
+			\begin{align*}
+				&(h \circ \iota_{Y \to X \cup Y})(y) \\
+				&= h(\iota_{Y \to X \cup Y}(y)) 	&\text{def.~of composition}\\
+				&= h(y) 							&\text{def.~of}\ \iota_{Y \to X \cup Y}\\
+				&= g(y) \text{ or } f(y)			&\text{def.~of}\ h \wedge y \in Y\\
+				&= g(y)								&x \in X \cap Y \to h(x) = g(x)
+			\end{align*}
+			, as desired.
+		\end{enumerate}
+	\end{enumerate}
+\end{proof}
+
+\section{Images and inverse Images}
+\begin{why}{47}
+	The image of a function can be defined by using the axiom of specification, instead of the axiom of replacement.
+\end{why}
+\begin{proof}
+	Let $f: X \to Y$ be any function. Let $P(x,y)$ be the property bound to $f$. Let $S$ be a subset of $X$. Define a property $Q(y)$ pertaining to elements in $Y$ this way:
+	\[
+	Q_S(y) := \exists x (x \in S \wedge P(x,y))
+	\]
+	And we define $f(S)_1 := \{y \in Y : Q_S(y)\}$.
+	
+	By the axiom of specification, the set $f(S)_1$ is well defined. Now we show that it equals to that set defined using the axiom of replacement: $f(S)_0 := \{x \in S : f(x)\}$.
+	
+	For any $y \in f(S)_0$, it must be replaced from some $x \in S$. By the definition of $f(S)_1$, we have $y \in f(S)_1$.
+	
+	For any $y \in f(S)_1$, by the definition of it, there exists a $x \in S$ such that $P(x,y)$ is true. By the definition of $f$, we must have $f(x) = y$. By the axiom of replacement, this $y$ is thus in $f(S)_0$.
+\end{proof}
+
+\begin{why}{48}
+	Let $f: X \to Y$ be any function. Let $S$ be a subset of $X$. Then,
+	\[
+	y \in f(S) \leftrightarrow \exists x (x \in S \wedge y = f(x))
+	\]
+\end{why}
+\begin{proof}
+	Recall how we defined $f(S)$ using the axiom of replacement and showed that it is indeed the same set defined using the axiom of specification: $f(S) := \{y \in Y : Q_S(y)\}$, where
+	\[
+		Q_S(y) := \exists x (x \in S \wedge P(x,y))
+	\]
+	
+	By the definition of functions, $P(x,y)$ iff $y = f(x)$. Thus,
+	\[
+		Q_S(y) \leftrightarrow \exists x (x \in S \wedge y = f(x))
+	\]
+	, as desired.
+\end{proof}
+
+\begin{why}{48}\label{why.func.image.surj}
+	Let $f: \setn \to \setn, x \mapsto 2x$. We have
+	\[
+	f(f^{-1}(\{1,2,3\})) \ne \{1,2,3\}
+	\]
+\end{why}
+\begin{proof}
+	According to Prof.~Tao, $f^{-1}(\{1,2,3\}) = \{1\}$. But $f(\{1\}) = \{2\} \ne \{1,2,3\}$. 
+\end{proof}
+
+The problem is that this $f$ is not surjective, and $\{1,2,3\} \subsetneq f(\setn)$. But what if I restrict a function $f: X \to Y$ to be surjective --- will $f(f^{-1}(T)) = T$ for all $T \subseteq Y$? Let's see.
+
+\begin{prop}\label{my.surj.image.prop}
+	Let $f: X \to Y$ be any surjective function. Let $T$ be a subset of $Y$, then we have
+	\[
+		f(f^{-1}(T)) = T
+	\]
+\end{prop}
+\begin{proof}
+	Suppose for the sake of contradiction that $f(f^{-1}(T)) \ne T$, then we have two situations:
+	\begin{enumerate}
+		\item There exists $t \in T$ such that $t \notin f(f^{-1}(T))$. By the definition of inverse images, $f^{-1}(T)$ contains this set $S = \{x \in X: f(x) = t\}$. Because $f$ is surjective, and $X$ is the whole domain, $S$ is non-empty. 
+		
+		By the definition of forward images, we then must have $t$ in $f(f^{-1}(T))$, mapped to by some element in $S$, a contradiction.
+		
+		\item There exists $t \in f(f^{-1}(T))$ such that $t \notin T$. By the definition of forward images, there exists some element $s \in f^{-1}(T)$ such that $f(s) = t$. By the definition of inverse images, there must exist some element $t' \in T$, such that $t' = f(s) = t$, which means $t \in T$, a contradiction.
+	\end{enumerate}
+	Therefore, $f(f^{-1}(T)) = T$, as desired.
+	
+	Note that surjectivity is not used at all in the second situation. Therefore, in all cases, we must have $f(f^{-1}(T)) \subseteq T$.
+\end{proof}
+
+Surprisingly, for $f(f^{-1}(T)) = T$ we generally don't need $f$ to be bijective. It is not the case for a function values, though --- $f$ must be bijective for its inverse function to exist!
+
+Symmetrical to the above Why~\ref{why.func.image.surj}, Prof.~Tao asked this:
+\begin{why}{49}
+	Let $f: \setz \to \setz$ by defined as $x \mapsto x^2$. We have
+	\[
+		f^{-1}(f(\{-1,0,1,2\})) \ne \{-1,0,1,2\}
+	\]
+\end{why}
+\begin{proof}
+This is because 
+\[
+	f^{-1}(f(\{-1,0,1,2\})) = f^{-1}(\{1,0,4\}) = \{-1,1,0,2,-2\}
+\].
+\end{proof}
+
+The problem here is that, $f$ is not injective, so an element in $f(S)$ may correspond to multiple elements in $f^{-1}(f(S))$.
+
+Symmetrical to the above My Proposition~\ref{my.surj.image.prop}, we can show that $f^{-1}(f(S)) = S$, if $f$ is injective.
+\begin{prop}\label{my.inj.image.prop}
+	Let $f: X \to Y$ be any injective function. Let $S$ be a subset of $X$, then we have
+	\[
+		f^{-1}(f(S)) = S
+	\]
+\end{prop}
+\begin{proof}
+	Suppose for the sake of contradiction that $f^{-1}(f(S)) \ne S$. Then we have two situations,
+	\begin{enumerate}
+		\item $\exists s \in S$ such that $s \notin f^{-1}(f(S))$. By the definition of forward images, we have $f(s) \in f(S)$. By the definition of inverse images, we must have $s \in f^{-1}(f(S))$, because $f(s)$ results in an element in $f(S)$, whether $f$ is injective or not. This is a contradiction.
+		
+		\item $\exists s \in f^{-1}(f(S))$ such that $s \notin S$. This is where we will need the injectivity of $f$. By the definition of inverse images, we have $f(s) \in f(S)$. By the injectivity, $s$ is the only element in $X$ for which $f$ equals $f(s)$. By our assumption, $s \notin S$, then we cannot have $f(s) \in f(S)$, a contradiction.
+	\end{enumerate}
+	Therefore, $f^{-1}(f(S)) = S$, as desired.
+
+	Note that injectivity is not used at all in the second situation. Therefore, in all cases, we must have $S \subseteq f^{-1}(f(S))$.
+\end{proof}
+
+Putting My Proposition~\ref{my.surj.image.prop} and My Proposition~\ref{my.inj.image.prop} together, we have the following theorem.
+\begin{thm}\label{my.inj.surj.image.thm}
+	Let $f: X \to Y$ be any function, $S$ be a subset of $X$, and $T$ be a subset of $Y$, then we have
+	\begin{enumerate}
+		\item $S \subseteq f^{-1}(f(S))$.
+		\item $f(f^{-1}(T)) \subseteq T$.
+	\end{enumerate}
+
+	If $f$ is additionally injective, then we also have $S = f^{-1}(f(S))$. If $f$ is additionally surjective, then we also have $f(f^{-1}(T)) = T$. So, if $f$ is bijective, then we have both, a result similar to that in \exerciseref{3.3.6}.
+\end{thm}
+
+\begin{exercise}{3.4.1}
+	Let $f: X \to Y$ be function, and let $V$ be a subset of $Y$. If $f$ is bijective, then we can treat $f^{-1}(V)$ as both the forward image of $f^{-1}$ and the inverse image of $f$. Show that they are the same.
+\end{exercise}
+\begin{proof}
+	Let $S$ denote the forward image, that is, $S = \{y \in V: f^{-1}(y)\}$, by the axiom of replacement. Let $T$ denote the inverse image, that is, $T = \{x \in X: \exists y (y \in V \wedge f(x) = y)\}$, by the axiom of specification. We show that $S = T$.
+	
+	For all $s \in S$, by its definition, there is a $y \in V$ that is replaced to it: $s = f^{-1}(y)$. By the definition of inverse functions, $f(s) = y$. This matches the condition in the definition of $T$, so we must have $s \in T$.
+	
+	For all $t \in T$, by its definition, there exists a $y \in V$ such that $f(t) = y$. By the definition of inverse functions, $f^{-1}(y) = t$. Because $y \in V$, it has to be replaced in the definition of $S$, to $t$. Therefore, $t \in S$.
+\end{proof}
+
+\begin{exercise}{3.4.2}
+	Let $f: X \to Y$ be a function. Let $S \subseteq X$, and $U \subseteq Y$.
+	\begin{enumerate}
+		\item What can we say about $f^{-1}(f(S))$ and $S$?
+		\item What can we say about $f(f^{-1}(U))$ and $U$?
+		\item What about $f^{-1}(f(f^{-1}(U)))$ and $f^{-1}(U)$?
+	\end{enumerate}
+\end{exercise}
+\begin{proof}\leavevmode
+	\begin{enumerate}
+		\item According to My Theorem~\ref{my.inj.surj.image.thm}, generally we have $S \subseteq f^{-1}(f(S))$. And if $f$ is injective, then the $\subseteq$ becomes $=$.
+		
+		\item According to My Theorem~\ref{my.inj.surj.image.thm}, generally we have $f(f^{-1}(U)) \subseteq U$. And if $f$ is surjective, then the $\subseteq$ becomes $=$.
+		
+		\item According to (1), generally, at least we should have $f^{-1}(U) \subseteq f^{-1}(f(f^{-1}(U)))$, if we regard $f^{-1}(U)$ as a subset of $X$. However, since Prof.~Tao mentioned this in particular, I wonder if I can prove something stronger, that is, if they are always equal in general.
+		
+		Now I only need to prove that $f^{-1}(f(f^{-1}(U))) \subseteq f^{-1}(U)$.
+		
+		For all $x \in f^{-1}(f(f^{-1}(U))$, by the definition of inverse images, there exists a $y \in f(f^{-1}(U))$ such that $f(x) = y$. Because $f(f^{-1}(U)) \subseteq U$, according to (2), we must also have $y \in U$. By the definition of inverse images again, we must have $x \in f^{-1}(U)$, since $f(x) = y \in U$.
+		
+		Therefore, in general we can also say $f^{-1}(f(f^{-1}(U))) = f^{-1}(U)$.
+	\end{enumerate}
+\end{proof}
+
+
+\declareexercise{3.4.3}
+\begin{proof}
+(1)
+\[
+x \in A \cap B \Longrightarrow f(x) \in f(A) \wedge f(x) \in f(B) \Longrightarrow 
+f(x) \in f(A) \cap f(B)
+\]
+\[
+y \in f(A \cap B) \equiv \exists x(x \in A \cap B \wedge f(x) = y)
+\]
+So $y \in f(A) \cap f(B)$, thus $f(A \cap B) \subseteq f(A) \cap f(B)$.
+
+(2)
+\[
+x \in A \setminus B \Longrightarrow f(x) \in f(A\setminus B)
+\]
+\[
+y \in f(A)\setminus f(B) \Longrightarrow \exists x(x \in A \wedge x \notin B \wedge f(x) = y)
+\]
+So $y \in f(A\setminus B)$, thus $f(A)\setminus f(B) \subseteq f(A\setminus B)$.
+
+(3)
+On one hand, 
+\[
+y \in f(A \cup B) \equiv \exists x (x \in A \cup B \wedge f(x) = y)
+\]
+\begin{align*}
+x \in A \cup B \Longrightarrow x \in A \vee x \in B \Longrightarrow \\
+f(x) \in f(A) \vee f(x) \in f(B) \Longrightarrow f(x) \in f(A)\cup f(B)
+\end{align*}
+
+On the other hand, 
+\[
+y \in f(A) \cup f(B) \Longrightarrow \exists x((x \in A \vee x \in B) \wedge f(x) = y) 
+\]
+\[
+x \in A \vee x \in B \Longrightarrow x \in A \cup B \Longrightarrow f(x) \in f(A\cup B)
+\]
+\end{proof}
+
+(1) $\subseteq$ can not be improved. Since it is possible that 
+\[
+\exists x \exists x'(x \in A \wedge x' \in B \wedge x \neq x' \wedge f(x) = f(x'))
+\]
+
+(2) $\subseteq$ can not be improved. Since it is possible that
+\[
+\exists x \exists x'(x \in A \setminus B \wedge x' \in B \wedge f(x) = f(x'))
+\]
+
+\declareexercise{3.4.4}
+\begin{proof}
+(1) 
+\begin{align*}
+x \in f^{-1}(U \cup V) \equiv (x \in X \wedge f(x) \in U \cup V) \equiv \\
+(x \in X \wedge (f(x) \in U \vee f(x) \in V))
+\end{align*}
+\begin{align*}
+x \in  f^{-1}(U) \cup  f^{-1}(V) \equiv (x \in X \wedge f(x) \in U) \vee (x \in X \wedge f(x) \in V) \\
+\equiv (x \in X \wedge (f(x) \in U \vee f(x) \in V))
+\end{align*}
+
+(2) and (3) can be proven in similar manners. 
+\end{proof}
+
+\declareexercise{3.4.5}
+\begin{proof}
+(1) On one hand, if $f(f^{-1}(S)) = S$ for every $S \subseteq Y$, then \\
+$f(f^{-1}(Y)) = Y$. That means, 
+$y \in Y \Longrightarrow \exists x (x \in f^{-1}(Y) \wedge f(x) \in Y)$. So even $f^{-1}(Y)$ 
+is enough for $f$ to be surjective. And $f^{-1}(Y) \subseteq X$, so $f$ is surjective.
+
+On the other hand, if $f$ is surjective, then for each $S \subseteq Y$, 
+\[
+y \in S \Longrightarrow \exists x(x \in X \wedge f(x) = y)
+\]
+Such $x$ are elements of $f^{-1}(S)$ of course, so $f(f^{-1}(S)) = S$.
+
+(2) On one hand, we show that $\forall S(S \subseteq X \Longrightarrow f^{-1}(f(S)) = S)$ implies that 
+$f$ is injective. Suppose the negation, that when 
+\[
+\forall S(S \subseteq X \Longrightarrow f^{-1}(f(S)) = S)
+\], but $f$ is not injective. Since $f$ is not injective, 
+\[
+\exists x \exists x'(x \in X \wedge x' \in X \wedge x \neq x' \wedge f(x) = f(x'))
+\]
+Let $S \subseteq X$ and $x \in S \wedge x' \notin S$. There is always such a set $S$.
+For example, we can let $S = X\setminus \{x'\}$. So we have $f^{-1}(f(S)) \neq S$ because $x' \in$ it.
+
+On the other hand, if $f$ is injective, then for every $S \subseteq X$, and for every $x \in S$, we have 
+$f(x) \in f(S)$. And $f(x)$ are the only elements in $f(S)$, that is, 
+$y \in f(S) \Longrightarrow y = f(x)$ for some $x \in S$. So now we know that 
+$S \subseteq f^{-1}(f(S))$. Moreover, for every $x' \in f^{-1}(f(S))$, $f(x') \in f(S)$. We can let 
+$f(x') = y = f(x)$. As $f$ is injective, $x = x'$, so $x' \in S$. That means $f^{-1}(f(S)) \subseteq S$. 
+So $f^{-1}(f(S)) =  S$.
+\end{proof}
+
+\declareexercise{3.4.6}
+\begin{proof}
+My own proof: According to Axiom 3.10, we can construct the set $X^X$. Apply the axiom 
+of replacement to each element of $X^X$, we construct a set $Z$ such that
+\[
+\forall x(x \in Z \equiv \exists f(f \in X^X \wedge x = f(X)))
+\]
+
+Let $Y = \{\varnothing\} \cup Z$.
+
+Now we prove that $Y$ is the set we want. On one hand, for any $S \subseteq X$, 
+if $S = \varnothing$, then $S \in Y$, as $Y = \{\varnothing\} \cup Z$.
+
+If $S \neq \varnothing$, there exists a surjective function $g: X \rightarrow S$. $g\in X^X$, and 
+$g(X) = S$, so $S \in Z$, and thus $S \in Y$. (To show the existence of $g$, for example, let $x \in X, 
+g(x) = x$ if $x \in S$, and for $x \in X \wedge x \notin S$, $g(x)$ can be any element of $X$.)
+
+
+On the other hand, for any $S' \nsubseteq X$, $\exists a(a \in S' \wedge a \notin X)$. To prove that 
+$S' \notin Y$, we need to show that $\nexists f(f \in X^X \wedge S' = f(X))$. We know that 
+$\nexists x(x \in X \wedge f(x) = a)$, so $a \notin f(X)$. Therefore $S' \neq f(X)$, so $S' \notin Y$.
+
+$Y$ is the set we want.
+
+I posted a question \href{https://math.stackexchange.com/questions/3803487/is-this-proof-to-the-existence-of-a-set-that-contains-all-subsets-of-another-set}{here} for verification for this proof. 
+Thanks to answers of people at Stack Exchange so that my proof can be refined.
+
+Proof By Tao's Hint:
+For each $S \subseteq X$, let a function $f_S$ be $f_S(x) = 1$ if $x \in S$, and $f_S(x)=0$ if 
+$x \in X \wedge x \notin S$. Then $f^{-1}_S(\{1\})$ gives $S$. 
+
+Now we show that any element in 
+$\{0,1\}^X$ is some $f_S$. Let $g \in \{0,1\}^X$. Then if $\forall x \in X, g(x) = 0$, then 
+$g = f_{\varnothing}$. Otherwise, there exists a set that contains all $x$ such that $g(x) = 0$ by 
+axiom of specification, namely $R$. Then $g = f_R$.
+
+On the other hand, each $f_S$ is obviously an element of $\{0,1\}^X$.
+
+Use the axiom of replacement, we construct a set $Y$ such that
+\[
+\forall x (x \in Y \equiv \exists f(f \in \{0,1\}^X \wedge x = f^{-1}(\{1\})))
+\]
+
+According to what we have proven, $Y$ is the set we want.
+\end{proof}
+
+\declareexercise{3.4.7}
+\begin{proof}
+As stated by the previous exercise, there exists a set $\mathbb{X}$ whose elements are all subsets of 
+$X$, and a set $\mathbb{Y}$ whose elements are all subsets of $Y$.
+
+For every element $x \in \mathbb{X}$, apply the axiom of replacement to $\mathbb{Y}$, to obtain a set 
+$S_x := \{y^x\}$ for every element $y \in \mathbb{Y}$. 
+
+According to the axiom of union, using $\mathbb{X}$ as the index set, we have the set
+\[
+Z = \bigcup_{x \in \mathbb{X}} S_x
+\]
+
+Apply again the axiom of union to $Z$ to obtain $R$, which contains all elements of elements of $Z$. Now 
+we show that $R$ is the set we want.
+
+On one hand, let $f$ be an arbitrary function with the domain of $X' \subseteq X$, and the range of $Y' 
+\subseteq Y$. We can see that $f \in {Y'}^{X'} \in S_{X'}$. ${Y'}^{X'}$ becomes an element of $Z$. And 
+thus $f$ becomes an element in $R$. 
+
+On the other hand, from the construction of $R$, we can see that $R$ contains only these elements.
+
+\end{proof}
+
+\declareexercise{3.4.8}
+\begin{proof}
+Let $A,B$ be two arbitrary sets. They are also objects as stated by Axiom 3.1. So according to 
+Axiom 3.3, there exists a set $S=\{A,B\}$. By Axiom 3.11, we have a set $Z$ such that 
+\[
+\forall x(x \in Z \equiv \exists X(X \in S \wedge x \in X))
+\]
+
+Now we show that $Z$ is the set we want. If $x \in A \vee x \in B$, then 
+$\exists X(X \in S \wedge x \in X)$ is true. So $x \in Z$.
+
+If $x \notin A \wedge x \notin B$, then $\forall X(X \in S \Longrightarrow x \notin X)$, that is, 
+$\exists X(X \in S \wedge x \in X)$ is false. So $x \notin Z$.
+
+$Z$ is therefore the set we want. 
+\end{proof}
+
+\paragraph{Example 3.4.11}
+In (3.3), why do Tao choose some element $\beta$ of $I$? This is because we need to apply the axiom of 
+specification to $A_\beta$ with the restriction $x \in A_\alpha$ for all $\alpha \in I$.
+
+\declareexercise{3.4.9}
+\begin{proof}
+This is quiet easy to prove. Let the left-handed side set be $S$, the RHS set be $S'$. For any 
+$x \in S$, $x \in A_\alpha$ for all $\alpha \in I$. So $x \in A_{\beta'}$. And $x \in A_\alpha$ for all 
+$\alpha \in I$. Therefore $x \in S'$. 
+
+It is nearly the same the prove $x \in S' \Longrightarrow x \in S$.
+\end{proof}
+
+\paragraph{Exercise 3.4.10} \label{exercise3.4.10}
+\begin{proof}
+For the sake of convenience, let 
+$(\bigcup_{\alpha \in I} A_{\alpha})\cup(\bigcup_{\alpha \in J}A_{\alpha})$ be $S$, \\
+$\bigcup_{\alpha \in I \cup J} A_{\alpha}$ be $S'$, 
+$(\bigcap_{\alpha \in I} A_{\alpha})\cap(\bigcap_{\alpha \in J}A_{\alpha})$ be $Z$,
+$\bigcap_{\alpha \in I \cup J} A_{\alpha}$ be $Z'$.
+
+(1) When $I,J \neq \varnothing$: 
+On one hand, 
+\[
+x \in S \Longrightarrow (x \in \bigcup_{\alpha \in I} A_{\alpha} \vee 
+x \in \bigcup_{\alpha \in J}A_{\alpha})
+\]
+If $x \in \bigcup_{\alpha \in I} A_{\alpha}$, then $x \in \bigcup_{\alpha \in I \cup J} A_{\alpha}$.
+If $x \in \bigcup_{\alpha \in J} A_{\alpha}$, then $x \in \bigcup_{\alpha \in I \cup J} A_{\alpha}$.
+
+On the other hand, if $x \in S'$, then there exists an object $a \in I \cup J$ such that $x \in A_a$.
+If $a \in I$ then $x \in x \in \bigcup_{\alpha \in I} A_{\alpha} \Longrightarrow x \in S$.
+If $a \in J$ then $x \in x \in \bigcup_{\alpha \in J} A_{\alpha} \Longrightarrow x \in S$.
+
+When $I,J$ are both empty, $S,S'$ are all empty.
+
+When there is only one of $I,J$ is empty, say it is $I$, then 
+$S = \varnothing \cup \bigcup_{\alpha \in J} = \bigcup_{\alpha \in J}$. And 
+$S' = \bigcup_{\alpha \in \varnothing \cup J} A_{\alpha} = \bigcup_{\alpha \in J}$.
+
+(2)
+\[
+x \in Z \equiv \forall a(a \in I \Longrightarrow x \in A_a) \wedge 
+\forall b(b \in J \Longrightarrow x \in A_b)
+\], which is equal to $\forall a(a \in I \cup J \Longrightarrow x \in A_a) \equiv x \in Z'$.
+\end{proof}
+
+\paragraph{Exercise 3.4.11} \label{exercise3.4.11}
+\begin{proof}
+(1) Let the LHS be $S$, the RHS be $S'$. 
+\begin{align*}
+x \in S &\equiv \\
+x \in X \wedge x \notin \bigcup_{\alpha \in I} A_{\alpha} &\equiv \\
+x \in X \wedge \forall a(a \in I \Longrightarrow x \notin A_{a})
+\end{align*}
+\begin{align*}
+x \in S' &\equiv \\
+\forall a(a \in I \Longrightarrow x \in X \setminus A_a) &\equiv \\
+x \in X \wedge \forall a(a \in I \Longrightarrow x \notin A_a)
+\end{align*}.
+
+So $S=S'$.
+
+(2) Let the LHS be $Z$, the RHS be $Z'$. 
+\begin{align*}
+x \in Z &\equiv \\
+x \in X \wedge x \notin \bigcap_{\alpha \in I} A_{\alpha} &\equiv \\
+x \in X \wedge \neg(\forall a(a \in I \Longrightarrow x \in A_a)) &\equiv \\
+x \in X \wedge \exists a(a \in I \Longrightarrow x \notin A_a)
+\end{align*}
+\begin{align*}
+x \in Z' &\equiv \\
+x \in X \wedge \bigvee_{\alpha \in I}(x \notin A_{\alpha}) &\equiv \\
+x \in X \wedge \exists a(a \in I \Longrightarrow x \notin A_a)
+\end{align*}
+
+Thus, $Z = Z'$
+\end{proof}
+
+\section{Cartesian products}
+\declareexercise{3.5.1}
+\begin{proof}
+First we show that $(x,y) = \{\{x\},\{x,y\}\}$ is a good definition. 
+Let $S_1$ denote $(x_1,y_1) = \{\{x_1\},\{x_1,y_1\}\}$, $S_2$ denote 
+$(x_2,y_2) = \{\{x_2\},\{x_2,y_2\}\}$.
+
+On one hand, if $x_1=x_2\wedge y_1=y_2$, then obviously $S_1=S_2$ for they have the same elements.
+
+On the other hand, if $S_1 = S_2$, then 
+\[
+\{x_1\} \in S_2 \wedge \{x_1,y_1\} \in S_2 \wedge
+\{x_2\} \in S_1 \wedge \{x_2,y_2\} \in S_1 
+\].
+We have that 
+\begin{align*}
+\{x_1\} \in S_2 &\equiv \{x_1\} = \{x_2\} \vee \{x_1\} = \{x_2,y_2\} \\
+&\equiv x_1=x_2 \vee x_1=x_2=y_2 \\
+&\Longrightarrow x_1=x_2
+\end{align*}
+\begin{align*}
+\{x_1,y_1\} \in S_2 &\equiv \{x_1,y_1\} = \{x_2\} \vee \{x_1,y_1\} = \{x_2,y_2\} \\
+&\equiv x_1=x_2=y_1 \\
+&\vee \textcolor{red}{((x_1=x_2\wedge y_1=y_2)\vee(x_1=y_2\wedge y_1=x_2))} 
+\end{align*}
+Similarly we have that
+\begin{align*}
+\{x_2,y_2\} \in S_1 
+&\equiv x_2=x_1=y_2 \\
+&\vee \textcolor{red}{((x_2=x_1\wedge y_2=y_1)\vee(x_2=y_1\wedge y_2=x_1))}
+\end{align*}
+We may notice that the red-colored text are two same statements. Thus from $\{x_1,y_1\} \in S_2$ and 
+$\{x_2,y_2\} \in S_1$ we can always conclude that $y_1=y_2$. Therefore, 
+$S_1 = S_2 \Longrightarrow x_1=x_2\wedge y_1=y_2$.
+
+Then we show that if $X,Y$ are two sets, then $X \times Y$ is also a set. For each element $x \in X$, 
+construct a set $S_x$, where we replace each element $y \in Y$ with $(x,y)$. Then construct the set 
+$\bigcup_{x \in X}S_x$.
+\end{proof}
+
+\declareexercise{3.5.2}
+\begin{proof}
+Since $x,y$ are two functions, they are equal means that $\forall 1\leq i \leq n$, $x(i) = y(i)$. That 
+is, $x_i = y_i, 1\leq i \leq n$.
+
+Now we show that $\displaystyle \prod_{1\leq i\leq n}X_i$ is a set. Let set $F$ be the set that contains 
+all partial functions from $N = \{i \in \mathbb{N}:1\leq i\leq n\}$ to 
+$\displaystyle X = \bigcup_{1\leq i\leq n}X_i$ (Exercise 3.4.7). Use the axiom of specification, select 
+such elements $f$ from $F$ that:
+\begin{enumerate}
+\item the element is surjective, and
+\item its domain is $N$, and 
+\item $f(i) \in X_i$
+\end{enumerate}, 
+and use all of them to construct a set $Z$, which is the set we want.
+\end{proof}
+
+\declareexercise{3.5.3}
+\begin{proof}
+The definition is entirely based on the equality of objects (e.g. $x = x'$). The proof is immediately 
+done since this equality is reflective ($x = x$), symmetric ($x = x' \equiv x' = x$), and transitive 
+($x_0 = x_1 \wedge x_1 = x_2 \Longrightarrow x_0 = x_2$).
+\end{proof}
+
+\declareexercise{3.5.4}
+\begin{proof}
+(1)
+\begin{align*}
+(x,y) \in A \times (B \cup C) &\equiv x \in A \wedge y \in (B \cup C) \\
+&\equiv x \in A \wedge (y \in B \vee y \in C) \\
+&\equiv (x \in A \wedge y \in B) \vee (x \in A \wedge y \in C) \\
+&\equiv ((x,y) \in A \times B) \vee ((x,y) \in A \times C) \\
+&\equiv (x,y) \in (A \times B) \cup (A \times C)
+\end{align*}
+
+(2)
+\begin{align*}
+(x,y) \in A \times (B \cap C) &\equiv x \in A \wedge y \in (B \cap C) \\
+&\equiv x \in A \wedge (y \in B \wedge y \in C) \\
+&\equiv (x \in A \wedge y \in B) \wedge (x \in A \wedge y \in C) \\
+&\equiv ((x,y) \in A \times B) \wedge ((x,y) \in A \times C) \\
+&\equiv (x,y) \in (A \times B) \cap (A \times C)
+\end{align*}
+
+(3)
+\begin{align*}
+(x,y) \in A \times (B \setminus C) &\equiv x \in A \wedge y \in (B \setminus C) \\
+&\equiv x \in A \wedge (y \in B \wedge \neg (y \in C)) \\
+&\equiv (x \in A \wedge y \in B) \wedge \neg (x \in A \wedge y \in C) \\
+\tag{The statement $x \in A$ implies $\neg (x \in A \wedge y \in C) 
+\Longrightarrow \neg (y \in C)$}\\
+&\equiv ((x,y) \in A \times B) \wedge \neg((x,y) \in A \times C) \\
+&\equiv (x,y) \in (A \times B) \setminus (A \times C)
+\end{align*}
+\end{proof}
+
+\declareexercise{3.5.5}
+\begin{proof}
+(1)
+\begin{align*}
+(x,y) \in (A \times B) \cap (C \times D) 
+&\equiv (x,y) \in (A \times B) \wedge (x,y) \in (C \times D) \\
+&\equiv (x \in A \wedge y \in B) \wedge (x \in C \wedge y \in D) \\
+&\equiv (x \in A \wedge x \in C) \wedge (y \in B \wedge y \in D) \\
+&\equiv x \in A \cap C \wedge y \in B \cap D \\
+&\equiv (x,y) \in (A \cap C) \times (B \cap D)
+\end{align*}
+
+(2) It is not true since 
+\begin{align*}
+(x,y) \in (A \times B) \cup (C \times D) 
+&\equiv (x,y) \in (A \times B) \vee (x,y) \in (C \times D) \\
+&\equiv (x \in A \wedge y \in B) \vee (x \in C \wedge y \in D) \\
+&\nLeftrightarrow (x \in A \vee x \in C) \wedge (y \in B \vee y \in D)
+\end{align*}
+Generally 
+\[
+(x \in A \wedge y \in B) \vee (x \in C \wedge y \in D) \Longrightarrow 
+(x \in A \vee x \in C) \wedge (y \in B \vee y \in D)
+\], 
+but
+\[
+(x \in A \vee x \in C) \wedge (y \in B \vee y \in D) \nRightarrow
+(x \in A \wedge y \in B) \vee (x \in C \wedge y \in D)
+\].
+
+(3) It is not true since
+\begin{align*}
+(x,y) \in (A \times B) \setminus (C \times D) 
+&\equiv (x,y) \in (A \times B) \wedge (x,y) \notin (C \times D) \\
+&\equiv (x \in A \wedge y \in B) \wedge (x \notin C \vee y \notin D) \\
+&\nLeftrightarrow (x \in A \wedge x \notin C) \wedge (y \in B \wedge y \notin D)
+\end{align*}
+\end{proof}
+
+\declareexercise{3.5.6}
+\begin{proof}
+(1) On one hand, if $A \subseteq C$ and $B \subseteq D$, then 
+\begin{align*}
+(x,y) \in A \times B &\equiv x \in A \wedge y \in B \\
+&\Longrightarrow x \in C \wedge y \in D \\
+&\Longrightarrow (x,y) \in C \times D
+\end{align*}, 
+which means $A \times B \subseteq C \times D$.
+
+On the other hand, if $A \times B \subseteq C \times D$, but we suppose that 
+\[
+\neg(A \subseteq C \wedge B \subseteq D)
+\]. 
+We only consider that $A \nsubseteq C$, the other situations are similar. Then 
+$\exists x(x \in A \wedge x \notin C)$. Let $p = (x,y)$, where $y \in B$, then $p \in A \times B$. 
+But $x \notin C$, so $p \notin C \times D$, a contradiction. Therefore, 
+\[
+A \times B \subseteq C \times D \Longrightarrow A \subseteq C \wedge B \subseteq D
+\]
+
+(2) On one hand, if $A = C \wedge B = D$, then
+\begin{align*}
+(x,y) \in A \times B &\equiv x \in A \wedge y \in B \\
+&\equiv x \in C \wedge y \in D \\
+&\equiv (x,y) \in C \times D
+\end{align*}.
+
+On the other hand, if $A \times B = C \times D$, but we suppose that $\neg(A = C \wedge B = D)$. 
+We only consider that $A \neq C$, the other situations are similar. Then we only consider 
+$\exists x(x \in A \wedge x \notin C)$, for the other situations are similar. 
+
+(3) It is easy to prove that $X \times \varnothing = \varnothing$ and 
+$\varnothing \times X = \varnothing$. Let $A = \varnothing$, we can see that even if $B \nsubseteq D$, 
+$A \times B \subseteq C \times D$. 
+
+Let $A = D = \varnothing$, then even if $A \neq C$, $A \times B = C \times D$.
+\end{proof}
+
+\declareexercise{3.5.7}
+\begin{proof}
+Existence: Let $h(t):=(f(t),y(t))$. It is easy to verify that $h(t) \in X \times Y$, and that given a 
+$t \in Z$, $h(t)$ is unique. Therefore, $h$ is a function. And it is obvious that 
+$\pi_{X\times Y \rightarrow X} \circ h = f$ and that $\pi_{X\times Y \rightarrow Y} \circ h = g$.
+
+Uniqueness: $\pi_{X\times Y \rightarrow X} \circ h = f$ and $\pi_{X\times Y \rightarrow Y} \circ h = g$ 
+imply that if there is another function $h'$ that satisfies the requirements, then $h'(t) = h(t)$. So $h$ 
+is unique. 
+\end{proof}
+
+\declareexercise{3.5.8}
+\begin{proof}
+On one hand, if for some $i, X_i = \varnothing$, then 
+\[
+\forall (x_i)_{1\leq i \leq n}(\bigwedge^{n}_{i =1}x_i \in X_i \equiv (x_i)_{1\leq i \leq n} \in 
+\varnothing)
+\], 
+which means that $\varnothing = \prod_{i=1}^{n}X_i$.
+
+On the other hand, if $\prod_{i=1}^{n}X_i = \varnothing$ but we suppose that $X_i \neq \varnothing$. Then 
+for each $i$, $\exists x_i \in X_i$. We thus have a tuple $(x_i)_{1\leq i \leq n}$, which should be an 
+element of $\prod_{i=1}^{n}X_i$. Therefore we have a contradiction.
+\end{proof}
+
+\declareexercise{3.5.9}
+\begin{proof}
+On one hand, let $x \in (\bigcup_{\alpha \in I}A_{\alpha})\cap(\bigcup_{\beta \in J}B_{\beta})$. Then 
+\[
+\exists a(a \in I \wedge x \in A_a) \wedge \exists b(b \in J \wedge x \in B_b)
+\]
+It is obvious that $x \in A_a \cap B_b$ and that $(a,b) \in I \times J$. Therefore 
+\[
+x \in \bigcup_{(\alpha,\beta) \in I \times J}(A_\alpha \cap B_\beta)
+\].
+
+On the other hand, let $x \in \bigcup_{(\alpha,\beta) \in I \times J}(A_\alpha \cap B_\beta)$. Then 
+\begin{align*}
+\exists (a,b) \in I \times J(x \in A_a \cap B_b) 
+&\Longrightarrow  x \in A_a \wedge x \in B_b \\
+&\Longrightarrow x \in \bigcup_{\alpha \in I}A_{\alpha} \wedge x \in \bigcup_{\beta \in J}B_{\beta} \\
+&\Longrightarrow x \in (\bigcup_{\alpha \in I}A_{\alpha})\cap(\bigcup_{\beta \in J}B_{\beta})
+\end{align*}
+\end{proof}
+
+\paragraph{Exercise 3.5.10} \label{exercise3.5.10}
+\begin{proof}
+We denote $\overset{\sim}{f}$ as $f'$, the graph of $f$ as $G$, and the graph of $f'$ as $G'$ for the 
+sake of simplification.
+
+(1) On one hand, if $f = f'$, then for every $(x,f(x)) \in G$, we can find $(x,f'(x)) \in G'$, and 
+obviously $(x,f(x)) = (x,f'(x))$, and vice versa.
+
+On the other hand, if $G = G'$, then for each $(x,f(x)) \in G$, $(x,f(x)) \in G'$. Note that each 
+element of $G'$ obeys the form $(x,f'(x))$, so $f(x) = f'(x)$ for every $x \in X$, that is, $f=f'$.
+
+(2) Existence: Let $f(x)$ be such a value that $(x,f(x)) \in G$. Thus the value is unique, so $f$ is a 
+function. According to its definition, the graph of $f$ is $G$.
+
+Uniqueness: As proven in (1), if $f,f'$ have the same graph, then they are equal.
+\end{proof}
+
+\paragraph{Exercise 3.5.11} \label{exercise3.5.11}
+I think this exercise is meaningless. Lemma 3.4.6 is proven by the fact that $X^Y$ exists, which depends 
+on Axiom 3.10. Then the exercise asks us to prove Axiom 3.10 using Lemma 3.4.6. So I looked up some books 
+about set theory and found out that the power set axiom is essentially Lemma 3.4.6, not Axiom 3.10.
+
+Nevertheless, here is the proof:
+\begin{proof}
+Let set $Z$ contains all subsets of $X\times Y$. The specify such element in $Z$ that obey the vertical 
+line test, and let them form the set $S$. According to the previous exercise, for each element in $S$, 
+there exists an unique function whose graph is the element. Then we replace all elements in $S$ with 
+these functions to construct the set $F$. Obviously, each element in $F$ is a function with the domain 
+$X$ and the range $Y$.
+
+Now we show that every function $f$ from $X$ to $Y$ is in $F$. Denote the graph of $f$ as $G$. We know 
+that $G$ obeys the vertical line test and $G \subseteq X \times Y$, so $G \in S$. Since $G$ is the graph 
+of $f$, $f \in F$.
+\end{proof}
+
+\paragraph{Exercise 3.5.12} \label{exercise3.5.12}
+I am confused by this exercise. It seems that simply applying induction to $a$ can solve the 
+problem, just like what we did in Proposition 2.1.16. What is wrong?
+
+By the way, according to the \href{https://terrytao.wordpress.com/books/analysis-i/}{corrections}, 
+edit the exercise as the following:
+\begin{quotation}
+Let $X$ be an arbitrary set containing at least an element $c$ and obeys the Peano axioms. Let $f$ be a 
+function from $N \times X$ to $X$. ... 
+
+Show that there exists an unique function $a$ from $X$ to $X$ such that 
+\[
+a(0) = c
+\] 
+and 
+\[
+a(n++) = f(n,a(n)), \forall n \in X
+\]
+...
+
+such that $a_N(0) = c$ and $a_{N}(n++) = f(n,a_N(n))$ ... 
+\end{quotation}
+
+Note that all properties (e.g. orders, addition) in section 2 are deduced from the Peano axioms and their 
+definitions. Since $X$ obeys these rules, we use such properties on elements of $X$ without proof.
+
+The proof is now reserved for further research.
+\begin{proof}
+\end{proof}
+
+\paragraph{Exercise 3.5.13} \label{exercise3.5.13}
+\begin{proof}
+Use induction.
+
+Existence: We need to prove that for all $n \in \mathbb{N}$, $f(n)$ is defined. Use induction:
+$f(0) = 0'$ is define. And the definition is unique for $0$ is not the successor of any natural number. 
+Now suppose that $f(n) = n'$ is defined, then $f(S(n)) = S'(f(n)) = S'(n')$ is also defined. The 
+definition is also unique. So we know that $f$ exists.
+
+Injectivity: We need to prove that $f(m) = f(n) \Longrightarrow m = n$. If $f(m) = f(n)$, then $m' = n'$, 
+and thus $m=n$. 
+
+Surjectivity: Use induction: 
+The basic case is, for $0' \in \mathbb{N}'$, $f(0) = 0'$. 
+
+Now suppose that for $n' \in \mathbb{N}'$, we can find $n \in \mathbb{N}$ such that $f(n) = n'$, then 
+for $S'(n')$, we have $f(S(n)) = S'(n')$. We can close the induction now.
+\end{proof}
+
+\section{Cardinality of Sets}
+
+\declareexercise{3.6.1}
+\begin{proof}
+Reflexivity: Let $f(x):= x, X \rightarrow X$. $f$ is bijective since $f^{-1}(x) = x$ exists.
+
+Symmetry: If $X,Y$ have the same cardinality, then $\exists f:X\rightarrow Y$ which is bijective. So 
+$f^{-1}$ exists, and is also a bijection. Thus $Y,X$ have the same cardinality. Since then, we can say 
+that two sets have the same cardinality without caring about the order.
+
+Transitivity: If $X,Y$ have the same cardinality, and $Y,Z$ also have the same cardinality, then there 
+exist two bijections: $f:X \rightarrow Y$ and $g:Y \rightarrow Z$. It is easy to verify that $g \circ f$ 
+is also a bijection and is from $X$ to $Z$ (See \exerciseref{3.3.7}).
+\end{proof}
+
+\paragraph{Remark 3.6.6}
+It is $f(n) := S(n)$. We are now proving something stronger
+\begin{lem} \label{lem3.6.6}
+For any natural number $m,n$, $\{i \in \mathbb{N}:0\leq i\leq n\}$ and 
+$\{i \in \mathbb{N}:m\leq i\leq n+m\}$ have the same cardinality.
+\end{lem}
+\begin{proof}
+Use induction on $m$. When $m=0$, the statement is obviously true. Simply give the function $f(n):=n$.
+
+Suppose that for some $m$, we have proven the statement. Then there exists a bijection: 
+\[
+f:\{i \in \mathbb{N}:0\leq i\leq n\} \rightarrow \{i \in \mathbb{N}:m\leq i\leq n+m\}
+\].
+Let $g$ be a function from $\{i \in \mathbb{N}:0\leq i\leq n\}$ to $\mathbb{N}$ such that 
+$g(x) = S(f(x))$. We prove that $g$ is a bijection from $\{i \in \mathbb{N}:0\leq i\leq n\}$ to 
+$\{i \in \mathbb{N}:S(m)\leq i\leq n+S(m)\}$.
+
+First we prove that $g(n)$ always in $\{i \in \mathbb{N}:S(m)\leq i\leq n+S(m)\}$, which is immediately 
+given by the fact that addition preserves order. 
+
+Surjectivity: For any $a \in \{i \in \mathbb{N}:S(m)\leq i\leq n+S(m)\}$, $a$ is positive. Then $a$ is 
+always some number's successor, that is $a = S(b) = b+1$ for some natural number $b$. Since addition 
+preserves order, $b \in \{i \in \mathbb{N}:m\leq i\leq n+m\}$. $f$ being surjective implies that there is 
+some $x$ in the domain such that $f(x) = b$, and $g(x) = f(x) + 1 = a$.
+
+Injectivity: By cancellation law, $f(x) + 1 \neq f(x') + 1 \equiv f(x) \neq f(x') \equiv x \neq x'$.
+
+We can now close the induction.
+\end{proof}
+
+\paragraph{Lemma 3.6.9}
+Empty functions are not injective when the range is not empty (See \exerciseref{3.3.3}). 
+
+Now we show that $g$ is bijective:
+\begin{proof}
+Injectivity: $f$ being injective implies that 
+\[
+\forall x \forall x'((x \in X \wedge x' \in X) \Longrightarrow (f(x) = f(x') \Rightarrow x = x'))
+\]
+For $a,a' \in X - \{x\}$, they also $\in X$. If $g(a) = g(a')$, then either directly $f(a) = f(a')$ or 
+$f(a) - 1 = f(a') - 1$, which gives $f(a) = f(a')$. Thus $a = a'$. (Note that subtraction is not defined 
+yet, see the footnote about this in the book).
+
+Surjectivity: The surjectivity of $f$ gives 
+\[
+(\forall 1 \leq i \leq n)(\exists a(a \in X \wedge f(a) = i))
+\].
+
+If $f(x) = n$, then $g(a) = f(a)$ for all meaningful $a$. Then for $1 \leq i \leq n-1$, we can find $a$ 
+such that $a \in X \wedge a \neq x$, that is, $x \in X - \{x\}$. So $g(a)$ is meaningful, then $g$ is 
+surjective.
+
+If $f(x) \neq n$, then $f(x) < n$. For those $1 \leq i < f(x)$, $g$ is obviously surjective. For 
+$n-1 \geq i \geq f(x)$, since $S(i) \leq n$, $\exists a(a \in X \wedge f(a) = S(i))$. And we know that 
+$S(i) \neq f(x)$, then $a \in X - \{x\}$. So $g(a) = f(a) - 1 = i$.
+\end{proof}
+
+\declareexercise{3.6.2}
+\begin{proof}
+On one hand, if $X$ is empty, then we know that the empty function whose range is also empty is injective, 
+(See \exerciseref{3.3.3}) so its cardinality is $0$. 
+
+On the other hand, if $\# X = 0$ but $X \neq \varnothing$, then there exists an bijection 
+$f:X \rightarrow \varnothing$, which is impossible.
+\end{proof}
+
+\declareexercise{3.6.3}
+\begin{proof}
+When $n = 0$, this is vacuously true. The base case then becomes $n=1$. We simply let $M = f(1)$.
+
+Suppose that the statement for $n$ is true. And for $1\leq i\leq n$ we have the number $M$. Then $f(S(n))$ 
+either $\geq$ or $<$ $M$. On the former case, let $f(S(n))$ be $M'$, and on the latter case, let $M' = M$. 
+It is east to verify that $M'$ is the number we want.
+\end{proof}
+
+From now on we will denote $\{i\in \mathbb{N}:1\leq i \leq n\}$ as $\mathbb{N}_n$
+
+\declareexercise{3.6.4}
+\begin{proof}
+(a) 
+Let $n = \#X$. There is an injective  $f$ from $X$ to $\{i\in \mathbb{N}:1\leq i\leq n\}$. Let $g$ be a 
+function from $X \cup \{x\}$ to $\{i\in \mathbb{N}:1\leq i\leq n+1\}$ such that $g(a) = f(a)$ if 
+$a\neq x$, and $g(x) = n+1$. Now we show that $g$ is bijective.
+
+Injectivity: We know that $\forall x \in X$, $g$ is already injective. Since that $g(x) = n+1 \neq g(a)$ 
+for all $a \in X$, so $g$ is injective on $X \cup \{x\}$.
+
+Surjectivity: We know that $\forall i \in \{i\in \mathbb{N}:1\leq i\leq n\}$, we can find 
+$a \in X \cup \{x\}$ such that $g(a) = i$. And we have $g(x) = n+1$, so 
+$\forall a \in \{i\in \mathbb{N}:1\leq i\leq n+1\}$, we can find $a \in X \cup \{x\}$ such that 
+$g(a) = i$. 
+
+(b)
+First we prove that if $X,Y$ are disjoint, then $\#X + \#Y = \#(X\cup Y)$. Let $f$ be a bijection from $X$ 
+to $\mathbb{N}_{\#X}$, and $g$ be a bijection from $Y$ to $\mathbb{N}_{\#Y}$. According to 
+\hyperref[lem3.6.6]{this Lemma}, there exists a bijection $h$ from $\mathbb{N}_{\#Y}$ to 
+$\{i\in \mathbb{N}:\#X+1\leq i \leq \#X+\#Y\}$. Thus $h \circ g$ is also a bijection. Let $u$ be a 
+function from $X \cup Y$ to $\mathbb{N}_{\#X} \cup\{i\in \mathbb{N}:\#X+1\leq i \leq \#X+\#Y\}$. Now we 
+show that $u$ is bijective.
+
+Injectivity: For $x \neq x'$ in the domain. If $x,x'$ are both in $X$ or $Y$, then $f(x)\neq f(x')$ is 
+immediately given by the injectivity of $f$ and $h \circ g$. If one of them is in $X$, and the other is 
+in $Y$, then they can also never be equal because the ranges of the two functions are disjoint. 
+
+Surjectivity: It is easy to verify that the range is equal to $\mathbb{N}_{\#X + \#Y}$. For any $y$ in the 
+range, if $y \in$ the range of $f$, then $u$ is surjective since $f$ is, and if $y \in$ the range of $h 
+\circ g$, $u$ is surjective for the same reason. The range consists of only this two sets, so $u$ is 
+surjective on the whole range.
+
+The proof is over. This also implies that $X \cup Y$ is finite. Now we need only to show that 
+$\#(X \cup Y) < \#X + \#Y$ when $X,Y$ are not disjoint. It is easy to see that
+\begin{align*}
+\#A + \#B 
+&= \#(A - A \cap B) + \#(A \cap B) + \#(B - A \cap B) + \#(A \cap B) \\
+&= (\#(A - A \cap B) + \#(A \cap B) + \#(B - A \cap B)) + \#(A \cap B) \\
+&= \#(A \cup B) + \#(A \cap B) \\
+&> \#(A \cup B)
+\end{align*}
+
+(c)
+If $X \subseteq Y \wedge X \neq Y$, then $\#(Y \setminus X) \neq 0$. 
+\[
+\#Y = \#X + \#(Y \setminus X) > \#X
+\].
+
+If $X = Y$, then $\#(Y \setminus X) = 0$, and $\#Y$ becomes $\#X$.
+
+(d)
+$f: X \rightarrow f(X)$ is always surjective. If $f$ is also injective, then $f$ is bijective. On this 
+occasion, $\#f(X) = \#X$. If $f$ is not injective, we can select a set $X' \subseteq X \wedge X' \neq X$, 
+on which $f$ is bijective. Then $\#X' = \#f(X') = \#f(X)$. According to (c), $\#X' < \#X$, so 
+$\#f(X) < \#X$.
+
+(e)
+Suppose that $\#Y = n$. Use induction on $n$. 
+
+When $n=0$, $Y$ is empty, then $\#(X \times Y) = 0 = \#X \times 0$. Here we additionally prove that 
+when $n=1$, this is also true for further usage. When $n=1$, let $Y = \{a\}$. Then the bijection is 
+$f(x):=(x,a), X \rightarrow X \times \{a\}$.
+
+Suppose that we have proven for some $n$, $\#(X \times Y) = \#X \times \#Y$. Then when $\#Y = S(n)$, 
+let $Y = Y\setminus\{x\}\cup\{x\}$, where $x \in Y$. Lemma 3.6.9 tells us that 
+$\#(Y\setminus\{x\}) = S(n)-1 = n$. And \exerciseref{3.5.4} tells us that 
+$X \times Y = X \times (Y\setminus\{x\}) \cup X \times \{x\}$. 
+\begin{align*}
+\#(X \times Y) 
+&= \#(X \times (Y\setminus\{x\}) \cup X \times \{x\}) \\
+&= \#(X \times (Y\setminus\{x\})) + \#(X \times \{x\}) \\
+&= \#X \times n + \#X \\
+&= \#X \times S(n)
+\end{align*}
+
+We can now close the induction.
+
+(f)
+We should first define $m^n$ for natural numbers $m,n$. It has not been done yet. Exponentiation is 
+defined for rational numbers at Definition 4.3.9.
+\begin{defn}
+\begin{itemize}
+\item $m^0=1$,
+\item $m^{S(n)} = m^n \times m$
+\end{itemize}
+\end{defn}
+
+Suppose that $\#Y = m,\#X = n$. Use induction on $n$. 
+
+When $n=0$, $X$ is empty, then $Y^X$ has one function $f:\varnothing \rightarrow Y$.
+
+Suppose that we have proven the statement for some $n$. Before we proceed the proof, we need some lemmas.
+\begin{lem}
+If $X$ is not empty, 
+\[
+\#Y^{X\setminus\{x'\}\cup\{x'\}} = \#Y^{X\setminus\{x'\}} \times \#Y
+\], 
+where $x'$ is an element of $X$.
+\end{lem}
+\begin{proof}
+By (e) we know that 
+\[
+\#Y^{X\setminus\{x'\}} \times \#Y = \#(Y^{X\setminus\{x'\}} \times Y)
+\].
+
+Try to build a bijection between $Y^{X\setminus\{x'\}} \times Y$ and $Y^X$. Let $f' \in Y^X$.
+
+Let $h$ be a function from $Y^X$ to $Y^{X\setminus\{x'\}} \times Y$ such that
+\[
+h(f') = (f,f'(x')), 
+\]
+where $f(x):=f'(x)$ when $x \neq x'$. Now we show that $h$ is bijective.
+
+Injectivity: 
+If ${f_1}' \neq {f_2}'$, then 
+\[
+{f_1}'(x') \neq {f_2}'(x') \vee \exists x(x \neq x' \wedge {f_1}'(x) \neq {f_2}'(x))
+\]
+That is, 
+\[
+{f_1}'(x') \neq {f_2}'(x') \vee f_1 \neq f_2,
+\]
+which means 
+\[
+(f_1,{f_1}'(x')) \neq (f_2,{f_2}'(x')).
+\]
+
+Surjectivity:
+For any $(f,a) \in Y^{X\setminus\{x'\}} \times Y$, let $f'$ be $f$ if $x\neq x'$, and $f'(x') = a$. Then 
+$f' \in Y^X$ and $h(f') = (f,a)$.
+
+So, 
+\[
+\#Y^X = \#(Y^{X\setminus\{x'\}} \times Y)
+\], which gives the lemma.
+\end{proof}
+
+Now we proceed the proof. Suppose that $\#X = n+1$, then $\#(X \setminus\{x'\}) = n$. By induction 
+hypothesis, $\#(Y^{X \setminus\{x'\}}) = m^n$. 
+
+By the lemma, 
+\[
+\#Y^X = \#Y^{X\setminus\{x'\}\cup\{x'\}} = \#Y^{X\setminus\{x'\}} \times \#Y,
+\]
+which equals to $m^n \times m$.
+
+Now we can close the induction.
+
+We have proven that the cardinality of power sets obeys the definition of power. This ensures the 
+exercise.
+\end{proof}
+
+\declareexercise{3.6.5}
+\begin{proof}
+Let $f((x,y)):= (y,x), A\times B \rightarrow B \times A$. The bijectivity is obvious. 
+
+Now we are using set theory to prove the commutativity of multiplication of natural number. For any 
+natural number $m,n$, construct two sets: $M = \mathbb{N}_{m}, N = \mathbb{N}_{n}$. According to (e) in 
+Proposition 3.6.14, we have that $\#(M \times N) = \#M \times \#N$. Then by what we have just proven, 
+\[
+\#(M \times N) = \#(N \times M) \Longrightarrow \#M \times \#N = \#N \times \#M \Longrightarrow mn = nm
+\]
+\end{proof}
+
+\declareexercise{3.6.6}
+\begin{proof}
+Let $c \in C$, $f \in (A^B)^C$. Then $f(c)$ is a function $B\rightarrow A$. Let 
+$b \in B, h \in A^{B\times C}$. Let
+\[
+g:A^{B\times C} \rightarrow (A^B)^{C}
+\]
+be such a function that for all $b,c$,
+\[
+g(h) = f \equiv h(b,c) = (f(c))\,(b)
+\]
+. Now we show that $g$ is bijective.
+
+Injectivity: 
+If $h \neq h'$, then $\exists b_0,c_0(h(b_0,c_0) \neq h'(b_0,c_0))$. Let $g(h) =f, g(h') = f'$. Then we 
+know that $(f(c_0))\,(b_0) \neq (f'(c_0))\,(b_0)$, so $f(c_0) \neq f'(c_0) \Longrightarrow f \neq f'$. 
+That means, $g(h) \neq g(h')$.
+
+Surjectivity:
+For any $f \in (A^B)^{C}$, let $h$ be such a function $\in A^{B\times C}$ that for all $b \in B,c \in C$, 
+$h(b,c) := (f(c))\,(b)$. It is easy to see that $h$ is well-defined. So $g(h) = f$.
+
+Note that by Proposition 3.6.14 we have $\#M^N = m^n$ and $\#(M \times N) = mn$, where $\#M =m, \#N =n$. 
+Suppose that $\#A = a, \#B = b, \#C = c$, then
+\[
+\#(A^B)^C = (\#A^B)^{\#C} = (a^b)^c
+\]
+\[
+\#A^{B\times C} = \#A^{\#(B \times C)} = a^{bc}
+\]
+So we have proven that $(a^b)^c = a^{bc}$.
+
+Now we try to prove $a^b \times a^c = a^{b+c}$. Let $B,C$ be disjoint sets with the cardinality $b,c$ 
+respectively. What we need to show is that
+\[
+\#(A^B \times A^C) = \#(A^{B \cup C}).
+\]
+
+Similarly, let 
+\[
+f: (A^{B \cup C}) \rightarrow (A^B \times A^C)
+\]
+be such a function that 
+\[
+f(g) = (u,v) \equiv \forall x(x \in B \Rightarrow g(x) = u(x) \wedge x \in C \Rightarrow g(x) = v(x)),
+\]
+where $g\in A^{B \cup C}, (u,v) \in A^B \times A^C$.
+
+We can verify the bijectivity of $f$ nearly in the same way as way did previously. So I won't write it 
+down here.
+
+Then, we know $B \cap C = \varnothing \Rightarrow \#(B \cup C) = \#B + \#C$. So we can conclude that 
+\[
+a^b \times a^c = a^{b+c}
+\]
+\end{proof}
+
+\declareexercise{3.6.7}
+\begin{proof}
+On one hand, if $\#A = a \leq \#B = b$, we show that $A$ has lesser or equal cardinalty to $B$. Let $f$ 
+be a bijection from $A$ to $\mathbb{N}_{a}$, $g$ be a bijection from $B$ to $\mathbb{N}_b$. Let 
+$\iota(x):=x, \mathbb{N}_{a} \rightarrow \mathbb{N}_b$. Then $g^{-1} \circ \iota \circ f$ is an injection 
+from $A$ to $B$.
+
+On the other hand, suppose that there is an injection $f$ from $A$ to $B$. We know that 
+$f:A\rightarrow f(A)$ is bijective. So $\#A = \#f(A)$. Since $f(A) \subseteq B$, $\#f(A) \leq B$ (See (c) 
+in Proposition 3.6.14). That is, $\#A \leq \#B$
+\end{proof}
+
+\declareexercise{3.6.8}
+\begin{proof}
+$f:A \rightarrow f(A)$ is bijective. So $f^{-1}: f(A) \rightarrow A$ is surjective. Let $g$ be defined as:
+\begin{itemize}
+\item $b \in f(A) \Longrightarrow g(b) = f^{-1}(b)$
+\item $b \in B\setminus f(A) \Longrightarrow g(b)$ is any element of $A$.
+\end{itemize}
+
+Then $g$ is surjective.
+\end{proof}
+
+\declareexercise{3.6.9}
+\begin{proof}
+\begin{align*}
+\#A + \#B 
+&= \#(A - A \cap B) + \#(A \cap B) + \#(B - A \cap B) + \#(A \cap B) \\
+&= (\#(A - A \cap B) + \#(A \cap B) + \#(B - A \cap B)) + \#(A \cap B) \\
+&= \#(A \cup B) + \#(A \cap B)
+\end{align*}
+\end{proof}
+
+\paragraph{Exercise 3.6.10} \label{exercise3.6.10}
+\begin{proof}
+Presume the negation:
+\[
+\forall i(i \in \{1,\dots,n\} \Longrightarrow \#(A_i) < 2)
+\]
+
+Use mathematical induction for (b) in Proposition 3.6.14, we can easily get:
+\[
+\#\bigcup_{i \in \{1,\dots,n\}}A_i \leq \sum_{i \in \{1,\dots,n\}} \#A_i
+\]
+We can also use mathematical induction to furthermore enhance what we proved while dealing with natural 
+numbers to:
+\[
+\bigwedge_{i} a_{i} \leq b_{i} \Longrightarrow \sum_{i} a_{i} \leq \sum_{i} b_i
+\].
+
+Then because $\# A_i \leq 1$, so 
+\[
+\sum_{i \in \{1,\dots,n\}} A_i \leq (\sum_{i \in \{1,\dots,n\}} 1 = n)
+\], 
+which is impossible.
+\end{proof}

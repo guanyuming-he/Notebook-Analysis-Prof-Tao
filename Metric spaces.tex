@@ -1,0 +1,40 @@
+\section{Metric spaces}
+\declareexercise{ii.1.2.3}
+
+%\begin{proof}
+\paragraph{(a)}
+If $E = \interior(E)$, then $E \cap \partial E = \varnothing$, then $E$ is open by definition. Conversely, if $E$ is open, then $E \cap \partial E = \varnothing$. But any set, including $E$, cannot contain its exterior points, so $E$ can only contain points that are neither boundary nor exterior to it, which means only interior points. Therefore, $E \subseteq \interior(E)$. Additionally, an interior point of $E$ must be in $E$, therefore, $\interior(E) \subseteq E$ and thus $E = \interior(E)$.
+
+\paragraph{(b)}
+Suppose $E$ is closed. By definition of interior points, $\interior(E) \subseteq E$. By definition of closed sets, $\partial E \subseteq E$. Therefore, $\interior(E) \cup \partial E \subseteq E$.
+By definition of exterior points, $\exterior(E) \cap E = \varnothing$. If a point is not exterior, then it's either interior or boundary by definition, so $E \subseteq \interior(E) \cup \partial E$. Putting the two parts together, $E = \interior(E) \cup \partial E$. Proposition 1.2.10 (a) and (b) tell that the set of adherent points of $E$ equals $\interior(E) \cup \partial E$, so $E$ equals the set of its adherent points if $E$ is closed.
+
+If $E = \interior(E) \cup \partial E$, then $E$ contains all of its boundary points and is closed by definition.
+
+\paragraph{(c)}
+I will use (a) to prove an open ball is open, so I need to show that $\forall x \in B(x_0, r), \exists p > 0, B(x,p) \subseteq B(x_0, r)$. It immediately follows from the triangular inequality. Let $p$ be any positive real number that is smaller than $r - d(x,x_0)$, then for any $y \in B(x,p)$, $d(y,x_0) \le d(y,x) + d(x,x_0) < r$, which means $B(x,p) \subseteq B(x_0, r)$ and thus the latter is open.
+
+Now I will prove a closed ball is closed. I will use Proposition 1.2.10 (c). Suppose there exists a sequence $\taoseq{x}[1]$ in $E$ that converges to $y \notin E$. Therefore, $d(y,x_0) > r$. Let $q = d(x_0, y) - r$ and consider the ball $B(y, q)$. For any point $p$ in it, $d(p,y) < q$. Using the triangular inequality, we have
+\begin{align*}
+d(x_0, y)	&\le d(x_0, p) + d(p, y) \to \\
+d(x_0, p)	&\ge d(x_0, y) - d(p, y) \\
+			&>   d(x_0, y) - (q = d(x_0, y) - r) \\
+			&=   r
+\end{align*}
+Thus, $B(y, q)$ is completely not contained within the closed ball. But as the sequence $\taoseqone{x}[1]$ converges to $y$, we can find $n \ge N$ such that $x_n \in B(y, q)$, which is both in $E$ and not in $E$, a contradiction. Therefore, all such sequences must converge inside $E$, and $E$ is closed.
+
+\paragraph{(d)}
+I will also use Proposition 1.2.10 (c) to prove it. The only possible sequence $\taoseqone{x}[1]$ that lies in a singleton set is a sequence where every $x_n = x$. That sequence obviously converges to $x$, and because a sequence cannot converge to two different elements, this means all sequences in $\{x\}$ converges to $x$, thus $\{x\}$ is closed.
+
+\paragraph{(e)} I only need to prove $(E = \interior(E)) = \exterior(E^C)$, because what's left from $\exterior(E^C)$ are its interior and boundary points. It's quite easy to show, just note that $B(x, r) \subseteq E$ implies $B(x, r) \cap E^C = \varnothing$ by the definition of complements.
+
+\paragraph{(f)} 
+Let $x \in E_1 \cap \dots \cap E_n$, then $B(x, r_1) \subseteq E_1, B(x, r_2) \subseteq E_2, \dots, B(x, r_n) \subseteq E_n$. Let $R = \min(r_1, r_2, \dots, r_n)$, which always exists and is one of the $r$'s because the set is finite. Then $B(x, R) \subseteq E_1, E_2, \dots, E_n$, which means $B(x, R) \subseteq E_1 \cap E_2 \cap \dots \cap E_n$. Therefore, all points in the intersection are interior to it, so it's open. Note: \emph{An infinite intersection of open sets can be closed: intersecting $(0, \frac{1}{n})$ for $n$ from 1 to $\infty$ results in $\{0\}$, which is obviously closed.}
+
+Note: \emph{Infinite union of closed sets can be open: let each point in any infinite open set (e.g.\ $(0,1)$) form a set, which is obviously closed, then their union is obviously open.}
+
+\paragraph{(g)}
+Suppose for the sake of contradiction that $\bigcup_{\alpha \in I} E_\alpha$ is not open, then $\partial \bigcup_{\alpha \in I}E_\alpha \cap \bigcup_{\alpha \in I}E_\alpha \ne \varnothing$. Let $x \in \partial \bigcup_{\alpha \in I}E_\alpha$, then $x \in E_a$ for some $a \in I$. Because $E_a$ is open, $x$ is interior in $E_a$, which means $B(x, r) \subset E_a$ for some $r > 0$, contradicting the fact that $x$ is the boundary of the union.
+
+TBD the next part.
+%\end{proof}

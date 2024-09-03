@@ -1,0 +1,152 @@
+\section{Series}
+\subsection{Finite Series}
+\declareexercise{7.1.1}
+\begin{proof}
+(a)
+Induct on $p$. When $p=m+1$, $n=m$, and 
+\[
+\sum_{i=m}^n{a_i} + \sum_{i=n+1}^p{a_i} = a_m + a_{m+1} = \sum_{i=m}^p{a_i}
+\]
+
+We suppose inductively that for some $p$ the property still holds, then for $p+1$,
+\begin{align*}
+&\sum_{i=m}^n{a_i} + \sum_{i=n+1}^{p+1}{a_i}\\
+&= \sum_{i=m}^n{a_i} +\sum_{i=n+1}^{p}{a_i} + a_{p+1} \tag{By def.}\\
+&= \sum_{i=m}^{p}{a_i} + a_{p+1} \tag{Induction Hypothesis} \\
+&= \sum_{i=m}^{p+1}{a_i} \tag{By def.} 
+\end{align*}
+
+(b)
+Induct on $n$. The inductive step is 
+\[
+\sum_{i=m}^{n+1}a_i = \sum_{i=m}^{n}a_i + a_{n+1} = \sum_{i=m+k}^{n+k}a_i + a_{n+k+1-k} = \sum_{i=m+k}^{n+k}a_i
+\]
+
+(c)
+The inductive step is
+\begin{align*}
+\sum_{i=1}^{n+1}{(a_i+b_i)} 
+&= \sum_{i=1}^{n}{(a_i+b_i)} + (a_{n+1}+b_{n+1}) \\
+&= \sum_{i=1}^{n}{a_i}+\sum_{i=1}^{n}{b_i}+ (a_{n+1}+b_{n+1}) \\
+&= \sum_{i=1}^{n+1}{a_i}+\sum_{i=1}^{n+1}{b_i}
+\end{align*}
+
+(d)
+The inductive step is
+\begin{align*}
+\sum_{i=1}^{n+1}{ca_i} 
+&= \sum_{i=1}^{n}{ca_i} + ca_{n+1} \\
+&= c\sum_{i=1}^{n}{a_i}+ c(a_{n+1}) \\
+&= c\sum_{i=1}^{n+1}{a_i}
+\end{align*}
+
+(e) 
+The inductive step is 
+\begin{align*}
+\left|\sum_{i=1}^{n+1}{a_i}\right|
+&= \left|\sum_{i=1}^{n}{a_i} + a_{n+1}\right| \\
+&\leq \left|\sum_{i=1}^{n}{a_i}\right| + \left|a_{n+1}\right| \\
+&\leq \sum_{i=1}^{n}{|a_i|} + |a_{n+1}| \\
+&= \sum_{i=1}^{n+1}{|a_i|}
+\end{align*}
+
+(f)
+The inductive step is
+\begin{align*}
+\sum_{i=1}^{n+1}{a_i}
+&= \sum_{i=1}^{n}{a_i} + a_{n+1} \\
+&\leq \sum_{i=1}^{n}{b_i} + b_{n+1} \\
+&= \sum_{i=1}^{n+1}{b_i}
+\end{align*}
+\end{proof}
+
+\declareexercise{7.1.2}
+\begin{proof}
+(a) 
+Any function $g$ from the empty set ($\{i:1\leq i \leq 0\}$) to the empty set is a bijection. So $\sum_{x \in \varnothing}{f(x)} = \sum_{i=1}^0{f(g(i))} = 0$.
+
+(b)
+This time the bijection $g$ would be $\{1\} \to \{x_0\}$. And we have $\sum_{x \in \{x_0\}}{f(x)} = \sum_{i=1}^1{f(g(i))} = f(g(1)) = f(x_0)$.
+
+(c)
+
+\end{proof}
+
+\subsection{Infinite Series}
+\declareexercise{7.2.1}
+It is divergent.
+\begin{proof}
+It is immediately derived from $((-1)^n)^\infty_n$ being divergent.
+\end{proof}
+
+
+\declareexercise{7.2.2}
+\begin{proof}
+According to Theorem 6.4.18, $(S_n)_n^\infty$ is convergent iff it is Cauchy. That is, iff 
+\[
+\forall \varepsilon>0(\exists N(\forall p,q\geq N(|S_p-S_q|\leq \varepsilon)))
+\]
+If $p\geq q$, then according to Lemma 7.1.4, (a), $|S_p-S_q| = |\sum_{i=q+1}^p{a_i}|$. If $p \leq q$, then 
+\[
+|S_p-S_q| = \left|\sum_{i=1}^p{a_i}-(\sum_{i=1}^p{a_i}+\sum_{i=q+1}^p{a_i})\right| = \left|-\sum_{i=q+1}^p{a_i}\right| = \left|\sum_{i=q+1}^p{a_i}\right|
+\]
+We nearly finished the proof except that here $i$ starts at $q+1$, not $q$. But this is an unimportant matter. In fact, on one hand, $\forall p,q \geq N(|\sum_{i=q}^p{a_i}|) \rightarrow \forall p,q \geq N(|\sum_{i=q+1}^p{a_i}|)$; on the other hand, $\forall p,q \geq N(|\sum_{i=q+1}^p{a_i}|) \rightarrow \forall p,q \geq N+1(|\sum_{i=q}^p{a_i}|)$. We only requires the existence of $N$ for any arbitrary $\varepsilon >0$, so the two statements are equivalent.
+\end{proof}
+
+\declareexercise{7.2.3}
+\begin{proof}
+Simply let $p=q$ in Proposition 7.2.5 to obtain $\forall \varepsilon >0 (\exists N(\forall p\geq N(|a_p|\leq \varepsilon)))$ and we are finished.
+\end{proof}
+
+\declareexercise{7.2.4}
+\begin{proof}
+According to Lemma 7.1.4, (e), we have $|\sum_{i=q}^p{a_i}| \leq \sum_{i=q}^p{|a_i|} = |\sum_{i=q}^p{|a_i|}|$ as $\sum_{i=q}^p{|a_i|}\geq 0$. So if $|\sum_{i=q}^p{|a_i|}| \leq \varepsilon$, then $|\sum_{i=q}^p{a_i}|$ must also satisfy it.
+\end{proof}
+
+\declareexercise{7.2.5}
+\begin{proof}
+(a)
+According to Lemma 7.1.4, (c), the partial sum of $\sum_{n=m}^\infty{a_n+b_n}$ is $\sum_{n=m}^Na_n + \sum_{n=m}^Nb_n$. The limit of this sequence, according to Proposition 6.1.19, is the sum of the two limits, $\sum_{n=m}^\infty a_n+ \sum_{n=m}^\infty b_n$.
+
+(b)
+The partial sum can be seen as $c \sum_{n=m}^Na_n$.
+
+(c)
+This statement immediately follows from taking limits on both sides of the following equation derived from Lemma 7.1.4 (for $N \geq m+k$)
+\[
+\sum_{n=m}^Na_n = \sum_{n=m}^{m+k-1}a_n + \sum_{n=m+k}^Na_n
+\]
+
+(d)
+This statement immediately follows from 
+\[
+\sum_{n=m}^Na_n = \sum_{n=m+k}^{N+k}a_{n-k}
+\]
+\end{proof}
+
+\declareexercise{7.2.6}
+\begin{proof}
+By induction we can easily show that $\sum_{i=0}^N{a_n-a_{n+1}} = a_0-a_{N+1}$. Taking limits on both sides of this equation immediately gives 
+$\sum_{n=0}^\infty = a_0-\lim_{n \to \infty}a_n$.
+\end{proof}
+
+\subsection{Sums of non-negative numbers}
+\declareexercise{7.3.1}
+\begin{proof}
+By Lemma 7.1.4, we know that $\sum_{n=m}^N|a_n| \leq \sum_{n=m}^Nb_n$. Since that $\sum_{n=m}^\infty b_n$ converges, there is a $M$ such that 
+$\sum_{n=m}^N|a_n| \leq \sum_{n=m}^Nb_n \leq M$. This fact plus that $|a_n| \geq 0$ immediately leads to the convergence of $\sum_{n=m}^\infty|a_n$. We can draw a similar conclusion for $|\sum_{n=m}^Na_{n}|$.
+
+To show that the limits of them still follows the order, however, it is not so obvious. We must prove that limit preserves order.
+\end{proof}
+
+\declareexercise{7.3.2}
+\begin{proof}
+If $|x| \geq 1$, then $x^n \to$ either $\infty$ or $-\infty$. Thus the series is divergent.
+
+If $|x| < 1$, then the partial sum of $|x|^n$ equals $\frac{1-|x|^{N+1}}{1-|x|}$. Since $|x|^{N+1} \to 0$, taking limit gives $\sum_{n=0}^\infty {|x|^n} = \frac{1}{1-|x|}$. This immediately implies that the original series is conditionally convergent. So taking limit on the not absolute partial sum gives what we want.
+\end{proof}
+
+\declareexercise{7.3.3}
+\begin{proof}
+Assume that negation, that is, at least for some $n \in X$, $a_n \neq 0$.
+\end{proof}

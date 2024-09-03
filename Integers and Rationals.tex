@@ -1,0 +1,1063 @@
+% Copyright (C) He Guanyuming 2020
+% The file is licensed under the MIT license.
+
+\section{Integers and Rationals}
+Now we are going to extend natural numbers to integers and rationals.
+
+\subsection{The Integers}
+
+\declareexercise{4.1.1}
+\begin{proof}
+It is immediately given by the fact that 
+\[
+a+b = a+b \equiv a -- b = a -- b
+\]
+\end{proof}
+
+\paragraph{Lemma 4.1.3}
+\[
+(m--0)+(n--0) = (m+n)--0
+\]
+\[
+(m--0) \times (n--0) = (mn) -- 0
+\]
+ensures that the definition $m--0:=m$ is consistent with addition and multiplication.
+
+\declareexercise{4.1.2}
+\begin{proof}
+\[
+a--b = a'--b' \equiv a=b \wedge a'=b'
+\]
+Then, 
+\[
+(b--a) = (b'--a') \equiv -(a--b) = -(a'--b')
+\]
+\end{proof}
+
+\declareexercise{4.1.3}
+\begin{proof}
+\begin{align*}
+-1 \times a 
+&= (0 -- 1) \times (a -- 0) \\
+&= (0\times a + 1 \times 0) -- (0 \times 0 + 1 \times a) \\
+&= 0 -- a \\
+&= -a
+\end{align*}
+\end{proof}
+
+\declareexercise{4.1.4}
+\begin{proof}
+Let $x=(a--b),y=(c--d),z=(e--f)$.
+
+(1)
+\begin{align*}
+(a--b) + (c--d) 
+&= (a+c) -- (b+d) \\
+&= (c+a) -- (d+b) \\
+&= (c--d) + (a--b)
+\end{align*}
+
+(2)
+\begin{align*}
+((a--b) + (c--d)) + (e--f)
+&= ((a+c)+e) -- ((b+d)+f) \\
+&= (a+(c+e)) -- (b+(d+f)) \\
+&= (a--b) + ((c--d) + (e--f))
+\end{align*}
+
+(3)
+First ,
+\[
+(a--b) + (0--0) = (a--b)
+\].
+
+Second, by (1) we have $0+x=x+0$.
+
+(4)
+First, 
+\begin{align*}
+(a--b) + (b--a) 
+&= (a+b) -- (a+b) \\
+&= 0 -- 0 \tag{$a+b+0=a+b+0$}
+\end{align*}
+
+Second, by (1) we have $x+(-x) = (-x) + x$.
+
+(5)
+\begin{align*}
+(a--b)(c--d)
+&= (ac + bd) -- (ad + bc) \\
+&= (ca + db) -- (cb + da) \\
+&= (c--d)(a--b)
+\end{align*}
+
+(6)
+The book proved this.
+
+(7)
+First,
+\[
+(1--0)(a--b) = (1a + 0b) -- (1b+0a) = (a--b)
+\]
+
+Second, by (5) we have $1x=x1$.
+
+(8)
+\begin{align*}
+&(a--b)((c--d)+(e--f)) \\
+&= (a--b)((c+e)--(d+f)) \\
+&= (a(c+e) + b(d+f)) -- (a(d+f) + b(c+e)) \\
+&= ((ac + bd)+(ae + bf)) -- ((ad + bc)+(af + be)) \\
+&= (ac+bd)--(ad+bc) + (ae+bf)--(af+be) \\
+&= (a--b)(c--d) + (a--b)(e--f)
+\end{align*}
+
+(9)
+This can be easily concluded from (5) and (8).
+\end{proof}
+
+\declareexercise{4.1.5}
+\begin{proof}
+We need to show that 
+\[
+a \neq 0 \wedge b \neq 0 \Longrightarrow ab \neq 0
+\]
+
+Since $a,b$ are not 0, they can be either positive or negative. If they are both positive, the case is 
+already proven.
+
+When at least one of them is negative, we can divide the $-1$ from the negative ones. That is, if $a=-m$, 
+where $m$ is positive, then we substitute $a$ with $-1 \times m$. Then we may get $ab$ in either the form 
+$(-1)(-1) mn$ or $(-1) mn$, where the former is a positive number because $(-1)(-1) =1$ and the latter is 
+negative.
+\end{proof}
+
+\declareexercise{4.1.6}
+\begin{proof}
+We check the value of $ac-bc$. We know that $ac=bc$, so $ac - bc = 0 - 0 = 0$. According to (9) in 
+Proposition 4.1.6, 
+\[
+ac - bc = ac+(-b)c = (a+(-b))c = 0
+\]
+
+As stated by Proposition 4.1.8, since that $c \neq 0$, $a+(-b) = 0$, which means $a-b=0$. Then we have 
+$a=b$.
+\end{proof}
+
+\declareexercise{4.1.7}
+In the following contents, $p$ stands for a positive natural number, $n$ stands for a natural number.
+
+\begin{proof}
+(a)
+\begin{align*}
+a>b 
+&\equiv a = b+p \\
+&\equiv a+(-b) = b + (-b) + p  \tag{See the following explanation} \\
+&\equiv a-b = p
+\end{align*}
+We now explain why $a = b+p \equiv a+(-b) = b + (-b) + p$. Using the substitution law and the 
+commutativity of addition, it is clear to see that $a = b+p \Longrightarrow a+(-b) = b + (-b) + p$. We now 
+show the cancellation law of addition, that is,
+\begin{lem}
+\[
+a+c = b+c \Longrightarrow a = b
+\]
+\end{lem}
+\begin{proof}
+\begin{align*}
+a+c=b+c
+&\Longrightarrow a+c+(-c) = b+c+(-c) \\
+&\Longrightarrow a+(c+(-c)) = b + (c+(-c)) \\
+&\Longrightarrow a=b
+\end{align*}
+\end{proof}
+
+So we get the inverse result: $a = b+p \Longleftarrow a+(-b) = b + (-b) + p$.
+
+Note that by the definition of integer and what we have know now, we can conclude that 
+\begin{lem}
+For every integer 
+$i = a - b, j = c - d$, there exists exactly one integer $k$ such that $i = j+k$.
+\end{lem}
+
+(b)
+\begin{align*}
+a>b
+&\equiv a = b + p \\
+&\Longrightarrow a+c = b+c+p \\
+&\Longrightarrow a+c>b+c
+\end{align*}
+
+(c)
+\begin{align*}
+a>b
+&\equiv a=b+p \\
+&\Longrightarrow ac = (b+p)c = bc + pc \\
+&\Longrightarrow ac > bc \tag{$pc > 0$ by Lemma 2.3.3}
+\end{align*}
+
+(d)
+\[
+a>b \equiv a = b+p
+\]
+Then
+\[
+-a = -(b+p) = (-1)(b+p) = -b - p
+\]
+So
+\[
+-a+p=-b-p+p
+\]
+That is,
+\[
+-b=-a+p \equiv -b>-a
+\]
+
+(e)
+Let
+\[
+a = b+p_1,b=c+p_2
+\]
+Then $a = c+(p_1+p_2)$. Obviously $p_1+p_2$ is positive, so $a>c$.
+
+Note that $-a,-b$ are also integers, and plus that $-(-a)=a$, so we can give a stronger conclusion:
+\[
+a>b \equiv -a<-b
+\]
+
+(f)
+If $a,b$ are all natural numbers, the statement was proven before. 
+
+If one of them (say $a$) is negative, 
+the other ($b$) is a natural number, then $a=-n$, and we know that $b>0$ and 
+$0 = a+n \Longrightarrow 0 >-a$, so by (e) we have $b>a$.
+
+If they are both negative, then their negations satisfy the statement. Then
+\[
+-a<-b \equiv a>b, -a=-b \equiv a=b, -a>-b \equiv a<b
+\].
+\end{proof}
+
+\declareexercise{4.1.8}
+An example: $P(i): i>=0$. It is obvious that $P(0)$ and $P(i) \Longrightarrow P(i+1)$ is true. But for any  
+negative integer $n$, $P(n)$ is not true.
+
+We additionally prove one more property:
+\begin{lem}
+For integers $a,b$,
+\[
+a-b=0\Longrightarrow a=b
+\]
+\end{lem}
+\begin{proof}
+We can add $b$ to both side to obtain $a=b$.
+\end{proof}
+
+\subsection{The Rationals}
+\declareexercise{4.2.1}
+\begin{proof}
+Reflectivity:
+\[
+a//b = a//b \equiv ab=ab
+\] 
+
+Being Symmetric:
+\begin{align*}
+a//b = c//d 
+&\equiv ad = bc \\
+&\equiv cb = da \\
+&\equiv c//d = a//d
+\end{align*}
+
+Transitivity:
+\[
+a//b = c//d \equiv ad = bc
+\]
+\[
+c//d = e//f \equiv cf = de
+\]
+Thus,
+\[
+(ad)(cf) = (bc)(de)
+\]
+We then have
+\[
+afcd = becd
+\]
+We can cancel $d$ since $d \neq 0$ to obtain $afc=bec$. If $a=0$, we can conclude that $c,e$ also must be 
+$0$. Under this occasion, $af=be$ is also true because they all equal to $0$. 
+\end{proof}
+
+\paragraph{Definition 4.2.2}
+It is useful to prove that 
+\begin{lem} \label{lem4.2.3}
+\[
+(-a)//b = a//(-b)
+\]
+,
+\[
+a//b = (-a)//(-b)
+\]
+\end{lem}
+\begin{proof}
+The first is immediately given since $(-a)(-b) = ab$. The latter is proven as $a(-b) = b(-a) = -ab$.
+\end{proof}
+
+We may notice that subtraction is not mentioned here. This is because that we can get $a-b$ by adding $a$ 
+and $-b$, where addition $+$ and negation $-$ are mentioned.
+
+\declareexercise{4.2.2}
+\begin{proof}
+(1) is deduced in the book.
+
+(2)
+I don't quiet understand why Tao used this $*$ sign instead of $\times$. I know it is a new definition, 
+but the $\times$ sign is undefined for rationals (except for integers, but for which we can verify that 
+the two definitions are the same). We will use the $\times $ sign or just leave it off here.
+
+\[
+(a'//b')(c//d) \equiv a'd = b'c \equiv ad=bc \equiv (a//b)(c//d)
+\]
+Similarly we can verify this for $c'//d'$.
+
+(3)
+\[
+-ab'=-a'b \equiv (-a)//b = (-a')//b'
+\]
+\end{proof}
+
+For the sake of simplification, we hereby introduce some useful lemmas:
+\begin{lem} \label{lem4.2.1}
+\[
+b=d\neq 0 \Longrightarrow (a//b = c//d \equiv a=c)
+\]
+\end{lem}
+\begin{proof}
+Assume that $b=d\neq 0$.
+
+On one hand, if $a//b=c//d$, then $ad=bc$. Since that $b=d \neq 0$, we can cancel them to obtain $a=c$.
+
+On the other hand, if $a=c$, then if we multiply them by the same integer (namely $b=d$), and the 
+results are still equal ($ad=bc$). So $a//b=c//d$.
+\end{proof}
+\begin{lem} \label{lem4.2.2}
+\[
+c \neq 0 \Longrightarrow a//b=ac//bc
+\]
+\end{lem}
+\begin{proof}
+Assume that $c\neq 0$.
+
+First we know that $ab=ab$. Then we can further obtain $abc=abc$, which 
+means $a//b=ac//bc$.
+\end{proof}
+
+\declareexercise{4.2.3}
+\begin{proof}
+(1)
+We have
+\[
+a//b + c//d = (ad+bc)//(bd)
+\]
+\[
+c//d + a//b = (cb+da)//(db)
+\]
+It is easy to see that they are equal.
+
+(2)
+It is proven in the book.
+
+(3)
+We just deduce $x+0=x$ here, for we have $0+x=x+0$ according to (1).
+\[
+a//b + 0//1 = (a1+b0)//(b1) = a//b
+\]
+
+(4)
+We only prove $x+(-x)=0$ here, for we have $x+(-x)=(-x)+x$ according to (1).
+\[
+a//b+(-a)//b= (ab-ab)//bb = 0//b^2=0
+\]
+
+(5)
+\begin{align*}
+a//b \times c//d
+&= ac//bd \\
+&= ca//db \\
+&= c//d \times a//b
+\end{align*}
+
+(6)
+\begin{align*}
+&(a//b \times c//d) \times e//f \\
+&= ac//bd \times e//f \\
+&= ace//bdf \\
+&= a//b \times ce//df \\
+&= a//b \times (c//d \times e//f)
+\end{align*}
+
+(7)
+We only prove $x1=x$ here, for we have $x1=1x$ according to (4).
+\[
+a//b \times 1//1 = a1//b1 = a//b
+\]
+
+(8)
+\begin{align*}
+&a//b (c//d + e//f) \\
+&= a//b ((cf+ed) // (df)) \\
+&= a(cf+ed)//bdf \\
+&= ab(cf+ed) // b^2df \tag{See Lemma \ref{lem4.2.2}} \\
+&= ((ac)(bf) + (bd)(ae)) // (bd)(bf) \\
+&= ac//bd + ae//bf \\
+&= (a//b \times c//d) + (a//b + e//f)
+\end{align*}
+
+(9)
+This can be deduced from (5) and (8).
+
+(10)
+We merely conclude $xx^{-1} = 1$ here, since we have $xx^{-1} = x^{-1}x$ from (5).
+
+\[
+a//b \times b//a  = ab//ba = (ab)1//(ab)1 = 1//1
+\]
+The last step is done by Lemma \ref{lem4.2.2}.
+\end{proof}
+
+\declareexercise{4.2.4}
+\begin{proof}
+For any rational $r = a/b$, $a,b$ are integers.
+They are either positive, $0$, or negative (except that $b$ cannot be 0). When $a,b$ are both positive, 
+then $r$ is also positive. When $a$ is positive but $b$ is negative, then let $b=-p$, where $p$ is 
+positive, thus $a/b = a/(-p) = (-a)/p$ is negative. When $a=0$, $r=0$. When $a$ is negative, and $b$ is 
+positive, then by definition $r$ is negative. When $a,b$ are both negative, according to Lemma 
+\ref{lem4.2.3}, $r$ is positive.
+
+Therefore, we have iterated through all possible situations and verified that there is and only is one 
+statement for a rational is true.
+\end{proof}
+
+\declareexercise{4.2.5}
+\begin{proof}
+Let $x=a/b,y=c/d,z=e/f$. Before proving the following components, we will introduce some useful 
+propositions here.
+\begin{lem} \label{lem4.2.4}
+\begin{enumerate}
+\item $x>0$ is logically equivalent to $x$ being positive.
+\item $x<0$ is logically equivalent to $x$ being negative.
+\end{enumerate}
+\end{lem}
+\begin{proof}
+\[
+x-0 =x
+\]
+is itself, so whether $x$ is positive or negative, the same is $x-0$, then we can deduce $x>0$ or $x<0$, 
+and vice versa.
+\end{proof}
+
+We can now use simplified notation $x>0$ to express the same meaning: $x$ is positive. 
+
+(a)
+We check the value of 
+\[
+\delta = x-y = a/b +(-c)/d = (ad-bc)/bd
+\]
+$\delta$ is also a rational number. According to the previous exercise, it is either positive, negative, 
+or $0$. So $x$ either $>y$, $<y$, or $=y$ (We haven't yet proven $x-y=0 \Longrightarrow x = y$. Let's 
+prove it now. We can add $y$ to both side of $x-y=0$ to obtain the result).
+
+(b)
+According to Lemma \ref{lem4.2.4}, $x<y \Longrightarrow x-y<0$. Then we multiply $-1/1$ with $x-y$ to 
+obtain (It is easy to see that for rational number $r$, $-1r = -r$ and $-(-r)=r$)
+\[
+-1/1 \times (x + (-y)) = -x + -(-y) = y - x
+\]
+Since $x-y$ is negative, and the negation of a positive number is negative, so the negation of $x-y$, 
+$y-x$, is positive, which means that $y>x$.
+
+(c)
+By the hypothesis, $x-y<0 \wedge y-z<0$. We are now proving that $i,j<0 \Longrightarrow i + j <0$. We can 
+write $i,j$ as $o/p,q/s$ respectively. Let $p,s>0$, then $o,q<0$. Then $o/p+q/s = (os+pq)/ps$. We know 
+that $os,pq<0$ (Write a negative integer as a negation of a positive integer to see that the product of a 
+positive and a negative is also negative). 
+
+Now we show that for two positive integers, their sum is still 
+positive. Integers who are positive are also natural number, and their sum remains a natural number. So 
+the sum itself equals to $0$ plus itself, which means it is positive. The negation of this sum, which is 
+also $-m+(-n)$, is thus negative. Since that $-m,-n$ can present any negative integer, the fact means that 
+the sum of two negative integers remains a negative integer.
+
+So $os+pq<0$. But $ps>0$, so $i+j<0$. Thus, $(x-y) + (y-z) = x-z<0$, which means $x<z$.
+
+(d)
+\begin{align*}
+x+z-(y+z) 
+&= x+z + (-)(y+z) \\
+&= x+z + (-1)(y+z) \\
+&= x+z -z - y \\
+&= x-y <0
+\end{align*}
+
+(e)
+It is easy to verify that the product of two positive rationals is still positive (Writing them as 
+$a/b,c/d$, where $a,b,c,d>0$, then $ac/bd$ also $>0$). Then $xz-yz=z(x-y)$, which is the product of a 
+positive number and a negative number, and is thus a negative number.
+\end{proof}
+
+\declareexercise{4.2.6}
+\begin{proof}
+According to (e) of Proposition 4.2.9, we need only to show that $x<y \Longrightarrow -x>-y$. Then we can 
+multiply $xz>yz$ with $-1$ to obtain what we want.
+
+We know that the negation operation will turn a positive into negative and vice versa. Now we have 
+$x-y<0$, so the negation $-(x-y) = -x+y = -x - (-y)>0$, which means that $-x>-y$.
+\end{proof}
+
+There are still many properties about rationals that we use for granted (e.g. $x^-1$ has the same sign as 
+$x$; the two definitions of order are the same, that is, $x-y>0 \equiv x=y+p \equiv x>y$, where $p>0$). 
+Although they need to be proven prior to being used, we can not cover all of them here. We will 
+prove some of them in the future only if they are used. Also, most of them are not hard to prove. We need 
+not to worry.
+
+We will prove some important ones here:
+\begin{prop} \label{prop.different.def.of.order}
+For rational numbers $x,y,p>0$
+\[
+x-y>0 \equiv x=y+p \equiv x>y
+\]
+\end{prop}
+\begin{proof}
+$x-y>0 \equiv x>y$ is the definition of order. We merely need to prove $x-y>0 \equiv x=y+p$ here.
+
+On one hand, if $x-y>0$, then $p$ is not others, but the very number $x-y$.
+
+On the other hand, if there exists a $p>0$ such that $x=y+p$. Then add $-y$ to the both side of the 
+equation, and we can get $x-y = p$, which means $x-y$ is positive. So $x-y>0$.
+\end{proof}
+
+\begin{prop} \label{prop.4.2.add.ineq}
+We can add two inequalities together. That is,
+\[
+a<b \wedge c<d \Longrightarrow a+c<b+d
+\]
+\end{prop}
+\begin{proof}
+We know that
+\[
+a<b \Longrightarrow a+c<b+c 
+\]
+, and
+\[
+c<d \Longrightarrow b+c<d+b 
+\]
+According to the transitivity of order, we can derive that
+\[
+a+c<b+c<b+d
+\]
+\end{proof}
+
+\begin{prop} \label{prop.4.2.multiply.ineq}
+We can multiply two inequalities of positives or negatives together. That is,
+\[
+a,b,c,d >0 \wedge a<b \wedge c<d \Longrightarrow ac<bd
+\]
+, and
+\[
+a,b,c,d <0 \wedge a<b \wedge c<d \Longrightarrow ac>bd
+\]
+\end{prop}
+\begin{proof}
+When they are all positive,
+we know that
+\[
+a<b \Longrightarrow ac<bc
+\]
+, and
+\[
+c<d \Longrightarrow bc<bd
+\]
+According to the transitivity of order, we can derive that
+\[
+ac<bc<bd
+\]
+
+When they are all negative,
+we know that
+\[
+a<b \Longrightarrow ac>bc
+\]
+, and
+\[
+c<d \Longrightarrow bc>bd
+\]
+According to the transitivity of order, we can derive that
+\[
+ac>bc>bd
+\]
+\end{proof}
+
+Note that we can already add or multiply equations because of the axiom of substitution, so we can change 
+the $<$ in the inequalities to $\leq$ in the previous two propositions whenever needed.
+
+\subsection{Absolute Value and Exponentiation}
+\declareexercise{4.3.1}
+\begin{proof}
+(a)
+$x>0 \Rightarrow |x| >0$, $x=0\Rightarrow |x|=0$, $x<0 \Rightarrow |x| >0$. So $|x| \geq 0$.
+
+And we can see that only when $x=0$ can $|x| = 0$.
+
+(b)
+This one is very tedious to prove. Let's enumerate all conditions:
+\begin{enumerate}
+\item $x,y>0$. On this occasion, 
+\[
+|x+y| = x+y = |x|+|y|
+\]
+
+\item At least one of them is $0$. On this occasion, let's just let $x$ be 0, the other 
+situations are similar.
+\[
+|x+y| = |0+y| = |y| = |0| + |y| = |x| + |y|
+\]
+
+\item $x=y>0$. On this occasion, $|x+y| = |2x| = 2x = |x|+|x|$.
+
+\item $x=y<0$. On this occasion, $|x+y| = |2x| = -2x = |x|+|x|$.
+
+\item $x,y<0$. On this occasion, $|x+y| = -(x+y) = -x -y = |x| + |y|$.
+
+\item One of them is positive, the other is negative. We specify $x>0,y<0$ here. But the other conditions 
+are similar. Under this condition, we further divide the situation into three occasions:
+\begin{itemize}
+\item $x+y>0$ On this occasion, $|x+y| = x+y$, $|x| + |y| = x-y$. Note that $x-y = x+y +2(-y)$, where 
+$2(-y) >0$, so $|x+y| < |x|+|y|$ (See Proposition \ref{prop.different.def.of.order}).
+\item $x+y<0$ On this occasion, $|x+y| = -x-y$, $|x|+|y|=x-y$. Note that $-x-y - (x-y) = 2(-x) < 0$, so 
+$|x+y| < |x| + |y|$.
+\item $x+y=0$ On this occasion, $|x+y| = 0 \leq |x| + |y|$ (Recall that the sum of two positive rationals 
+remains positive).
+\end{itemize}
+\end{enumerate}
+
+We have iterated through all conditions.
+
+(c)
+We shall prove that 
+\[
+-|x| \leq x \leq |x|
+\]
+first.
+
+\begin{enumerate}
+\item If $x>0$, then $x=|x|>0$. And $0>-|x|$, so by the transitivity of order, $-|x| < x$.
+\item If $x=0$, then $|x|=-|x| = x=0$.
+\item If $x<0$, then $x=-|x|<0$ And $0<|x|$, so $x<|x|$.
+\end{enumerate}
+This also means that $x$ either equals to $|x|$ or $-|x|$.
+
+Then we prove that $-y \leq x \leq y \equiv y \geq |x|$.
+
+On one hand, if $-y \leq x \leq y$, then when $x=|x|$, we have $|x| \leq y$; when $x=-|x|$, we have 
+$-y \leq -|x| \equiv y \geq |x|$. As stated previously, we know that at least one of the two conditions 
+are satisfied.
+
+On the other hand, if $y \geq |x|$, then $-y \leq -|x|$. But since that $-|x| \leq x \leq |x|$, we can 
+obtain what we want by the transitivity of order.
+
+(d)
+\begin{enumerate}
+\item If $x=y=0$, then $|xy| = 0 = |x||y|$.
+\item If $x,y>0$, then $|xy| = xy = |x||y|$.
+\item If $x,y<0$, then $xy>0$, $|xy| = xy = (-x)(-y) = |x||y|$.
+\item If one of them is positive, and the other is negative, (say $x>0,y<0$), then 
+$|xy|=-xy=x(-y)=|x||y|$. The other conditions are similar.
+\end{enumerate}
+
+Thus, $|-x| = |-1||x| = 1|x| = |x|$.
+
+(e)
+This can be easily conclude from (a).
+
+(f)
+Since that $|-x|=|x|$, we have $|x-y| = |-(x-y)| = |y-x|$.
+
+(g)
+Note that $x-z = (x-y) = (y-z)$. Then from (b) we can deduce that $|x-z| \leq |x-y| + |y-z|$, which is 
+$d(x,z) \leq d(x,y) + d(y,z)$.
+\end{proof}
+
+\declareexercise{4.3.2}
+\begin{proof}
+(a)
+If $x=y$, then $|x-y| = 0$. And any positive rational $\varepsilon >0$, so $|x-y|\leq\varepsilon$.
+
+The other statement is much better easier to prove after we have know the denseness of rationals. We 
+essentially repeat some of the proof work that are done afterwards here.
+On the other hand, suppose the negation, that is, $(\forall \varepsilon>0)(|x-y| \leq \varepsilon)$, but 
+$x\neq y$. Then $x-y \neq 0$. Let $\delta = |x-y| \neq 0$. We know that $2^{-1} = 1/2 > 0$, so 
+$\delta / 2 > 0$. Also we have $\delta /2 + \delta /2 = \delta \Longrightarrow \delta /2 < \delta$. Then let 
+$\varepsilon = \delta /2$. So we have both $|x-y| < \delta/2$ and $|x-y| > \delta /2$, which is impossible. 
+
+(b)
+It is immediately derived from $|x-y| = |y-x|$.
+
+(c)
+\[
+|x-z| \leq |x-y| + |y-z| \leq \varepsilon + \delta
+\]
+
+(d)
+\[
+|x+z - (y+w)| = |x-y + z-w| \leq |x-y| + |z-w| \leq \varepsilon + \delta
+\]
+\[
+|x-z - (y-w)| = |x-y + w-z)| \leq |x-y| + |w-z| \leq \varepsilon + \delta
+\]
+
+(e)
+\[
+|x-y| \leq \varepsilon < \varepsilon'
+\]
+
+(f)
+From (c) of Proposition 4.3.3, we can derive that
+\[
+|x-z| \leq \varepsilon \equiv -\varepsilon \leq x-z \leq \varepsilon 
+\equiv z-\varepsilon \leq x \leq z+ \varepsilon
+\]
+, and that
+\[
+|x-y| \leq \varepsilon \equiv y-\varepsilon \leq x \leq y + \varepsilon
+\]
+Thus we have
+\[
+y-\varepsilon \leq x \leq z + \varepsilon
+\]
+
+We will only prove the statement when $z\leq w \leq y$, another one is similar. On this occasion, 
+$-y \leq -w \leq -z$. Add this inequality to $y-\varepsilon \leq x \leq z + \varepsilon$ to obtain that 
+\[
+-\varepsilon \leq x-w \leq \varepsilon
+\]
+
+(g)
+\[
+|xz-yz| = |x-y||z| \leq \varepsilon|z|
+\]
+
+(h)
+We will explain why $|a| \leq \varepsilon \wedge |b| \leq \delta$ implies 
+$|a||z| + |b||x| + |a||b| \leq \varepsilon|z| + \delta|x| + \varepsilon\delta$.
+
+First, multiply $|a| \leq \varepsilon$ with $|z|$ to obtain $|a||z| \leq \varepsilon |z|$. Then add both sides 
+of the inequality with $|b||x| + |a||b|$ to gain 
+\[
+|a||z| + |b||x| + |a||b| \leq \varepsilon |z| + |b||x| + |a||b| \tag{1}
+\]
+Similarly,
+\[
+|a||z| + |b||x| + |a||b| \leq |a||z| + \delta |x| + |a||b| \tag{2}
+\]
+Finally, we can multiply $|a| \leq \varepsilon$ with $|b| \leq \delta$ as stated by Proposition 
+\ref{prop.4.2.multiply.ineq} to derive $|a||b| \leq \varepsilon\delta$. So after some addition we have
+\[
+|a||z| + |b||x| + |a||b| \leq |a||z| + |b||x| + \varepsilon\delta \tag{3}
+\]
+
+Using Proposition \ref{prop.4.2.add.ineq}, we add (1),(2) and (3) together:
+\[
+3(|a||z| + |b||x| + |a||b|) \leq (\varepsilon|z| + \delta|x| + \varepsilon\delta) + 2(|a||z| + |b||x| + |a||b|)
+\],
+which can be simplified to
+\[
+|a||z| + |b||x| + |a||b| \leq \varepsilon|z| + \delta|x| + \varepsilon\delta
+\]
+
+Also note that if we use $x-y$ as $a$, $z-w$ as $b$, and derive $|xz-yw|$ from 
+\[
+xz=(y+a)(w+b),
+\]
+then what we will get is that $xz,yw$ are ($\delta|y| + \varepsilon|w| + \delta\varepsilon$) close.
+
+This consequence may seem obvious, but in fact it isn't. And should we change some variables of them, the 
+result may vary. This example tells us that we should be very cautious when dealing with inequalities. What we 
+should do is to carefully derive conclusions from what we have proven instead of taking intuitive things for 
+granted.
+\end{proof}
+
+\declareexercise{4.3.3}
+\begin{proof}
+(a)
+\begin{enumerate}
+\item Use induction. We induct on $m$. First, $x^nx^0 = x^n1 = x^{n+0}$.
+
+Suppose that for $m$, the statement is already true. Then 
+\begin{align*}
+x^nx^{m+1} 
+&= x^n(x^m\times x)\\
+&= x^nx^m \times x \\
+&= x^{n+m} \times x \tag{The induction hypothesis} \\
+&= x^{n+m+1}
+\end{align*}
+
+\item Use induction. We induct on $m$. First, $(x^n)^0 = 1 = x^{n\times 0}$.
+
+Suppose that for $m$, the statement is already true. Then 
+\begin{align*}
+(x^n)^{m+1} 
+&= (x^n)^m \times x^n \\
+&= x^{mn} \times x^n \tag{The induction hypothesis} \\
+&= x^{mn + n} \tag{By the previous statement} \\
+&= x^{n(m+1)}
+\end{align*}
+
+\item Use induction. We induct on $n$. First, $(xy)^0 = 1 = x^0y^0$.
+
+Suppose that for $m$, the statement is already true. Then 
+\begin{align*}
+(xy)^{m+1} 
+&= (xy)^m \times xy \\
+&= x^my^m \times xy \tag{The induction hypothesis} \\
+&= x^m \times x \times y^m \times y \\
+&= x^{m+1} y^{m+1}
+\end{align*}
+\end{enumerate}
+
+(b)
+On one hand, if $x=0$, then for $n>0$, $0^n=0$.
+
+On the other hand, if for $n>0$, $x^n=0$, we need to prove $x=0$. We try to show that 
+$x \neq 0 \Longrightarrow x^n \neq 0$. Use induction. Since that $n\neq 0$, we start from $n=1$. 
+$x^1 = x^0 \times x = x$. 
+
+Suppose that for $n$, the statement is already true. Then 
+\[
+x^{n+1} = x^n \times x,
+\]
+which is the product of two positive rationals, and which is thus positive. 
+
+(c)
+(1)
+Use induction: $x^0 = y^0 =1>0$.
+
+Suppose that for $n$, the statement is already true. Then we have two inequalities here:
+\[
+x^n \geq y^n \geq 0
+\]
+and
+\[
+x \geq y \geq 0
+\]
+We can multiply the two because of Proposition \ref{prop.4.2.multiply.ineq}. Then we have 
+\[
+x^{n+1} \geq y^{n+1} \geq 0
+\]
+
+If $n>0$, then we induct from $1$. The process resembles to what we have just done, so I don't write it here.
+
+(d)
+Use induction: $|x^0| = |1| =1 =|1|^0$. 
+
+Suppose that for $n$, the statement is already true. Then 
+\[
+|x^{n+1}| = |x^n \times x| = |x^n| |x| = |x|^n |x| = |x|^{n+1}
+\]
+\end{proof}
+
+\paragraph{Definition 4.3.11}
+We can see that there are now two versions of $x^{-1}$. Now we try to show that they express the same thing. 
+Write $x$ as $a/b$. The first version is $x^{-1} = b/a$. 
+
+The second version is $x^{-1} = 1/x = 1 \times x^{-1}\text{(version 1)} = x^{-1} = b/a$.
+
+Note that only after we have known this can we say that for the second version of $x^{-1}$, 
+$(x^{-1})^{-1} = x$.
+
+Now we can also say that $x^{-n} = (x^n)^{-1}$
+
+\declareexercise{4.3.4}
+\begin{proof}
+Except for (3),
+we have already proven these properties when $m,n \in \mathbb{N}$. Then we will just write $m,n$ as $-m,-n$.
+
+(a)
+(1)
+\[
+x^{-m}x^{-n} = \frac{1}{x^m}\frac{1}{x^n} = \frac{1}{x^mx^n}=1/x^{m+n} = x^{-m-n}
+\]
+
+(2)
+Before doing this, we must derive that for integers $a,b$ and natural number $n$, $(a/b)^n = a^n/b^n$. Use 
+induction: $(a/b)^0 = 1 = 1/1 = a^0/b^0$.
+
+Suppose that for $n$, the statement is already true. Then 
+\[
+(a/b)^{n+1} = (a^n/b^n)(a/b) = (a^{n+1}/b^{n+1})
+\]
+
+We can now close the induction.
+
+Thus, 
+\begin{align*}
+&(x^{-n})^{-m} \\
+&= ((1/(x^n))^m)^{-1} \tag{$x^{-n} = (x^n)^{-1}$} \\
+&= (1/(x^n)^m)^{-1} \\
+&= (x^n)^m \\
+&= x^{mn}
+\end{align*}
+
+(3)
+\begin{align*}
+(xy)^{-n} 
+&= 1/(xy)^n \\
+&= 1/(x^ny^n) \\
+&= (1/x^n) (1/y^n) \\
+&= x^{-n}y^{-n}
+\end{align*}
+
+(b)
+\begin{lem}
+For $x = (a/b) >  y = (c/d) > 0$,
+\[
+0 < x^{-1} < y{-1}
+\]
+\end{lem}
+\begin{proof}
+Let $a,b,c,d>0$. We know that
+\[
+a \times b^{-1} > c \times d^{-1}
+\]
+Multiply it with $bd>0$, we have
+\[
+ad>bc
+\].
+Multiply it with $a^{-1}c^{-1} >0$, we have
+\[
+d/c>b/a
+\]
+That is,
+\[
+y^{-1} > x^{-1}
+\]
+And they are obviously bigger than $0$.
+\end{proof}
+
+According to the lemma,
+\[
+x^{n} \geq y^{n} \Longrightarrow ((x^{n})^{-1} \leq (y^{n})^{-1} \equiv x^{-n} \leq y^{-n})
+\]
+
+(c)
+We first show that for positive integer $n$, the statement is true. We assume that $x>y$. Another situation is 
+similar.
+Use induction, we try to prove that $x\neq y \Longrightarrow x^n \neq y^n$. We need to start from $n=1$. First, 
+$x^1=x > y^1=y$. 
+
+Suppose that for $n$, the statement is already true. Then
+Multiply $x>y$ with $x^n > y^n$, 
+we have $x^{n+1} > y^{n+1}$.
+
+We can now close the induction.
+
+Then for negative ones, we know that $1/x = 1/y$ iff $x=y$, so $x^n \neq y^n \equiv x^{-n} \neq y^{-n}$.
+
+(d)
+It is immediately derived since $1/x = 1/y \equiv x=y$.
+\end{proof}
+
+\declareexercise{4.3.5}
+\begin{proof}
+Use induction from $1$.
+
+$2^1 = 2 >1$.
+
+Suppose that for $N$, the statement is already true. Then
+\[
+2^{N+1} = 2\times 2^N > 2N \geq N+1
+\]
+(Note that $N\geq 1 \Longrightarrow 2N \geq N+1$)
+\end{proof}
+
+\subsection{Gaps In The Rational Numbers}
+\declareexercise{4.4.1}
+\begin{proof}
+Existence: We show that when $x \geq 0$, $(\exists n \in \mathbb{Z})(n \leq x < n+1)$. Write $x$ as $a/b$, 
+where $a \geq 0,b>0$. If $a= 0$, then $x=0$, $n=0$. If $a\neq 0$, then according to Proposition 2.3.9, 
+\[
+\exists m \exists r(a = mb+r),
+\]
+where $m,r \in \mathbb{N}$ and $r < b$. Because of this, $mb+b >a$, so $(mb+b)/b>a/b=x$, which means $m+1>x$. 
+On the other hand, $mb \leq a$, so $mb/b \leq a/b =x$, which means $m \leq x$.
+
+Then when $x<0$, then $-x>0$, and $(\exists n \in \mathbb{Z})(n \leq -x < n+1)$, so 
+\[
+-n \geq x > -n -1
+\]
+$\geq$ means $>$ or $=$ (exclusive). When $-n > x >-n-1$, let $m=-n-1$, then $m \leq x < m+1$ is true. When 
+$-n =x > -n-1$, let $m=-n$, then $m \leq x < m+1$ is also true. So $m$ is the integer we want if $x<0$.
+
+Uniqueness:
+For $n \leq x < n+1$, and $m \neq n$, we try to prove that $m \leq x<m+1$ is not possible. Before doing this, 
+we need some lemmas:
+\begin{lem}
+(1) For integers $i,j$, $i<j \equiv i+1\leq j$.
+(2) For integer $i$, there is no integer $j$ such that $i<j<i+1$.
+\end{lem}
+\begin{proof}
+(1) It has already been proven for natural numbers. If $i,j<0$, then $-i,-j>0$.
+\[
+i<j \equiv -i>-j \equiv -i \geq -j+1 \equiv i \leq j-1 \equiv i+1 \leq j
+\]
+
+(2)
+Suppose the negation, that there exists a integer $j$ such that $i<j<i+1$. We know that 
+$i<j \equiv i+1 \leq j \equiv j \geq i+1$. But we also have $j<i+1$, which is impossible.
+\end{proof}
+
+$m$ either $<$ or $>n$. On the former case, $m+1\leq n\leq x$, so $m+1>x$ is not possible. One the latter case, 
+$x<n+1\leq m$, so $m \leq x$ is impossible.
+\end{proof}
+
+\declareexercise{4.4.2}
+\begin{proof}
+(a) We will use a different approach from the hint the book provided here. After assuming the negation, we 
+try to prove that 
+$a_n \leq a_0 -n$. Note that subtraction may results in a overflow (that is, natural numbers flows to negative 
+integers). So we will first define $a_n$ as integers. And we try to show that no such infinite descent 
+sequences can only lie in  $\mathbb{N}$.
+
+Use induction: $a_0 \leq a_0-0$.
+
+Suppose the statement for $n$ is already true, then 
+$a_{n+1} < a_n \equiv a_{n+1} +1 \leq a_n \equiv a_{n+1} \leq a_n - 1$. Then we have 
+$a_{n+1} \leq (a_0 -n -1 = a_n -(n+1))$. We can now close the induction.
+
+However, let $n = a_0$, then $a_{n+1} \leq n-n-1 = -1$, which means that $a_{n+1}$ does not lie in 
+$\mathbb{N}$.
+
+(b)
+(1) Yes. For example, $a_n:=-n$ satisfies our restrictions.
+
+(2) Yes. Because it is always possible to find a rational between $0$ and $a_0$.
+\end{proof}
+
+\declareexercise{4.4.3}
+\begin{proof}
+(1) Suppose the negation, that natural number $n=2k=2k'+1$, where $k,k'$ are also natural. Then $2k=2k'+1$
+Then we have $2k > 2k' \Longrightarrow k>k'$. But $2k+1 = 2(k'+1)$, so $2(k'+1) > 2k \Longrightarrow k'+1 >k$. 
+But we know that between $k',k'+1$ there exists no natural numbers. so it is impossible. (Note that we don't 
+have a proposition saying $ac>bc \Longrightarrow a>b$ for natural numbers, but we can first deal with them with 
+the range of rationals. Multiply them with $c^{-1}$, and we will see that the result of the two sides are also 
+natural numbers, so for natural numbers this is true.)
+
+(2)
+\[
+p^2 = (2k+1)^2 = 4k^2+4k + 1 = 2(2k^2+2k) +1
+\]
+
+(3)
+Treat $p,q$ as rationals.
+$p^2/2=q^2 \Longrightarrow q^2<p^2$. We show that $q \geq p$ can not be true. It is obvious that $q \neq p$. 
+And when $q>p$, multiply it with itself, $q^2>p^2$, which is impossible.
+\end{proof}

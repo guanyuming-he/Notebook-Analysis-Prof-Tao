@@ -1,0 +1,64 @@
+% Styles that are not directly related to math typesetting.
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{mystyles}
+
+\RequirePackage{mymath}
+% For defining theorem styles
+\RequirePackage{amsthm}
+
+% enum abc enumerates items using (a), (b), (c), ...
+\newcounter{enumabcctr}
+\newenvironment{enumabc}{%
+	\begingroup% Contain this inside a group so that the environment can be nested and won't affect the outer counters
+	\begin{list}{%
+		(\alph{enumabcctr})}{%
+		\usecounter{enumabcctr}
+	}%
+}{%
+	\end{list}%
+	\endgroup%
+}
+
+% Produces Exercise <number>
+\newcommand{\exercisename}[1]{Exercise #1}
+% Produces exercise<number>
+\newcommand{\exerciserefname}[1]{exercise#1}
+% #1: exercise number
+\newcommand{\exerciseref}[1]{\hyperref[\exerciserefname{#1}]{\exercisename{#1}}}
+% Deprecated. Now to be replaced by the environment exercise
+% #1: exercise number
+\newcommand{\declareexercise}[1]{\paragraph{\exercisename{#1}}\label{\exerciserefname{#1}}}
+% #1: exercise number
+% #2: alternative name for the statement to be proven in the exercise
+\NewDocumentEnvironment{exercise}{m o}{%
+	\paragraph{\exercisename{#1}}\label{\exerciserefname{#1}}%
+	\IfNoValueF{#2}{({\em #2})\textbf{.}}%
+}{%
+	\vskip 0pt% Can add more if I want
+}
+
+% These theorems will have italic text and extra space above and below
+% See amsthdoc.pdf, p. 8
+\theoremstyle{plain}
+\newtheorem{thm}{My Theorem}[chapter]
+\newtheorem{lem}[thm]{My Lemma}
+\newtheorem{prop}[thm]{My Proposition}
+\newtheorem{coro}[thm]{My Corollary}
+
+% These theorems will have upright text and extra space above and below.
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{My Definition}
+% The environment that gives the statement of a ``Why?''
+% Its parent counter is chapter, following Prof. Tao's habit.
+\newtheorem{whyinternal}{Why?}[chapter]
+% The actual environment used, which includes a page number for the Why as its identification.
+% #1: page number
+\newenvironment{why}[1]{%
+	\begin{whyinternal}[p.~#1]%
+}{%
+	\end{whyinternal}%
+}
+
+\newcommand\addanswer[1]{\addtocontents{ans}{\protect\@dottedtocline{1}{1.5em}{2.3em}{\exerciseref{#1}}{\pageref{exercise#1}}}}
+\newcommand\listofanswers{\part*{Answers}\@starttoc{ans}}

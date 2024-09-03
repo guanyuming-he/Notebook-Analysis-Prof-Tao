@@ -1,0 +1,337 @@
+% Copyright (C) He Guanyuming 2020
+% The file is licensed under the MIT license.
+
+% There is another section with no exercise before this one, so this section should be the second section.
+\setcounter{chapter}{1}
+\chapter{Natural Numbers}
+\section{The Peano Axioms}
+No notes for this section.
+
+\section{Addition of Natural Numbers}
+\begin{why}{20}
+The sum of two natural numbers is still a natural number. That is, for any natural numbers $m,n$, $n+m$ is also a natural number.
+\end{why}
+\begin{proof}
+We use induction on $n$. 
+
+\fbox{\em Base Case.} When $n = 0$, $0 + m$ by definition equals to $m$, which is a natural number.
+
+\fbox{\em Inductive Step.} Suppose that it is already true for some $N$, then the sum $\successor{N} + m$ by definition is $\successor{(N+m)}$. The induction hypothesis tells that $N+m$ is a natural number, so by Axiom 2.2 its successor also is.
+
+We can now close the induction.
+\end{proof}
+
+\begin{exercise}{2.2.1}
+Addition of natural numbers is associative. That is, for any natural numbers $a,b,c$, $a+(b+c) = (a+b)+c$.	
+\end{exercise}
+\begin{proof}
+Induct on $a$.
+
+\fbox{\em Base Case.} When $a = 0$, $0 + (b+c)$ by definition equals to $b+c$. $(0+b)+c = (b)+c$, which equals to the former result. 
+
+\fbox{\em Inductive Step.} $\successor{a}+(b+c) = \successor{(a+(b+c))}$. We have $(\successor{a}+b)+c = \successor{(a+b)}+c = \successor{((a+b)+c)}$. But by the inductive hypothesis we know that $(a+(b+c)) = ((a+b)+c)$, hence they are equal.
+
+We can now close the induction.
+\end{proof}
+
+After we have the cancellation law, it would be nice to have an additional proposition that Tao didn't mention in the book. Our intuition would let us think that whenever we count, we get a new, different number, that is, $1\ne 2,3,4,5,\dots;\quad 2\ne 3,4,5,6,\dots$ and so on. But can we formalise it for all natural numbers?
+\begin{prop}\label{my.prop.natural.number.ne}
+Let $m,n$ be such natural numbers that $m=n+a$ for natural number $a\ne 0$, which means $m$ is produced by counting $a$ times from $n$. Then, we have $m \ne n$.
+\end{prop}
+\begin{proof}
+Surprisingly, we don't need induction here. If we were to use it, we would first need to prove the following corollary.
+
+Suppose for the sake of contradiction that $m=n$, then by the definition and commutativity of addition, $m=0+n=n+0$. Hence, $n+a=n+0$, and by the cancellation law we have $a=0$, a contradiction.
+\end{proof}
+
+Following it we have this useful corollary.
+\begin{coro}
+Let $n$ be any natural number. Then, $n\ne \successor{n}$.
+\end{coro}
+
+\begin{proof}
+It immediately follows the fact that $\successor{n} = n+1$ and My Proposition~\ref{my.prop.natural.number.ne}.
+\end{proof}
+
+\begin{exercise}{2.2.2}
+For any positive natural number $n$, there is exactly one natural number $m$ that $\successor{m} = n$. 
+\end{exercise}
+
+\begin{proof}
+Note that, because of Axiom 2.4, if $\successor{m} = n$, then $m$ must be unique. Therefore, we only need to prove that for each positive $n$, there exists some $m$ such that $\successor{m} = n$.
+	
+We induct on $n$. However, as $n$ does not start from $0$, we need to rewrite the statement a little bit:
+$$
+n \ne 0 \to (\exists m, \successor{m} = n)
+$$
+
+\fbox{\em Base Case.} When $n = 0$, this statement is vacuously true.
+
+\fbox{\em Inductive Step.} Set $m=n$, then $\successor{m} = \successor{n}$.
+
+We can now close the induction.
+\end{proof}
+
+\begin{exercise}{2.2.3}
+\begin{enumerate}
+	\item $a \ge a$
+	\item $a \ge b \wedge b \ge c \to a \ge c$.
+	\item $a \ge b \wedge b \ge a \to a = b$.
+	\item $a \ge b \to a+c \ge b+c$.
+	\item $a < b$ iff $\successor{a} \le b$.
+	\item $a < b$ iff $b = a+d$, where $d \ne 0$.
+\end{enumerate}
+\end{exercise}
+\begin{proof}\leavevmode
+\begin{enumerate}
+	\item $a=a+0$.
+	\item Let $a = b+m$ and $b = c+n$, then $a = (c+n)+m = c +(n+m)$, by the associativity of addition.
+	\item Let $a=b+m$ and $b=a+n$. Then, $a=(a+n)+m = a+(n+m)$, by the associativity of addition.
+	
+	Because $a=a+0$, we have $a+0 = a+(n+m)$. By the cancellation law, $0 = m+n$. By Corollary 2.2.9, $m=n=0$. Hence, $a=b+0=b$.
+	\item Let $a = b+m$. Then $a+c=(b+m)+c = b+(m+c) = b+(c+m) = (b+c)+m$.
+	\item 
+	\begin{enumerate}
+		\item If $a < b$, then $b=a+m$ for $m \ne 0$. By Lemma 2.2.10, $m = \successor{n}$ for some $n$. Hence, $b=a+\successor{n} = \successor(a+n) = \successor{a}+n$, which by definition means $b \ge \successor{a}$.
+		
+		\item
+		If $\successor{a} \le b$, then $b=\successor{a}+n$ for some $n$. Hence, $b=a+\successor{n}$. By Axiom 2.3, $\successor{n}$ is positive, thus $b=a+m$ for some positive number $m$. Using My Proposition~\ref{my.prop.natural.number.ne}, we have $b \ne a$. 
+		
+		However, to show that $a < b$, we also need to show that $a \le b$. Using the transitivity of order, this can be done by observing that $a \le \successor{a} \le b$. Therefore, we have $a \le b \wedge a \ne b$, and it follows that $a < b$.
+	\end{enumerate}
+
+	\item 
+	\begin{enumerate}
+		\item If $b=a+d$, then $a \le b$. But because $d$ is positive, using My Proposition~\ref{my.prop.natural.number.ne} we know that $a \ne b$ and hence $a < b$.
+		
+		\item If $a<b$, then $a \le b \wedge a \ne b$. Which means $b=a+d \wedge b \ne a+0$. Therefore, $a+d \ne a+0$, and we cannot have $d=0$.
+	\end{enumerate}
+\end{enumerate}
+\end{proof}
+
+\begin{exercise}{2.2.4}
+The exercise consists of these (Why?)'s
+\begin{why}{23}
+$0 \le b$ for all natural numbers $b$.
+\end{why}
+\begin{why}{23}
+$a>b \to \successor{a}>b$.
+\end{why}
+\begin{why}{23}
+$a=b \to \successor{a}>b$.
+\end{why}
+\end{exercise}
+\begin{proof}\leavevmode
+\begin{enumerate}
+	\item We have $b=0+b$ for all $b$. As $b$ is a natural number, by the definition of order we have $b \ge 0$.
+	\item If $a>b$, then $a=b+m$. Hence, $\successor{a} = \successor(b+m) = b+\successor{m}$. By Axiom 2.3, $\successor{m} \ne 0$. Hence, $\successor{a} > b$ by Exercise 2.2.3 (f).
+	\item If $a=b$, then $\successor{a} = \successor{b} = b+1$. Hence, $\successor{a} > b$ by Exercise 2.2.3 (f).
+\end{enumerate}
+\end{proof}
+
+\begin{exercise}{2.2.5}
+Let $m_0$ be a natural number, and $P(m)$ be a property pertaining to any natural number $m$. Suppose that whenever
+$$
+(P(m') \text{ for all } m_0 \le m' < m) \to P(m)
+$$
+, we have $P(m)$.
+
+Then, we can conclude that $P(m)$ is true for all $m \ge m_0$.
+\end{exercise}
+\begin{proof}
+Quite obviously, induction is the only tool that we can use now to prove something is true for all natural numbers. 
+
+However, if we try to apply induction directly to $P$, we will see that the inductive hypothesis only gives a single $P(n)$, not $P(n)$ over the whole range $m_0 \le n < m'$. This failure makes us realise that Prof Tao's hint is very important.
+
+Using Prof Tao's hint: define $Q(n)$ to be true iff $P(m)$ is true for all $m_0 \le m < n$. If we show that $Q(n)$ is true for all $n$, then automatically $P(m)$ is true for all $m \ge m_0$: to let $P$ be true for some $m$, just set $n=\successor{m}$, and since $m < \successor{m}$, $P(m)$ is true.
+
+To show that $Q(n)$ is true for all $n$, we induct on $n$.
+
+\fbox{\em Base Case.} 
+$Q(0)$ is vacuously true, which is because $0 \le m_0$ for all $m_0$. To show this, consider that $m_0 = 0 + m_0$.
+
+If we are to have a $m$ such that $m_0 \le m < 0$, then by the transitivity of order we also have $m \ge 0 \wedge m < 0$, which is impossible, according to Proposition 2.2.13.
+
+\fbox{\em Inductive Step.} 
+By the inductive hypothesis, $Q(n)$ is true, which means $P(m)$ is true for all $m_0 \le m < n$. By the definition of $P$, $P(n)$ is also true. Given any natural number $a \ge m_0$, we have, by Proposition 2.2.13, three situations:
+\begin{enumerate}
+	\item If $a < n$, then $P(a)$ is true by the inductive hypothesis.
+	\item If $a = n$, then $P(a)$ is also true, as we just showed.
+	\item If $a > n$, then we don't know yet.
+\end{enumerate}
+The first two situations are enough to conclude that for all $m_0 \le a \le n$, $P(a)$ is true. Using proposition 2.2.12 (e), we can rewrite this as $m_0 \le a < \successor{n}$. 
+
+We can now close the induction.
+\end{proof}
+
+\begin{exercise}{2.2.6}
+	Let $n$ be a natural number. Let $P(m)$ be a property pertaining to all natural numbers. If
+	\begin{enumerate}
+		\item $P(n)$ is true.
+		\item $P(\successor{m}) \to P(m)$,
+	\end{enumerate}
+	then $P(m)$ is true for all $m \le n$.
+\end{exercise}
+\begin{proof}
+	Using Prof Tao's hint, induct on $n$, on this property $Q(n)$, defined as the principle of backwards induction works on $n$.
+	
+	\fbox{\em Base Case.} 
+	When $n = 0$, we need to show $Q(0)$, which means $P(m)$ is true for all $m \le 0$. We can show that only $m=0$ can satisfy $m \le n$. Recall the fact that $m \ge 0$ by $m = 0+m$. Hence, for $m$ to both $\le 0$ and $\ge 0$, $m$ can only $=0$, by Proposition 2.2.13.
+	
+	\fbox{\em Inductive Step.} 
+	If $P(m)$ is already true for all $m \le n$, then we need to show that the principle works for $\successor{n}$. However, the premise of the principle automatically gives $P(\successor{n})$. By proposition 2.2.13, $m \le n$ together with $m = \successor{n}$ give all such $m$'s that $m \le \successor{n}$. Hence, $P(m)$ is true for all of them.
+	
+	We can now close the induction.
+\end{proof}
+
+\begin{exercise}{2.2.7}
+		Let $P$ be such a property pertaining to the natural numbers that
+		\begin{enumerate}
+			\item $P(n)$ is true.
+			\item $P(m) \to P(\successor{m})$,
+		\end{enumerate}
+		then $P(m)$ is true for all $m \ge n$.
+\end{exercise}
+\begin{proof}
+	Although we could walk a similar path as we walked to prove the previous two exercises, that is, define a property $Q$ such that $Q(n)$ means that the principle works for $n$, I choose to walk a different path this time.
+
+	Let $Q(m)$ be true for all $m < n$ and be equal to $P(m)$ for all $m \ge n$. By Proposition 2.2.13, this definition includes every natural number $n$.
+	
+	To prove that $P(m)$ is true for all $m \ge n$, we can show that $Q(m)$ is true for every natural number $m$. This is easy, just induct on $m$.
+	
+	\fbox{\em Base Case.} 
+	By definition, $Q(0)$ is true, because $0 \le n$ for any $n$. If $0 < n$, then by definition $Q(0)$ is true. If $0 = n$, then by the premise $Q(0) = P(0)$ is true.
+
+	\fbox{\em Inductive Step.} 
+	There are two situations to consider
+\begin{enumerate}
+	\item If $m < n$, then $\successor{m} \le n$, and $Q(\successor{m})$ is true by definition.
+	\item If $m \ge n$, then $P(m)$ is defined and equals to $Q(m)$, which by the inductive hypothesis is true. By the premise, this implies $P(\successor{m})$ is true. By definition, $Q(\successor{m})$ equals it, and is also true.
+\end{enumerate}
+
+We can now close the induction.
+\end{proof}
+
+\section{Multiplication of Natural Numbers}
+\begin{exercise}{2.3.1}
+	Let $a,b$ be natural numbers. Then, $a \times b = b \times a$.
+\end{exercise}
+To prove this exercise, we can always follow the path we walked when we try to prove the commutativity of addition. In fact, since we can regard the definition of multiplication as replacing $\successor{}$ with $+$ in the definition of addition, we can simply replace it with $+$ in the proofs, too.
+
+We introduce the two lemmas:
+\begin{lem}\label{my.cpmmutative.mul.lem.1}
+	Let $m$ be any natural number, then $0 \times m = m \times 0$.
+\end{lem}
+\begin{proof}
+	We induct on $m$.
+	
+	\fbox{\em Base Case.} $0 \times 0 = 0 \times 0$.
+	
+	\fbox{\em Inductive Step.} $0 \times \successor{m} = 0$ by definition. $\successor{m} \times 0 = (m \times 0) + 0$, and $m \times 0 = 0 \times m = 0$, according to the inductive hypothesis.
+	
+	We can now close the induction.
+\end{proof}
+
+\begin{lem}\label{my.cpmmutative.mul.lem.2}
+	Let $m, n$ be any natural number, then $n \times \successor{m} = n \times m + n$.
+\end{lem}
+\begin{proof}
+	We induct on $n$.
+	
+	\fbox{\em Base Case.} $0 \times \successor{m} = 0 = 0 + 0$.
+	
+	\fbox{\em Inductive Step.} We need to prove $\successor{n} \times \successor{m} = (\successor{n} \times m) + \successor{n}$.
+	
+	The left side equals $(n \times \successor{m}) + \successor{m}$, by definition. By the inductive hypothesis, it also equals to $(n \times m + n) + \successor{m} = n \times m + n + m + 1$.
+	
+	The right side, by definition, equals $n \times m + m + \successor{n} = n \times m + m +n +1$. By the properties of addition, the two are equal.
+	
+	We can now close the induction.
+\end{proof}
+
+Now, we prove the exercise.
+\begin{proof}
+	Induct on $m$.
+	
+	\fbox{\em Base Case.} $0 \times n = n \times 0$, by My Lemma~\ref{my.cpmmutative.mul.lem.1}.
+	
+	\fbox{\em Inductive Step.} We need to prove $\successor{m} \times n = n \times \successor{m}$. The left side equals $m \times n + n$, by definition. The right side equals to $n \times m + n$, according to My Lemma~\ref{my.cpmmutative.mul.lem.2}. However, they are the same, by the inductive hypothesis.
+	
+	We can now close the induction.
+\end{proof}
+
+\begin{exercise}{2.3.2}
+	Let $m, n$ be natural numbers. Then, $mn = 0$ iff $m = 0 \vee n = 0$. In particular, if $m,n$ are both positive, that is, $\neg(m = 0 \vee n = 0)$, then $mn \ne 0$.
+\end{exercise}
+\begin{proof}\leavevmode\par % To align the two paragraph start markers.
+	\fbox{\em If.} 
+	If one of $m,n$ is zero, then by the definition of multiplication and the commutativity, their product is also zero.
+	
+	\fbox{\em Only If.} 
+	We induct on $m$.
+
+	\leavevmode\hskip\parindent\fbox{\em Base Case.}
+		If $m = 0$, then $(mn = 0) \to (m = 0 \vee n = 0)$ is true, because the both sides of $\to$ are true.
+	
+	\leavevmode\hskip\parindent\fbox{\em Inductive Step.}
+		If $(\successor{m})n = 0$, then, by definition, $mn + n = 0$. According to Corollary 2.2.9, they can only both be 0. Hence, $n = 0$, and $\successor{m} = 0 \vee n = 0$ is true.
+	
+	We can now close the induction.
+\end{proof}
+
+\begin{exercise}{2.3.3}
+	Let $a,b,c$ be natural numbers. Then, $(a\times b)\times c = a \times (b \times c)$.
+\end{exercise}
+\begin{proof}
+	We induct $a$. We could induct on $b$ or $c$, but when handling their successors, we would need to additionally use the commutativity.
+	
+	\fbox{\em Base Case.} $(0 \times b) \times c = 0 \times c = 0 = 0 \times (b \times c)$.
+	
+	\fbox{\em Inductive Step.} $(\successor{a} \times b) \times c = (ab + b) \times c$. This equals to $(ab)c + bc$ by distributive law. We also have $\successor{a} \times bc = a(bc) + bc$ by definition. According to the inductive hypothesis, $(ab)c = a(bc)$.
+	
+	We can now close the induction.
+\end{proof}
+
+\begin{exercise}{2.3.4}
+	\[
+		(a+b)^2 = a^2 + 2ab + b^2
+	\]
+\end{exercise}
+\begin{proof}
+\begin{align*}
+	&(a+b)(a+b) \\
+	&= (a+b)a + (a+b)b &\text{distributive law} \\
+	&= (a^2 + ba) + (ab + b^2) &\text{distributive law} \\
+	&= \big((a^2 + ba)+ab\big) +b^2 &\text{associativity of addition} \\
+	&= \big(a^2 + (ba+ab)\big) +b^2 &\text{associativity of addition} \\
+	&= \big(a^2 + (ab+ab)\big) +b^2 &\text{commutativity of multiplication} \\
+	&= \big(a^2 + 2ab\big) +b^2 &\text{def.~of multiplication} \\
+	&= a^2 + 2ab + b^2 &\text{associativity of addition}
+\end{align*}
+\end{proof}
+
+\begin{exercise}{2.3.5}[Euclid's Division Lemma]
+	Let $n$ be a natural number, and $q$ be a positive natural number (so that it is not 0 as the divisor). Then, $n$ ``divided'' by $q$ will always get a quotient and a remainder.
+	
+	That is, there exists such natural numbers $m,r$ that 
+	\[
+	0 \le r < q \quad \wedge \quad n = mq + r
+	\]
+\end{exercise}
+\begin{proof}
+	We induct on $n$.
+	
+	\fbox{\em Base Case.} Set $m = r = 0$, and we have $0 = 0q + 0$, as desired.
+	
+	\fbox{\em Inductive Step.} $\successor{n}$, by the inductive hypothesis, equals to $\successor{(mq+r)} = mq+\successor{r}$.
+	
+	As $0 \le r < q$, $0 < \successor{r} \le q$, by Proposition 2.2.12 (e). According to the trichotomy of order, $\successor{r}$ either $<q$ or $=q$
+	\begin{itemize}
+		\item If $\successor{r}<q$, then we set $m' = m, r' = \successor{r}$.
+		\item If $\successor{r}=q$, then we have $\successor{n} = mq + q = (\successor{m})q$, by the definition of multiplication. However, it also equals $(\successor{m})q + 0$.
+		
+		Therefore, we set $m' = \successor{m}, r' = 0$.
+	\end{itemize}
+
+	We can now close the induction.
+\end{proof}

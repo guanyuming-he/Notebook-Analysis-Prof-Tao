@@ -1,0 +1,496 @@
+\section{The Real Numbers}
+
+\subsection{Cauchy Sequences}
+\declareexercise{5.1.1}
+\begin{proof}
+Since $(a_n)^\infty_{n=1}$ is a Cauchy sequence, it is 1-steady for some $N$. That implies,
+\[
+\forall n \geq N(|a_n-a_N| \leq 1)
+\]
+And we know that $a_1,a_2,\dots,a_N$ is bounded by some number $M$, which means $|a_N| \leq M$. Expand $|a_n-a_N| \leq 1$ to obtain 
+\[
+a_N-1 \leq a_n \leq a_N+1
+\]
+If $a_N \geq 0$, then $a_n \geq a_N-1 \geq -a_N-1$, then 
+\[
+-(a_N+1) \leq a_n \leq a_N+1 \equiv |a_n| \leq |a_N+1|
+\]
+So 
+\[
+|a_n| \leq |a_N+1| \leq |a_N| + |1| \leq M+1
+\]
+If $a_N < 0$, then $a_n \leq a_N +1 < -a_N+1$, then
+\[
+a_N - 1 \leq a_n \leq -(a_N-1) \equiv |a_n| \leq |a_N-1|
+\]
+We can also get 
+\[
+|a_n| \leq |a_N-1| \leq |a_N| + |1| \leq M+1
+\]
+Therefore, we know that $(a_n)^\infty_1$ is bounded by $M+1$.
+\end{proof}
+
+\subsection{Equivalent Cauchy Sequences}
+\declareexercise{5.2.1}
+\begin{proof}
+Although we need to prove that $a_n$ being a Cauchy sequence is logically equivalent to $b_n$ being a Cauchy sequence, showing that one 
+implies another is enough due to the structure of these statements.
+
+Now we show that $a_n$ being a Cauchy sequence implies that $b_n$ being a Cauchy sequence. We need to show that for any $\varepsilon >0$, 
+there exists a $N$ such that for all $m,n\geq N$, $|a_m-a_n| \leq \varepsilon$. 
+
+First we know that for any $\varepsilon >0$, there exists a $N$ such that $\forall m,j\geq N(|a_m-b_j|\leq \varepsilon)$. By substituting $m$ 
+with $n$ we have both $|a_m-b_j|\leq \varepsilon$ and $|a_n-b_j|\leq \varepsilon$.
+Thus, 
+\[
+|a_m-a_n| = |(a_m-b_j) - (a_n-b_j)| \leq |a_m-b_j| + |a_n-b_j| \leq 2\varepsilon
+\]
+
+Then we find the $N'$ such that $\forall m,n\geq N(|a_m-b_n| \leq \varepsilon/2)$, and then for $i,j \geq N$, $|a_i-a_j| \leq \varepsilon$.
+\end{proof}
+
+\declareexercise{5.2.2}
+\begin{proof}
+We need only to show that $a_n$ being bounded implies that $b_n$ being so because of the structure of these statements. 
+
+Consider \exerciseref{5.1.1}. Since that $(a_n)^\infty_{n=1},(b_n)^\infty_{n=1}$ are eventually $\varepsilon$-close, the sequence 
+$(a_n-b_n)^\infty_{n=1}$ is eventually $\varepsilon$-steady. Thus, according to the exercise mentioned, it is bounded by some number $M$. And 
+we say that $a_n$ is bounded by some number $N$.
+
+So $|a_n-b_n| \leq M$. Again, similar to the proof of $|a_n| \leq |a_N|+1$ in \exerciseref{5.1.1}, we can obtain that 
+$|b_n| \leq |a_n| + M \leq N+M$. Therefore, $b_n$ is also bounded.
+\end{proof}
+
+\subsection{The Construction of the Real Numbers}
+\declareexercise{5.3.1}
+\begin{proof}
+Reflectivity: It is immediately derived from $|a_n-a_n| = 0$.
+
+Symmetry: It is immediately derived from $|a_n-b_n| = |b_n-a_n|$.
+
+Transitivity: For any $\varepsilon >0$, we can find $M,N$ such that $\forall n\geq M(|a_n-b_n| \leq \varepsilon)$ and 
+$\forall n\geq N(|b_n-c_n| \leq \varepsilon)$. Let $B = \max{(M,N)}$. Then for $n\geq B$,
+\[
+|a_n-c_n| \leq |a_n-b_n| + |b_n-c_n| \leq 2\varepsilon
+\]
+This can also be deduced by (c) in Proposition 4.3.7
+So $a_n$ and $c_n$ are also equal.
+\end{proof}
+
+\declareexercise{5.3.2}
+\begin{proof}
+(1)
+We need to show that $(a_nb_n)^\infty_{n=1}$ is a Cauchy sequence. For any $\varepsilon>0$, we can find $M,N$ such that 
+$\forall i,j\geq M(|a_i-a_j| \leq \varepsilon)$ and $\forall i,j\geq N(|b_i-b_j| \leq \varepsilon)$. Let $B = \max{(M,N)}$. Then for 
+$i,j \geq B$, (See (h) in Proposition 4.3.7)
+\[
+|a_ib_i - a_jb_j| \leq \varepsilon(|a_i| + |a_j|) + \varepsilon^2
+\]
+Note that $(a_n)^\infty_{n=1}$ is a Cauchy sequence, so it is bounded by some number $M$. Thus, 
+$|a_i| + |a_j| \leq 2M$. 
+
+For any $\varepsilon' >0$, we need to find a $\varepsilon >0$ such that 
+$\varepsilon(|a_i| + |a_j|) + \varepsilon^2 \leq \varepsilon'$. First, if $\varepsilon' \geq 1$, then by 
+setting $\varepsilon < 1$ we can obtain $\varepsilon^2 < 1 \leq \varepsilon'$; if $\varepsilon' < 1$, then we let $\varepsilon < \varepsilon'$, and multiply it with $\varepsilon < 1$, we then have 
+$\varepsilon^2 < \varepsilon'$. After these steps, we can ensure that $\varepsilon' - \varepsilon^2>0$. 
+
+Consider the number $t = \dfrac{\varepsilon' - \varepsilon^2}{2M}>0$. If $\varepsilon$ already satisfies 
+$\varepsilon <t$, then it is the number we want. If it doesn't, then we can shrink it. That is, let
+$\varepsilon'' < t \leq \varepsilon$. $\varepsilon'' < \varepsilon$ gives 
+$(\varepsilon'')^2 < (\varepsilon)^2$, then $-(\varepsilon'')^2 > -(\varepsilon)^2$, and finally 
+\[
+t'' = \frac{\varepsilon' - (\varepsilon'')^2}{2M}>\frac{\varepsilon' - \varepsilon^2}{2M}
+\]
+So $\varepsilon'' < t < t''$. We can set $\varepsilon$ to this $\varepsilon''$. Then 
+\begin{align*}
+\varepsilon < \frac{\varepsilon' - \varepsilon^2}{2M} &\Longrightarrow \\
+\varepsilon \times 2M < \varepsilon' - \varepsilon^2 &\Longrightarrow \\
+\varepsilon \times 2M + \varepsilon^2 < \varepsilon'
+\end{align*}
+
+So no matter what $\varepsilon'>0$ is, we can always find $\varepsilon >0$ such that 
+\[
+\varepsilon(|a_i| + |a_j|) + \varepsilon^2 \leq \varepsilon'
+\].
+And for this $\varepsilon'$, there exists $N\geq 1$ such that 
+\[
+\forall i,j\geq N(|a_ib_i - a_jb_j| \leq \varepsilon(|a_i| + |a_j|) + \varepsilon^2 \leq \varepsilon')
+\]
+Then, $(a_nb_n)^\infty_{n=1}$ is a Cauchy sequence. So is $xy$ a real number.
+
+(2)
+For any $\varepsilon >0$, we can find $N$ such that $\forall n\geq N(|a_n-a'_n|\leq \varepsilon)$. Thus, for 
+such $n$, 
+\[
+|a_nb_n - a'_nb_n| = |b_n||a_n - a'_n| \leq \varepsilon|b_n|
+\]
+Note that $(b_n)^\infty_{n=1}$ is bounded by some number $M$. So $|a_nb_n - a'_nb_n| \leq \varepsilon M$. 
+Therefore, we find the $N'$ such that $\forall n\geq N'(|a_n-a'_n|\leq \varepsilon/M)$. Then for such $n$, 
+$|a_nb_n - a'_nb_n| \leq \varepsilon$. Thus $\taoseq{a_nb_n}{1} = \taoseq{a'_nb_n}{1}$.
+\end{proof}
+
+\declareexercise{5.3.3}
+\begin{proof}
+On one hand, if $a=b$, then obviously $a,a,\cdots = b,b,\cdots$. 
+
+On the other hand, if $a,a,\cdots \neq b,b,\cdots$, we try to show that $a=b$. Presume the negation, that is, 
+$a \neq b$. Then, $|a_n-b_n| = |a-b| \geq |a-b|$. For any $0<\varepsilon< |a-b|$, the two Cauchy sequences cannot be 
+$\varepsilon-$close, which is impossible.
+\end{proof}
+
+\paragraph{Lemma 5.3.14}
+Here it is asked that why can we deduce $|b_n| \geq \varepsilon/2$ from $|b_{n0} - b_n| \leq \varepsilon/2$ and 
+$|b_{n0} > \varepsilon$. The book says that the triangle inequality can be used. In fact, we use the fact 
+\[
+||b_{n0}| - |b_n|| \leq |b_{n0} - b_n|
+\]
+instead of $|b_{n0} - b_n| \leq |b_{n0}| + |b_n|$. Since that $|b_{n0}| - |b_n| \leq ||b_{n0}| - |b_n||$, 
+we have 
+\[
+|b_{n0}| - |b_n| \leq \varepsilon/2 \equiv |b_{n0}| \leq \varepsilon/2 + |b_n|
+\]
+But $|b_{n0}| > \varepsilon$, so $\varepsilon/2 + |b_n| > \varepsilon \equiv |b_n| > \varepsilon/2$.
+
+It is not mentioned in (b) of Proposition 4.3.3, but it can be easily proven if we divide conditions, though 
+the process is indeed very tedious.
+
+\declareexercise{5.3.4}
+\begin{proof}
+Since that the two Cauchy sequences are equivalent, they are eventually $\varepsilon-$steadiness for any $\varepsilon>0$. 
+Then, according to \exerciseref{5.2.2}, $(a_n)^\infty_{n=1}$ being bounded implies that $(b_n)^\infty_{n=1}$ being so.
+\end{proof}
+
+\declareexercise{5.3.5}
+\begin{proof}
+We show that $(\frac{1}{n})^\infty_{n=1} = (0)^\infty_{n=1}$.
+
+For each $\varepsilon>0$, we want to find $N \in \mathbb{N}$ such that 
+$n\geq N \longrightarrow |\frac{1}{n}-0|\leq \varepsilon$. Note that 
+\[
+|\frac{1}{n}-0|\leq \varepsilon \equiv \frac{1}{n} \leq \varepsilon \equiv \frac{1}{\varepsilon} \leq n
+\], 
+which means that we need to find $N \geq \frac{1}{\varepsilon}$. This is always possible as stated by Proposition 4.4.1.
+
+Then the two sequences are equivalent, which proves our proposition.
+\end{proof}
+
+\subsection{Ordering the Reals}
+\declareexercise{5.4.1}
+\begin{proof}
+We try to show that if a real number $a$ is non-zero, then it must be either positive or negative (not both). We already know from 
+Lemma 5.3.14 that $a$ can equal to $\LIM{a_n}$, where $\taoseq{a_n}{1}$ is bounded away from zero. Now we show that every Cauchy 
+sequence that is bounded away from zero can always equal to either a positively bounded away from zero or a negatively bounded away 
+from zero Cauchy sequence.
+
+Let $\taoseq{a_n}{1}$ be a Cauchy sequence that is bounded away from zero. Then for every $n$, $|a_n| \geq c$. Choose $\varepsilon$ 
+so that $0<\varepsilon<c$. We can find $N$ such that $m,n \geq N \longrightarrow |a_n-a_m| \leq \varepsilon$. We know that 
+$|a_n| \geq c \longrightarrow a_n\leq -c \vee a_n \geq c$. We will only show that $\taoseq{a_n}{1}$ equals to some sequences 
+positively bounded away from zero on the latter condition. It is easy to derive that $\taoseq{a_n}{1}$ equals to some sequences 
+negatively bounded away from zero on the former condition.
+
+We have
+\[
+|a_n-a_m| \leq \varepsilon \longrightarrow a_n -\varepsilon <a_m
+\]
+and hence $a_m >c-\varepsilon>0$ since $\varepsilon<c \wedge a_n \geq c$.
+
+Let $\taoseq{b_n}{1}$ be such a sequence that
+\begin{itemize}
+\item $m \geq N \longrightarrow b_n = a_n$,
+\item $0<n<N \longrightarrow b_n$ be any value bigger than $c-\varepsilon$.
+\end{itemize}
+
+Thus, $\taoseq{b_n}{1}$ is positively bounded away from zero, and is also equivalent to $\taoseq{a_n}{1}$ since that 
+$m \geq N \longrightarrow b_n = a_n$.
+
+Now we show that it cannot equal to both. Denote it by $a_n$. Presume the negation, that is, it is equal to both a sequence 
+$x_n \geq c$ and $y_n \leq -c$ for $c>0$. Choose $\varepsilon$ so that $0<\varepsilon<c$. It equals to $x_n$ implies that we can always 
+find $N_1$ such that 
+\[
+n \geq N \longrightarrow |a_n-x_n| \leq \varepsilon \longrightarrow a_n > x_n -\varepsilon >c-\varepsilon >0
+\]
+Similarly, we can find $N_2$ such that
+\[
+a_n < -(c-\varepsilon)<0
+\]
+
+This is impossible, as $a_n$ cannot be eventually $2(c-\varepsilon)$-close.
+
+From what we have shown, we can easily derive that a real number is either positive, negative, or zero.
+
+Now we show that $x$ is positive iff $-x$ is negative. We know $x = \LIM{a_n}$, where $a_n > c>0$. Then 
+$-x = \LIM{-a_n}$. Since that $-a_n < -c <0$, $\taoseq{-a_n}{1}$ is negatively bounded away from zero. So $-x$ is 
+negative, as desired.
+
+Finally we show that if $x=\LIM{a_n},y=\LIM{b_n}$ are both positive, then $x+y=\LIM{a_n+b_n},xy = \LIM{a_nb_n}$ is also 
+positive. It is immediately leaded to since 
+\[
+a_n >c>0 \wedge b_n >d>0 \Longrightarrow a_nb_n > cd>0 \wedge a_n+b_n > c+d>0
+\]
+\end{proof}
+
+\declareexercise{5.4.2}
+\begin{proof}
+(a) It is immediately derived since $x-y$ satisfies Proposition 5.4.4.
+
+(b)
+Denote $x,y$ as $\LIM{a_n},\LIM{b_n}$, respectively. Note that by definition 
+$y-x = \LIM{b_n-a_n} = \LIM{-(a_n-b_n)} = -(x-y)$. So from Proposition 5.4.4 we can see that
+\[
+x>y \equiv x-y>0 \equiv y-x<0 \equiv y<x
+\]
+One might notice that we use $x-y>0$ to represent $x-y$ being positive here. It is quite easy to prove. Just notice that 
+$x$ being positive is logically equivalent to $x-0$ being so, and thus is to $x>0$. We can further prove that $x<0$ is 
+equivalent to $x$ being negative.
+
+(c)
+We know by Proposition 5.4.4 that 
+\[
+x-y >0 \wedge y-z>0 \longrightarrow (x-y)+(y-z) = x-z >0
+\]
+So $x>y \wedge y>z \longrightarrow x>z$.
+
+(d)
+It is immediately deduced as $(x+z)-(y+z) = x-y$.
+
+(e)
+$x>y \equiv x-y>0$. As stated by Proposition 5.4.4, $z(x-y) >0$. So $xz-yz>0 \longrightarrow xz>yz$.
+
+\end{proof}
+
+\begin{prop} \label{prop.5.4.basicproperties}
+Since that reals numbers possess the same basic algebraic properties as the properties possessed by rational numbers, we 
+can ascertain that the corollaries of them are also right. For example,
+\[
+a<b\wedge c<d \longrightarrow a+c<b+d
+\]
+\[
+a,b,c,d>0\wedge a<b\wedge c<d \longrightarrow ac<bd
+\]
+\end{prop}
+
+\declareexercise{5.4.3}
+\begin{proof}
+Existence:
+For a $\varepsilon>0$, there exists a $N$ such that $n\geq N \longrightarrow |a_n-a_N| \leq \varepsilon$. Choose an 
+arbitrary $c>0$, and let a rational number $y$ be $\LIM{a_N-\varepsilon-c}$. On this occasion, the real number 
+$y-x<0$, which means that $y<x$. 
+
+Since $y$ is a rational number, there exists a natural number $M$ such that $M \leq y$. So $M<x$ the number $M+1$ may be 
+bigger than $x$, and if it is, $M$ is the number we want.
+
+If $M+1 \leq x$, then we check if $(M+1)+1$ is bigger than $x$, and we repeat the step until we find the first natural 
+number $M'$ such that $M'+1>x$. Hence $M'$ is the number we want.
+
+Uniqueness:
+We have already shown that $\exists M(M\leq x<M+1)$.
+Suppose that there exists another natural number $K$ such that $K\leq x<K+1$. We show that $K=M$. Suppose the negation. 
+Then $K$ either $<M$ or $>M$. Under the former condition, $K+1\leq M\leq x$, which is impossible. Under the latter 
+condition, $x<M+1\leq K$, which is also impossible.
+\end{proof}
+
+\declareexercise{5.4.4}
+\begin{proof}
+\[
+x>0\rightarrow \frac{1}{x}>0\rightarrow \exists N(N>\frac{1}{x}>0)
+\]
+So, according to Proposition 5.4.8,
+\[
+0<\frac{1}{N}<x
+\]
+, as desired.
+\end{proof}
+
+\declareexercise{5.4.5}
+\begin{proof}
+Let $x=\LIM{x_n},y=\LIM{y_n}$. Since $x>y$, the sequence $\taoseq{x_n-y_n}{1}$ equals to a sequence that is positively 
+bounded 
+away from zero. We may just let $\taoseq{x_n-y_n}{1}$ be such a sequence. (This is always possible. Given a sequence 
+$\taoseq{z_n}{1}$, which is positively bounded away from zero, and satisfies $\LIM{z_n}=x-y$, we can define $x_n$ as 
+$y_n+z_n$) This way, for some $c>0$, $x_n-y_n>c\equiv x_n>c+y_n$. 
+
+Moreover, we can find $N$ such that for $0<\varepsilon<\frac{c}{2}$ and $n\geq N$, 
+$|x_n-x_N|\leq \varepsilon\wedge|y_n-y_N|\leq \varepsilon$, which means
+\[
+x_n\geq x_N -\varepsilon\wedge y_n \leq y_N+\varepsilon
+\]
+Adding $c>2\varepsilon$ to the inequality $x_N \geq y_N+c$ gives
+\[
+x_N>y_N+2\varepsilon \equiv x_N-\varepsilon>y_N+\varepsilon
+\]
+
+This simplifies our work because both $x_N-\varepsilon$ and $y_N+\varepsilon$ are rational numbers, and we know that 
+there exists a rational number $q$ such that $x_N-\varepsilon<q<y_N+\varepsilon$. We now know that for $n\geq N$,
+\[
+x_n \geq x_N -\varepsilon \longrightarrow x_n-q \geq x_N-\varepsilon-q>0
+\]
+and
+\[
+y_n \leq y_N +\varepsilon \longrightarrow q-y_n \geq q-(y_N+\varepsilon)>0
+\]
+Define a new sequence as the following: $x_n'=x_n$ if $n\geq N$, and $x_n'$ be any rational number such that $
+|x_n'-x_N|\leq \varepsilon$, and define $y_n'$ in the same way. Obviously $x=\LIM{x_n'},y=\LIM{y_n'}$. And the sequences
+$\taoseq{x_n'-q}{1},\taoseq{q-y_n'}{1}$ are both positively bounded away from zero. Hence $x<q<y$, as desired.
+\end{proof}
+
+\declareexercise{5.4.6}
+\begin{proof}
+On one hand, suppose that $|x-y|<\varepsilon$. If $x=y$, then $y-\varepsilon<x<y+\varepsilon$ is obvious. If $x>y$, then 
+$|x-y|=x-y<\varepsilon \rightarrow x<y+\varepsilon$, and $x>y \rightarrow x>y-\varepsilon$. If $x<y$, then 
+$x<y+\varepsilon$ and $|x-y|=y-x<\varepsilon\rightarrow x>y-\varepsilon$.
+
+On the other hand, conversely, suppose that 
+\[
+y-\varepsilon<x<y+\varepsilon \rightarrow x-y<\varepsilon \wedge y-x<\varepsilon
+\]. If $x>y$, then $|x-y|=x-y<\varepsilon$. If $x=y$, then $|x-y|=0<\varepsilon$. If $x<y$, then 
+$|x-y|=y-x<\varepsilon$.
+\end{proof}
+
+\declareexercise{5.4.7}
+\begin{proof}
+(a)
+On one hand, if $x\geq y$, then add $0<\varepsilon$ to it (See Proposition \ref{prop.5.4.basicproperties}), we have 
+$x \geq y+\varepsilon$.
+
+On the other hand, conversely, if for all real number $\varepsilon>0$, $x \leq y+\varepsilon$, we show that $x\leq y$. 
+Presume the negation, that is, $x>y$, then as stated by Proposition 5.4.14, we can find $q$ such that $x>q>y$, so 
+$x>y+(q-y)$, a contradiction.
+
+(b)
+On one hand, suppose that $|x-y|\leq \varepsilon$ for all $\varepsilon>0$. If $x\geq y$, then 
+$|x-y|=x-y \leq \varepsilon$, so we have $x\leq y$ by (a). If $x\leq y$, we can conclude that $x\geq y$ as well. So 
+either way we will have $x=y$.
+
+On the other hand, if $x=y$, then $|x-y|=0<\varepsilon$.
+\end{proof}
+
+\declareexercise{5.4.8}
+\begin{proof}
+We shall just prove the first one here.
+
+Presume the negation, that is, $\LIM{a_n}>x$. Then we can find a rational $q$ such that $x<q<\LIM{a_n}$
+(Proposition 5.4.14). Thus
+$a_n\leq x<q$,
+and then $\LIM{a_n}\leq\LIM{q}=q$ (Corollary 5.4.10). But we have $\LIM{a_n}>q$, a contradiction.
+\end{proof}
+
+\subsection{The Least Upper Bound Property}
+
+\paragraph{Example 5.5.3}
+This set has no upper bound because
+\begin{itemize}
+\item If $x$ is greater than an element in the set, then $x$ must also be an element in the set;
+\item $\forall x \in \mathbb{R}^+(\exists y(y \in \mathbb{R}^+ \wedge y>x))$.
+\end{itemize}
+\begin{proof}
+(1)
+This is immediately derived from the fact that order is transitive (Proposition 5.4.7).
+
+(2)
+Consider the number $x+1$, which, according to (1), is also in the set, and which, is greater than $x$ as $y-x = 1>0$.
+\end{proof}
+
+\declareexercise{5.5.1}
+\begin{proof}
+First we show that every upper bound of $E$, $N$, is a lower bound for $-E$, and vice versa. This can be concluded from
+\[
+x \leq N \equiv -x \geq -N
+\]
+Then we show that $-M$ is the greatest lower bound. In fact,
+\[
+M \leq N \to -M \geq -N
+\]
+\end{proof}
+
+\declareexercise{5.5.2}
+\begin{proof}
+We show that for all $L<m\leq K$, there at least exists one $m_0$ such that we can not have both $\frac{m_0}{n}$ and $\frac{m_0-1}{n}$ being upper bounds and they not being upper bounds. That is, for this $m_0$, either 
+\[
+\frac{m_0}{n} \text{ is an upper bound} \wedge \frac{m_0-1}{n} \text{ is not}
+\]
+, which is impossible as $\frac{m_0}{n}>\frac{m_0-1}{n}$, or
+\[
+\frac{m_0-1}{n} \text{ is an upper bound} \wedge \frac{m_0}{n} \text{ is not}.
+\]
+
+Presume the negation, that is, (Note that this statement includes the situation when $\frac{m_0}{n}$ and $\frac{m_0-1}{n}$ are both not upper bounds)
+\[
+(\forall L<m\leq K)(\frac{m_0}{n} \text{ is an upper bound} \equiv \frac{m_0-1}{n} \text{ is an upper bound})
+\]
+We know that when $m=K$, $m/n$ is an upper bound. Then $(m-1)/n$ also is. Repeat the step until $m=L+1$, then we can 
+conclude that $\frac{m-1=L}{n}$ is an upper bound, a contradiction.
+\end{proof}
+
+\declareexercise{5.5.3}
+\begin{proof}
+\emph{This is a different approach.}
+
+On one hand, for all $x<m_n \to x \leq m_n-1$, $x/n\leq (m_n-1)/n$, which means such $x/n$ cannot be upper bounds. On the other hand, 
+for all $x>m_n \to x-1\geq m_n$, $(x-1)/n\geq m_n/n$.
+\end{proof}
+
+\declareexercise{5.5.4}
+\begin{proof}
+(1) Simply take $M \geq \varepsilon$, then $|m_n/n-m_{n'}/n'|\leq 1/M\leq \varepsilon$.
+
+(2)
+Since we want to use \exerciseref{5.4.8}, we need to prove that for some $N$, $(\forall n \geq N, q_n < q_M) \vee (\forall n \geq N, q_n > q_M)$. This thought introduces the following lemma:
+\begin{lem}
+For any Cauchy sequence $a_n$, if $a_M \neq \LIM{a_n}$, then there exists a $N$ such that for all $n$ greater than or equal to it, $a_n$ are either all lesser than $a_M$ or all greater than $a_M$.
+\end{lem}
+\begin{proof}
+Since $q_M \neq \LIM{a_n}$,
+\[
+\neg (\forall \varepsilon>0(\exists N(n\geq N \to |a_n-a_M| \leq \varepsilon) ))
+\]
+, which is
+\[
+\exists \varepsilon >0 (\forall N(\exists n\geq N(|a_n-a_M| > \varepsilon)))
+\]
+For this $\varepsilon$, $\exists N_1(n,n'\geq N_1 \to |a_n-a_{n'}| \leq \varepsilon)$. But we know $\exists N_2 \geq N_1(|a_{N_2}-a_M| > \varepsilon)$. So for all $n \geq N_2$, we have
+\[
+|a_n-a_{N_2}| \leq \varepsilon \wedge |a_{N_2} - a_M| > \varepsilon
+\]
+This means either $a_n < q_{M}$ (when $a_M > a_{N_2}$), or $a_n > a_{M}$ (when $a_M < a_{N_2}$).
+\end{proof}
+
+If $q_M = S$, then $|q_M-S| = 0 \leq \frac{1}{M}$.
+
+If $q_M \neq S$, then according to the previous lemma, for some $N$ and all $n\geq N$, $q_n > q_M$ or $q_n<q_M$. We suppose that $q_n > q_M$ here. We also know that for all $n\geq M$, $|q_M - q_n| \leq \frac{1}{M}$. Then for $n \geq \max(N,M)$, we can say that $\frac{1}{M} \geq q_n - q_M >0$. The limit of the sequence $(q_n-q_M)_1^n$ is $S-q_M$ (To really make it a sequence, we define its value to be any number between $\frac{1}{M}$ and 0 when $n < \max(N,M)$). We can now apply \exerciseref{5.4.8} to it to obtain $\frac{1}{M}\geq S-q_M >0$ (Note that $S \neq q_M$ is our hypothesis.) A similar process produces $\frac{1}{M}\geq q_M-S >0$ when $q_n<q_M$. 
+
+We can now finish the proof.
+\end{proof}
+
+\declareexercise{5.5.5}
+\begin{proof}
+We will prove that there exists an irrational number $0<i<y-x$ and then $x+i$ automatically becomes the number we want.
+
+Then we only need to prove that irrational numbers can be arbitrarily small. So we think of $\frac{\sqrt{2}}{N}$, which becomes smaller than any given $\varepsilon>0$ as $N$ approaches to infinite.
+
+But first we need to prove that it is an irrational number. Presume the negation, that is, it is rational. We know that rationals are closed under multiplication, which means $\frac{\sqrt{2}}{N} \cdot N = \sqrt{2}$ is rational, a contradiction.
+\end{proof}
+
+\subsection{Real Exponentiation, Part I}
+\paragraph{Lemma 5.6.5}
+The set contains 0 because $0 \geq 0$ and for $n \geq 1$, $0^n = 0$.
+
+If $y>1$, then according to Proposition 5.4.7 and Proposition 4.2.9, we know that we can multiply $y>1\wedge y>1$ to get $y^2>1^2=1$, 
+and so on. In fact, $y>1 \to y^2 > y$ and $y>1\to y \times 1 > 1 \times 1 \equiv y >1$, so $y^2>y>1$. We can use induction to prove 
+$y^n>1$.
+
+Since that we can multiply such inequalities where both sides are positive, we can conclude from $y>x$ and $y>1$ that $y^n > x \times 1^{n-1} \equiv y^n > x$.
+
+\declareexercise{5.6.1}
+\begin{proof}
+Let's denote the set $\{y \in \mathbb{R}:y \geq 0 \wedge y^n \leq x\}$ as $S$. Furthermore, we assert the following lemma without proof (the proof can be given by induction):
+\begin{lem}
+\[
+(x+\varepsilon)^n = \sum_{i=0}^n{\binom{n}{i}n^i\varepsilon^{n-i}}
+\]
+\end{lem}
+
+
+(a) If $y^n < x$, then there exists a real number $c$ such that $y^n < c < x$. By definition, $c \in$ the set that determines $x^{1/n}$. But $y$
+
+(c) By definition, for any $y \in S$, $y \geq 0$.
+\end{proof}
