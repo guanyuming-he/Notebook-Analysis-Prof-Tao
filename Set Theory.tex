@@ -1032,148 +1032,177 @@ Putting My Proposition~\ref{my.surj.image.prop} and My Proposition~\ref{my.inj.i
 	\end{enumerate}
 \end{proof}
 
+\begin{exercise}{3.4.3}
+	Let $A,B \subseteq X$ be sets. Let $f: X \to Y$ be a function. Then,
+	\begin{enumerate}
+		\item $f(A \cap B) \subseteq f(A) \cap f(B)$.
+		\item $f(A) \setminus f(B) \subseteq f(A \setminus B)$.
+		\item But $f(A \cup B) = f(A) \cup f(B)$.
+	\end{enumerate}
+\end{exercise}
+\begin{proof}\leavevmode
+	\begin{enumerate}
+		\item For all $y \in f(A \cap B)$, we have $\exists x(x \in A \cap B \wedge f(x) = y)$. For such $x$, we have $x \in A$, thus $f(x) \in f(A)$, and $x \in B$, thus $f(x) \in f(B)$. Hence $y = f(x) \in f(A) \cap f(B)$, as desired.
+		
+		Note that the converse isn't generally true. If there exists $x \in A \setminus B, x' \in B \setminus A$ such that $x \ne x'$ and $f(x) = f(x')$, then we see that $x,x' \notin A \cap B$. Suppose that in addition that no other elements in $X$ can result in the value of $f = f(x)$, then we see that $f(A) \cap f(B)$ will contain $f(x)$, but $f(A \cap B)$ will not.
+		
+		\item For all $y \in f(A) \setminus f(B)$, we must have $y$ satisfy
+		\[
+		\exists x(x \in A \wedge f(x) = y) \wedge \forall x(x \in B \to f(x) \ne y)
+		\]
+		
+		Let $x_0$ be some element that satisfies the $\exists$ statement. We have two situations:
+		\begin{enumerate}
+			\item $x_0 \in B$. Then, according to the $\forall$ statement, we have $f(x_0) \ne y$, a contradiction. Therefore, this situation is not possible.
+			\item $x_0 \notin B$. Then, $x \in A \setminus B$, and by definition, $y = f(x) \in f(A \setminus B)$.
+		\end{enumerate}
+	
+		The converse, generally is still not true. For a $x \in A \setminus B$, $f(x)$ might still equal to $f(x')$ for some $x' \in B$, if $f$ is not injective.
+	
+		\item For all $y \in f(A \cup B)$, we have
+		\begin{equation}
+			\exists x(x \in A \cup B \wedge f(x) = y) \label{eq.1.exer.3.4.3}
+		\end{equation}
+	
+		For all $y \in f(A) \cup f(B)$, we have
+		\begin{equation}
+			\exists x(x \in A \wedge f(x) = y) \vee \exists x(x \in B \wedge f(x) = y) \label{eq.2.exer.3.4.3}
+		\end{equation}
+		
+		We have to show the two logical statements are equivalent.
+		\begin{enumerate}
+			\item If $x$ satisfies \eqref{eq.1.exer.3.4.3}, then $x \in A \vee x \in B$, and $f(x) = y$. Therefore, we see that \eqref{eq.2.exer.3.4.3} can be satisfied.
+			
+			\item If $x$ satisfies \eqref{eq.2.exer.3.4.3}, then we have $x \in A \wedge f(x) = y$ or $x \in B \wedge f(x) = y$. Either case, we have $(x \in A \vee x \in B) \wedge f(x) = y$, that is, $x \in A \cup B \wedge f(x) = y$, satisfying \eqref{eq.1.exer.3.4.3}.
+		\end{enumerate}
+	\end{enumerate}
 
-\declareexercise{3.4.3}
-\begin{proof}
-(1)
-\[
-x \in A \cap B \Longrightarrow f(x) \in f(A) \wedge f(x) \in f(B) \Longrightarrow 
-f(x) \in f(A) \cap f(B)
-\]
-\[
-y \in f(A \cap B) \equiv \exists x(x \in A \cap B \wedge f(x) = y)
-\]
-So $y \in f(A) \cap f(B)$, thus $f(A \cap B) \subseteq f(A) \cap f(B)$.
-
-(2)
-\[
-x \in A \setminus B \Longrightarrow f(x) \in f(A\setminus B)
-\]
-\[
-y \in f(A)\setminus f(B) \Longrightarrow \exists x(x \in A \wedge x \notin B \wedge f(x) = y)
-\]
-So $y \in f(A\setminus B)$, thus $f(A)\setminus f(B) \subseteq f(A\setminus B)$.
-
-(3)
-On one hand, 
-\[
-y \in f(A \cup B) \equiv \exists x (x \in A \cup B \wedge f(x) = y)
-\]
-\begin{align*}
-x \in A \cup B \Longrightarrow x \in A \vee x \in B \Longrightarrow \\
-f(x) \in f(A) \vee f(x) \in f(B) \Longrightarrow f(x) \in f(A)\cup f(B)
-\end{align*}
-
-On the other hand, 
-\[
-y \in f(A) \cup f(B) \Longrightarrow \exists x((x \in A \vee x \in B) \wedge f(x) = y) 
-\]
-\[
-x \in A \vee x \in B \Longrightarrow x \in A \cup B \Longrightarrow f(x) \in f(A\cup B)
-\]
+	In fact, let $P(x), Q(x)$ be predicates indicating that $x \in A$ and $x \in B$, respectively. And let $R(x)$ indicate $f(x) = y$. Then, we are essentially proving
+	\begin{enumerate}
+		\item $\exists x(P(x) \wedge Q(x) \wedge R(x)) \to \big[\exists x(P(x) \wedge Q(x)) \wedge \exists x(P(x) \wedge R(x))\big]$.
+		\item $\big[\exists x(P(x) \wedge R(x)) \wedge \nexists x(Q(x) \wedge R(x))\big] \to \exists x(P(x) \wedge \neg Q(x) \wedge R(x))$.
+		\item $\exists x((P(x) \vee Q(x)) \wedge R(x)) \equiv \big[\exists x(P(x) \wedge R(x)) \vee \exists x (P(x) \wedge R(x))\big]$.
+	\end{enumerate}
 \end{proof}
 
-(1) $\subseteq$ can not be improved. Since it is possible that 
-\[
-\exists x \exists x'(x \in A \wedge x' \in B \wedge x \neq x' \wedge f(x) = f(x'))
-\]
-
-(2) $\subseteq$ can not be improved. Since it is possible that
-\[
-\exists x \exists x'(x \in A \setminus B \wedge x' \in B \wedge f(x) = f(x'))
-\]
-
-\declareexercise{3.4.4}
+\begin{exercise}{3.4.4}
+	Let $f: X \to Y$ be a function. Let $U,V$ be subsets of $Y$. Then,
+	\begin{enumerate}
+		\item $f^{-1}(U \cup V) = f^{-1}(U) \cup f^{-1}(V)$.
+		\item $f^{-1}(U \cap V) = f^{-1}(U) \cap f^{-1}(V)$.
+		\item $f^{-1}(U \setminus V) = f^{-1}(U) \setminus f^{-1}(V)$.
+	\end{enumerate}
+\end{exercise}
 \begin{proof}
-(1) 
-\begin{align*}
-x \in f^{-1}(U \cup V) \equiv (x \in X \wedge f(x) \in U \cup V) \equiv \\
-(x \in X \wedge (f(x) \in U \vee f(x) \in V))
-\end{align*}
-\begin{align*}
-x \in  f^{-1}(U) \cup  f^{-1}(V) \equiv (x \in X \wedge f(x) \in U) \vee (x \in X \wedge f(x) \in V) \\
-\equiv (x \in X \wedge (f(x) \in U \vee f(x) \in V))
-\end{align*}
-
-(2) and (3) can be proven in similar manners. 
+	For all $x \in X$, by definition $x \in f^{-1}(T)$ iff $f(x) \in T$. Therefore, we can translate them as:
+	\begin{enumerate}
+		\item $f(x) \in U \cup V$ versus $f(x) \in U \vee f(x) \in V$, which by the definition of pairwise union, are the same.
+		\item $f(x) \in U \cap V$ versus $f(x) \in U \wedge f(x) \in V$, which by the definition of intersection, are the same.
+		\item $f(x) \in U \setminus V$ versus $f(x) \in U \wedge \neg(f(x) \in V)$, which by the definition of set difference, are the same.
+	\end{enumerate}
 \end{proof}
 
-\declareexercise{3.4.5}
-\begin{proof}
-(1) On one hand, if $f(f^{-1}(S)) = S$ for every $S \subseteq Y$, then \\
-$f(f^{-1}(Y)) = Y$. That means, 
-$y \in Y \Longrightarrow \exists x (x \in f^{-1}(Y) \wedge f(x) \in Y)$. So even $f^{-1}(Y)$ 
-is enough for $f$ to be surjective. And $f^{-1}(Y) \subseteq X$, so $f$ is surjective.
-
-On the other hand, if $f$ is surjective, then for each $S \subseteq Y$, 
-\[
-y \in S \Longrightarrow \exists x(x \in X \wedge f(x) = y)
-\]
-Such $x$ are elements of $f^{-1}(S)$ of course, so $f(f^{-1}(S)) = S$.
-
-(2) On one hand, we show that $\forall S(S \subseteq X \Longrightarrow f^{-1}(f(S)) = S)$ implies that 
-$f$ is injective. Suppose the negation, that when 
-\[
-\forall S(S \subseteq X \Longrightarrow f^{-1}(f(S)) = S)
-\], but $f$ is not injective. Since $f$ is not injective, 
-\[
-\exists x \exists x'(x \in X \wedge x' \in X \wedge x \neq x' \wedge f(x) = f(x'))
-\]
-Let $S \subseteq X$ and $x \in S \wedge x' \notin S$. There is always such a set $S$.
-For example, we can let $S = X\setminus \{x'\}$. So we have $f^{-1}(f(S)) \neq S$ because $x' \in$ it.
-
-On the other hand, if $f$ is injective, then for every $S \subseteq X$, and for every $x \in S$, we have 
-$f(x) \in f(S)$. And $f(x)$ are the only elements in $f(S)$, that is, 
-$y \in f(S) \Longrightarrow y = f(x)$ for some $x \in S$. So now we know that 
-$S \subseteq f^{-1}(f(S))$. Moreover, for every $x' \in f^{-1}(f(S))$, $f(x') \in f(S)$. We can let 
-$f(x') = y = f(x)$. As $f$ is injective, $x = x'$, so $x' \in S$. That means $f^{-1}(f(S)) \subseteq S$. 
-So $f^{-1}(f(S)) =  S$.
+\begin{exercise}{3.4.5}
+	Let $f: X \to Y$ be a function. Then,
+	\begin{enumerate}
+		\item $\forall S(S \subseteq Y \to f(f^{-1}(S)) = S)$ iff $f$ is surjective.
+		\item $\forall S(S \subseteq X \to f^{-1}(f(S)) = S)$ iff $f$ is injective.
+	\end{enumerate}
+\end{exercise}
+\begin{proof}\leavevmode
+	\begin{enumerate}
+		\item \fbox{\em If.} An immediate consequence of My Theorem~\ref{my.inj.surj.image.thm}.
+		
+		\fbox{\em Only If.} Suppose for the sake of contradiction that $f$ is not surjective. Then, the set 
+		$S := \{y \in Y: \forall x(x \in X \to f(x) \ne y)\}$ is non-empty. Clearly, $S \subseteq Y$, then by premise we must have $f(f^{-1}(S)) = S$. However, by the definition of $S$ and the definition of inverse images, we have $f^{-1}(S) = \varnothing$, and thus $f(f^{-1}(S)) = \varnothing$, a contradiction (as $S$ is non-empty).
+		
+		\item \fbox{\em If.} An immediate consequence of My Theorem~\ref{my.inj.surj.image.thm}.
+		
+		\fbox{\em Only If.} Suppose for the sake of contradiction that $f$ is not injective. Then, there exists such $x,x' \in X$ that $x \ne x'$ but $f(x) = f(x')$. Let $S := \{x\}$. Then, by the definition of forward images, $f(S) = \{f(x)\}$. However, by the definition of inverse images, $\{x,x'\} \subseteq f^{-1}(\{f(x)\})$, so it clearly is not equal to $S$, a contradiction.
+	\end{enumerate}
 \end{proof}
 
-\declareexercise{3.4.6}
+\begin{exercise}{3.4.6}
+	\begin{enumerate}
+		\item For all set $X$, there exists such a set $2^X$ that $Y \in 2^X$ iff $Y \subseteq X$.
+		\item If we accept the above statement as an axiom, then we can prove the power set axiom, assuming the rest axioms of the set theory.
+	\end{enumerate}
+\end{exercise}
+The proofs for the two are quite tricky. Let me divide them into parts.
+
+\fbox{\em 1.} We use Prof.~Tao's hint.
 \begin{proof}
-My own proof: According to Axiom 3.10, we can construct the set $X^X$. Apply the axiom 
-of replacement to each element of $X^X$, we construct a set $Z$ such that
-\[
-\forall x(x \in Z \equiv \exists f(f \in X^X \wedge x = f(X)))
-\]
+	For any subset $Y \in X$, and any element $x \in X$, $x \in Y$ is either $\true$ or $\false$. If we regard $0 = \false$ and $1 = \true$, then for each $x$ we will assign either $0$ or $1$ to it, which looks like what a function does.
 
-Let $Y = \{\varnothing\} \cup Z$.
+	Hence,  consider the set $\{0,1\}^X$, obtained by the axiom of power set. For all $f \in \{0,1\}^X$, we can replace $f$ with $f^{-1}(\{1\})$, because the inverse image is well defined. (That is, for each function, it has a unique inverse image on a given set.)
+	
+	First, be the definition of inverse images, $f^{-1}(\{1\})$ is a subset of $X$.
+	
+	Second, we need to show that every subset of $X$ equals $f^{-1}(\{1\})$ for some $f \in \{0,1\}^X$. Let $S \subseteq X$ be any subset of $X$. Define
+	\[
+	f_S: X \to \{0,1\},\ x \mapsto
+	\begin{cases}
+		0 & \text{if } x \notin S \\
+		1 & \text{if } x \in S
+	\end{cases}
+	\]
+	Clearly, $f_S$ is well-defined, because $x \in S$ is either true or false. By the power set axiom, $f_S \in \{0,1\}^X$. Now we only need to show that $f_S^{-1}(\{1\}) = S$.	By the definition of inverse images, $x \in f_S^{-1}(\{1\})$ iff $f(x) = 1$. Therefore, $x \in f_S^{-1}(\{1\})$ iff $x \in S$, as desired.
+\end{proof}
 
-Now we prove that $Y$ is the set we want. On one hand, for any $S \subseteq X$, 
-if $S = \varnothing$, then $S \in Y$, as $Y = \{\varnothing\} \cup Z$.
+\fbox{\em 2.} Now we assume the existence of $2^X$ for any set $X$. For any set $X$ and $Y$, we want to prove the existence of the set $Y^X$, which contains all functions from $X$ to $Y$.
+\begin{proof}
+	I tried many times and think this is quite hard. Let me try to break it down into smaller pieces. Then general idea is, for each element $x \in X$, it can be mapped to any element in $Y$. Then for each such mapping, another element in $X$ can be mapped to any element in $Y$, too. Repeat this until we have mapped all elements in $X$ to some element in $Y$.
+	
+	First, for any element $x \in X$, we would like to create a set that contains all possible mappings from it to an element in $Y$. To do this, we have to use the axiom of replacement on $Y$, replacing each element $y \in Y$ with $f_{xy}: \{x\} \to \{y\}$. This obeys the conditions of the axiom, because any function from a singleton to a singleton is unique. (Obviously the domain and codomain match; and obviously the function has only one possible value.) We denote the set created as $M_{x}$.
+	
+	Because $M_{x}$ solely depends on the choice of $x$, we can then replace each element $x \in X$ with $M_x$. Let's denote this big set as $\Omega_1$.
+	
+	This is already a breakthrough. Each $M_{x}$ has the same amount of elements as $Y$, and there are the same amount of $M_{x}$'s in $\Omega_1$ as there are elements in $X$. Prof.~Tao pointed out early that the power set $Y^X$ would have $n^m$ elements, if $Y$ has $n$ elements and $X$ has $m$. We already have exactly this number of functions in our $\Omega_1$, although
+	\begin{enumerate}
+		\item first we will have to extract them out from the layer of $M_{x}$'s.
+		\item second they are still all singleton to singleton functions. We have to somehow manage to create ``larger'' functions from them.
+	\end{enumerate}
 
-If $S \neq \varnothing$, there exists a surjective function $g: X \rightarrow S$. $g\in X^X$, and 
-$g(X) = S$, so $S \in Z$, and thus $S \in Y$. (To show the existence of $g$, for example, let $x \in X, 
-g(x) = x$ if $x \in S$, and for $x \in X \wedge x \notin S$, $g(x)$ can be any element of $X$.)
-
-
-On the other hand, for any $S' \nsubseteq X$, $\exists a(a \in S' \wedge a \notin X)$. To prove that 
-$S' \notin Y$, we need to show that $\nexists f(f \in X^X \wedge S' = f(X))$. We know that 
-$\nexists x(x \in X \wedge f(x) = a)$, so $a \notin f(X)$. Therefore $S' \neq f(X)$, so $S' \notin Y$.
-
-$Y$ is the set we want.
-
-I posted a question \href{https://math.stackexchange.com/questions/3803487/is-this-proof-to-the-existence-of-a-set-that-contains-all-subsets-of-another-set}{here} for verification for this proof. 
-Thanks to answers of people at Stack Exchange so that my proof can be refined.
-
-Proof By Tao's Hint:
-For each $S \subseteq X$, let a function $f_S$ be $f_S(x) = 1$ if $x \in S$, and $f_S(x)=0$ if 
-$x \in X \wedge x \notin S$. Then $f^{-1}_S(\{1\})$ gives $S$. 
-
-Now we show that any element in 
-$\{0,1\}^X$ is some $f_S$. Let $g \in \{0,1\}^X$. Then if $\forall x \in X, g(x) = 0$, then 
-$g = f_{\varnothing}$. Otherwise, there exists a set that contains all $x$ such that $g(x) = 0$ by 
-axiom of specification, namely $R$. Then $g = f_R$.
-
-On the other hand, each $f_S$ is obviously an element of $\{0,1\}^X$.
-
-Use the axiom of replacement, we construct a set $Y$ such that
-\[
-\forall x (x \in Y \equiv \exists f(f \in \{0,1\}^X \wedge x = f^{-1}(\{1\})))
-\]
-
-According to what we have proven, $Y$ is the set we want.
+	Anyway, let's do it step by step. Using the axiom of union, we can create
+	\[
+		\Omega_2 := \bigcup_{M_x \in \Omega_1} M_x
+	\]
+	This set contains all the singleton to singleton functions in $\Omega_1$ directly. Now we need to somehow make ``larger'' functions from them.
+	
+	It is where we need the assumed axiom of subsets, which (is the only axiom that) can combine the possibilities of each of these singleton to singleton functions. We then denote
+	\[
+		\Omega_3 := 2^{\Omega_2}
+	\]
+	
+	Now, we select all subsets in $\Omega_3$ that can cover all $x \in X$, but only once for each, using the axiom of specification. Let $Q(S)$ be a property pertaining to all $S \in \Omega_3$ such that $Q(S)$ is true iff
+	\begin{enumerate}
+		\item For all $x \in X$, there exists a function $f \in S$ whose domain equals $\{x\}$.
+		\item No two functions in $S$ have the same domain.
+	\end{enumerate}
+	, and denote the result set as
+	\[
+		\Omega_4 := \{S \in \Omega_3 : Q(S)\}
+	\]
+	
+	Finally, we can turn each set in $\Omega_4$ into a corresponding function. For any $S \in \Omega_4$, define $f_S: X \to Y$ this way: For any $x \in S$, there exists, by the restriction applied with $Q(S)$, a unique $f_{xy}$ that maps $\{x\}$ to some $\{y\}$, where $y \in Y$. Define $f_S(x) := y$. Because the $f_{xy}$ is unique for any $x$, this function is well defined. We replace each $S \in \Omega_4$ with such a $f_S$, to get $\Omega_5$.
+	
+	Now we show that $\Omega_5$ is indeed the set that contains all functions from $X$ to $Y$.
+	\begin{enumerate}
+		\item First, we show that each function in $\Omega_5$ is indeed from $X$ to $Y$. By the definition of $Q(S)$, we see that every $x$ is covered. And from the construction of $f_{xy}$ earlier, we see that indeed $y \in Y$, as desired.
+		
+		\item Then, we show that every function from $X$ to $Y$ lies in $\Omega_5$. Let $f$ be any function in $\Omega_5$. We try to construct a $S \in \Omega_3$ that can satisfy $Q(S)$. If this is possible, then we can subsequently make $f$ again from $S$ with the above steps.
+		
+		With this $f$, replace each element $x$ in $X$ with the function $\{x\} \to \{f(x)\}$, to get the set $X_f$. One can easily verify that this
+		\begin{enumerate}
+			\item Is indeed a subset of $\Omega_2$, because each such function $\{x\} \to \{f(x)\}$ falls into $\Omega_2$, by its definition. Therefore, $X_f \in \Omega_3$.
+			
+			\item Satisfies the definition of $Q(S)$, because $f$ is a function from $X \to Y$ --- it covers every $x \in X$ uniquely. Therefore, $X_f \in \Omega_4$.
+		\end{enumerate}
+	
+		Hence, we apply the replacement procedure that we used on $\Omega_4$ to get $\Omega_5$. And by the definition of the procedural, we can easily see that it preserves all the values of $f$. Hence the result must be equal to $f$.
+	\end{enumerate}
+	
+	We have finally finished the proof. Phew.
 \end{proof}
 
 \declareexercise{3.4.7}
