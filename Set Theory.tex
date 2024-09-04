@@ -620,13 +620,13 @@ These are logically equivalent:
 
 	\fbox{\em Injective.} For such a function $f: \varnothing \to X$ to be injective, we must have
 	\[
-	\forall x \forall x'\Big[(x \in \varnothing \wedge x' \in \varnothing) \to \big(x \ne x' \to f(x) \ne f(x')\big)\Big]
+	\forall x \forall x'\Bigl[(x \in \varnothing \wedge x' \in \varnothing) \to \bigr(x \ne x' \to f(x) \ne f(x')\bigl)\Bigr]
 	\]
 	, which is always vacuously true.
 	
 	\fbox{\em Surjective.} For such a function $f: \varnothing \to X$ to be surjective, we must have
 	\[
-	\forall y\Big[y \in X \to \big(\exists x(x \in \varnothing \wedge f(x) = y)\big)\Big]
+	\forall y\Bigl[y \in X \to \bigl(\exists x(x \in \varnothing \wedge f(x) = y)\bigr)\Bigr]
 	\]
 	, which is false (because $x \in \varnothing$ is false), unless $y \in X$ is false. In that case, $X = \varnothing$.
 	
@@ -1022,7 +1022,7 @@ Putting My Proposition~\ref{my.surj.image.prop} and My Proposition~\ref{my.inj.i
 		
 		\item According to My Theorem~\ref{my.inj.surj.image.thm}, generally we have $f(f^{-1}(U)) \subseteq U$. And if $f$ is surjective, then the $\subseteq$ becomes $=$.
 		
-		\item According to (1), generally, at least we should have $f^{-1}(U) \subseteq f^{-1}(f(f^{-1}(U)))$, if we regard $f^{-1}(U)$ as a subset of $X$. However, since Prof.~Tao mentioned this in particular, I wonder if I can prove something stronger, that is, if they are always equal in general.
+		\item According to (1), generally, at least we should have $f^{-1}(U) \subseteq f^{-1}$\discretionary{}{}{}$(f(f^{-1}$\discretionary{}{}{}$(U)))$, if we regard $f^{-1}(U)$ as a subset of $X$. However, since Prof.~Tao mentioned this in particular, I wonder if I can prove something stronger, that is, if they are always equal in general.
 		
 		Now I only need to prove that $f^{-1}(f(f^{-1}(U))) \subseteq f^{-1}(U)$.
 		
@@ -1079,9 +1079,9 @@ Putting My Proposition~\ref{my.surj.image.prop} and My Proposition~\ref{my.inj.i
 
 	In fact, let $P(x), Q(x)$ be predicates indicating that $x \in A$ and $x \in B$, respectively. And let $R(x)$ indicate $f(x) = y$. Then, we are essentially proving
 	\begin{enumerate}
-		\item $\exists x(P(x) \wedge Q(x) \wedge R(x)) \to \big[\exists x(P(x) \wedge Q(x)) \wedge \exists x(P(x) \wedge R(x))\big]$.
-		\item $\big[\exists x(P(x) \wedge R(x)) \wedge \nexists x(Q(x) \wedge R(x))\big] \to \exists x(P(x) \wedge \neg Q(x) \wedge R(x))$.
-		\item $\exists x((P(x) \vee Q(x)) \wedge R(x)) \equiv \big[\exists x(P(x) \wedge R(x)) \vee \exists x (P(x) \wedge R(x))\big]$.
+		\item $\exists x(P(x) \wedge Q(x) \wedge R(x)) \to \bigl[\exists x(P(x) \wedge Q(x)) \wedge \exists x(P(x) \wedge R(x))\bigr]$.
+		\item $\bigl[\exists x(P(x) \wedge R(x)) \wedge \nexists x(Q(x) \wedge R(x))\bigr] \to \exists x(P(x) \wedge \neg Q(x) \wedge R(x))$.
+		\item $\exists x((P(x) \vee Q(x)) \wedge R(x)) \equiv \bigl[\exists x(P(x) \wedge R(x)) \vee \exists x (P(x) \wedge R(x))\bigr]$.
 	\end{enumerate}
 \end{proof}
 
@@ -1122,6 +1122,29 @@ Putting My Proposition~\ref{my.surj.image.prop} and My Proposition~\ref{my.inj.i
 	\end{enumerate}
 \end{proof}
 
+\begin{why}{50}
+	\[
+		\bigcup \{\{2,3\},\{3,4\},\{4,5\}\} = \{2,3,4,5\}
+	\]
+\end{why}
+\begin{proof}
+	First, we prove that $\bigcup \{\{2,3\},\{3,4\},\{4,5\}\} \subseteq \{2,3,4,5\}$. Clearly, $\{2,3\}$, $\{3,4\}$, $\{4,5\} \subseteq \{2,3,4,5\}$. If $x \in \bigcup \{\{2,3\},\{3,4\},\{4,5\}\}$, then by definition $x$ is in one of the three sets. Hence, $x \in \{2,3,4,5\}$ by the definition of subsets.
+	
+	Second, we show that $\{2,3,4,5\} \subseteq \bigcup \{\{2,3\},\{3,4\},\{4,5\}\}$. We see that $2,3 \in \{2,3\}$, and $4,5 \in \{4,5\}$. Hence, by definition, all the four elements are in $\bigcup \{\{2,3\},\{3,4\},\{4,5\}\}$, as desired.
+\end{proof}
+
+\begin{why}{50}
+	If $I = \varnothing$, then $\bigcup_{\alpha \in I}A_\alpha = \varnothing$.
+\end{why}
+\begin{proof}
+	By definition, $y \in \bigcup_{\alpha \in I}A_\alpha$ iff
+	\[
+		\exists \alpha (\alpha \in I \wedge y \in A_\alpha)
+	\]
+	
+	If $I = \varnothing$, then the $\exists \alpha(\dots)$ is always false for any $y$. Hence for any $y$ we have $y \notin \bigcup_{\alpha \in I}A_\alpha$, and by the empty set axiom, this set is empty.
+\end{proof}
+
 \begin{exercise}{3.4.6}
 	\begin{enumerate}
 		\item For all set $X$, there exists such a set $2^X$ that $Y \in 2^X$ iff $Y \subseteq X$.
@@ -1153,7 +1176,7 @@ The proofs for the two are quite tricky. Let me divide them into parts.
 \begin{proof}
 	I tried many times and think this is quite hard. Let me try to break it down into smaller pieces. Then general idea is, for each element $x \in X$, it can be mapped to any element in $Y$. Then for each such mapping, another element in $X$ can be mapped to any element in $Y$, too. Repeat this until we have mapped all elements in $X$ to some element in $Y$.
 	
-	First, for any element $x \in X$, we would like to create a set that contains all possible mappings from it to an element in $Y$. To do this, we have to use the axiom of replacement on $Y$, replacing each element $y \in Y$ with $f_{xy}: \{x\} \to \{y\}$. This obeys the conditions of the axiom, because any function from a singleton to a singleton is unique. (Obviously the domain and codomain match; and obviously the function has only one possible value.) We denote the set created as $M_{x}$.
+	First, for any element $x \in X$, we would like to create a set that contains all possible mappings from it to all element in $Y$. To do this, we have to use the axiom of replacement on $Y$, replacing each element $y \in Y$ with $f_{xy}: \{x\} \to \{y\}$. This obeys the conditions of the axiom, because any function from a singleton to a singleton is unique. (Obviously the domain and codomain match; and obviously the function has only one possible value.) We denote the set created as $M_{x}$.
 	
 	Because $M_{x}$ solely depends on the choice of $x$, we can then replace each element $x \in X$ with $M_x$. Let's denote this big set as $\Omega_1$.
 	
@@ -1205,124 +1228,130 @@ The proofs for the two are quite tricky. Let me divide them into parts.
 	We have finally finished the proof. Phew.
 \end{proof}
 
-\declareexercise{3.4.7}
+\begin{exercise}{3.4.7}
+	Let $X,Y$ be sets. A partial function between the two sets, $f: X' \to Y'$, is such that $X' \subseteq X$ and $Y' \subseteq Y$.
+	
+	Prove the existence of a set that contains all partial functions from $X$ to $Y$.
+\end{exercise}
 \begin{proof}
-As stated by the previous exercise, there exists a set $\mathbb{X}$ whose elements are all subsets of 
-$X$, and a set $\mathbb{Y}$ whose elements are all subsets of $Y$.
-
-For every element $x \in \mathbb{X}$, apply the axiom of replacement to $\mathbb{Y}$, to obtain a set 
-$S_x := \{y^x\}$ for every element $y \in \mathbb{Y}$. 
-
-According to the axiom of union, using $\mathbb{X}$ as the index set, we have the set
-\[
-Z = \bigcup_{x \in \mathbb{X}} S_x
-\]
-
-Apply again the axiom of union to $Z$ to obtain $R$, which contains all elements of elements of $Z$. Now 
-we show that $R$ is the set we want.
-
-On one hand, let $f$ be an arbitrary function with the domain of $X' \subseteq X$, and the range of $Y' 
-\subseteq Y$. We can see that $f \in {Y'}^{X'} \in S_{X'}$. ${Y'}^{X'}$ becomes an element of $Z$. And 
-thus $f$ becomes an element in $R$. 
-
-On the other hand, from the construction of $R$, we can see that $R$ contains only these elements.
-
+	We use a similar idea to that used in \exerciseref{3.4.6}~(2).
+	
+	Because of Lemma 3.4.10, we have $2^X$ and $2^Y$. Given any $X' \in 2^X$, we can use the axiom of replacement on $2^Y$ to replace each $Y' \to 2^Y$ with $Y'^{X'}$, the set of all partial functions from $X'$ to $Y'$, and denote the result set as $F_{X'}$, which contains, for each $Y'$, the set $Y'^{X'}$. If we use the axiom of union on it, we get $\bigcup F_{X'}$ that contains all functions from $X'$ to any subset of $Y$.
+	
+	Because the replacement depends only on the choice of $X'$, it is unique for each $X'$. Therefore, we replace each $X' \in 2^X$ with $\bigcup F_{X'}$, to have $\Omega$. Finally, we apply the axiom of union again, on $\Omega$, to have $\bigcup \Omega$.
+	
+	We show that $\Omega$ is the set we want.
+	\begin{enumerate}
+		\item If $f: X' \to Y'$ is a partial function, then $X' \in 2^X$ and $Y' \in 2^Y$. By the way we constructed $\bigcup \Omega$, we see that $f \in F_{X'} \in \Omega$, and thus $f \in \bigcup \Omega$.
+		
+		\item If $f \in \bigcup \Omega$, then $f$ is in a $F_{X'}$ for some $X'$. By the way we constructed $F_{X'}$, there exists such a $Y' \subseteq Y$ that $Y'$ is the codomain of $f$.
+	\end{enumerate}
 \end{proof}
 
-\declareexercise{3.4.8}
+\begin{exercise}{3.4.8}
+	Show that Axiom~3.5 (the axiom of pairwise union) can be deduced from Axiom~3.1 (sets are objects), Axiom~3.4 (singleton and pair sets), and Axiom~3.12 (the axiom of union).
+\end{exercise}
 \begin{proof}
-Let $A,B$ be two arbitrary sets. They are also objects as stated by Axiom 3.1. So according to 
-Axiom 3.3, there exists a set $S=\{A,B\}$. By Axiom 3.11, we have a set $Z$ such that 
-\[
-\forall x(x \in Z \equiv \exists X(X \in S \wedge x \in X))
-\]
-
-Now we show that $Z$ is the set we want. If $x \in A \vee x \in B$, then 
-$\exists X(X \in S \wedge x \in X)$ is true. So $x \in Z$.
-
-If $x \notin A \wedge x \notin B$, then $\forall X(X \in S \Longrightarrow x \notin X)$, that is, 
-$\exists X(X \in S \wedge x \in X)$ is false. So $x \notin Z$.
-
-$Z$ is therefore the set we want. 
+	Let $A,B$ be two arbitrary sets. They are also objects as stated by Axiom~3.1. So according to the pair sets axiom, there exists a set $S=\{A,B\}$. By the axiom of union, we have a set $\bigcup S$ such that 
+	\[
+	\forall x(x \in \bigcup S \equiv \exists X(X \in S \wedge x \in X))
+	\]
+	
+	Now we show that $Z$ is the set we want. That is, we prove, for all $x$, $x \in Z$ iff $x = A$ or $x = B$.
+	\begin{enumerate}
+		\item  If $x \in A \vee x \in B$, then $x$ is in one of the elements in $S$. So $x \in Z$.
+		
+		\item If $x \in \bigcup S$, then by definition there must exist at least $X \in S$ such that $x \in X$. This $X$ is either $A$ or $B$. So $x \in A \vee x \in B$ is true.
+	\end{enumerate}
+	
+	$\bigcup S$ is therefore the set we want. 
 \end{proof}
 
-\paragraph{Example 3.4.11}
-In (3.3), why do Tao choose some element $\beta$ of $I$? This is because we need to apply the axiom of 
-specification to $A_\beta$ with the restriction $x \in A_\alpha$ for all $\alpha \in I$.
-
-\declareexercise{3.4.9}
+\begin{exercise}{3.4.9}
+	Show that the definition of $\bigcap_{\alpha \in I} A_\alpha$, 
+	\[
+		\{x \in A_\beta : \forall \alpha(\alpha \in I \to x \in A_\alpha)\}
+	\]
+	, does not depend on the choice of $\beta$. That is,
+	\[
+		\{x \in A_\beta : \forall \alpha(\alpha \in I \to x \in A_\alpha)\} =
+		\{x \in A_{\beta'} : \forall \alpha(\alpha \in I \to x \in A_\alpha)\}
+	\]
+	, for all $\beta,\beta' \in I$.
+\end{exercise}
 \begin{proof}
-This is quiet easy to prove. Let the left-handed side set be $S$, the RHS set be $S'$. For any 
-$x \in S$, $x \in A_\alpha$ for all $\alpha \in I$. So $x \in A_{\beta'}$. And $x \in A_\alpha$ for all 
-$\alpha \in I$. Therefore $x \in S'$. 
-
-It is nearly the same the prove $x \in S' \Longrightarrow x \in S$.
+	By the axiom of specification, $x \in \{x \in X : Q(x)\}$ iff $x \in X \wedge Q(x)$. Therefore,
+	$x \in \{x \in A_\beta : \forall \alpha(\alpha \in I \to x \in A_\alpha)\}$ iff $x \in A_\beta \wedge \forall \alpha(\alpha \in I \to x \in A_\alpha)$, and $x \in \{x \in A_{\beta'} : \forall \alpha(\alpha \in I \to x \in A_\alpha)\}$ iff $x \in A_{\beta'} \wedge \forall \alpha(\alpha \in I \to x \in A_\alpha)$.
+	
+	But $\beta, \beta' \in I$, so $\forall \alpha(\alpha \in I \to x \in A_\alpha)$ covers all the choices of them already. Hence, they are all equivalent to $\forall \alpha(\alpha \in I \to x \in A_\alpha)$, as desired.
 \end{proof}
 
-\paragraph{Exercise 3.4.10} \label{exercise3.4.10}
+\begin{exercise}{3.4.10}
+	Let $I$ and $J$ be sets. For all $\alpha \in I \cup J$, suppose there is destined a unique set $A_\alpha$. Show that
+	\begin{enumerate}
+		\item $(\bigcup_{\alpha \in I}A_\alpha) \cup (\bigcup_{\alpha \in J}A_\alpha) = \bigcup_{\alpha \in I \cup J}A_\alpha$.
+		\item $(\bigcup_{\alpha \in I}A_\alpha) \cap (\bigcup_{\alpha \in J}A_\alpha) = \bigcup_{\alpha \in I \cap J}A_\alpha$.
+	\end{enumerate}
+\end{exercise}
 \begin{proof}
-For the sake of convenience, let 
-$(\bigcup_{\alpha \in I} A_{\alpha})\cup(\bigcup_{\alpha \in J}A_{\alpha})$ be $S$, \\
-$\bigcup_{\alpha \in I \cup J} A_{\alpha}$ be $S'$, 
-$(\bigcap_{\alpha \in I} A_{\alpha})\cap(\bigcap_{\alpha \in J}A_{\alpha})$ be $Z$,
-$\bigcap_{\alpha \in I \cup J} A_{\alpha}$ be $Z'$.
-
-(1) When $I,J \neq \varnothing$: 
-On one hand, 
-\[
-x \in S \Longrightarrow (x \in \bigcup_{\alpha \in I} A_{\alpha} \vee 
-x \in \bigcup_{\alpha \in J}A_{\alpha})
-\]
-If $x \in \bigcup_{\alpha \in I} A_{\alpha}$, then $x \in \bigcup_{\alpha \in I \cup J} A_{\alpha}$.
-If $x \in \bigcup_{\alpha \in J} A_{\alpha}$, then $x \in \bigcup_{\alpha \in I \cup J} A_{\alpha}$.
-
-On the other hand, if $x \in S'$, then there exists an object $a \in I \cup J$ such that $x \in A_a$.
-If $a \in I$ then $x \in x \in \bigcup_{\alpha \in I} A_{\alpha} \Longrightarrow x \in S$.
-If $a \in J$ then $x \in x \in \bigcup_{\alpha \in J} A_{\alpha} \Longrightarrow x \in S$.
-
-When $I,J$ are both empty, $S,S'$ are all empty.
-
-When there is only one of $I,J$ is empty, say it is $I$, then 
-$S = \varnothing \cup \bigcup_{\alpha \in J} = \bigcup_{\alpha \in J}$. And 
-$S' = \bigcup_{\alpha \in \varnothing \cup J} A_{\alpha} = \bigcup_{\alpha \in J}$.
-
-(2)
-\[
-x \in Z \equiv \forall a(a \in I \Longrightarrow x \in A_a) \wedge 
-\forall b(b \in J \Longrightarrow x \in A_b)
-\], which is equal to $\forall a(a \in I \cup J \Longrightarrow x \in A_a) \equiv x \in Z'$.
+	By definition, $x \in \bigcup_{\alpha \in I}A_\alpha$ iff $\exists \alpha(\alpha \in I \wedge x \in A_\alpha)$. And $x \in \bigcup_{\alpha \in J}A_\alpha$ iff $\exists \alpha(\alpha \in J \wedge x \in A_\alpha)$.
+	
+	Let predicates $P(x,\alpha) := \alpha \in I \wedge x \in A_\alpha$, $Q(x,\alpha) := \alpha \in J \wedge x \in A_\alpha$.
+	
+	Therefore, by the definition of union and intersection
+	\begin{align*}
+		&x \in (\bigcup_{\alpha \in I}A_\alpha) \cup (\bigcup_{\alpha \in J}A_\alpha) \\
+		&\leftrightarrow \exists \alpha(P(x,\alpha)) \vee \exists \alpha(Q(x,\alpha))
+	\end{align*}
+	and
+	\begin{align*}
+		&x \in (\bigcup_{\alpha \in I}A_\alpha) \cap (\bigcup_{\alpha \in J}A_\alpha) \\
+		&\leftrightarrow \exists \alpha(P(x,\alpha)) \wedge \exists \alpha(Q(x,\alpha))
+	\end{align*}
+	
+	So we need to prove that
+	\[
+		 \exists\alpha(P(x,\alpha) \vee Q(x,\alpha)) \equiv \bigl[\exists \alpha(P(x,\alpha)) \vee \exists \alpha(Q(x,\alpha))\bigr]
+	\]
+	and that
+	\[
+		\exists\alpha(P(x,\alpha) \wedge Q(x,\alpha)) \equiv \bigl[\exists \alpha(P(x,\alpha)) \wedge \exists \alpha(Q(x,\alpha))\bigr]
+	\]
+	, whose proofs are quite straightforward. For example, we can assume that for some $\alpha_0$, $P(x,\alpha) \vee Q(x,\alpha)$. Then we can derive either $P(x,\alpha)$ or $Q(x,\alpha)$, and take any of the two, we can have the RHS.
 \end{proof}
 
-\paragraph{Exercise 3.4.11} \label{exercise3.4.11}
+\begin{exercise}{3.4.11}
+	Let $X, I \ne \varnothing$ be sets. For all $\alpha \in I$, let $A_\alpha$ denote a unique subset of $X$. Then,
+	\begin{enumerate}
+		\item $X \big\backslash\bigcup_{\alpha \in I} A_\alpha = \bigcap_{\alpha\in I}(X \setminus A_\alpha)$
+		\item $X \big\backslash\bigcap_{\alpha \in I} A_\alpha = \bigcup_{\alpha\in I}(X \setminus A_\alpha)$
+	\end{enumerate}
+\end{exercise}
 \begin{proof}
-(1) Let the LHS be $S$, the RHS be $S'$. 
-\begin{align*}
-x \in S &\equiv \\
-x \in X \wedge x \notin \bigcup_{\alpha \in I} A_{\alpha} &\equiv \\
-x \in X \wedge \forall a(a \in I \Longrightarrow x \notin A_{a})
-\end{align*}
-\begin{align*}
-x \in S' &\equiv \\
-\forall a(a \in I \Longrightarrow x \in X \setminus A_a) &\equiv \\
-x \in X \wedge \forall a(a \in I \Longrightarrow x \notin A_a)
-\end{align*}.
+	Similar to what we did in doing \exerciseref{3.4.10}, for all $x$, let $P(x,\alpha) := x \in A_\alpha$, let $Q(x) := x \in X$, and let $R(\alpha) := \alpha \in I$.
+	
+	Then, we can translate the statements to, by the definition of difference, intersection, and union, that for all $x$,
+	\begin{enumerate}
+		\item $Q(x) \wedge \neg \exists\alpha\bigl(R(\alpha) \wedge P(x,\alpha)\bigr) \equiv \forall\alpha\Bigl(R(\alpha) \to \bigl(Q(x) \wedge \neg P(x,\alpha)\bigr)\Bigr)$.
+		\item $Q(x) \wedge \neg \forall\alpha\bigl(R(\alpha) \to P(x,\alpha)\bigr) \equiv \exists\alpha\Bigl(R(\alpha) \wedge \bigl(Q(x) \wedge \neg P(x,\alpha)\bigr)\Bigr)$
+	\end{enumerate}
 
-So $S=S'$.
+	To prove them, first, observe that, $Q(x)$ does not depend on the choice of $\alpha$. And both sides of each of the two statements require $Q(x)$ to be true. (It makes sense, because $x$ has to be in $X$ to fall into the difference between $X$ and another set.) Therefore, we can simplify them to
+	\begin{enumerate}
+		\item $\neg \exists\alpha\bigl(R(\alpha) \wedge P(x,\alpha)\bigr) \equiv \forall\alpha\Bigl(R(\alpha) \to \bigl(\neg P(x,\alpha)\bigr)\Bigr)$.
+		\item $\neg \forall\alpha\bigl(R(\alpha) \to P(x,\alpha)\bigr) \equiv \exists\alpha\Bigl(R(\alpha) \wedge \bigl(\neg P(x,\alpha)\bigr)\Bigr)$
+	\end{enumerate}
 
-(2) Let the LHS be $Z$, the RHS be $Z'$. 
-\begin{align*}
-x \in Z &\equiv \\
-x \in X \wedge x \notin \bigcap_{\alpha \in I} A_{\alpha} &\equiv \\
-x \in X \wedge \neg(\forall a(a \in I \Longrightarrow x \in A_a)) &\equiv \\
-x \in X \wedge \exists a(a \in I \Longrightarrow x \notin A_a)
-\end{align*}
-\begin{align*}
-x \in Z' &\equiv \\
-x \in X \wedge \bigvee_{\alpha \in I}(x \notin A_{\alpha}) &\equiv \\
-x \in X \wedge \exists a(a \in I \Longrightarrow x \notin A_a)
-\end{align*}
-
-Thus, $Z = Z'$
+	Recall that $\neg\exists a(\phi(a)) \equiv \forall a(\neg \phi(a))$ and that $\neg\forall a(\psi(a)) \equiv \exists a(\neg\psi(a))$. Therefore, we only need to prove
+	\begin{enumerate}
+		\item $\neg\bigl( R(\alpha) \wedge P(x,\alpha) \bigr) \equiv \bigl( R(\alpha) \to \neg P(x,\alpha) \bigr)$.
+		\item $\neg\bigl( R(\alpha) \to P(x,\alpha) \bigr) \equiv \bigl( R(\alpha) \wedge \neg P(x,\alpha) \bigr)$.
+	\end{enumerate}
+	, which are well established logical facts:
+	\begin{enumerate}
+		\item $\neg (p \wedge q) \equiv (p \to \neg q)$.
+		\item $\neg (p \to q) \equiv (p \wedge \neg q)$.
+	\end{enumerate}
 \end{proof}
 
 \section{Cartesian products}
