@@ -23,7 +23,7 @@ If $\varnothing$ and $\varnothing'$ are both empty sets, then they are equal.
 	because in either direction the statement is vacuously true.
 \end{proof}
 
-\begin{why}{30}
+\begin{why}{30}\label{why.eq.singleton.sets}
 	Let $A = \{a\}, A' = \{a\}$, then $A = A'$.
 \end{why}
 \begin{proof}
@@ -37,7 +37,7 @@ If $\varnothing$ and $\varnothing'$ are both empty sets, then they are equal.
 	Therefore, $x \in A \leftrightarrow x \in A'$ is always true. By the definition of set equality, $A = A'$.
 \end{proof}
 
-\begin{why}{30}
+\begin{why}{30}\label{why.eq.pair.sets}
 	Let $A = \{a,b\}, A' = \{b,a\}$, then $A = A'$.
 \end{why}
 \begin{proof}
@@ -1355,138 +1355,304 @@ The proofs for the two are quite tricky. Let me divide them into parts.
 \end{proof}
 
 \section{Cartesian products}
-\declareexercise{3.5.1}
+\begin{exercise}{3.5.1}
+	\begin{enumerate}
+		\item
+		Suppose we define ordered pairs using the Kuratowski definition: $(x,y) := \{\{x\}, \{x,y\}\}$. Show that this definition satisfies the property 3.5 (in the book) that we want all ordered pairs to have:
+		\[
+			(x,y) = (x',y') \hbox{ iff } x = x' \wedge y = y'
+		\]
+		
+		\item
+		Suppose we define ordered pairs this way instead (using what's called the short definition): $(x,y) := \{x, \{x,y\}\}$. Show that this definition also satisfies the above property.
+		
+		\item Show that, regardless of the definition of ordered pairs, (as long as they satisfy the property~3.5 and can show that given any $x,y$, $(x,y)$ indeed exists as a valid object), then there exists such a set, which we denote as $X \times Y$, that
+		\[
+			p \in (X \times Y) \hbox{ iff } p = (x,y) \hbox{ for some } x \in X, y \in Y
+		\]
+	\end{enumerate}
+\end{exercise}
 \begin{proof}
-First we show that $(x,y) = \{\{x\},\{x,y\}\}$ is a good definition. 
-Let $S_1$ denote $(x_1,y_1) = \{\{x_1\},\{x_1,y_1\}\}$, $S_2$ denote 
-$(x_2,y_2) = \{\{x_2\},\{x_2,y_2\}\}$.
+	\fbox{\em 1. If.} If $x = x' \wedge y = y'$, then $\{x\} = \{x'\}$ and $\{x,y\} = \{x',y'\}$, by Why~\ref{why.eq.singleton.sets} and Why~\ref{why.eq.pair.sets}. Using Why~\ref{why.eq.pair.sets} again, we have $\{\{x\}, \{x,y\}\} = \{\{x'\}, \{x',y'\}\}$.
+	
+	\fbox{\em 1. Only If.} Suppose $\{\{x\}, \{x,y\}\} = \{\{x'\}, \{x',y'\}\}$. First, we use the fact that $(x,y) \subseteq (x',y')$, which gives $\{x\} \in \{\{x'\}, \{x',y'\}\}$ and $\{x,y\} \in \{\{x'\}, \{x',y'\}\}$.
+	
+	By the definition of pair sets, $e \in \{a,b\}$ iff $e = a$ or $e = b$. Therefore,
+	\begin{align*}
+		&\{x\} \in \{\{x'\}, \{x',y'\}\} \\
+		&\equiv \{x\} = \{x'\} \vee \{x\} = \{x',y'\} \\
+		&\equiv x = x' \vee x = x' = y' \\
+		&\to x = x'
+	\end{align*}
+	and
+	\begin{equation}\label{eq.exer.3.5.1.1}
+	\begin{aligned}
+		&\{x,y\} \in \{\{x'\}, \{x',y'\}\} \\
+		&\equiv \{x,y\} = \{x'\} \vee \{x,y\} = \{x',y'\} \\
+		&\equiv x=y=x' \vee \{x,y\} = \{x',y'\} \\
+	\end{aligned}
+	\end{equation}
+	In particular, we have $x = x'$. Because of this, we have $\{x,y\} = \{x',y\}$. Now if the second case of \eqref{eq.exer.3.5.1.1}, $\{x,y\} = \{x',y'\}$, is true, then we can conclude $\{x',y\} = \{x',y'\}$ and thus $y = y'$, as desired.
+	
+	However, if it is not the case, then $x=y=x'$ must be true instead. Therefore, we carry these two statements: $x = x'$ and $x=y=x'$ to investigate further.
 
-On one hand, if $x_1=x_2\wedge y_1=y_2$, then obviously $S_1=S_2$ for they have the same elements.
+	Now we consider the fact that $(x',y') \subseteq (x,y)$. This gives us
+	\begin{align*}
+		&\{x',y'\} \in \{\{x\}, \{x,y\}\} \\
+		&\equiv \{x',y'\} = \{x\} \vee \{x',y'\} = \{x,y\} \\
+		&\equiv x'=y'=x \vee \{x',y'\} = \{x,y\}
+	\end{align*}
+	If $x' = y' = x$, then because $x=y=x'$, we have $y = y'$, as desired. If $\{x',y'\} = \{x,y\}$, then because $x = x'$, we have $\{x,y'\} = \{x,y\}$, and hence $y = y'$, as desired.
+	
+	Therefore, whatever the case is, we always have $x = x'$ and $y = y'$.
+	
+	\fbox{\em 2. If.} If $x = x' \wedge y = y'$, then $\{x,y\} = \{x',y'\}$, by Why~\ref{why.eq.pair.sets}. Using Why~\ref{why.eq.pair.sets} again, we have $\{x, \{x,y\}\} = \{x', \{x',y'\}\}$.
+	
+	\fbox{\em 2. Only If.} Similar to what we did above, from $(x,y) \subseteq (x',y')$, we have
+	\begin{equation}\label{eq.exer.3.5.1.2}
+	\begin{aligned}
+		&x \in \{x', \{x',y'\}\} \\
+		&\equiv x = x' \vee x = \{x',y'\}
+	\end{aligned}
+	\end{equation}
+	and
+	\begin{equation}\label{eq.exer.3.5.1.3}
+	\begin{aligned}
+		&\{x,y\} \in \{x', \{x',y'\}\} \\
+		&\equiv \{x,y\} = x' \vee \{x,y\} = \{x',y'\}
+	\end{aligned}
+	\end{equation}
 
-On the other hand, if $S_1 = S_2$, then 
-\[
-\{x_1\} \in S_2 \wedge \{x_1,y_1\} \in S_2 \wedge
-\{x_2\} \in S_1 \wedge \{x_2,y_2\} \in S_1 
-\].
-We have that 
-\begin{align*}
-\{x_1\} \in S_2 &\equiv \{x_1\} = \{x_2\} \vee \{x_1\} = \{x_2,y_2\} \\
-&\equiv x_1=x_2 \vee x_1=x_2=y_2 \\
-&\Longrightarrow x_1=x_2
-\end{align*}
-\begin{align*}
-\{x_1,y_1\} \in S_2 &\equiv \{x_1,y_1\} = \{x_2\} \vee \{x_1,y_1\} = \{x_2,y_2\} \\
-&\equiv x_1=x_2=y_1 \\
-&\vee \textcolor{red}{((x_1=x_2\wedge y_1=y_2)\vee(x_1=y_2\wedge y_1=x_2))} 
-\end{align*}
-Similarly we have that
-\begin{align*}
-\{x_2,y_2\} \in S_1 
-&\equiv x_2=x_1=y_2 \\
-&\vee \textcolor{red}{((x_2=x_1\wedge y_2=y_1)\vee(x_2=y_1\wedge y_2=x_1))}
-\end{align*}
-We may notice that the red-colored text are two same statements. Thus from $\{x_1,y_1\} \in S_2$ and 
-$\{x_2,y_2\} \in S_1$ we can always conclude that $y_1=y_2$. Therefore, 
-$S_1 = S_2 \Longrightarrow x_1=x_2\wedge y_1=y_2$.
+	This is trickier, but we can still eliminate some of the four possibilities from further consideration: 
+	
+	Now we consider the other three possibilities.
+	\begin{enumerate}
+		\item Suppose the first case of \eqref{eq.exer.3.5.1.2} and the second case of \eqref{eq.exer.3.5.1.3} are true, that is $x = x'$ and $\{x,y\} = \{x',y'\}$, then we have $x = x' \wedge y = y'$, as desired.
+		
+		\item Suppose $x = x'$ and $\{x,y\} = x'$. Then, $\{x,y\} = x$. We then have $\{x,y\} \in \{x,y\}$. However, according to \exerciseref{3.3.2}, this is impossible.
+		
+		\item Suppose $x = \{x',y'\}$ and $\{x,y\} = x'$. We cannot immediately get anything useful.
+		
+		\item Suppose $x = \{x',y'\}$ and $\{x,y\} = \{x',y'\}$, the we have $x = \{x,y\}$ again, an impossible situation, the same as in (1).
+	\end{enumerate}
 
-Then we show that if $X,Y$ are two sets, then $X \times Y$ is also a set. For each element $x \in X$, 
-construct a set $S_x$, where we replace each element $y \in Y$ with $(x,y)$. Then construct the set 
-$\bigcup_{x \in X}S_x$.
+	Wow, we have eliminated three possibilities and there's only one left now: $x = \{x',y'\} \wedge \{x,y\} = x'$.
+
+	We now have to rely on the additional information: $(x',y') \subseteq (x,y)$.
+	\begin{equation}\label{eq.exer.3.5.1.4}
+		\begin{aligned}
+			&x' \in \{x, \{x,y\}\} \\
+			&\equiv x = x' \vee x' = \{x,y\}
+		\end{aligned}
+	\end{equation}
+	and
+	\begin{equation}\label{eq.exer.3.5.1.5}
+		\begin{aligned}
+			&\{x',y'\} \in \{x, \{x,y\}\} \\
+			&\equiv \{x',y'\} = x \vee \{x',y'\} = \{x,y\}
+		\end{aligned}
+	\end{equation}
+	Similarly, consider all the four situations:
+	\begin{enumerate}
+		\item Suppose the first case of \eqref{eq.exer.3.5.1.4} and the second case of \eqref{eq.exer.3.5.1.5} are true, that is $x = x'$ and $\{x',y'\} = \{x,y\}$, then we have $x = x' \wedge y'=y$, as desired.
+		
+		\item Suppose $x = x'$ and $\{x',y'\} = x$. Then, $\{x',y'\} = x'$. We then have $\{x',y'\} \in \{x',y'\}$. However, according to \exerciseref{3.3.2}, this is impossible.
+		
+		\item Suppose $x' = \{x,y\}$ and $\{x',y'\} = x$. We cannot immediately get anything useful.
+		
+		\item Suppose $x' = \{x,y\}$ and $\{x',y'\} = \{x,y\}$, the we have $x' = \{x',y\}$ again, an impossible situation, the same as in (1).
+	\end{enumerate}
+
+	Hence, we have $x = \{x',y'\} \wedge \{x,y\} = x'$ and $x' = \{x,y\} \wedge \{x',y'\} = x$ together as the only situation to consider. We see that two statements are redundant, and we eventually can still only have 
+	\[
+		x = \{x',y'\} \wedge \{x,y\} = x'
+	\]
+	Alright, we substitution $\{x,y\} = x'$ in the set $\{x',y'\}$ to get
+	\[
+		x = \{\{x,y\},y'\}
+	\]
+	Now consider the set $\{x,y\}$ and $\{\{x,y\},y'\}$. According to \exerciseref{3.3.2}, either $\{x,y\} \notin \{\{x,y\},y'\}$ or $\{\{x,y\},y'\} \notin \{x,y\}$. The former case is already false. But for the latter case, we have $\{\{x,y\},y'\} = x \in \{x,y\}$. Hence, this situation is impossible, again.
+
+	Eventually, we are able to verify that only one situation is possible. And in that situation, we have $x = x'$ and $y = y'$, as desired.
+	
+	\fbox{\em 3.} Now we assume that for all $x,y$, the object $(x,y)$ exists. In addition, we assume that $(x,y) = (x',y')$ iff $x = x' \wedge y = y'$. We want to prove that, for any two sets $X,Y$, there exists such a set $X \times Y$ that contains exactly all such pairs $(x,y)$ that $x \in X, y \in Y$.
+	
+	That is,
+	\begin{enumerate}
+		\item For all $x$ and $y$, $x \in X \wedge y \in Y \to (x,y) \in X \times Y$.
+		\item For all $p \in X \times Y$, there exists such $x \in X, y \in Y$ that $p = (x,y)$.
+	\end{enumerate}
+
+	If either $X$ or $Y$ is empty, then define $X \times Y := \varnothing$. Thus, the two statements are all vacuously true.
+	
+	Suppose now that $X$ and $Y$ are both non-empty. Let $x$ be any element in $X$. Define the set $Y_x$ as each element $y \in Y$ being replaced with $(x,y)$. We can do this using the axiom of replacement, because the statement ``$(x,y) = (x',y')$ iff $x = x' \wedge y = y'$'' ensures that the object $(x,y)$ is unique.
+	
+	Now, we replace each $x \in X$ with $Y_x$. Denote the result as $\Omega$. We finally define $X\times Y := \bigcup \Omega$. 
+	
+	We verify that $\bigcup \Omega$ satisfies the two statements.
+	\begin{enumerate}
+		\item If $x \in X \wedge y \in Y$, then, by the process we build $\Omega$ from, $(x,y) \in Y_x \in \Omega$. Therefore, by the axiom of union, $(x,y) \in \bigcup \Omega$.
+		\item If $p \in \bigcup \Omega$, then by the axiom of union, there exists a $Y_x \in \Omega$ such that $p \in Y_x$, where $Y_x$ is replaced from some $x \in X$. By the definition of $Y_x$, we see that there exists some $y \in Y$ such that $p = (x,y)$, as desired.
+	\end{enumerate}
 \end{proof}
 
-\declareexercise{3.5.2}
-\begin{proof}
-Since $x,y$ are two functions, they are equal means that $\forall 1\leq i \leq n$, $x(i) = y(i)$. That 
-is, $x_i = y_i, 1\leq i \leq n$.
-
-Now we show that $\displaystyle \prod_{1\leq i\leq n}X_i$ is a set. Let set $F$ be the set that contains 
-all partial functions from $N = \{i \in \mathbb{N}:1\leq i\leq n\}$ to 
-$\displaystyle X = \bigcup_{1\leq i\leq n}X_i$ (Exercise 3.4.7). Use the axiom of specification, select 
-such elements $f$ from $F$ that:
-\begin{enumerate}
-\item the element is surjective, and
-\item its domain is $N$, and 
-\item $f(i) \in X_i$
-\end{enumerate}, 
-and use all of them to construct a set $Z$, which is the set we want.
+\begin{exercise}{3.5.2}
+	Define an ordered $n$-tuple to be a surjective function $x : \{i \in \setn : 1 \le i \le n\} \to X$. We write the $i$\textsuperscript{th} item in the tuple as $x_i := x(i)$. Denote the function also as $(x_i)_{1 \le i \le n}$. 
+	
+	Show that 
+	\begin{enumerate}
+		\item $(x_i)_{1 \le i \le n} = (y_i)_{1 \le i \le n}$ iff $x_i = y_i$ for all $1 \le i \le n$.
+		\item If $(X_i)_{1 \le i \le n}$ is an ordered $n$-tuple of sets, then the cartesian product defined in Definition 3.5.6 exists as a set.
+	\end{enumerate}
+\end{exercise}
+\begin{proof}\leavevmode
+	\begin{enumerate}
+		\item We see that $(x_i)_{1 \le i \le n}$ and $(y_i)_{1 \le i \le n}$ have the same domain. Now we show that they have the same codomain and values iff $x_i = y_i$ for all $1 \le i \le n$.
+		
+		\fbox{\em If.}
+		First, because such a $n$-tuple function is surjective, the codomain of any such function is the function's image of the domain. For $x$ and $y$, they are $\{x_1, \dots, x_n\}$ and $\{y_1, \dots, y_n\}$, respectively. Since $x_i = y_i$ for all $1 \le i \le n$, they are equal.
+		
+		Their values are literally equal, as $x_i = y_i$ for all $1 \le i \le n$.
+		
+		\fbox{\em Only If.}
+		If $x$ and $y$ have the same codomain and values, then, in particular, they have the same values. By the definition of function values, we have $x_i = y_i$ for all $1 \le i \le n$, as desired.
+		
+		\item If $(X_i)_{1 \le i \le n}$ exists as an ordered $n$-tuple of sets, then it means, by definition, then function
+		\[
+			X : \{i \in \setn : 1 \le i \le n\} \to \{X_1, \dots, X_n\}
+		\]
+		exists. In particular, the set $\{X_1, \dots, X_n\}$ exists. Denote it as $\Omega$.
+		
+		Now, by the axiom of union, we have $\bigcup \Omega$. By \exerciseref{3.4.7}, there exists a set $F$ that contains all partial functions from $\{i \in \setn : 1 \le i \le n\}$ to $\bigcup \Omega$.
+		
+		Let $Q(f)$ be a property pertaining to any partial function from $\{i \in \setn : 1 \le i \le n\}$ to $\bigcup \Omega$. Define $Q(f)$ to be true iff
+		\begin{enumerate}
+			\item $f$'s domain is $\{i \in \setn : 1 \le i \le n\}$, and
+			\item $f(i) \in X_i$ for all $i$ in its domain. \label{exer.3.5.2.q.of.f.2}
+		\end{enumerate}
+	
+		Using the axiom of specification, select all $f \in F$ that satisfies $Q(f)$. We show that the result set, denoted as $P$, satisfies Definition 3.5.6.
+		
+		Let $f$ be any element in $P$. Then, $Q(f)$ is true. Then, its domain is $\{i \in \setn : 1 \le i \le n\}$, so we can denote $f = (x_i)_{1 \le i \le n}$. Because of condition \eqref{exer.3.5.2.q.of.f.2}, we have $x_i \in X_i$ for all $1 \le i \le n$. Therefore, each element of $P$ is in the set specified by Definition~3.5.6.
+		
+		Let $(x_i)_{1 \le i \le n}$ be any object that is in the set specified by Definition~3.5.6. Then, $x_i$ is a partial function from $\{1 \le i \le n\}$ to $\bigcup \Omega$. And, by the definition, it satisfies $Q$. Hence, it is in the set $P$.
+		
+		We have shown that $P$ is the set we want.
+	\end{enumerate}
 \end{proof}
 
-\declareexercise{3.5.3}
-\begin{proof}
-The definition is entirely based on the equality of objects (e.g. $x = x'$). The proof is immediately 
-done since this equality is reflective ($x = x$), symmetric ($x = x' \equiv x' = x$), and transitive 
-($x_0 = x_1 \wedge x_1 = x_2 \Longrightarrow x_0 = x_2$).
+\begin{exercise}{3.5.3}
+	Show that reflexivity, symmetry, and transitivity holds for the equality of
+	\begin{enumerate}
+		\item ordered pairs
+		\item ordered $n$-tuples.
+	\end{enumerate}
+\end{exercise}
+\begin{proof}\leavevmode
+	\begin{enumerate}
+		\item By definition, $(x,y) = (x',y')$ iff $x = x' \wedge y = y'$.
+		
+		\fbox{\em Reflexivity} This holds because $x = x \wedge y = y$.
+		
+		\fbox{\em Symmetry} This holds because $x = x' \leftrightarrow x' = x$ for any $x,x'$ (so it includes $y,y'$).
+		
+		\fbox{\em Transitivity} This holds because $x = x_1 \wedge x_1 = x_2$ gives $x = x_2$, for all $x,x_1,x_2$.
+		
+		\item By definition, an ordered $n$-tuple is a function. We have already verified the three properties of function equality in \exerciseref{3.3.1}.
+	\end{enumerate}
 \end{proof}
 
-\declareexercise{3.5.4}
-\begin{proof}
-(1)
-\begin{align*}
-(x,y) \in A \times (B \cup C) &\equiv x \in A \wedge y \in (B \cup C) \\
-&\equiv x \in A \wedge (y \in B \vee y \in C) \\
-&\equiv (x \in A \wedge y \in B) \vee (x \in A \wedge y \in C) \\
-&\equiv ((x,y) \in A \times B) \vee ((x,y) \in A \times C) \\
-&\equiv (x,y) \in (A \times B) \cup (A \times C)
-\end{align*}
-
-(2)
-\begin{align*}
-(x,y) \in A \times (B \cap C) &\equiv x \in A \wedge y \in (B \cap C) \\
-&\equiv x \in A \wedge (y \in B \wedge y \in C) \\
-&\equiv (x \in A \wedge y \in B) \wedge (x \in A \wedge y \in C) \\
-&\equiv ((x,y) \in A \times B) \wedge ((x,y) \in A \times C) \\
-&\equiv (x,y) \in (A \times B) \cap (A \times C)
-\end{align*}
-
-(3)
-\begin{align*}
-(x,y) \in A \times (B \setminus C) &\equiv x \in A \wedge y \in (B \setminus C) \\
-&\equiv x \in A \wedge (y \in B \wedge \neg (y \in C)) \\
-&\equiv (x \in A \wedge y \in B) \wedge \neg (x \in A \wedge y \in C) \\
-\tag{The statement $x \in A$ implies $\neg (x \in A \wedge y \in C) 
-\Longrightarrow \neg (y \in C)$}\\
-&\equiv ((x,y) \in A \times B) \wedge \neg((x,y) \in A \times C) \\
-&\equiv (x,y) \in (A \times B) \setminus (A \times C)
-\end{align*}
+\begin{exercise}{3.5.4}
+	Show that the Cartesian product is distributive for operations $\cup,\cap$, and $\setminus$. That is, for any sets $A,B,C$, we have
+	\begin{enumerate}
+		\item $A \times (B \cup C) = (A \times B) \cup (A \times C)$.
+		\item $A \times (B \cap C) = (A \times B) \cap(A \times C)$.
+		\item $A \times (B \setminus C) = (A \times B) \setminus (A \times C)$.
+	\end{enumerate}
+\end{exercise}
+\begin{proof}\leavevmode
+	Note that we will use De Morgan's rules on logical operations $\vee, \wedge$, and $\neg$.
+	
+	For all objects $x,y$, we have
+	\begin{enumerate}
+		\item 
+		\begin{align*}
+			(x,y) \in A \times (B \cup C) 
+			&\equiv x \in A \wedge y \in (B \cup C) \\
+			&\equiv x \in A \wedge (y \in B \vee y \in C) \\
+			&\equiv (x \in A \wedge y \in B) \vee (x \in A \wedge y \in C) \\
+			&\equiv ((x,y) \in A \times B) \vee ((x,y) \in A \times C) \\
+			&\equiv (x,y) \in (A \times B) \cup (A \times C)
+		\end{align*}
+	
+		\item 
+		\begin{align*}
+			(x,y) \in A \times (B \cap C) 
+			&\equiv x \in A \wedge y \in (B \cap C) \\
+			&\equiv x \in A \wedge (y \in B \wedge y \in C) \\
+			&\equiv (x \in A \wedge y \in B) \wedge (x \in A \wedge y \in C) \\
+			&\equiv ((x,y) \in A \times B) \wedge ((x,y) \in A \times C) \\
+			&\equiv (x,y) \in (A \times B) \cap (A \times C)
+		\end{align*}
+	
+		\item
+		\begin{align}
+			(x,y) \in A \times (B \setminus C) 
+			&\equiv x \in A \wedge y \in (B \setminus C) \nonumber\\
+			&\equiv x \in A \wedge (y \in B \wedge \neg (y \in C)) \nonumber\\
+			&\equiv x \in A \wedge y \in B \wedge x \in A \wedge \neg (y \in C) \nonumber\\
+			&\equiv (x \in A \wedge y \in B) \wedge (x \in A \wedge \neg y \in C) \label{eq.exer.3.5.4.1}
+		\end{align}
+		We would want $(x \in A \wedge \neg y \in C)$ to become $\neg (x \in A \wedge y \in C)$, but we could not do this alone, without considering the statement we have, \eqref{eq.exer.3.5.4.1}, as a whole. For it, we have:
+		\begin{enumerate}
+			\item If $x \in A$, then the statement \eqref{eq.exer.3.5.4.1} is true iff $y \in B \wedge \neg y \in C$.
+			\item If $x \notin A$, then the statement is false.
+		\end{enumerate}
+		
+		Now consider the statement we want:
+		\begin{equation}
+			(x \in A \wedge y \in B) \wedge \neg(x \in A \wedge y \in C) \label{eq.exer.3.5.4.2}
+		\end{equation}
+		For it, we have
+		\begin{enumerate}
+			\item If $x \in A$, then the statement \eqref{eq.exer.3.5.4.2} is true iff $y \in B \wedge \neg y \in C$.
+			\item If $x \notin A$, then the statement is false.
+		\end{enumerate}
+	
+		Therefore, we have demonstrated $\eqref{eq.exer.3.5.4.1} \equiv \eqref{eq.exer.3.5.4.2}$. We expand it further:
+		\begin{align*}
+			&(x \in A \wedge y \in B) \wedge \neg(x \in A \wedge y \in C) \\
+			&\equiv (x,y) \in A \times B \wedge \neg\bigl((x,y) \in A \times C\bigr) \\
+			&\equiv (x,y) \in (A \times B) \setminus (A \times C)
+		\end{align*}
+		, as desired.
+	\end{enumerate}
 \end{proof}
 
-\declareexercise{3.5.5}
-\begin{proof}
-(1)
-\begin{align*}
-(x,y) \in (A \times B) \cap (C \times D) 
-&\equiv (x,y) \in (A \times B) \wedge (x,y) \in (C \times D) \\
-&\equiv (x \in A \wedge y \in B) \wedge (x \in C \wedge y \in D) \\
-&\equiv (x \in A \wedge x \in C) \wedge (y \in B \wedge y \in D) \\
-&\equiv x \in A \cap C \wedge y \in B \cap D \\
-&\equiv (x,y) \in (A \cap C) \times (B \cap D)
-\end{align*}
-
-(2) It is not true since 
-\begin{align*}
-(x,y) \in (A \times B) \cup (C \times D) 
-&\equiv (x,y) \in (A \times B) \vee (x,y) \in (C \times D) \\
-&\equiv (x \in A \wedge y \in B) \vee (x \in C \wedge y \in D) \\
-&\nLeftrightarrow (x \in A \vee x \in C) \wedge (y \in B \vee y \in D)
-\end{align*}
-Generally 
-\[
-(x \in A \wedge y \in B) \vee (x \in C \wedge y \in D) \Longrightarrow 
-(x \in A \vee x \in C) \wedge (y \in B \vee y \in D)
-\], 
-but
-\[
-(x \in A \vee x \in C) \wedge (y \in B \vee y \in D) \nRightarrow
-(x \in A \wedge y \in B) \vee (x \in C \wedge y \in D)
-\].
-
-(3) It is not true since
-\begin{align*}
-(x,y) \in (A \times B) \setminus (C \times D) 
-&\equiv (x,y) \in (A \times B) \wedge (x,y) \notin (C \times D) \\
-&\equiv (x \in A \wedge y \in B) \wedge (x \notin C \vee y \notin D) \\
-&\nLeftrightarrow (x \in A \wedge x \notin C) \wedge (y \in B \wedge y \notin D)
-\end{align*}
+\begin{exercise}{3.5.5}
+	Let $A,B,C,D$ be sets.
+	\begin{enumerate}
+		\item Show that $(A \times B) \cap (C \times D) = (A \cap C) \times (B \cap D)$		
+		\item Is it also true that $(A \times B) \cup (C \times D) = (A \cup C) \times (B \cup D)$?
+		\item Is it also true that $(A \times B) \setminus (C \times D) = (A \setminus C) \times (B \setminus D)$?
+	\end{enumerate}
+\end{exercise}
+\begin{proof}\leavevmode
+	\begin{enumerate}
+		\item 
+		\begin{align*}
+			(x,y) \in (A \times B) \cap (C \times D) 
+			&\equiv (x,y) \in (A \times B) \wedge (x,y) \in (C \times D) \\
+			&\equiv (x \in A \wedge y \in B) \wedge (x \in C \wedge y \in D) \\
+			&\equiv (x \in A \wedge x \in C) \wedge (y \in B \wedge y \in D) \\
+			&\equiv x \in A \cap C \wedge y \in B \cap D \\
+			&\equiv (x,y) \in (A \cap C) \times (B \cap D)
+		\end{align*}
+	
+		\item No. $(x,y) \in (A \cup C) \times (B \cup D)$ includes the case when $x \in C \wedge y \in B$. If $A \cap C = \varnothing$ and $B \cap D = \varnothing$, then $(x,y)$ is in neither $A \times B$ and $C \times D$.
+		
+		\item No. For $(x,y)$ to be in $(A \times B) \setminus (C \times D)$, we have $(x,y) \notin C \times D$. That is, $x \notin C \vee y \notin D$. However, for $(x,y)$ to be in $(A \setminus C) \times (B \setminus D)$, we must have $x \notin C \wedge y \notin D$.
+	\end{enumerate}
 \end{proof}
 
 \declareexercise{3.5.6}
