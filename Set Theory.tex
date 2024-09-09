@@ -1342,7 +1342,7 @@ The proofs for the two are quite tricky. Let me divide them into parts.
 		\item $\neg \forall\alpha\bigl(R(\alpha) \to P(x,\alpha)\bigr) \equiv \exists\alpha\Bigl(R(\alpha) \wedge \bigl(\neg P(x,\alpha)\bigr)\Bigr)$
 	\end{enumerate}
 
-	Recall that $\neg\exists a(\phi(a)) \equiv \forall a(\neg \phi(a))$ and that $\neg\forall a(\psi(a)) \equiv \exists a(\neg\psi(a))$. Therefore, we only need to prove
+	Recall that $\neg\exists a(\phi(a)) \equiv \forall a(\neg \phi(a))$ and that $\neg\forall a(\psi(a)) \equiv \exists a(\neg\psi(a))$. Th\-erefore, we only need to prove
 	\begin{enumerate}
 		\item $\neg\bigl( R(\alpha) \wedge P(x,\alpha) \bigr) \equiv \bigl( R(\alpha) \to \neg P(x,\alpha) \bigr)$.
 		\item $\neg\bigl( R(\alpha) \to P(x,\alpha) \bigr) \equiv \bigl( R(\alpha) \wedge \neg P(x,\alpha) \bigr)$.
@@ -1655,172 +1655,312 @@ The proofs for the two are quite tricky. Let me divide them into parts.
 	\end{enumerate}
 \end{proof}
 
-\declareexercise{3.5.6}
-\begin{proof}
-(1) On one hand, if $A \subseteq C$ and $B \subseteq D$, then 
-\begin{align*}
-(x,y) \in A \times B &\equiv x \in A \wedge y \in B \\
-&\Longrightarrow x \in C \wedge y \in D \\
-&\Longrightarrow (x,y) \in C \times D
-\end{align*}, 
-which means $A \times B \subseteq C \times D$.
+\begin{exercise}{3.5.6}
+	Let $A,B,C,D$ be non-empty sets. Show that
+	\begin{enumerate}
+		\item $A \times C \subseteq B \times D$ iff $A \subseteq B$ and $C \subseteq D$.
+		\item $A \times C = B \times D$ iff $A = B$ and $C = D$.
+	\end{enumerate}
 
-On the other hand, if $A \times B \subseteq C \times D$, but we suppose that 
+	What if some of them are empty?
+\end{exercise}
+\begin{proof}\leavevmode
+	\begin{enumerate}
+		\item 
+		\fbox{\em If.} Suppose $A \subseteq C$ and $B \subseteq D$, then 
+		\begin{align*}
+			(x,y) \in A \times B 
+			&\to x \in A \wedge y \in B \\
+			&\to x \in C \wedge y \in D \\
+			&\to (x,y) \in C \times D
+		\end{align*}, 
+		which means $A \times B \subseteq C \times D$.
+		
+		\fbox{\em Only If.}
+		Suppose $A \times B \subseteq C \times D$. Suppose for the sake of contradiction that $A \subseteq C \wedge B \subseteq D$ is not true. This means that either $A \subsetneq C$ or $B \subsetneq D$.
+		
+		We only consider when $A \nsubseteq C$, the other situation is handled similarly. Then, $\exists x(x \in A \wedge x \notin C)$. Because $B$ is non-empty, we can choose some $y \in B$. 
+		
+		Therefore, we have the object $(x,y)$. By how $x$ and $y$ are chosen, we have $(x,y) \in A \times B$. Because our premise, we have $(x,y) \in C \times D$. However, by the definition of Cartesian products, this means $x \in C$, a contradiction.
+	
+		\fbox{\em What If some are not empty?} Then the statement does not hold. For example, let $B = C = \varnothing$, and let $A,D$ be non-empty. Then we have $A \times C = \varnothing \subseteq B \times D = \varnothing$, but obviously $A \subsetneq B$.
+		
+		\item 
+		\fbox{\em If.} Suppose $A = C$ and $B = D$, then 
+		\begin{align*}
+			(x,y) \in A \times B 
+			&\equiv x \in A \wedge y \in B \\
+			&\equiv x \in C \wedge y \in D \\
+			&\equiv (x,y) \in C \times D
+		\end{align*}, 
+		as desired.
+		
+		\fbox{\em Only If.}
+		Suppose $A \times B = C \times D$. Suppose for the sake of contradiction that $A = C \wedge B = D$ is not true. This means that either $A \ne C$ or $B \ne D$.
+		
+		We only consider when $A \ne C$, the other situation is handled similarly. Then, there exists such a $x$ that
+		\begin{enumerate}
+			\item $x \in A \wedge x \notin C$, or \label{exer.3.5.6.case.1}
+			\item $x \in C \wedge x \notin A$. \label{exer.3.5.6.case.2}
+		\end{enumerate}
+		For case \eqref{exer.3.5.6.case.1}, we choose $y \in B$. For case \eqref{exer.3.5.6.case.2}, we choose $y \in D$. These can all be done as non of the sets is empty.
+	
+		Therefore, we have the object $(x,y)$. By how $x$ and $y$ are chosen, we have $(x,y) \in A \times B$ for case \eqref{exer.3.5.6.case.1}, $(x,y) \in C \times D$ for case \eqref{exer.3.5.6.case.2}. 
+		
+		Because $A \times B = C \times D$, in either case we have $(x,y) \in A \times B = C \times D$. However, by the definition of Cartesian products, this means $x$ is in both $A$ and $C$, a contradiction.
+		
+		\fbox{\em What If some are not empty?} Then the statement does not hold. For example, let $B = C = \varnothing$, and let $A,D$ be non-empty. Then we have $A \times C = \varnothing = B \times D = \varnothing$, but obviously $A \ne B$.
+\end{enumerate}
+\end{proof}
+
+\begin{exercise}{3.5.7}
+	Let $X,Y$ be sets. Define $\pi_{X\times Y \to X}: (x,y) \mapsto x$ and $\pi_{X\times Y \to Y}: (x,y) \mapsto y$.
+	
+	Show that, for all set $Z$ and functions $f: Z \to X$, $g: Z \to Y$, there exists such a unique function $h: Z \to X \times Y$, that $\pi_{X\times Y \to X} \circ h = f$ and $\pi_{X\times Y \to Y} \circ h = y$.
+\end{exercise}
+\begin{proof}
+	\fbox{\em Existence.} For all $t \in Z$, define $h(t) := (f(t),y(t))$. Because $f(t) \in X, g(t) \in Y$, we have $h(t) \in X \times Y$.
+	
+	Therefore, $h$ is well defined. We have
+	\[
+	(\pi_{X\times Y \to X} \circ h)(t) = \pi_{X\times Y \to X}((f(t),y(t))) = f(t)
+	\]
+	and
+	\[
+	(\pi_{X\times Y \to Y} \circ h)(t) = \pi_{X\times Y \to Y}((f(t),y(t))) = y(t)
+	\]
+	, as desired.
+
+	\fbox{\em Uniqueness.} We know that $h: t \mapsto (f(t),y(t))$ is such a $h$. Let $h'$ be another function that satisfies the requirements. Because the codomain of $h'$ is $X \to Y$, we can write $h(t) = (x,y)$ for some $x \in X, y \in Y$.
+	
+	Then,
+	\[
+		(\pi_{X\times Y \to X} \circ h')(t) = f(t) \to x = f(t)
+	\]
+	and
+	\[
+		(\pi_{X\times Y \to Y} \circ h')(t) = g(t) \to y = g(t)
+	\]
+	
+	By the property of ordered pair, since the two elements are all equal, we must have $(x,y) = (f(t),g(t))$. Hence, $h(t) = h'(t)$ for all $t \in Z$, as desired.
+\end{proof}
+
+\begin{exercise}{3.5.8}
+	Let $X_1, \dots, X_n$ be sets. Show that the Cartesian product defined in Definition 3.5.6, $\prod_{i=1}^{n}X_i$ is empty iff for some $i$, $X_i$ is empty.
+\end{exercise}
+\begin{proof}
+\fbox{\em If.} Suppose for some $i, X_i = \varnothing$, then for every ordered $n$-tuple $(x_i)_{1 \le i \le n}$, the statement 
 \[
-\neg(A \subseteq C \wedge B \subseteq D)
-\]. 
-We only consider that $A \nsubseteq C$, the other situations are similar. Then 
-$\exists x(x \in A \wedge x \notin C)$. Let $p = (x,y)$, where $y \in B$, then $p \in A \times B$. 
-But $x \notin C$, so $p \notin C \times D$, a contradiction. Therefore, 
-\[
-A \times B \subseteq C \times D \Longrightarrow A \subseteq C \wedge B \subseteq D
+x_i \in X_i \hbox{ for all } 1 \le i \le n
 \]
+is always false. This by definition means that all elements does not in $\prod_{i=1}^{n}X_i$, and hence it is empty.
 
-(2) On one hand, if $A = C \wedge B = D$, then
-\begin{align*}
-(x,y) \in A \times B &\equiv x \in A \wedge y \in B \\
-&\equiv x \in C \wedge y \in D \\
-&\equiv (x,y) \in C \times D
-\end{align*}.
+\fbox{\em Only If.} Suppose $\prod_{i=1}^{n}X_i = \varnothing$. Suppose for the sake of contradiction that $X_i \ne \varnothing$ for all $1 \le i \le n$. 
 
-On the other hand, if $A \times B = C \times D$, but we suppose that $\neg(A = C \wedge B = D)$. 
-We only consider that $A \neq C$, the other situations are similar. Then we only consider 
-$\exists x(x \in A \wedge x \notin C)$, for the other situations are similar. 
-
-(3) It is easy to prove that $X \times \varnothing = \varnothing$ and 
-$\varnothing \times X = \varnothing$. Let $A = \varnothing$, we can see that even if $B \nsubseteq D$, 
-$A \times B \subseteq C \times D$. 
-
-Let $A = D = \varnothing$, then even if $A \neq C$, $A \times B = C \times D$.
+Then, according to the lemma of finite choice (Lemma~3.5.11), there exists a $n$-tuple $(x_i)_{1 \le i \le n}$, such that $x_i \in X_i$. By definition, this $n$-tuple should be an element of $\prod_{i=1}^{n}X_i = \varnothing$, a contradiction.
 \end{proof}
 
-\declareexercise{3.5.7}
+\begin{exercise}{3.5.9}
+	Let $I,J$ be two sets. For all $\alpha \in I$, let there be a (unique) set $A_\alpha$. For all $\beta \in J$, let there be a (unique) set $B_\beta$. Then,
+	\[
+		(\bigcup_{\alpha \in I}A_\alpha) \cap (\bigcup_{\beta \in J}B_\beta) = 
+		\bigcup_{(\alpha,\beta) \in I \times J}(A_\alpha \cap B_\beta)
+	\]
+	
+	What happens if we interchange the $\cup$ and $\cap$ symbols?
+\end{exercise}
 \begin{proof}
-Existence: Let $h(t):=(f(t),y(t))$. It is easy to verify that $h(t) \in X \times Y$, and that given a 
-$t \in Z$, $h(t)$ is unique. Therefore, $h$ is a function. And it is obvious that 
-$\pi_{X\times Y \rightarrow X} \circ h = f$ and that $\pi_{X\times Y \rightarrow Y} \circ h = g$.
-
-Uniqueness: $\pi_{X\times Y \rightarrow X} \circ h = f$ and $\pi_{X\times Y \rightarrow Y} \circ h = g$ 
-imply that if there is another function $h'$ that satisfies the requirements, then $h'(t) = h(t)$. So $h$ 
-is unique. 
+	Let $x$ be any object. We have
+	\begin{align*}
+		&x \in (\bigcup_{\alpha \in I}A_\alpha) \cap (\bigcup_{\beta \in J}B_\beta) \\
+		&\equiv x \in \bigcup_{\alpha \in I}A_\alpha \wedge x \in \bigcup_{\beta \in J}B_\beta \\
+		&\equiv \exists \alpha(\alpha \in I \wedge x \in A_\alpha) \wedge \exists \beta(\beta \in J \wedge x \in B_\beta) \\
+		&\equiv \exists\alpha\exists\beta(\alpha \in I \wedge \beta \in J \wedge x \in A_\alpha \wedge x \in B_\beta) \\
+		&\equiv \exists(\alpha,\beta)\,\bigl((\alpha,\beta) \in I \times J \wedge x \in A_\alpha \wedge  x \in B_\beta\bigr) \\
+		&\equiv x \in \bigcup_{(\alpha,\beta) \in I \times J}(A_\alpha \cap B_\beta)
+	\end{align*}
+	, as desired. \hfill \qedsymbol
+	
+	If we interchange $\cap$ and $\cup$, then, we show that the statement still holds.
+	
+	\begin{enumerate}
+		\item
+		Suppose \[x \in (\bigcap_{\alpha \in I}A_\alpha) \cup (\bigcap_{\beta \in J}B_\beta)\].
+		
+		We see that $x$ has to be in the intersection of all $A_\alpha$ or the intersection of all $B_\beta$. We assume the first case, and the second case can be handled similarly. Then, for all $\alpha \in I$, we have $x \in A_\alpha$. So $x \in A_\alpha \cup B_\beta$ is also true. If $(\alpha, \beta) \in I \times J$, then we must have $\alpha \in I$, so we have what we want.
+		
+		\item Suppose \[x \in \bigcap_{(\alpha,\beta) \in I \times J}(A_\alpha \cup B_\beta)\].
+		
+		Suppose for the sake of contradiction that 
+		\[x \notin (\bigcap_{\alpha \in I}A_\alpha) \cup (\bigcap_{\beta \in J}B_\beta)\]
+		is not true.
+		
+		Then,
+		\[
+			\exists x(x \notin \bigcap_{\alpha \in I}A_\alpha) \wedge x \notin (\bigcap_{\beta \in J}B_\beta)
+		\]
+		That means, for some $\alpha \in I$ and some $\beta \in J$, we have $x \notin A_\alpha$ and $x \notin B_\beta$. Hence, we know that $x \notin A_\alpha \cup B_\beta$ for this $\alpha$ and $\beta$, a contradiction.
+	\end{enumerate}
 \end{proof}
 
-\declareexercise{3.5.8}
-\begin{proof}
-On one hand, if for some $i, X_i = \varnothing$, then 
-\[
-\forall (x_i)_{1\leq i \leq n}(\bigwedge^{n}_{i =1}x_i \in X_i \equiv (x_i)_{1\leq i \leq n} \in 
-\varnothing)
-\], 
-which means that $\varnothing = \prod_{i=1}^{n}X_i$.
-
-On the other hand, if $\prod_{i=1}^{n}X_i = \varnothing$ but we suppose that $X_i \neq \varnothing$. Then 
-for each $i$, $\exists x_i \in X_i$. We thus have a tuple $(x_i)_{1\leq i \leq n}$, which should be an 
-element of $\prod_{i=1}^{n}X_i$. Therefore we have a contradiction.
+\begin{exercise}{3.5.10}
+	Let $f: X \to Y$ be a function. Define the \emph{graph} of $f$ to be the set (using the axiom of replacement on the set $X$)
+	\[
+		\{x \in X : \bigl(x,f(x)\bigr)\}
+	\]
+	, which, since $f(x) \in Y$, is a subset of $X \times Y$.
+	
+	Show that
+	\begin{enumerate}
+		\item Two functions $f,\tilde{f} : X \to Y$ are equal iff they have the same graph.
+		\item Conversely, let $G$ be any subset of $X \times Y$. If $G$ satisfies this property that for all $x \in X$, the set $\{y \in Y: (x,y) \in G\}$ (constructed using the axiom of replacement on $Y$ and the axiom of specification on the result) contains exactly one element, then there exists a unique function $f: X \to Y$ whose graph is equal to $G$.
+		\item We can define a function to be an ordered triple, $(X,Y,G)$, where $X,Y$ are sets, and $G$ is a subset of $X \times Y$ that satisfies the above property. If we define $f$ this way given this triple: $X$ is its domain, $Y$ is its codomain, and for all $x \in X$, define $f(x) := y$ where $(x,y) \in G$.
+		
+		Then, the definition is compatible with Definition~3.3.1, and hence is compatible with Definition~3.3.8.
+	\end{enumerate}
+\end{exercise}
+\begin{proof}\leavevmode
+	\begin{enumerate}
+		\item 
+		Denote the graph of $f$ as $G_f$, and that of $\tilde{f}$ as $G_{\tilde{f}}$.
+		
+		\fbox{\em If.} Suppose $f = \tilde{f}$. Then, for all $x \in X$, $f(x) = \tilde{f}(x)$. Hence, $(x,f(x)) = (x,\tilde{f}(x))$. Therefore, each $(x,f(x))$ in $G_f$ equals to some $(x,\tilde{f}(x))$ in $G_{\tilde{f}}$, and vice versa. Thus, $G_f = G_{\tilde{f}}$.
+		
+		\fbox{\em Only If.} Suppose $G_f = G_{\tilde{f}}$. Then for all element $(x,f(x)) \in G_f$, we see that $(x,f(x)) \in G_{\tilde{f}}$. By the definition of $G_{\tilde{f}}$, we see that $(x,f(x))$ has to equal to $(x,\tilde{f}(x))$. By the property of ordered pairs, we must have $f(x) = \tilde{f}(x)$.
+		
+		Because this works for all elements in $G_f$, we see that $x$ can take any value in $X$. Therefore, $f(x) = \tilde{f}(x)$ for all $x \in X$, and the two functions are equal.
+		
+		\item For all $x \in X$, define $f(x) := y$ such that $(x,y) \in G$. By how $G$ is defined, we see that $f$ satisfies the vertical line test used in Definition~3.3.1. Because for every $x \in X$, $f$ is defined to be some value $y \in Y$, we see that $f: X \to Y$ is a valid function. By how we constructed $f$, we see that $G$ is indeed its graph.
+		
+		Now we prove that $f$ is unique. Suppose another $f'$ also has $G$ as its graph. Then, for all $x \in X$, we must have $f'(x) = y$. Because $y$ is unique, we see that $f'(x) = y = f(x)$. Hence, $f$ and $f'$ have the same values, and because they also have the same domain and codomain, they are thus equal.
+		
+		\item Here $P(x,y)$ is true iff $(x,y) \in G$. By the definition of $G$, $P(x,y)$ satisfies the vertical line test. Because $G$ is a subset of $X \times Y$, we have $\forall x(x \in X \to y \in Y)$. Then, $X$ and $Y$ are indeed valid domain and codomain. (Note that passing the vertical line test implies that $f$ is defined for all $x \in X$.) Hence, the definition is compatible with all the conditions in Definition~3.3.1.
+	\end{enumerate}
 \end{proof}
 
-\declareexercise{3.5.9}
+\begin{exercise}{3.5.11}
+	Treating Lemma~3.4.10 as an axiom, prove the power set axiom.
+	
+	This is already done in \exerciseref{3.4.6} (ii). However, this time, we have some better tools. Given any two objects $x,y$, we now know the existence of ordered pair $(x,y)$, thanks to \exerciseref{3.5.1} (i) and (ii). Also, given any two sets $X,Y$, we now know the existence of $X \times Y$, thanks to \exerciseref{3.5.1} (iii).
+	
+	With these new tools, we can drastically simplify the proof using Prof.~Tao's hint, where it once was quite tricky. However, do note that it did took quite some efforts to create these tools, too.
+\end{exercise}
 \begin{proof}
-On one hand, let $x \in (\bigcup_{\alpha \in I}A_{\alpha})\cap(\bigcup_{\beta \in J}B_{\beta})$. Then 
-\[
-\exists a(a \in I \wedge x \in A_a) \wedge \exists b(b \in J \wedge x \in B_b)
-\]
-It is obvious that $x \in A_a \cap B_b$ and that $(a,b) \in I \times J$. Therefore 
-\[
-x \in \bigcup_{(\alpha,\beta) \in I \times J}(A_\alpha \cap B_\beta)
-\].
-
-On the other hand, let $x \in \bigcup_{(\alpha,\beta) \in I \times J}(A_\alpha \cap B_\beta)$. Then 
-\begin{align*}
-\exists (a,b) \in I \times J(x \in A_a \cap B_b) 
-&\Longrightarrow  x \in A_a \wedge x \in B_b \\
-&\Longrightarrow x \in \bigcup_{\alpha \in I}A_{\alpha} \wedge x \in \bigcup_{\beta \in J}B_{\beta} \\
-&\Longrightarrow x \in (\bigcup_{\alpha \in I}A_{\alpha})\cap(\bigcup_{\beta \in J}B_{\beta})
-\end{align*}
+	Let $X$ and $Y$ be any set.
+	
+	By \exerciseref{3.5.1} (iii), the set $X \times Y$ exists. By Lemma~3.4.10, the set $2^{X \times Y}$ exists. Using the axiom of specification, we select all elements in $2^{X \times Y}$ that satisfies the vertical line test, and denote the result as $\Omega$. Therefore, $G \in \Omega$ iff $G \subseteq X \times Y$ and $G$ satisfies the vertical line test.
+	
+	According to \exerciseref{3.5.10} (ii), for each such $G$, there exists such a unique function $f : X \to Y$ whose graph is $G$. Because it is unique, we can use the axiom of replacement to replace each $G \in \Omega$ with this $f$. We then obtained a set $F$ in which all elements are functions from $X$ to $Y$.
+	
+	Now, we show that any function from $X$ to $Y$ is also in $F$. Let $f$ be any such function. Define $G_f := \{x \in X: (x,f(x))\}$, using the axiom of replacement on $X$. It is clear that $G_f \subseteq X \times Y$ and $G_f$ satisfies the vertical line test, since $f$ is a function.
+	
+	Therefore, $G_f \in \Omega$. But we are not finished yet. We need to show that $f \in F$. Clearly, $f$ satisfies the condition of the replacement: $f$ is from $X$ to $Y$ and has $G$ as its graph. Because the replacement condition must give a unique function, we must have $f$ as the element in $F$ that is replaced from $G_f$, as desired.
+	
+	Finally, we can say that $F$ is the set we want.
 \end{proof}
 
-\paragraph{Exercise 3.5.10} \label{exercise3.5.10}
+\begin{exercise}{3.5.12}	
+	Note that there is a typo in the book, which Prof.~Tao pointed out in his errata: $a$ should be a function from $\setn$, instead of from $X$.
+	
+	Prove Proposition~2.1.16, which was then informally proven. 
+	
+	That is, for any function $f: \setn \times X \to X$, there exists a unique function $a: \setn \to X$ such that
+	\begin{align*}
+		a(0) &= c \in X \\
+		a(\successor{n}) &= f(n,a(n)), \hbox{ for all } n \in \setn
+	\end{align*}
+
+	Prove the statement in these two ways:
+	\begin{enumerate}
+		\item I am allowed to use all the properties that have been derived so far about natural numbers. Addition, order, and multiplication. However, this, strictly, introduces circularity, because addition is defined using recursive definition (Proposition~2.1.16). Then, order is defined using addition, and multiplication is defined using both addition and recursive definition.
+		
+		\item Prove it without using any of these properties that may introduce circularity. 
+	\end{enumerate}
+\end{exercise}
+
+\noindent\fbox{\em The first way.}
 \begin{proof}
-We denote $\overset{\sim}{f}$ as $f'$, the graph of $f$ as $G$, and the graph of $f'$ as $G'$ for the 
-sake of simplification.
-
-(1) On one hand, if $f = f'$, then for every $(x,f(x)) \in G$, we can find $(x,f'(x)) \in G'$, and 
-obviously $(x,f(x)) = (x,f'(x))$, and vice versa.
-
-On the other hand, if $G = G'$, then for each $(x,f(x)) \in G$, $(x,f(x)) \in G'$. Note that each 
-element of $G'$ obeys the form $(x,f'(x))$, so $f(x) = f'(x)$ for every $x \in X$, that is, $f=f'$.
-
-(2) Existence: Let $f(x)$ be such a value that $(x,f(x)) \in G$. Thus the value is unique, so $f$ is a 
-function. According to its definition, the graph of $f$ is $G$.
-
-Uniqueness: As proven in (1), if $f,f'$ have the same graph, then they are equal.
+	I asked Prof.~Tao about this exercise, because I am uncertain about something. It is left untouched until Prof.~Tao replies or until I found the problem.
 \end{proof}
 
-\paragraph{Exercise 3.5.11} \label{exercise3.5.11}
-I think this exercise is meaningless. Lemma 3.4.6 is proven by the fact that $X^Y$ exists, which depends 
-on Axiom 3.10. Then the exercise asks us to prove Axiom 3.10 using Lemma 3.4.6. So I looked up some books 
-about set theory and found out that the power set axiom is essentially Lemma 3.4.6, not Axiom 3.10.
-
-Nevertheless, here is the proof:
+\begin{exercise}{3.5.13}
+	Suppose there exists an alternative $0'$, an alternative increment: $\successor{}'$, such that the numbers we obtained from the two obey the Axioms 2.1--2.5.
+	
+	According to the axiom of infinity, we have an alternative set: $\setn'$. Show that there exists a bijection $a: \setn \to \setn'$ such that $a(0) = 0'$, and $a(n) = n'$ iff $a(\successor{n}) = \successor{n'}'$.
+\end{exercise}
 \begin{proof}
-Let set $Z$ contains all subsets of $X\times Y$. The specify such element in $Z$ that obey the vertical 
-line test, and let them form the set $S$. According to the previous exercise, for each element in $S$, 
-there exists an unique function whose graph is the element. Then we replace all elements in $S$ with 
-these functions to construct the set $F$. Obviously, each element in $F$ is a function with the domain 
-$X$ and the range $Y$.
+Define $f: \setn \times \setn' : \setn'$ as follows: for all $n \in \setn, n' \in \setn'$, we have $f(n,n') := \successor{n'}'$.
 
-Now we show that every function $f$ from $X$ to $Y$ is in $F$. Denote the graph of $f$ as $G$. We know 
-that $G$ obeys the vertical line test and $G \subseteq X \times Y$, so $G \in S$. Since $G$ is the graph 
-of $f$, $f \in F$.
-\end{proof}
+Because of Axiom 2.4, this definition of $f$ satisfies the vertical line test: if two function values $f(a,n') \ne f(b,m')$, where $a,b$ are any elements in $\setn$, then we must have $n' \ne m'$, and thus the two input values $(a,n') \ne (b,m')$. Hence, $f$ is a function.
 
-\paragraph{Exercise 3.5.12} \label{exercise3.5.12}
-I am confused by this exercise. It seems that simply applying induction to $a$ can solve the 
-problem, just like what we did in Proposition 2.1.16. What is wrong?
+Because $0'$ is an element in $\setn'$, according to \exerciseref{3.5.12}, we have a unique function $a: \setn \to \setn'$ such that $a(0) = 0'$, and $a(\successor{n}) = f(n,a(n))$ for all $n \in \setn$. Expand $f(n,a(n))$, we have $a(\successor{n}) = \successor{(a(n))}'$.
 
-By the way, according to the \href{https://terrytao.wordpress.com/books/analysis-i/}{corrections}, 
-edit the exercise as the following:
-\begin{quotation}
-Let $X$ be an arbitrary set containing at least an element $c$ and obeys the Peano axioms. Let $f$ be a 
-function from $N \times X$ to $X$. ... 
+Now we show that $a$ is the function that we want. 
+\begin{enumerate}
+	\item First, by definition, $a(0) = 0'$. 
+	
+	\item Now we show that $a(n) = n'$ iff $a(\successor{n}) = \successor{n'}'$. 
+	
+	\fbox{\em If.} Suppose $a(\successor{n}) = \successor{n'}'$. We expand $a(\successor{n})$ by the definition of $a$, to get
+	\[
+	a(\successor{n}) = \successor{(a(n))}'
+	\]
+	Using our hypothesis, we have $\successor{n'}' = \successor{(a(n))}'$. By Axiom 2.4, we have $n' = a(n)$, as desired.
+	
+	\fbox{\em Only If.} Suppose $a(n) = n'$. We expand $a(\successor{n})$ by the definition of $a$, to get
+	\[
+	a(\successor{n}) = \successor{(a(n))}'
+	\]
+	Substitute $a(n) = n'$ in, we have $a(\successor{n}) = \successor{n'}'$, as desired.
+	
+	\item Finally, we show that $a$ is a bijection.
+	
+	\fbox{\em Injectivity.} Let $m,n$ be any two elements in $\setn$. Suppose $a(m) \ne a(n)$. We consider $a(\successor{m})$ and $a(\successor{n})$. 
+	
+	By the property of $a$, we have $a(\successor{m}) = \successor{(a(m))}'$ and $a(\successor{n}) = \successor{(a(n))}'$. Because $a(m) \ne a(n)$, by Axiom 2.4, we have $a(\successor{m}) \ne a(\successor{n})$. 
+	
+	This gives us a nice property: Whenever $a(m) \ne a(n)$, we have $a(\successor{m}) \ne a(\successor{n})$. We now consider using induction on $m \in \setn$, for this statement of injectivity:
+	\[
+		m \ne n \to a(m) \ne a(n) \hbox{ for all } n \in \setn
+	\]
+	
+	\begin{enumerate}
+		\item \fbox{\em Base case.} In this case, $m = 0$. we need to show that $0 \ne n \to a(0) \ne a(n)$. According Lemma~2.2.10, since $n \ne 0$, we have some $b \in \setn$ such that $\successor{b} = n$.
+		
+		Observer the value $a(n) = a(\successor{b}) = \successor{a(b)}'$. Because, by definition, $a(0) = 0'$, we cannot have $\successor{a(b)}' = a(0)$, thanks to Axiom~2.3. Therefore, $a(0) \ne a(n)$.
+		
+		\item \fbox{\em Inductive step.} Suppose that the statement is true for some $m \in \setn$. We need to show that this is true:
+		\[
+			\successor{m} \ne n \to a(\successor{m}) \ne a(n) \hbox{ for all } n \in \setn
+		\]
+		We have two situations:
+		\begin{enumerate}
+			\item When $n = 0$, $a(n) = 0'$. But $a(\successor{m}) = \successor{(a(m))}' \ne 0'$, by Axiom~2.3, as desired.
+			
+			\item When $n \ne 0$, by Lemma~2.2.10, we have $c \in \setn$ such that $\successor{c} = n$.
+			Therefore, we have $\successor{m} \ne \successor{c}$. This implies $m \ne c$. (If $m = c$, then $\successor{m} = \successor{c}$, by the axiom of substitution.) By our inductive hypothesis, this implies $a(m) \ne a(c)$.
+			
+			By the nice property we just proved, from $a(m) \ne a(c)$ we can have $a(\successor{m}) \ne a(\successor{c})$, that is, $a(\successor{m}) \ne a(n)$, as desired.
+		\end{enumerate}
+	\end{enumerate}
 
-Show that there exists an unique function $a$ from $X$ to $X$ such that 
-\[
-a(0) = c
-\] 
-and 
-\[
-a(n++) = f(n,a(n)), \forall n \in X
-\]
-...
+	We can now close the induction.
 
-such that $a_N(0) = c$ and $a_{N}(n++) = f(n,a_N(n))$ ... 
-\end{quotation}
+	\fbox{\em Surjectivity.} Let $n'$ be any element in $\setn'$. We show that there exists some element $n \in \setn$ such that $a(n) = n'$.
+	
+	We induct on $n'$, since the alternative natural number set also satisfies Axiom~2.5.
+	\begin{enumerate}
+		\item \fbox{\em Base case.} When $n' = 0'$, we set $n = 0$, and $a(0) = 0'$, by definition.
+		
+		\item \fbox{\em Inductive step.} Suppose the statement is true for some $n' \in \setn'$, then there exists a $n \in \setn$ such that $a(n) = n'$. 
+		
+		Consider $a(\successor{n})$. By definition it equals to $\successor{a(n)}'$, which equals $\successor{n'}'$, by the inductive hypothesis.
+	\end{enumerate}
 
-Note that all properties (e.g. orders, addition) in section 2 are deduced from the Peano axioms and their 
-definitions. Since $X$ obeys these rules, we use such properties on elements of $X$ without proof.
+	We can now close the induction.
+\end{enumerate}
 
-The proof is now reserved for further research.
-\begin{proof}
-\end{proof}
-
-\paragraph{Exercise 3.5.13} \label{exercise3.5.13}
-\begin{proof}
-Use induction.
-
-Existence: We need to prove that for all $n \in \mathbb{N}$, $f(n)$ is defined. Use induction:
-$f(0) = 0'$ is define. And the definition is unique for $0$ is not the successor of any natural number. 
-Now suppose that $f(n) = n'$ is defined, then $f(S(n)) = S'(f(n)) = S'(n')$ is also defined. The 
-definition is also unique. So we know that $f$ exists.
-
-Injectivity: We need to prove that $f(m) = f(n) \Longrightarrow m = n$. If $f(m) = f(n)$, then $m' = n'$, 
-and thus $m=n$. 
-
-Surjectivity: Use induction: 
-The basic case is, for $0' \in \mathbb{N}'$, $f(0) = 0'$. 
-
-Now suppose that for $n' \in \mathbb{N}'$, we can find $n \in \mathbb{N}$ such that $f(n) = n'$, then 
-for $S'(n')$, we have $f(S(n)) = S'(n')$. We can close the induction now.
+	Therefore, we showed the existence of such a function $a: \setn \to \setn'$ having the properties, and showed that it is a bijection.
 \end{proof}
 
 \section{Cardinality of Sets}
