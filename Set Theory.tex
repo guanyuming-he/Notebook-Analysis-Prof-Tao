@@ -1865,10 +1865,10 @@ Then, according to the lemma of finite choice (Lemma~3.5.11), there exists a $n$
 	Prove Proposition~2.1.16, which was then informally proven. 
 	
 	That is, for any function $f: \setn \times X \to X$, there exists a unique function $a: \setn \to X$ such that
-	\begin{align*}
-		a(0) &= c \in X \\
-		a(\successor{n}) &= f(n,a(n)), \hbox{ for all } n \in \setn
-	\end{align*}
+	\begin{align}
+		a(0) &= c \in X \label{exer.3.5.12.cond.1}\\
+		a(\successor{n}) &= f(n,a(n)), \hbox{ for all } n \in \setn \label{exer.3.5.12.cond.2}
+	\end{align}
 
 	Prove the statement in these two ways:
 	\begin{enumerate}
@@ -1880,8 +1880,64 @@ Then, according to the lemma of finite choice (Lemma~3.5.11), there exists a $n$
 
 \noindent\fbox{\em The first way.}
 \begin{proof}
-	I asked Prof.~Tao about this exercise, because I am uncertain about something. It is left untouched until Prof.~Tao replies or until I found the problem.
+	I asked Prof.~Tao about this exercise, because I did not know why we had to start from the partial functions $a_N$. According to Prof.~Tao, it is because the statement in Proposition~2.1.16 cannot be written formally in first order logic.
+	
+	I have made an attempt to do so:
+		
+	\begin{equation}
+		\forall n\bigg(n \in \setn \to \exists!a_n\Bigl[\bigl(n = 0 \to a_n = c\bigr) \wedge \bigl(\exists b(\successor{b} = n) \to a_n = f_n(a_b)\bigr)\Bigr]\bigg) \label{prop.2.1.16.formal.stat.1}
+	\end{equation}
+	
+	, in which we cannot formally define $a_b$.
+	
+	Hence, I use Prof.~Tao's hint to prove that, for all natural numbers $N$, there exists a unique function $a_N : \{n \in \setn : n \le N\} \to X$ such that the conditions \eqref{exer.3.5.12.cond.1} and~\eqref{exer.3.5.12.cond.2} hold, if we replace the $a$ there with this $a_N$ and let $n \le N$ for \eqref{exer.3.5.12.cond.2}.
+	
+	\fbox{\em Existence of partial functions.} We induct on $N$, to show only the existence of such a function for now.
+	
+	\fbox{\em Base case.} When $N = 0$, the domain of $a_N$ becomes $\{0\}$, because for all numbers $n$, we have $n = 0 + n$, hence by definition $0 \le n$. If $n \ne 0$, they $0 < n$. So $0$ is the only element in the domain. Define $a_0: \{0\} \to \{c\}$. Clearly, it satisfies the conditions \eqref{exer.3.5.12.cond.1} and~\eqref{exer.3.5.12.cond.2} for $n \le 0$.
+	
+	\fbox{\em Inductive step.} Suppose that the statement's been proven for some $N$. Define $a_{\successor{N}}$ as follows:
+	\begin{enumerate}
+		\item $a_{\successor{N}}(n) = a_N(n)$, if $n \le N$.
+		\item $a_{\successor{N}}(\successor{N}) = f(N,a_{\successor{N}}(N))$.
+	\end{enumerate}
+	By the inductive hypothesis, $a_{\successor{N}}(n)$ satisfies the conditions if $n \le N$. Now the only element to consider is $n = \successor{N}$, which by definition satisfies the condition \eqref{exer.3.5.12.cond.2}.
+	
+	We can now close the induction. \hfill \qedsymbol
+	
+	\fbox{\em Uniqueness of partial functions.} Once we know such functions exits, we induct on $N$, to show the uniqueness of such functions for each $N$.
+	
+	\fbox{\em Base case.} If $N = 0$, suppose there is some $a_0'$ that also satisfies the conditions \eqref{exer.3.5.12.cond.1} and~\eqref{exer.3.5.12.cond.2}. Then we must have $a_0'(0) = c = a_0(0)$. Since $0$ is the only element in the domain, we have the two functions equal.
+	
+	\fbox{\em Inductive step.} Consider any partial function $a_{\successor{N}}$ that satisfies the conditions \eqref{exer.3.5.12.cond.1} and~\eqref{exer.3.5.12.cond.2} for $n \le \successor{N}$.
+	
+	We restrict its domain to $\{n \in \setn : n \le N\}$. Clearly, the restricted function satisfy the conditions \eqref{exer.3.5.12.cond.1} and~\eqref{exer.3.5.12.cond.2} when $n \le N$. Hence, by our inductive hypothesis, it is the only function from $\{n \in \setn : n \le N\}$ to $X$ that satisfies the conditions. This means for any $n \le N$, $a_{\successor{N}}(n)$ can only have a unique value.
+	
+	By condition \eqref{exer.3.5.12.cond.2}, we must have $a_{\successor{N}}(\successor{N}) = f(N,a_{\successor{N}}(N))$, another unique value, since $f$ is a function and $a_{\successor{N}}(N)$ is unique. Therefore, for any $n \le \successor{N}$, $a_{\successor{N}}(n)$ can only take a corresponding unique value. This proves the uniqueness of $a_{\successor{N}}$.
+	
+	We can now close the induction. \hfill \qedsymbol
+	
+	Once we have defined the unique $a_N$'s for all $N$, our previous statement \eqref{prop.2.1.16.formal.stat.1} finally becomes valid, if we rewrite it using $a_N$'s this way (note that we use the symbol $m_n$ here for the unique number to avoid conflict with the function names, and the subscript of $f$ in 2.1.16 becomes its first variable):
+	\begin{equation}
+		\forall n\bigg(n \in \setn \to \exists!m_n\Bigl[\bigl(n = 0 \to m_n = c\bigr) \wedge \bigl(\exists b(\successor{b} = n) \to m_n = f(b,a_b(b))\bigr)\Bigr]\bigg) \label{prop.2.1.16.formal.stat.2}
+	\end{equation}
+	To prove this statement, for each $n$, set the corresponding $m_n := a_n(n)$. By the property of functions, $m$ is unique. By the definition of $a_n$, we have 
+	\begin{enumerate}
+		\item If $n = 0$, then $m_n = a_0(0) = c$.
+		\item If $n = \successor{b}$ for some $b$, then $m_n = a_{\successor{b}}(\successor{b}) = f(b,a_{\successor{b}}(b)) = f(b,a_{b}(b)) = f(b,m_b)$, as desired.
+	\end{enumerate}
+	Hence, we have finally proven Proposition~2.1.16 formally. Note that, if we change the codomain of the $f_n$ there to any set $X$, then we will have $m_n \in X$ instead of $\setn$.
+	
+	To prove the statement in our exercise, define $a: \setn \to X,\ n \mapsto m_n$. By the definition of $m_n$, we see that $a$ satisfies the conditions. 
+	
+	Now we show that $a$ is unique. If there's another function $a'$ that satisfies the conditions for all $n \in \setn$, then we can inductively prove that $a'(n) = m_n$ for all $n$. Hence, $a'(n) = m_n = a(n)$, and the two functions are equal.
 \end{proof}
+
+While the above prove may seem sound, it is actually circular. This is because we have used the order of natural numbers, which depends on addition, which in turn depends on this theorem of recursive definition.
+
+It is why Prof.~Tao asked us to prove it using only the Peano axioms. (Actually, we can use other propositions, like Lemma~2.2.10, if they don't depend on the recursive theorem.)
+
+\noindent\fbox{\em The second way.}
 
 \begin{exercise}{3.5.13}
 	Suppose there exists an alternative $0'$, an alternative increment: $\successor{}'$, such that the numbers we obtained from the two obey the Axioms 2.1--2.5.
