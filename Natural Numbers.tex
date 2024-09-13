@@ -14,9 +14,9 @@ The sum of two natural numbers is still a natural number. That is, for any natur
 \begin{proof}
 We use induction on $n$. 
 
-\fbox{\em Base Case.} When $n = 0$, $0 + m$ by definition equals to $m$, which is a natural number.
+\mybcbox When $n = 0$, $0 + m$ by definition equals to $m$, which is a natural number.
 
-\fbox{\em Inductive Step.} Suppose that it is already true for some $N$, then the sum $\successor{N} + m$ by definition is $\successor{(N+m)}$. The induction hypothesis tells that $N+m$ is a natural number, so by Axiom 2.2 its successor also is.
+\myisbox Suppose that it is already true for some $N$, then the sum $\successor{N} + m$ by definition is $\successor{(N+m)}$. The induction hypothesis tells that $N+m$ is a natural number, so by Axiom 2.2 its successor also is.
 
 We can now close the induction.
 \end{proof}
@@ -27,9 +27,9 @@ Addition of natural numbers is associative. That is, for any natural numbers $a,
 \begin{proof}
 Induct on $a$.
 
-\fbox{\em Base Case.} When $a = 0$, $0 + (b+c)$ by definition equals to $b+c$. $(0+b)+c = (b)+c$, which equals to the former result. 
+\mybcbox When $a = 0$, $0 + (b+c)$ by definition equals to $b+c$. $(0+b)+c = (b)+c$, which equals to the former result. 
 
-\fbox{\em Inductive Step.} $\successor{a}+(b+c) = \successor{(a+(b+c))}$. We have $(\successor{a}+b)+c = \successor{(a+b)}+c = \successor{((a+b)+c)}$. But by the inductive hypothesis we know that $(a+(b+c)) = ((a+b)+c)$, hence they are equal.
+\myisbox $\successor{a}+(b+c) = \successor{(a+(b+c))}$. We have $(\successor{a}+b)+c = \successor{(a+b)}+c = \successor{((a+b)+c)}$. But by the inductive hypothesis we know that $(a+(b+c)) = ((a+b)+c)$, hence they are equal.
 
 We can now close the induction.
 \end{proof}
@@ -65,9 +65,9 @@ $$
 n \ne 0 \to (\exists m, \successor{m} = n)
 $$
 
-\fbox{\em Base Case.} When $n = 0$, this statement is vacuously true.
+\mybcbox When $n = 0$, this statement is vacuously true.
 
-\fbox{\em Inductive Step.} Set $m=n$, then $\successor{m} = \successor{n}$.
+\myisbox Set $m=n$, then $\successor{m} = \successor{n}$.
 
 We can now close the induction.
 \end{proof}
@@ -147,12 +147,12 @@ Using Prof Tao's hint: define $Q(n)$ to be true iff $P(m)$ is true for all $m_0 
 
 To show that $Q(n)$ is true for all $n$, we induct on $n$.
 
-\fbox{\em Base Case.} 
+\mybcbox 
 $Q(0)$ is vacuously true, which is because $0 \le m_0$ for all $m_0$. To show this, consider that $m_0 = 0 + m_0$.
 
 If we are to have a $m$ such that $m_0 \le m < 0$, then by the transitivity of order we also have $m \ge 0 \wedge m < 0$, which is impossible, according to Proposition 2.2.13.
 
-\fbox{\em Inductive Step.} 
+\myisbox 
 By the inductive hypothesis, $Q(n)$ is true, which means $P(m)$ is true for all $m_0 \le m < n$. By the definition of $P$, $P(n)$ is also true. Given any natural number $a \ge m_0$, we have, by Proposition 2.2.13, three situations:
 \begin{enumerate}
 	\item If $a < n$, then $P(a)$ is true by the inductive hypothesis.
@@ -175,10 +175,10 @@ We can now close the induction.
 \begin{proof}
 	Using Prof Tao's hint, induct on $n$, on this property $Q(n)$, defined as the principle of backwards induction works on $n$.
 	
-	\fbox{\em Base Case.} 
+	\mybcbox 
 	When $n = 0$, we need to show $Q(0)$, which means $P(m)$ is true for all $m \le 0$. We can show that only $m=0$ can satisfy $m \le n$. Recall the fact that $m \ge 0$ by $m = 0+m$. Hence, for $m$ to both $\le 0$ and $\ge 0$, $m$ can only $=0$, by Proposition 2.2.13.
 	
-	\fbox{\em Inductive Step.} 
+	\myisbox 
 	If $P(m)$ is already true for all $m \le n$, then we need to show that the principle works for $\successor{n}$. However, the premise of the principle automatically gives $P(\successor{n})$. By proposition 2.2.13, $m \le n$ together with $m = \successor{n}$ give all such $m$'s that $m \le \successor{n}$. Hence, $P(m)$ is true for all of them.
 	
 	We can now close the induction.
@@ -199,10 +199,10 @@ We can now close the induction.
 	
 	To prove that $P(m)$ is true for all $m \ge n$, we can show that $Q(m)$ is true for every natural number $m$. This is easy, just induct on $m$.
 	
-	\fbox{\em Base Case.} 
+	\mybcbox 
 	By definition, $Q(0)$ is true, because $0 \le n$ for any $n$. If $0 < n$, then by definition $Q(0)$ is true. If $0 = n$, then by the premise $Q(0) = P(0)$ is true.
 
-	\fbox{\em Inductive Step.} 
+	\myisbox 
 	There are two situations to consider
 \begin{enumerate}
 	\item If $m < n$, then $\successor{m} \le n$, and $Q(\successor{m})$ is true by definition.
@@ -225,9 +225,9 @@ We introduce the two lemmas:
 \begin{proof}
 	We induct on $m$.
 	
-	\fbox{\em Base Case.} $0 \times 0 = 0 \times 0$.
+	\mybcbox $0 \times 0 = 0 \times 0$.
 	
-	\fbox{\em Inductive Step.} $0 \times \successor{m} = 0$ by definition. $\successor{m} \times 0 = (m \times 0) + 0$, and $m \times 0 = 0 \times m = 0$, according to the inductive hypothesis.
+	\myisbox $0 \times \successor{m} = 0$ by definition. $\successor{m} \times 0 = (m \times 0) + 0$, and $m \times 0 = 0 \times m = 0$, according to the inductive hypothesis.
 	
 	We can now close the induction.
 \end{proof}
@@ -238,9 +238,9 @@ We introduce the two lemmas:
 \begin{proof}
 	We induct on $n$.
 	
-	\fbox{\em Base Case.} $0 \times \successor{m} = 0 = 0 + 0$.
+	\mybcbox $0 \times \successor{m} = 0 = 0 + 0$.
 	
-	\fbox{\em Inductive Step.} We need to prove $\successor{n} \times \successor{m} = (\successor{n} \times m) + \successor{n}$.
+	\myisbox We need to prove $\successor{n} \times \successor{m} = (\successor{n} \times m) + \successor{n}$.
 	
 	The left side equals $(n \times \successor{m}) + \successor{m}$, by definition. By the inductive hypothesis, it also equals to $(n \times m + n) + \successor{m} = n \times m + n + m + 1$.
 	
@@ -253,9 +253,9 @@ Now, we prove the exercise.
 \begin{proof}
 	Induct on $m$.
 	
-	\fbox{\em Base Case.} $0 \times n = n \times 0$, by My Lemma~\ref{my.cpmmutative.mul.lem.1}.
+	\mybcbox $0 \times n = n \times 0$, by My Lemma~\ref{my.cpmmutative.mul.lem.1}.
 	
-	\fbox{\em Inductive Step.} We need to prove $\successor{m} \times n = n \times \successor{m}$. The left side equals $m \times n + n$, by definition. The right side equals to $n \times m + n$, according to My Lemma~\ref{my.cpmmutative.mul.lem.2}. However, they are the same, by the inductive hypothesis.
+	\myisbox We need to prove $\successor{m} \times n = n \times \successor{m}$. The left side equals $m \times n + n$, by definition. The right side equals to $n \times m + n$, according to My Lemma~\ref{my.cpmmutative.mul.lem.2}. However, they are the same, by the inductive hypothesis.
 	
 	We can now close the induction.
 \end{proof}
@@ -264,16 +264,16 @@ Now, we prove the exercise.
 	Let $m, n$ be natural numbers. Then, $mn = 0$ iff $m = 0 \vee n = 0$. In particular, if $m,n$ are both positive, that is, $\neg(m = 0 \vee n = 0)$, then $mn \ne 0$.
 \end{exercise}
 \begin{proof}\leavevmode\par % To align the two paragraph start markers.
-	\fbox{\em If.} 
+	\myifbox 
 	If one of $m,n$ is zero, then by the definition of multiplication and the commutativity, their product is also zero.
 	
-	\fbox{\em Only If.} 
+	\myoifbox 
 	We induct on $m$.
 
-	\leavevmode\hskip\parindent\fbox{\em Base Case.}
+	\leavevmode\hskip\parindent\mybcbox
 		If $m = 0$, then $(mn = 0) \to (m = 0 \vee n = 0)$ is true, because the both sides of $\to$ are true.
 	
-	\leavevmode\hskip\parindent\fbox{\em Inductive Step.}
+	\leavevmode\hskip\parindent\myisbox
 		If $(\successor{m})n = 0$, then, by definition, $mn + n = 0$. According to Corollary 2.2.9, they can only both be 0. Hence, $n = 0$, and $\successor{m} = 0 \vee n = 0$ is true.
 	
 	We can now close the induction.
@@ -285,9 +285,9 @@ Now, we prove the exercise.
 \begin{proof}
 	We induct $a$. We could induct on $b$ or $c$, but when handling their successors, we would need to additionally use the commutativity.
 	
-	\fbox{\em Base Case.} $(0 \times b) \times c = 0 \times c = 0 = 0 \times (b \times c)$.
+	\mybcbox $(0 \times b) \times c = 0 \times c = 0 = 0 \times (b \times c)$.
 	
-	\fbox{\em Inductive Step.} $(\successor{a} \times b) \times c = (ab + b) \times c$. This equals to $(ab)c + bc$ by distributive law. We also have $\successor{a} \times bc = a(bc) + bc$ by definition. According to the inductive hypothesis, $(ab)c = a(bc)$.
+	\myisbox $(\successor{a} \times b) \times c = (ab + b) \times c$. This equals to $(ab)c + bc$ by distributive law. We also have $\successor{a} \times bc = a(bc) + bc$ by definition. According to the inductive hypothesis, $(ab)c = a(bc)$.
 	
 	We can now close the induction.
 \end{proof}
@@ -321,9 +321,9 @@ Now, we prove the exercise.
 \begin{proof}
 	We induct on $n$.
 	
-	\fbox{\em Base Case.} Set $m = r = 0$, and we have $0 = 0q + 0$, as desired.
+	\mybcbox Set $m = r = 0$, and we have $0 = 0q + 0$, as desired.
 	
-	\fbox{\em Inductive Step.} $\successor{n}$, by the inductive hypothesis, equals to $\successor{(mq+r)} = mq+\successor{r}$.
+	\myisbox $\successor{n}$, by the inductive hypothesis, equals to $\successor{(mq+r)} = mq+\successor{r}$.
 	
 	As $0 \le r < q$, $0 < \successor{r} \le q$, by Proposition 2.2.12 (e). According to the trichotomy of order, $\successor{r}$ either $<q$ or $=q$
 	\begin{itemize}

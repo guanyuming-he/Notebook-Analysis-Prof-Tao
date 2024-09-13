@@ -13,12 +13,12 @@ Some additional notes:
 
 \section{Fundamentals}
 \begin{why}{29}\label{why.unique.empty.set}
-If $\varnothing$ and $\varnothing'$ are both empty sets, then they are equal.
+If $\emptyset$ and $\emptyset'$ are both empty sets, then they are equal.
 \end{why}
 \begin{proof}
 	Observe that 
 	\[
-	\forall x (x \in \varnothing \leftrightarrow x \in \varnothing')
+	\forall x (x \in \emptyset \leftrightarrow x \in \emptyset')
 	\]
 	because in either direction the statement is vacuously true.
 \end{proof}
@@ -75,16 +75,16 @@ If $\varnothing$ and $\varnothing'$ are both empty sets, then they are equal.
 \end{proof}
 
 \begin{exercise}{3.1.2}
-	$\varnothing, \{\varnothing\}, \{\{\varnothing\}\}$, and $\{\varnothing,\{\varnothing\}\}$ are all distinct.
+	$\emptyset, \{\emptyset\}, \{\{\emptyset\}\}$, and $\{\emptyset,\{\emptyset\}\}$ are all distinct.
 \end{exercise}
 \begin{proof}
-	First, because all except $\varnothing$ contain some element, they are all non-empty, by Axiom 3.2 and 3.3.
+	First, because all except $\emptyset$ contain some element, they are all non-empty, by Axiom 3.2 and 3.3.
 	
-	Now, we show that $\{\varnothing\}, \{\{\varnothing\}\}$, and $\{\varnothing,\{\varnothing\}\}$ are distinct. 
+	Now, we show that $\{\emptyset\}, \{\{\emptyset\}\}$, and $\{\emptyset,\{\emptyset\}\}$ are distinct. 
 	
-	Observe that $\{\varnothing\} \notin \{\varnothing\}$, but it is in both $\{\{\varnothing\}\}$, and $\{\varnothing,\{\varnothing\}\}$. Therefore, $\{\varnothing\}$ is distinct from the rest two.
+	Observe that $\{\emptyset\} \notin \{\emptyset\}$, but it is in both $\{\{\emptyset\}\}$, and $\{\emptyset,\{\emptyset\}\}$. Therefore, $\{\emptyset\}$ is distinct from the rest two.
 	
-	Now, we only need to show that $\{\{\varnothing\}\} \ne \{\varnothing,\{\varnothing\}\}$. This is done by noticing that $\varnothing$ is in the latter, but not in the former.
+	Now, we only need to show that $\{\{\emptyset\}\} \ne \{\emptyset,\{\emptyset\}\}$. This is done by noticing that $\emptyset$ is in the latter, but not in the former.
 \end{proof}
 
 \begin{why}{30}
@@ -125,13 +125,13 @@ If $\varnothing$ and $\varnothing'$ are both empty sets, then they are equal.
 	For any set $A$,
 	\begin{itemize}
 		\item $A \subseteq A$.
-		\item $\varnothing \subseteq A$.
+		\item $\emptyset \subseteq A$.
 	\end{itemize}
 \end{why}
 \begin{proof}\leavevmode
 	\begin{itemize}
 		\item For all $x$, $x \in A \to x \in A$ is true.
-		\item For all $x$, $x \in \varnothing \to x \in A$ is vacuously true.
+		\item For all $x$, $x \in \emptyset \to x \in A$ is vacuously true.
 	\end{itemize}
 \end{proof}
 
@@ -174,12 +174,12 @@ If $\varnothing$ and $\varnothing'$ are both empty sets, then they are equal.
 \end{proof}
 
 \begin{why}{34}
-	$\varnothing$ and $\varnothing$ are disjoint, but not distinct.
+	$\emptyset$ and $\emptyset$ are disjoint, but not distinct.
 \end{why}
 \begin{proof}\leavevmode
 	\begin{itemize}
-		\item They are disjoint, because no element $x$ can satisfy $x \in \varnothing \wedge x \in \varnothing$.
-		\item They are not distinct, because we showed earlier that any empty set is the same as $\varnothing$.
+		\item They are disjoint, because no element $x$ can satisfy $x \in \emptyset \wedge x \in \emptyset$.
+		\item They are not distinct, because we showed earlier that any empty set is the same as $\emptyset$.
 	\end{itemize}
 \end{proof}
 
@@ -232,13 +232,13 @@ These are logically equivalent:
 \begin{exercise}{3.1.6}
 	Let $A,B,C,X$ be any sets that $A,B,C \subseteq X$, then:
 	\begin{enumabc}
-		\item $A \cup \varnothing = A$, and $A \cap \varnothing = \varnothing$.
+		\item $A \cup \emptyset = A$, and $A \cap \emptyset = \emptyset$.
 		\item $A \cup X = X$, and $A \cap X = A$.
 		\item $A \cap A = A = A \cup A$.
 		\item $A \cap B = B \cap A$, and $A \cup B = B \cup A$.
 		\item $(A \cup B) \cup C = A \cup (B \cup C)$, and $(A \cap B) \cap C = A \cap (B \cap C)$.
 		\item $A \cup (B \cap C) = (A \cup B) \cap (A \cup C)$, and $A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$.
-		\item $A \cup (X \setminus A) = X$, and $A \cap (X \setminus A) = \varnothing$. 
+		\item $A \cup (X \setminus A) = X$, and $A \cap (X \setminus A) = \emptyset$. 
 		\item $X \setminus (A \cup B) = (X \setminus A) \cap (X \setminus B)$, and $X \setminus (A \cap B) = (X \setminus A) \cup (X \setminus B)$.
 	\end{enumabc}
 \end{exercise}
@@ -268,15 +268,15 @@ These are logically equivalent:
 
 	We will use these facts about logical statements to prove the proposition.
 	\begin{enumabc}
-		\item Given any $x$, let $p := x \in A$, and we have $\false \equiv x \in \varnothing$. We give an example of how to prove the statement and everything below is done similarly.
+		\item Given any $x$, let $p := x \in A$, and we have $\false \equiv x \in \emptyset$. We give an example of how to prove the statement and everything below is done similarly.
 		
-		For example, to prove $A \cup \varnothing = A$, we need to show that
+		For example, to prove $A \cup \emptyset = A$, we need to show that
 		\[
-			\forall x(x \in A \cup \varnothing \leftrightarrow x \in A)
+			\forall x(x \in A \cup \emptyset \leftrightarrow x \in A)
 		\]
 		, which is, by Axiom 3.5,
 		\[
-			\forall x((x \in A \vee x \in \varnothing) \leftrightarrow x \in A)
+			\forall x((x \in A \vee x \in \emptyset) \leftrightarrow x \in A)
 		\]
 		Substitute $p$ and $\false$ in, we have
 		\[
@@ -302,7 +302,7 @@ These are logically equivalent:
 		\begin{enumerate}
 			\item If $x \notin X$, then $x \in X \setminus \text{anything}$ is false, by the definition of the difference of sets. Therefore, all implication statements are vacuously true.
 			
-			\item If $x \in X$, then $x \in X \equiv \true; x \in \varnothing \equiv \false$. 
+			\item If $x \in X$, then $x \in X \equiv \true; x \in \emptyset \equiv \false$. 
 			
 			In addition, for subset $A \subseteq X$, let $p := x \in A$. By definition of the difference of sets, $\neg p \equiv x \in X \setminus A$.
 		\end{enumerate}
@@ -378,7 +378,7 @@ These are logically equivalent:
 \end{proof}
 
 \begin{exercise}{3.1.9}
-	If $A \cup B = X$ and $A \cap B = \varnothing$, then
+	If $A \cup B = X$ and $A \cap B = \emptyset$, then
 	\begin{enumerate}
 		\item $A = X \setminus B$,
 		\item and $B = X \setminus A$.
@@ -386,7 +386,7 @@ These are logically equivalent:
 \end{exercise}
 \begin{proof}\leavevmode
 	\begin{enumerate}
-		\item If $x \in A$, then $x \in A \cup B$, by Axiom 3.5. Then, $x \in X$. But $x \notin B$, because $A \cap B = \varnothing$ (so everyone in $A$ is not in $B$). Hence, $x \in X \setminus B$.
+		\item If $x \in A$, then $x \in A \cup B$, by Axiom 3.5. Then, $x \in X$. But $x \notin B$, because $A \cap B = \emptyset$ (so everyone in $A$ is not in $B$). Hence, $x \in X \setminus B$.
 		
 		If $x \in X \setminus B$, then $x \in X$, so $x \in A \cup B$, so $x \in A \vee X \in B$. But $x \notin B$ by the difference, then $x$ can only be in $A$.
 		
@@ -486,11 +486,11 @@ These are logically equivalent:
 	A set $A$ does not have any non-empty proper subset iff $A$ is a singleton set.
 \end{exercise}
 \begin{proof}
-	\fbox{\em If.} Suppose $A$ is a singleton set $\{x\}$. Let $B$ be a proper subset of $A$. Suppose for the sake of contradiction that $B$ is non-empty, that is, $\exists y \in B$. Then, by the definition of subsets, $y \in A$. Because $A$ is a singleton, we have $y = x$.
+	\myifbox Suppose $A$ is a singleton set $\{x\}$. Let $B$ be a proper subset of $A$. Suppose for the sake of contradiction that $B$ is non-empty, that is, $\exists y \in B$. Then, by the definition of subsets, $y \in A$. Because $A$ is a singleton, we have $y = x$.
 	
 	This means that $x \in B$, or, in other words, $\{x\} \subseteq B$. Hence, we have $B \subseteq A \wedge A \subseteq B$, and it follows that $A = B$, a contradiction.
 	
-	\fbox{\em Only If.} Suppose that all proper subsets of $A$ are empty. By Why~\ref{why.unique.empty.set}, they are the same set: $\varnothing$. Because $\varnothing$ is a proper subset of $A$, we know that $A$ is non-empty.
+	\myoifbox Suppose that all proper subsets of $A$ are empty. By Why~\ref{why.unique.empty.set}, they are the same set: $\emptyset$. Because $\emptyset$ is a proper subset of $A$, we know that $A$ is non-empty.
 	
 	Hence, there exists some $x \in A$. We show that it is the only element in $A$. Actually, we have $\{x\} \subseteq A$. But $\{x\}$ cannot be a proper subset, as it is non-empty. Therefore, we must have $\{x\} = A$, as desired.
 \end{proof}
@@ -525,7 +525,7 @@ These are logically equivalent:
 	\begin{enumerate}
 		\item Suppose for the sake of contradiction that $A \in A$ for some set $A$. This means that the set $\{A\} \subseteq A$. Now consider the set $\{A\}$.
 		
-		According to the axiom of regularity, its only element, is either not a set (excluded), or is disjoint from it, that is, $A \cap \{A\} = \varnothing$. But this is a contradiction, because we already have $\{A\} \subseteq A$, so there is some element (namely, $A$), that is contained in both $\{A\}$ and $A$.
+		According to the axiom of regularity, its only element, is either not a set (excluded), or is disjoint from it, that is, $A \cap \{A\} = \emptyset$. But this is a contradiction, because we already have $\{A\} \subseteq A$, so there is some element (namely, $A$), that is contained in both $\{A\}$ and $A$.
 		
 		\item Suppose for the sake of contradiction that there exist such sets $A,B$ that $A \in B$ and $B \in A$. Now, we consider, somewhat similarly, the pair set $\{A,B\}$.
 		
@@ -542,9 +542,9 @@ These are logically equivalent:
 	(Assuming the other axioms of the set theory.) The axiom of universal specification is equivalent to the existence of a universal set $\Omega$ that contains all objects.
 \end{exercise}
 \begin{proof}
-	\fbox{\em If.} If there exists such a set as $\Omega$, then for any property $P(x)$ pertaining to all objects $x$, we can construct the set for the axiom of universal specification using $\Omega$ and the axiom of specification.
+	\myifbox If there exists such a set as $\Omega$, then for any property $P(x)$ pertaining to all objects $x$, we can construct the set for the axiom of universal specification using $\Omega$ and the axiom of specification.
 	
-	\fbox{\em Only If.} If the axiom of universal specification is assumed, then we can simply choose a property $P(x)$ which is true for all objects to have $\Omega$.
+	\myoifbox If the axiom of universal specification is assumed, then we can simply choose a property $P(x)$ which is true for all objects to have $\Omega$.
 \end{proof}
 
 \section{Functions}
@@ -556,12 +556,12 @@ These are logically equivalent:
 \end{proof}
 
 \begin{why}{43}
-	For the same set $X$, all functions from $\varnothing$ to $X$ are equal.
+	For the same set $X$, all functions from $\emptyset$ to $X$ are equal.
 \end{why}
 \begin{proof}\leavevmode
 	\begin{enumerate}
 		\item The domains and codomains obviously match.
-		\item $\forall x(x \in \varnothing \to (f(x) = f'(x)))$ is vacuously true.
+		\item $\forall x(x \in \emptyset \to (f(x) = f'(x)))$ is vacuously true.
 	\end{enumerate}
 \end{proof}
 
@@ -618,41 +618,41 @@ These are logically equivalent:
 \begin{proof}
 	Be careful how you intrepret the definition of injectivity. I didn't know how, so I had asked a \href{https://math.stackexchange.com/questions/3800240/how-to-interpret-the-definition-of-injectivity}{question} at Stack Exchange regarding this problem.
 
-	\fbox{\em Injective.} For such a function $f: \varnothing \to X$ to be injective, we must have
+	\fbox{\em Injective.} For such a function $f: \emptyset \to X$ to be injective, we must have
 	\[
-	\forall x \forall x'\Bigl[(x \in \varnothing \wedge x' \in \varnothing) \to \bigr(x \ne x' \to f(x) \ne f(x')\bigl)\Bigr]
+	\forall x \forall x'\Bigl[(x \in \emptyset \wedge x' \in \emptyset) \to \bigr(x \ne x' \to f(x) \ne f(x')\bigl)\Bigr]
 	\]
 	, which is always vacuously true.
 	
-	\fbox{\em Surjective.} For such a function $f: \varnothing \to X$ to be surjective, we must have
+	\fbox{\em Surjective.} For such a function $f: \emptyset \to X$ to be surjective, we must have
 	\[
-	\forall y\Bigl[y \in X \to \bigl(\exists x(x \in \varnothing \wedge f(x) = y)\bigr)\Bigr]
+	\forall y\Bigl[y \in X \to \bigl(\exists x(x \in \emptyset \wedge f(x) = y)\bigr)\Bigr]
 	\]
-	, which is false (because $x \in \varnothing$ is false), unless $y \in X$ is false. In that case, $X = \varnothing$.
+	, which is false (because $x \in \emptyset$ is false), unless $y \in X$ is false. In that case, $X = \emptyset$.
 	
-	\fbox{\em Bijective.} Is true if $X = \varnothing$. Because only then can the function be surjective.
+	\fbox{\em Bijective.} Is true if $X = \emptyset$. Because only then can the function be surjective.
 \end{proof}
 
 I am tempted to discover and prove something stronger, because such boring situations involving these boring sets will be encountered a lot, later when we talk more about injectivity and surjectivity.
 \begin{thm}\label{my.boring.inj.surj.thm}
 	Let $f: X \to Y$ be a function, then
 	\begin{enumerate}
-		\item If $X = \varnothing$ or is a singleton $\{x\}$, then $f$ must be injective.
-		\item If $Y = \varnothing$ or is a singleton $\{y\}$, then $f$ must be surjective.
+		\item If $X = \emptyset$ or is a singleton $\{x\}$, then $f$ must be injective.
+		\item If $Y = \emptyset$ or is a singleton $\{y\}$, then $f$ must be surjective.
 	\end{enumerate}
 \end{thm}
 \begin{proof}\leavevmode
 	\begin{enumerate}
-		\item If $X = \varnothing$, then it's already proven in \exerciseref{3.3.3}.
+		\item If $X = \emptyset$, then it's already proven in \exerciseref{3.3.3}.
 		
 		If $X$ is a singleton set, then for $x,x' \in X$, $x \ne x' \to f(x) \ne f(x')$ is always vacuously true. Thus, $f$ is injective.
 		
-		\item If $Y = \varnothing$, then $y \in Y \to \exists x(\dots)$ is always vacuously true.
+		\item If $Y = \emptyset$, then $y \in Y \to \exists x(\dots)$ is always vacuously true.
 		
 		If $Y = \{y\}$, then we have two situations.
 		\begin{enumerate}
-			\item If $X = \varnothing$, then as shown in \exerciseref{3.3.3}, $f$ is surjective.
-			\item If $X \ne \varnothing$, then there exists some $x \in X$. By the definition of functions, $f(x)$ must be in $Y$. Because $Y$ is a singleton, we must have $f(x) = y$. Because $Y$ is a singleton again, its only single element is mapped to by $f$, and thus $f$ is surjective.
+			\item If $X = \emptyset$, then as shown in \exerciseref{3.3.3}, $f$ is surjective.
+			\item If $X \ne \emptyset$, then there exists some $x \in X$. By the definition of functions, $f(x)$ must be in $Y$. Because $Y$ is a singleton, we must have $f(x) = y$. Because $Y$ is a singleton again, its only single element is mapped to by $f$, and thus $f$ is surjective.
 		\end{enumerate}
 	\end{enumerate}
 \end{proof}
@@ -695,7 +695,7 @@ I am tempted to discover and prove something stronger, because such boring situa
 \end{exercise}
 \begin{proof}\leavevmode
 	\begin{enumerate}
-		\item First, if $X = \varnothing$ or $\{x\}$, then $f$ must be injective, by My Theorem~\ref{my.boring.inj.surj.thm}.
+		\item First, if $X = \emptyset$ or $\{x\}$, then $f$ must be injective, by My Theorem~\ref{my.boring.inj.surj.thm}.
 		
 		Suppose for the sake of contradiction that $f$ is not injective. Then, there must exist such $x,x' \in X$ that $x \ne x'$ but $f(x) = f(x')$. By the axiom of substitution, this implies that $g(f(x)) = g(f(x'))$, a contradiction with our premise.
 		
@@ -1111,14 +1111,14 @@ Putting My Proposition~\ref{my.surj.image.prop} and My Proposition~\ref{my.inj.i
 \end{exercise}
 \begin{proof}\leavevmode
 	\begin{enumerate}
-		\item \fbox{\em If.} An immediate consequence of My Theorem~\ref{my.inj.surj.image.thm}.
+		\item \myifbox An immediate consequence of My Theorem~\ref{my.inj.surj.image.thm}.
 		
-		\fbox{\em Only If.} Suppose for the sake of contradiction that $f$ is not surjective. Then, the set 
-		$S := \{y \in Y: \forall x(x \in X \to f(x) \ne y)\}$ is non-empty. Clearly, $S \subseteq Y$, then by premise we must have $f(f^{-1}(S)) = S$. However, by the definition of $S$ and the definition of inverse images, we have $f^{-1}(S) = \varnothing$, and thus $f(f^{-1}(S)) = \varnothing$, a contradiction (as $S$ is non-empty).
+		\myoifbox Suppose for the sake of contradiction that $f$ is not surjective. Then, the set 
+		$S := \{y \in Y: \forall x(x \in X \to f(x) \ne y)\}$ is non-empty. Clearly, $S \subseteq Y$, then by premise we must have $f(f^{-1}(S)) = S$. However, by the definition of $S$ and the definition of inverse images, we have $f^{-1}(S) = \emptyset$, and thus $f(f^{-1}(S)) = \emptyset$, a contradiction (as $S$ is non-empty).
 		
-		\item \fbox{\em If.} An immediate consequence of My Theorem~\ref{my.inj.surj.image.thm}.
+		\item \myifbox An immediate consequence of My Theorem~\ref{my.inj.surj.image.thm}.
 		
-		\fbox{\em Only If.} Suppose for the sake of contradiction that $f$ is not injective. Then, there exists such $x,x' \in X$ that $x \ne x'$ but $f(x) = f(x')$. Let $S := \{x\}$. Then, by the definition of forward images, $f(S) = \{f(x)\}$. However, by the definition of inverse images, $\{x,x'\} \subseteq f^{-1}(\{f(x)\})$, so it clearly is not equal to $S$, a contradiction.
+		\myoifbox Suppose for the sake of contradiction that $f$ is not injective. Then, there exists such $x,x' \in X$ that $x \ne x'$ but $f(x) = f(x')$. Let $S := \{x\}$. Then, by the definition of forward images, $f(S) = \{f(x)\}$. However, by the definition of inverse images, $\{x,x'\} \subseteq f^{-1}(\{f(x)\})$, so it clearly is not equal to $S$, a contradiction.
 	\end{enumerate}
 \end{proof}
 
@@ -1134,7 +1134,7 @@ Putting My Proposition~\ref{my.surj.image.prop} and My Proposition~\ref{my.inj.i
 \end{proof}
 
 \begin{why}{50}
-	If $I = \varnothing$, then $\bigcup_{\alpha \in I}A_\alpha = \varnothing$.
+	If $I = \emptyset$, then $\bigcup_{\alpha \in I}A_\alpha = \emptyset$.
 \end{why}
 \begin{proof}
 	By definition, $y \in \bigcup_{\alpha \in I}A_\alpha$ iff
@@ -1142,7 +1142,7 @@ Putting My Proposition~\ref{my.surj.image.prop} and My Proposition~\ref{my.inj.i
 		\exists \alpha (\alpha \in I \wedge y \in A_\alpha)
 	\]
 	
-	If $I = \varnothing$, then the $\exists \alpha(\dots)$ is always false for any $y$. Hence for any $y$ we have $y \notin \bigcup_{\alpha \in I}A_\alpha$, and by the empty set axiom, this set is empty.
+	If $I = \emptyset$, then the $\exists \alpha(\dots)$ is always false for any $y$. Hence for any $y$ we have $y \notin \bigcup_{\alpha \in I}A_\alpha$, and by the empty set axiom, this set is empty.
 \end{proof}
 
 \begin{exercise}{3.4.6}
@@ -1321,7 +1321,7 @@ The proofs for the two are quite tricky. Let me divide them into parts.
 \end{proof}
 
 \begin{exercise}{3.4.11}
-	Let $X, I \ne \varnothing$ be sets. For all $\alpha \in I$, let $A_\alpha$ denote a unique subset of $X$. Then,
+	Let $X, I \ne \emptyset$ be sets. For all $\alpha \in I$, let $A_\alpha$ denote a unique subset of $X$. Then,
 	\begin{enumerate}
 		\item $X \big\backslash\bigcup_{\alpha \in I} A_\alpha = \bigcap_{\alpha\in I}(X \setminus A_\alpha)$
 		\item $X \big\backslash\bigcap_{\alpha \in I} A_\alpha = \bigcup_{\alpha\in I}(X \setminus A_\alpha)$
@@ -1483,7 +1483,7 @@ The proofs for the two are quite tricky. Let me divide them into parts.
 		\item For all $p \in X \times Y$, there exists such $x \in X, y \in Y$ that $p = (x,y)$.
 	\end{enumerate}
 
-	If either $X$ or $Y$ is empty, then define $X \times Y := \varnothing$. Thus, the two statements are all vacuously true.
+	If either $X$ or $Y$ is empty, then define $X \times Y := \emptyset$. Thus, the two statements are all vacuously true.
 	
 	Suppose now that $X$ and $Y$ are both non-empty. Let $x$ be any element in $X$. Define the set $Y_x$ as each element $y \in Y$ being replaced with $(x,y)$. We can do this using the axiom of replacement, because the statement ``$(x,y) = (x',y')$ iff $x = x' \wedge y = y'$'' ensures that the object $(x,y)$ is unique.
 	
@@ -1509,12 +1509,12 @@ The proofs for the two are quite tricky. Let me divide them into parts.
 	\begin{enumerate}
 		\item We see that $(x_i)_{1 \le i \le n}$ and $(y_i)_{1 \le i \le n}$ have the same domain. Now we show that they have the same codomain and values iff $x_i = y_i$ for all $1 \le i \le n$.
 		
-		\fbox{\em If.}
+		\myifbox
 		First, because such a $n$-tuple function is surjective, the codomain of any such function is the function's image of the domain. For $x$ and $y$, they are $\{x_1, \dots, x_n\}$ and $\{y_1, \dots, y_n\}$, respectively. Since $x_i = y_i$ for all $1 \le i \le n$, they are equal.
 		
 		Their values are literally equal, as $x_i = y_i$ for all $1 \le i \le n$.
 		
-		\fbox{\em Only If.}
+		\myoifbox
 		If $x$ and $y$ have the same codomain and values, then, in particular, they have the same values. By the definition of function values, we have $x_i = y_i$ for all $1 \le i \le n$, as desired.
 		
 		\item If $(X_i)_{1 \le i \le n}$ exists as an ordered $n$-tuple of sets, then it means, by definition, then function
@@ -1649,7 +1649,7 @@ The proofs for the two are quite tricky. Let me divide them into parts.
 			&\equiv (x,y) \in (A \cap C) \times (B \cap D)
 		\end{align*}
 	
-		\item No. $(x,y) \in (A \cup C) \times (B \cup D)$ includes the case when $x \in C \wedge y \in B$. If $A \cap C = \varnothing$ and $B \cap D = \varnothing$, then $(x,y)$ is in neither $A \times B$ and $C \times D$.
+		\item No. $(x,y) \in (A \cup C) \times (B \cup D)$ includes the case when $x \in C \wedge y \in B$. If $A \cap C = \emptyset$ and $B \cap D = \emptyset$, then $(x,y)$ is in neither $A \times B$ and $C \times D$.
 		
 		\item No. For $(x,y)$ to be in $(A \times B) \setminus (C \times D)$, we have $(x,y) \notin C \times D$. That is, $x \notin C \vee y \notin D$. However, for $(x,y)$ to be in $(A \setminus C) \times (B \setminus D)$, we must have $x \notin C \wedge y \notin D$.
 	\end{enumerate}
@@ -1667,7 +1667,7 @@ The proofs for the two are quite tricky. Let me divide them into parts.
 \begin{proof}\leavevmode
 	\begin{enumerate}
 		\item 
-		\fbox{\em If.} Suppose $A \subseteq C$ and $B \subseteq D$, then 
+		\myifbox Suppose $A \subseteq C$ and $B \subseteq D$, then 
 		\begin{align*}
 			(x,y) \in A \times B 
 			&\to x \in A \wedge y \in B \\
@@ -1676,17 +1676,17 @@ The proofs for the two are quite tricky. Let me divide them into parts.
 		\end{align*}, 
 		which means $A \times B \subseteq C \times D$.
 		
-		\fbox{\em Only If.}
+		\myoifbox
 		Suppose $A \times B \subseteq C \times D$. Suppose for the sake of contradiction that $A \subseteq C \wedge B \subseteq D$ is not true. This means that either $A \subsetneq C$ or $B \subsetneq D$.
 		
 		We only consider when $A \nsubseteq C$, the other situation is handled similarly. Then, $\exists x(x \in A \wedge x \notin C)$. Because $B$ is non-empty, we can choose some $y \in B$. 
 		
 		Therefore, we have the object $(x,y)$. By how $x$ and $y$ are chosen, we have $(x,y) \in A \times B$. Because our premise, we have $(x,y) \in C \times D$. However, by the definition of Cartesian products, this means $x \in C$, a contradiction.
 	
-		\fbox{\em What If some are not empty?} Then the statement does not hold. For example, let $B = C = \varnothing$, and let $A,D$ be non-empty. Then we have $A \times C = \varnothing \subseteq B \times D = \varnothing$, but obviously $A \subsetneq B$.
+		\fbox{\em What If some are not empty?} Then the statement does not hold. For example, let $B = C = \emptyset$, and let $A,D$ be non-empty. Then we have $A \times C = \emptyset \subseteq B \times D = \emptyset$, but obviously $A \subsetneq B$.
 		
 		\item 
-		\fbox{\em If.} Suppose $A = C$ and $B = D$, then 
+		\myifbox Suppose $A = C$ and $B = D$, then 
 		\begin{align*}
 			(x,y) \in A \times B 
 			&\equiv x \in A \wedge y \in B \\
@@ -1695,7 +1695,7 @@ The proofs for the two are quite tricky. Let me divide them into parts.
 		\end{align*}, 
 		as desired.
 		
-		\fbox{\em Only If.}
+		\myoifbox
 		Suppose $A \times B = C \times D$. Suppose for the sake of contradiction that $A = C \wedge B = D$ is not true. This means that either $A \ne C$ or $B \ne D$.
 		
 		We only consider when $A \ne C$, the other situation is handled similarly. Then, there exists such a $x$ that
@@ -1709,7 +1709,7 @@ The proofs for the two are quite tricky. Let me divide them into parts.
 		
 		Because $A \times B = C \times D$, in either case we have $(x,y) \in A \times B = C \times D$. However, by the definition of Cartesian products, this means $x$ is in both $A$ and $C$, a contradiction.
 		
-		\fbox{\em What If some are not empty?} Then the statement does not hold. For example, let $B = C = \varnothing$, and let $A,D$ be non-empty. Then we have $A \times C = \varnothing = B \times D = \varnothing$, but obviously $A \ne B$.
+		\fbox{\em What If some are not empty?} Then the statement does not hold. For example, let $B = C = \emptyset$, and let $A,D$ be non-empty. Then we have $A \times C = \emptyset = B \times D = \emptyset$, but obviously $A \ne B$.
 \end{enumerate}
 \end{proof}
 
@@ -1749,15 +1749,15 @@ The proofs for the two are quite tricky. Let me divide them into parts.
 	Let $X_1, \dots, X_n$ be sets. Show that the Cartesian product defined in Definition 3.5.6, $\prod_{i=1}^{n}X_i$ is empty iff for some $i$, $X_i$ is empty.
 \end{exercise}
 \begin{proof}
-\fbox{\em If.} Suppose for some $i, X_i = \varnothing$, then for every ordered $n$-tuple $(x_i)_{1 \le i \le n}$, the statement 
+\myifbox Suppose for some $i, X_i = \emptyset$, then for every ordered $n$-tuple $(x_i)_{1 \le i \le n}$, the statement 
 \[
 x_i \in X_i \hbox{ for all } 1 \le i \le n
 \]
 is always false. This by definition means that all elements does not in $\prod_{i=1}^{n}X_i$, and hence it is empty.
 
-\fbox{\em Only If.} Suppose $\prod_{i=1}^{n}X_i = \varnothing$. Suppose for the sake of contradiction that $X_i \ne \varnothing$ for all $1 \le i \le n$. 
+\myoifbox Suppose $\prod_{i=1}^{n}X_i = \emptyset$. Suppose for the sake of contradiction that $X_i \ne \emptyset$ for all $1 \le i \le n$. 
 
-Then, according to the lemma of finite choice (Lemma~3.5.11), there exists a $n$-tuple $(x_i)_{1 \le i \le n}$, such that $x_i \in X_i$. By definition, this $n$-tuple should be an element of $\prod_{i=1}^{n}X_i = \varnothing$, a contradiction.
+Then, according to the lemma of finite choice (Lemma~3.5.11), there exists a $n$-tuple $(x_i)_{1 \le i \le n}$, such that $x_i \in X_i$. By definition, this $n$-tuple should be an element of $\prod_{i=1}^{n}X_i = \emptyset$, a contradiction.
 \end{proof}
 
 \begin{exercise}{3.5.9}
@@ -1824,9 +1824,9 @@ Then, according to the lemma of finite choice (Lemma~3.5.11), there exists a $n$
 		\item 
 		Denote the graph of $f$ as $G_f$, and that of $\tilde{f}$ as $G_{\tilde{f}}$.
 		
-		\fbox{\em If.} Suppose $f = \tilde{f}$. Then, for all $x \in X$, $f(x) = \tilde{f}(x)$. Hence, $(x,f(x)) = (x,\tilde{f}(x))$. Therefore, each $(x,f(x))$ in $G_f$ equals to some $(x,\tilde{f}(x))$ in $G_{\tilde{f}}$, and vice versa. Thus, $G_f = G_{\tilde{f}}$.
+		\myifbox Suppose $f = \tilde{f}$. Then, for all $x \in X$, $f(x) = \tilde{f}(x)$. Hence, $(x,f(x)) = (x,\tilde{f}(x))$. Therefore, each $(x,f(x))$ in $G_f$ equals to some $(x,\tilde{f}(x))$ in $G_{\tilde{f}}$, and vice versa. Thus, $G_f = G_{\tilde{f}}$.
 		
-		\fbox{\em Only If.} Suppose $G_f = G_{\tilde{f}}$. Then for all element $(x,f(x)) \in G_f$, we see that $(x,f(x)) \in G_{\tilde{f}}$. By the definition of $G_{\tilde{f}}$, we see that $(x,f(x))$ has to equal to $(x,\tilde{f}(x))$. By the property of ordered pairs, we must have $f(x) = \tilde{f}(x)$.
+		\myoifbox Suppose $G_f = G_{\tilde{f}}$. Then for all element $(x,f(x)) \in G_f$, we see that $(x,f(x)) \in G_{\tilde{f}}$. By the definition of $G_{\tilde{f}}$, we see that $(x,f(x))$ has to equal to $(x,\tilde{f}(x))$. By the property of ordered pairs, we must have $f(x) = \tilde{f}(x)$.
 		
 		Because this works for all elements in $G_f$, we see that $x$ can take any value in $X$. Therefore, $f(x) = \tilde{f}(x)$ for all $x \in X$, and the two functions are equal.
 		
@@ -1894,9 +1894,9 @@ Then, according to the lemma of finite choice (Lemma~3.5.11), there exists a $n$
 	
 	\fbox{\em Existence of partial functions.} We induct on $N$, to show only the existence of such a function for now.
 	
-	\fbox{\em Base case.} When $N = 0$, the domain of $a_N$ becomes $\{0\}$, because for all numbers $n$, we have $n = 0 + n$, hence by definition $0 \le n$. If $n \ne 0$, they $0 < n$. So $0$ is the only element in the domain. Define $a_0: \{0\} \to \{c\}$. Clearly, it satisfies the conditions \eqref{exer.3.5.12.cond.1} and~\eqref{exer.3.5.12.cond.2} for $n \le 0$.
+	\mybcbox When $N = 0$, the domain of $a_N$ becomes $\{0\}$, because for all numbers $n$, we have $n = 0 + n$, hence by definition $0 \le n$. If $n \ne 0$, then $0 < n$. So $0$ is the only element in the domain. Define $a_0: \{0\} \to \{c\}$. Clearly, it satisfies the conditions \eqref{exer.3.5.12.cond.1} and~\eqref{exer.3.5.12.cond.2} for $n \le 0$.
 	
-	\fbox{\em Inductive step.} Suppose that the statement's been proven for some $N$. Define $a_{\successor{N}}$ as follows:
+	\myisbox Suppose that the statement's been proven for some $N$. Define $a_{\successor{N}}$ as follows:
 	\begin{enumerate}
 		\item $a_{\successor{N}}(n) = a_N(n)$, if $n \le N$.
 		\item $a_{\successor{N}}(\successor{N}) = f(N,a_{\successor{N}}(N))$.
@@ -1907,9 +1907,9 @@ Then, according to the lemma of finite choice (Lemma~3.5.11), there exists a $n$
 	
 	\fbox{\em Uniqueness of partial functions.} Once we know such functions exits, we induct on $N$, to show the uniqueness of such functions for each $N$.
 	
-	\fbox{\em Base case.} If $N = 0$, suppose there is some $a_0'$ that also satisfies the conditions \eqref{exer.3.5.12.cond.1} and~\eqref{exer.3.5.12.cond.2}. Then we must have $a_0'(0) = c = a_0(0)$. Since $0$ is the only element in the domain, we have the two functions equal.
+	\mybcbox If $N = 0$, suppose there is some $a_0'$ that also satisfies the conditions \eqref{exer.3.5.12.cond.1} and~\eqref{exer.3.5.12.cond.2}. Then we must have $a_0'(0) = c = a_0(0)$. Since $0$ is the only element in the domain, we have the two functions equal.
 	
-	\fbox{\em Inductive step.} Consider any partial function $a_{\successor{N}}$ that satisfies the conditions \eqref{exer.3.5.12.cond.1} and~\eqref{exer.3.5.12.cond.2} for $n \le \successor{N}$.
+	\myisbox Consider any partial function $a_{\successor{N}}$ that satisfies the conditions \eqref{exer.3.5.12.cond.1} and~\eqref{exer.3.5.12.cond.2} for $n \le \successor{N}$.
 	
 	We restrict its domain to $\{n \in \setn : n \le N\}$. Clearly, the restricted function satisfy the conditions \eqref{exer.3.5.12.cond.1} and~\eqref{exer.3.5.12.cond.2} when $n \le N$. Hence, by our inductive hypothesis, it is the only function from $\{n \in \setn : n \le N\}$ to $X$ that satisfies the conditions. This means for any $n \le N$, $a_{\successor{N}}(n)$ can only have a unique value.
 	
@@ -1938,6 +1938,61 @@ While the above prove may seem sound, it is actually circular. This is because w
 It is why Prof.~Tao asked us to prove it using only the Peano axioms. (Actually, we can use other propositions, like Lemma~2.2.10, if they don't depend on the recursive theorem.)
 
 \noindent\fbox{\em The second way.}
+The first place where we use the order of natural numbers is in the domain of every $a_N$. Therefore, we must create some new sets as domains that do not depend on the order.
+
+Using Prof.~Tao's hint, I show that, 
+\begin{lem}
+	For every natural number $N$, we have
+	\begin{enumerate}
+		\item There exists unique sets $A_N, B_N \subseteq \setn$ such that (That is, there exists such sets, and for all such sets (in paris) that satisfy the following conditions, they must respectively equal to $A_N$ and $B_N$.) 
+			\label{exer.3.5.12.2nd.cond.1}
+		\item $A_N \cap B_N = \emptyset$. 
+			\label{exer.3.5.12.2nd.cond.2}
+		\item $A_N \cup B_N = \setn$. 
+			\label{exer.3.5.12.2nd.cond.3}
+		\item $0 \in A_N$. 
+			\label{exer.3.5.12.2nd.cond.4}
+		\item $\successor{N} \in B_N$. 
+			\label{exer.3.5.12.2nd.cond.5}
+		\item For all $n$, if $n \in B_N$, then $\successor{n} \in B_N$. 
+			\label{exer.3.5.12.2nd.cond.6}
+		\item For all $n$, if $n \in A_N \wedge n \ne N$, then $\successor{n} \in A_N$. 
+			\label{exer.3.5.12.2nd.cond.7}
+	\end{enumerate}
+\end{lem}
+\begin{proof}
+	We induct on $N$.
+	
+	\mybcbox Set $A_0 := \{0\}$ and $B_0 = \setn \setminus \{0\}$. Obviously, they satisfy the conditions \ref{exer.3.5.12.2nd.cond.2}, \ref{exer.3.5.12.2nd.cond.3}, \ref{exer.3.5.12.2nd.cond.4}, and \ref{exer.3.5.12.2nd.cond.5}.
+	
+	For condition \ref{exer.3.5.12.2nd.cond.6}, note that, $\successor{n} \ne 0$, by Axiom~2.3. By the definition of $B_0$, we thus have $\successor{n} \in B_0$. For condition \ref{exer.3.5.12.2nd.cond.7}, it is vacuously true.
+	
+	Now we show that $A_0$ and $B_0$ are unique. 
+	% A_0,B_0 will be \mathcal_{A}_0,\mathcal{B}_0 within this group
+	
+	\begingroup
+	\def\azro{{\cal A}_0}
+	\def\bzro{{\cal B}_0}
+	We show that, for all pairs of sets $\azro,\bzro$ that satisfy such conditions, we have, for all $n \in \setn$, $n \in \bzro$ iff $n \ne 0$, by inducting on $n$.
+	\begin{enumerate}
+		\item When $n = 0$. The \myifbox part is vacuously true. For the \myoifbox part, note that $0 \in \azro$ by condition \ref{exer.3.5.12.2nd.cond.4}. Hence, by condition \ref{exer.3.5.12.2nd.cond.2}, we see that $n \in \bzro \to n \ne \azro \to n \ne 0$.
+		
+		\item Suppose for some $n$, we already have $n \in \bzro$ iff $n \ne 0$. We either have 
+		\begin{enumerate}
+			\item $n \in \bzro$, then, by the inductive hypothesis, $n \ne 0$. By condition \ref{exer.3.5.12.2nd.cond.6}, we have $\successor{n} \in \bzro$. Hence, the iff statement is true because both sides are true.
+			\item $n \ne \bzro$. 
+		\end{enumerate}
+	\end{enumerate}
+	\endgroup
+	
+	\myisbox Suppose for some $N$ we have such sets $A_N,B_N$ that satisfy the above conditions. We define
+	\[
+	A_{\successor{N}} := A_N \cup \{\successor{N}\}; \quad B_{\successor{N}} := \setn \setminus A_{\successor{N}}
+	\]
+\end{proof}
+
+In fact, if we had the order, we would see that $A_N = \{n \in \setn : 1 \le n \le N\}$ and $B_N = \setn \setminus A_N$. But we could not have the order.
+
 
 \begin{exercise}{3.5.13}
 	Suppose there exists an alternative $0'$, an alternative increment: $\successor{}'$, such that the numbers we obtained from the two obey the Axioms 2.1--2.5.
@@ -1957,13 +2012,13 @@ Now we show that $a$ is the function that we want.
 	
 	\item Now we show that $a(n) = n'$ iff $a(\successor{n}) = \successor{n'}'$. 
 	
-	\fbox{\em If.} Suppose $a(\successor{n}) = \successor{n'}'$. We expand $a(\successor{n})$ by the definition of $a$, to get
+	\myifbox Suppose $a(\successor{n}) = \successor{n'}'$. We expand $a(\successor{n})$ by the definition of $a$, to get
 	\[
 	a(\successor{n}) = \successor{(a(n))}'
 	\]
 	Using our hypothesis, we have $\successor{n'}' = \successor{(a(n))}'$. By Axiom 2.4, we have $n' = a(n)$, as desired.
 	
-	\fbox{\em Only If.} Suppose $a(n) = n'$. We expand $a(\successor{n})$ by the definition of $a$, to get
+	\myoifbox Suppose $a(n) = n'$. We expand $a(\successor{n})$ by the definition of $a$, to get
 	\[
 	a(\successor{n}) = \successor{(a(n))}'
 	\]
@@ -1981,11 +2036,11 @@ Now we show that $a$ is the function that we want.
 	\]
 	
 	\begin{enumerate}
-		\item \fbox{\em Base case.} In this case, $m = 0$. we need to show that $0 \ne n \to a(0) \ne a(n)$. According Lemma~2.2.10, since $n \ne 0$, we have some $b \in \setn$ such that $\successor{b} = n$.
+		\item \mybcbox In this case, $m = 0$. we need to show that $0 \ne n \to a(0) \ne a(n)$. According Lemma~2.2.10, since $n \ne 0$, we have some $b \in \setn$ such that $\successor{b} = n$.
 		
 		Observer the value $a(n) = a(\successor{b}) = \successor{a(b)}'$. Because, by definition, $a(0) = 0'$, we cannot have $\successor{a(b)}' = a(0)$, thanks to Axiom~2.3. Therefore, $a(0) \ne a(n)$.
 		
-		\item \fbox{\em Inductive step.} Suppose that the statement is true for some $m \in \setn$. We need to show that this is true:
+		\item \myisbox Suppose that the statement is true for some $m \in \setn$. We need to show that this is true:
 		\[
 			\successor{m} \ne n \to a(\successor{m}) \ne a(n) \hbox{ for all } n \in \setn
 		\]
@@ -2006,9 +2061,9 @@ Now we show that $a$ is the function that we want.
 	
 	We induct on $n'$, since the alternative natural number set also satisfies Axiom~2.5.
 	\begin{enumerate}
-		\item \fbox{\em Base case.} When $n' = 0'$, we set $n = 0$, and $a(0) = 0'$, by definition.
+		\item \mybcbox When $n' = 0'$, we set $n = 0$, and $a(0) = 0'$, by definition.
 		
-		\item \fbox{\em Inductive step.} Suppose the statement is true for some $n' \in \setn'$, then there exists a $n \in \setn$ such that $a(n) = n'$. 
+		\item \myisbox Suppose the statement is true for some $n' \in \setn'$, then there exists a $n \in \setn$ such that $a(n) = n'$. 
 		
 		Consider $a(\successor{n})$. By definition it equals to $\successor{a(n)}'$, which equals $\successor{n'}'$, by the inductive hypothesis.
 	\end{enumerate}
@@ -2096,8 +2151,8 @@ $S(i) \neq f(x)$, then $a \in X - \{x\}$. So $g(a) = f(a) - 1 = i$.
 On one hand, if $X$ is empty, then we know that the empty function whose range is also empty is injective, 
 (See \exerciseref{3.3.3}) so its cardinality is $0$. 
 
-On the other hand, if $\# X = 0$ but $X \neq \varnothing$, then there exists an bijection 
-$f:X \rightarrow \varnothing$, which is impossible.
+On the other hand, if $\# X = 0$ but $X \neq \emptyset$, then there exists an bijection 
+$f:X \rightarrow \emptyset$, which is impossible.
 \end{proof}
 
 \declareexercise{3.6.3}
@@ -2200,7 +2255,7 @@ defined for rational numbers at Definition 4.3.9.
 
 Suppose that $\#Y = m,\#X = n$. Use induction on $n$. 
 
-When $n=0$, $X$ is empty, then $Y^X$ has one function $f:\varnothing \rightarrow Y$.
+When $n=0$, $X$ is empty, then $Y^X$ has one function $f:\emptyset \rightarrow Y$.
 
 Suppose that we have proven the statement for some $n$. Before we proceed the proof, we need some lemmas.
 \begin{lem}
@@ -2326,7 +2381,7 @@ where $g\in A^{B \cup C}, (u,v) \in A^B \times A^C$.
 We can verify the bijectivity of $f$ nearly in the same way as way did previously. So I won't write it 
 down here.
 
-Then, we know $B \cap C = \varnothing \Rightarrow \#(B \cup C) = \#B + \#C$. So we can conclude that 
+Then, we know $B \cap C = \emptyset \Rightarrow \#(B \cup C) = \#B + \#C$. So we can conclude that 
 \[
 a^b \times a^c = a^{b+c}
 \]

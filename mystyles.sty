@@ -60,5 +60,34 @@
 	\end{whyinternal}%
 }
 
+% These boxes are stored in box registers for quicker typesetting. I use these boxes to open a situation.
+% The leading i in the names means ``internal.''
+\newsavebox{\ibcbox}
+\newsavebox{\iisbox}
+\newsavebox{\iifbox}
+\newsavebox{\ioifbox}
+\sbox{\ibcbox}{{\em Base case}}
+\sbox{\iisbox}{{\em Inductive step}}
+\sbox{\iifbox}{{\em If}}
+\sbox{\ioifbox}{{\em Only if}}
+% Now each the following commands will produce a corresponding box followed by a space, which is discarded in the star version.
+%
+\NewDocumentCommand{\mybcbox}{s}{%
+	\fbox{\usebox{\ibcbox}}% Type the space
+	\IfBooleanTF{#1}{}{\ }%
+}
+\NewDocumentCommand{\myisbox}{s}{%
+	\fbox{\usebox{\iisbox}}% Type the space
+	\IfBooleanTF{#1}{}{\ }%
+}
+\NewDocumentCommand{\myifbox}{s}{%
+	\fbox{\usebox{\iifbox}}% Type the space
+	\IfBooleanTF{#1}{}{\ }%
+}
+\NewDocumentCommand{\myoifbox}{s}{%
+	\fbox{\usebox{\ioifbox}}% Type the space
+	\IfBooleanTF{#1}{}{\ }%
+}
+
 \newcommand\addanswer[1]{\addtocontents{ans}{\protect\@dottedtocline{1}{1.5em}{2.3em}{\exerciseref{#1}}{\pageref{exercise#1}}}}
 \newcommand\listofanswers{\part*{Answers}\@starttoc{ans}}
