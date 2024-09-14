@@ -1905,7 +1905,7 @@ Then, according to the lemma of finite choice (Lemma~3.5.11), there exists a $n$
 	
 	We can now close the induction. \hfill \qedsymbol
 	
-	\fbox{\em Uniqueness of partial functions.} Once we know such functions exits, we induct on $N$, to show the uniqueness of such functions for each $N$.
+	\fbox{\em Uniqueness of partial functions.} Once we know such functions exists, we induct on $N$, to show the uniqueness of such functions for each $N$.
 	
 	\mybcbox If $N = 0$, suppose there is some $a_0'$ that also satisfies the conditions \eqref{exer.3.5.12.cond.1} and~\eqref{exer.3.5.12.cond.2}. Then we must have $a_0'(0) = c = a_0(0)$. Since $0$ is the only element in the domain, we have the two functions equal.
 	
@@ -1941,10 +1941,10 @@ It is why Prof.~Tao asked us to prove it using only the Peano axioms. (Actually,
 The first place where we use the order of natural numbers is in the domain of every $a_N$. Therefore, we must create some new sets as domains that do not depend on the order.
 
 Using Prof.~Tao's hint, I show that, 
-\begin{lem}
-	For every natural number $N$, we have
+\begin{lem}\label{my.lem.exer.3.5.12}
+	For every natural number $N$, we have unique sets $A_N,B_N$, such that (That is, there exists such sets, and for all such sets (in paris) that satisfy the following conditions, they must respectively equal to $A_N$ and $B_N$.) 
 	\begin{enumerate}
-		\item There exists unique sets $A_N, B_N \subseteq \setn$ such that (That is, there exists such sets, and for all such sets (in paris) that satisfy the following conditions, they must respectively equal to $A_N$ and $B_N$.) 
+		\item $A_N, B_N \subseteq \setn$
 			\label{exer.3.5.12.2nd.cond.1}
 		\item $A_N \cap B_N = \emptyset$. 
 			\label{exer.3.5.12.2nd.cond.2}
@@ -1963,36 +1963,131 @@ Using Prof.~Tao's hint, I show that,
 \begin{proof}
 	We induct on $N$.
 	
-	\mybcbox Set $A_0 := \{0\}$ and $B_0 = \setn \setminus \{0\}$. Obviously, they satisfy the conditions \ref{exer.3.5.12.2nd.cond.2}, \ref{exer.3.5.12.2nd.cond.3}, \ref{exer.3.5.12.2nd.cond.4}, and \ref{exer.3.5.12.2nd.cond.5}.
+	\mybcbox Set $A_0 := \{0\}$ and $B_0 = \setn \setminus \{0\}$. Obviously, they satisfy the conditions \ref{exer.3.5.12.2nd.cond.1}--\ref{exer.3.5.12.2nd.cond.5}.
 	
 	For condition \ref{exer.3.5.12.2nd.cond.6}, note that, $\successor{n} \ne 0$, by Axiom~2.3. By the definition of $B_0$, we thus have $\successor{n} \in B_0$. For condition \ref{exer.3.5.12.2nd.cond.7}, it is vacuously true.
 	
-	Now we show that $A_0$ and $B_0$ are unique. 
-	% A_0,B_0 will be \mathcal_{A}_0,\mathcal{B}_0 within this group
-	
+	\textbf{Now we show that $A_0$ and $B_0$ are unique.} 
+	% A_0,B_0 will be \mathcal_{A}_0,\mathcal{B}_0 within this group	
 	\begingroup
 	\def\azro{{\cal A}_0}
 	\def\bzro{{\cal B}_0}
 	We show that, for all pairs of sets $\azro,\bzro$ that satisfy such conditions, we have, for all $n \in \setn$, $n \in \bzro$ iff $n \ne 0$, by inducting on $n$.
 	\begin{enumerate}
-		\item When $n = 0$. The \myifbox part is vacuously true. For the \myoifbox part, note that $0 \in \azro$ by condition \ref{exer.3.5.12.2nd.cond.4}. Hence, by condition \ref{exer.3.5.12.2nd.cond.2}, we see that $n \in \bzro \to n \ne \azro \to n \ne 0$.
+		\item \mybcbox When $n = 0$. The \myifbox part is vacuously true. For the \myoifbox part, note that $0 \in \azro$ by condition \ref{exer.3.5.12.2nd.cond.4}. Hence, by condition \ref{exer.3.5.12.2nd.cond.2}, we see that $n \in \bzro \to n \ne \azro \to n \ne 0$.
 		
-		\item Suppose for some $n$, we already have $n \in \bzro$ iff $n \ne 0$. We either have 
+		\item \myisbox Suppose for some $n$, we already have $n \in \bzro$ iff $n \ne 0$. We either have 
 		\begin{enumerate}
-			\item $n \in \bzro$, then, by the inductive hypothesis, $n \ne 0$. By condition \ref{exer.3.5.12.2nd.cond.6}, we have $\successor{n} \in \bzro$. Hence, the iff statement is true because both sides are true.
-			\item $n \ne \bzro$. 
-		\end{enumerate}
+			\item $n \in \bzro$. Then, by the inductive hypothesis, $n \ne 0$. By condition \ref{exer.3.5.12.2nd.cond.6}, we have $\successor{n} \in \bzro$. By Axiom~2.3, we have $\successor{n} \ne 0$. Therefore, the iff statement is true because both sides are true.
+			
+			\item $n \ne \bzro$. Then, by the inductive hypothesis, we have $\false \leftrightarrow n \ne 0$. So we must have $n \ne 0$ to be $\false$, and $n = 0$. Hence, by condition \ref{exer.3.5.12.2nd.cond.5}, we have $\successor{n} = \successor{0} \in \bzro$. By Axiom~2.3, we have $\successor{n} \ne 0$. Therefore, the iff statement is true because both sides are true.
+		\end{enumerate} 
 	\end{enumerate}
+
+	Therefore, for all such $\bzro$, we have $n \in \bzro$ iff $n \ne 0$. That is, $\bzro = \{n \in \setn : n \ne 0\}$, which is unique, thanks to the axiom of specification. 
+	
+	Now we show that $\azro$ is also unique. Recall the conditions \ref{exer.3.5.12.2nd.cond.2} and \ref{exer.3.5.12.2nd.cond.3}: with them and \exerciseref{3.1.9}, we must have $\azro = \setn \setminus \bzro$. As we proved that $\bzro$ is unique, $\azro$ must also be unique.
 	\endgroup
 	
-	\myisbox Suppose for some $N$ we have such sets $A_N,B_N$ that satisfy the above conditions. We define
+	\myisbox Suppose for some $N$ we have unique sets $A_N,B_N$ that satisfy the above conditions \ref{exer.3.5.12.2nd.cond.1}--\ref{exer.3.5.12.2nd.cond.7}. We define
+	\begin{equation}
+		A_{\successor{N}} := A_N \cup \{\successor{N}\}; \quad B_{\successor{N}} := \setn \setminus A_{\successor{N}} \label{eq.3.5.12.relation.an.bn}
+	\end{equation}
+	
+	and try to show that $A_{\successor{N}},B_{\successor{N}}$ also satisfy the conditions.
+	
+	By definition, condition \ref{exer.3.5.12.2nd.cond.1} without the uniqueness is obviously true for them.
+	
+	Let $n$ be any natural number. By our inductive hypothesis and conditions \ref{exer.3.5.12.2nd.cond.1}, \ref{exer.3.5.12.2nd.cond.2}, we have two such situations that at least and only one of them can be true:
+	\begin{enumerate}
+		\item $n \in A_N$.
+		\item $n \in B_N$.
+	\end{enumerate}
+	If we add condition \ref{exer.3.5.12.2nd.cond.5} into consideration, we can have three such situations that at least and only one of them can be true:
+	\begin{enumerate}
+		\item $n \in A_N$.
+		\item $n = \successor{N}$.
+		\item $n \in B_N \setminus \{\successor{N}\}$.
+	\end{enumerate}
+	For the first two, we have $n \in A_N \cup \{\successor{N}\} =: A_{\successor{N}}$. For the third one, we have $n \in B_N \setminus \{\successor{N}\} =: B_{\successor{N}}$. Since at least and only one of them must be true, we see that $A_{\successor{N}}$ and $B_{\successor{N}}$ are disjoint, the condition \ref{exer.3.5.12.2nd.cond.2}.
+	
+	By their definition and the inductive hypothesis, \ref{exer.3.5.12.2nd.cond.3} and \ref{exer.3.5.12.2nd.cond.4} are clearly true.
+	
+	By the inductive hypothesis and condition \ref{exer.3.5.12.2nd.cond.5}, we have $\successor{N} \in B_N$. By \ref{exer.3.5.12.2nd.cond.6}, we have $\successor{(\successor{N})} \in B_N$. By Axiom 2.3 and~2.4, we have $\successor{(\successor{N})} \ne \successor{N}$. Therefore, $\successor{(\successor{N})} \in B_N \setminus \{\successor{N}\} =: B_{\successor{N}}$. Therefore, condition \ref{exer.3.5.12.2nd.cond.5} is true.
+	
+	By definition, if $n \in B_{\successor{N}}$, then $n \in B_N$. By the inductive hypothesis, \ref{exer.3.5.12.2nd.cond.6} is clearly true.
+	
+	If $n \in A_{\successor{N}} \wedge n \ne \successor{N}$, then by definition $n \in A_N$. We have two situations:
+	\begin{enumerate}
+		\item $n = N$, then $\successor{n} = \successor{N} \in A_{\successor{N}}$.
+		\item $n \ne N$, then by condition \ref{exer.3.5.12.2nd.cond.7} and the inductive hypothesis, we have $\successor{n} \in A_N \in A_{\successor{N}}$.
+	\end{enumerate}
+	Therefore, in all cases we have condition \ref{exer.3.5.12.2nd.cond.7}.
+	
+	We have proved all the conditions \ref{exer.3.5.12.2nd.cond.1}--\ref{exer.3.5.12.2nd.cond.7} for $A_{\successor{N}}$ and $B_{\successor{N}}$. 
+	
+	\textbf{Now we show that $A_{\successor{N}}$ and $B_{\successor{N}}$ are indeed unique.}
+	% A_{N++},B_{N++} will be \mathcal_{A}_{N++},\mathcal{B}_{N++} within this group	
+	\begingroup
+	\def\anpp{{\cal A}_{\successor{N}}}%
+	\def\bnpp{{\cal B}_{\successor{N}}}%
+	We show that, for all pairs of sets $\anpp,\bnpp$ that satisfy such conditions, we must have $\anpp = A_N \cup \{\successor{N}\}$, where $A_N$ is the unique set obtained from the inductive hypothesis.
+	
+	That is equivalent of saying, for all $n \in \setn$,
 	\[
-	A_{\successor{N}} := A_N \cup \{\successor{N}\}; \quad B_{\successor{N}} := \setn \setminus A_{\successor{N}}
+		n \in \anpp \hbox{ iff } n \in A_N \cup \{\successor{N}\}
 	\]
+	We induct on $n$.
+	\begin{enumerate}
+		\item \mybcbox When $n = 0$, by condition \ref{exer.3.5.12.2nd.cond.4}, $n \in A_N$ and $n \in \anpp$. Hence, both sides of the iff statement are true.
+		
+		\item \myisbox Suppose for some $n$, we already have $n \in \anpp$ iff $n \in A_N \cup \{\successor{N}\}$, a unique set, thanks to the union axiom. Because we already have $A_N,B_N$ satisfying the conditions, we have three situations, and at least and only one of them is true at a time:
+		\begin{enumerate}
+			\item $n \in A_N$. By inductive hypothesis, $n \in \anpp$. By condition \ref{exer.3.5.12.2nd.cond.2} and \ref{exer.3.5.12.2nd.cond.5}, we have $n \ne \successor{N}$. Because the set $A_{\successor{N}}$ satisfies the condition \ref{exer.3.5.12.2nd.cond.7}, we thus have $\successor{n} \in \anpp$. 
+			
+			Hence, both sides of the iff for $\successor{n}$ are true.
+			
+			\item $n = \successor{N}$. By condition \ref{exer.3.5.12.2nd.cond.5}, we have $\successor{n} \in \bnpp$. By condition \ref{exer.3.5.12.2nd.cond.2}, we have $\successor{n} \notin \anpp$. 
+			
+			By our premise about $A_N,B_N$, we have $n \in B_N$. By condition \ref{exer.3.5.12.2nd.cond.6}, $\successor{n} \in B_N$. By condition \ref{exer.3.5.12.2nd.cond.2}, $\successor{n} \notin A_N$. Because $n = \successor{N}$, by Axiom 2.3 and~2.4, $\successor{n} \ne \successor{N}$, which means $\successor{n} \notin A_N \cup \{\successor{N}\}$.
+			
+			Hence, both sides of the iff for $\successor{n}$ are false. The iff statement is thus vacuously true.
+			
+			\item $n \in B_N \setminus \{\successor{N}\}$. By condition \ref{exer.3.5.12.2nd.cond.2}, we see that $n \notin A_N \cup \{\successor{N}\}$. By the inductive hypothesis, $n \notin \anpp$. By the conditions \ref{exer.3.5.12.2nd.cond.2} and \ref{exer.3.5.12.2nd.cond.3}, $n \in \bnpp$. By condition \ref{exer.3.5.12.2nd.cond.6}, we then have $\successor{n} \in \bnpp$, and $\successor{n} \notin \anpp$ follows from condition \ref{exer.3.5.12.2nd.cond.2}.
+			
+			We need to show that $\successor{n} \notin A_N \cup \{\successor{N}\}$. Because $n \in B_N$ and condition \ref{exer.3.5.12.2nd.cond.6}, we have $\successor{n} \in B_N$. Hence $\successor{n} \notin A_N$.
+			
+			Now we only need to show that $\successor{n} \ne \successor{N}$. Suppose for the sake of contradiction that they equal to each other, then by Axiom~2.4 we have $n = N$. Hence, $n \in \anpp$ by condition \ref{exer.3.5.12.2nd.cond.7}. However, we just showed that $a \notin \anpp$ in the last paragraph, a contradiction.
+			
+			Therefore, both sides of the iff for $\successor{n}$ are false. The iff statement is thus vacuously true.
+		\end{enumerate}
+	\end{enumerate}
+
+	Now we know that $A_{\successor{N}}$ is unique, thanks to the pairwise union axiom. By \exerciseref{3.1.9}, all the sets $\bnpp$ must satisfy $\bnpp = \setn \setminus A_{\successor{N}}$. Thanks to the axiom of specification, this means that $B_{\successor{N}}$ is also unique.
+	\endgroup
+	
+	We can now close the induction to conclude that for all $N$, there exists unique sets $A_N,B_N$, which satisfy the conditions \ref{exer.3.5.12.2nd.cond.1}--\ref{exer.3.5.12.2nd.cond.7}.
 \end{proof}
 
-In fact, if we had the order, we would see that $A_N = \{n \in \setn : 1 \le n \le N\}$ and $B_N = \setn \setminus A_N$. But we could not have the order.
+In fact, if we had the order, we would see that $A_N = \{n \in \setn : n \le N\}$ and $B_N = \setn \setminus A_N$. But we cannot have the order.
 
+Recall how we defined $A_{\successor{N}}$ and $B_{\successor{N}}$ in the proof of the existence? The equation \eqref{eq.3.5.12.relation.an.bn}. Now we know that they are unique, so the following corollary is true: 
+\begin{coro}\label{my.coro.3.5.12.an.bn}
+	For all $N \in \setn$, \eqref{eq.3.5.12.relation.an.bn} is true.
+\end{coro}
+
+Now we are ready to define the partial functions $a_N$ again, but this time without any circularity. In the first proof for the existence of unique partial functions $a_N$,
+\begin{enumerate}
+	\item Replace every $\{0\}$ with $A_0$. Actually, we can skip this.
+	\item Replace every $n \le N$ with $n \in A_N$. Or, in the context of $A_{\successor{N}}$, we may instead replace it with $n \in A_{\successor{N}}\setminus \{\successor{N}\}$. But the two replacements are the same, thanks to My Corollary~\ref{my.coro.3.5.12.an.bn}.
+	\item Replace every $n < N$ with $n \in A_N \setminus \{N\}$.
+	\item Replace every $n > N$ with $n \in B_N$.
+\end{enumerate}
+After the replacements, wherever we use the trichotomy of the order to conclude $n$ either $\le N$ or $>N$ (we used it implicitly), we can instead use the conditions $A_N \cap B_N = \emptyset$ and $A_N \cup B_N = \setn$ (and \exerciseref{3.1.9}).
+
+\begin{proof}
+	We will see that, after these replacements, all places in the first proof where addition and ordered are depended are removed. Hence, the proof will become valid again for this exercise.
+\end{proof}
 
 \begin{exercise}{3.5.13}
 	Suppose there exists an alternative $0'$, an alternative increment: $\successor{}'$, such that the numbers we obtained from the two obey the Axioms 2.1--2.5.
