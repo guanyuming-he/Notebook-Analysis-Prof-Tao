@@ -34,12 +34,12 @@ Induct on $a$.
 We can now close the induction.
 \end{proof}
 
-After we have the cancellation law, it would be nice to have an additional proposition that Tao didn't mention in the book. Our intuition would let us think that whenever we count, we get a new, different number, that is, $1\ne 2,3,4,5,\dots;\quad 2\ne 3,4,5,6,\dots$ and so on. But can we formalise it for all natural numbers?
+After we have the cancellation law, we can prove what Prof.~Tao referred to as the natural numbers being distinct. However, the proof depends on addition, which uses the informal Proposition~2.1.16, so we will have to wait until \exerciseref{3.5.12} to eventually formalise it.
 \begin{prop}\label{my.prop.natural.number.ne}
 Let $m,n$ be such natural numbers that $m=n+a$ for natural number $a\ne 0$, which means $m$ is produced by counting $a$ times from $n$. Then, we have $m \ne n$.
 \end{prop}
 \begin{proof}
-Surprisingly, we don't need induction here. If we were to use it, we would first need to prove the following corollary.
+Surprisingly, we don't need induction here. However, if we were to use it, we could start from the following corollary.
 
 Suppose for the sake of contradiction that $m=n$, then by the definition and commutativity of addition, $m=0+n=n+0$. Hence, $n+a=n+0$, and by the cancellation law we have $a=0$, a contradiction.
 \end{proof}

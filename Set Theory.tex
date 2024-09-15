@@ -2089,6 +2089,8 @@ After the replacements, wherever we use the trichotomy of the order to conclude 
 	We will see that, after these replacements, all places in the first proof where addition and ordered are depended are removed. Hence, the proof will become valid again for this exercise.
 \end{proof}
 
+This exercise has formalised all things that depend on the recursive definition theorem, in particular, addition, and in particular, the statement, My Proposition~\ref{my.prop.natural.number.ne}, that the natural numbers are distinct.
+
 \begin{exercise}{3.5.13}
 	Suppose there exists an alternative $0'$, an alternative increment: $\successor{}'$, such that the numbers we obtained from the two obey the Axioms 2.1--2.5.
 	
@@ -2170,174 +2172,177 @@ Now we show that $a$ is the function that we want.
 \end{proof}
 
 \section{Cardinality of Sets}
-
-\declareexercise{3.6.1}
+\begin{why}{58}
+	The map $f: \setn \to Y,\ n \mapsto 2n$, where $Y$ is the set of even natural numbers, is a bijection.
+\end{why}
 \begin{proof}
-Reflexivity: Let $f(x):= x, X \rightarrow X$. $f$ is bijective since $f^{-1}(x) = x$ exists.
-
-Symmetry: If $X,Y$ have the same cardinality, then $\exists f:X\rightarrow Y$ which is bijective. So 
-$f^{-1}$ exists, and is also a bijection. Thus $Y,X$ have the same cardinality. Since then, we can say 
-that two sets have the same cardinality without caring about the order.
-
-Transitivity: If $X,Y$ have the same cardinality, and $Y,Z$ also have the same cardinality, then there 
-exist two bijections: $f:X \rightarrow Y$ and $g:Y \rightarrow Z$. It is easy to verify that $g \circ f$ 
-is also a bijection and is from $X$ to $Z$ (See \exerciseref{3.3.7}).
+	By the definition of even numbers, we see that $f$ is clearly surjective. 
+	
+	Now we show that it is injective. Consider $f(m) = 2m$ and $f(n) = 2n$ for all $m,n$. If $f(m) = f(n)$, then we must have $m = n$, by the cancellation law of multiplication (Corollary~2.3.7).
 \end{proof}
 
-\paragraph{Remark 3.6.6}
-It is $f(n) := S(n)$. We are now proving something stronger
-\begin{lem} \label{lem3.6.6}
-For any natural number $m,n$, $\{i \in \mathbb{N}:0\leq i\leq n\}$ and 
-$\{i \in \mathbb{N}:m\leq i\leq n+m\}$ have the same cardinality.
-\end{lem}
-\begin{proof}
-Use induction on $m$. When $m=0$, the statement is obviously true. Simply give the function $f(n):=n$.
-
-Suppose that for some $m$, we have proven the statement. Then there exists a bijection: 
-\[
-f:\{i \in \mathbb{N}:0\leq i\leq n\} \rightarrow \{i \in \mathbb{N}:m\leq i\leq n+m\}
-\].
-Let $g$ be a function from $\{i \in \mathbb{N}:0\leq i\leq n\}$ to $\mathbb{N}$ such that 
-$g(x) = S(f(x))$. We prove that $g$ is a bijection from $\{i \in \mathbb{N}:0\leq i\leq n\}$ to 
-$\{i \in \mathbb{N}:S(m)\leq i\leq n+S(m)\}$.
-
-First we prove that $g(n)$ always in $\{i \in \mathbb{N}:S(m)\leq i\leq n+S(m)\}$, which is immediately 
-given by the fact that addition preserves order. 
-
-Surjectivity: For any $a \in \{i \in \mathbb{N}:S(m)\leq i\leq n+S(m)\}$, $a$ is positive. Then $a$ is 
-always some number's successor, that is $a = S(b) = b+1$ for some natural number $b$. Since addition 
-preserves order, $b \in \{i \in \mathbb{N}:m\leq i\leq n+m\}$. $f$ being surjective implies that there is 
-some $x$ in the domain such that $f(x) = b$, and $g(x) = f(x) + 1 = a$.
-
-Injectivity: By cancellation law, $f(x) + 1 \neq f(x') + 1 \equiv f(x) \neq f(x') \equiv x \neq x'$.
-
-We can now close the induction.
+\begin{exercise}{3.6.1}
+	Having the same cardinality is an equivalent relation. That is,
+	\begin{enumerate}
+		\item \fbox{\em Reflexivity} $X$ has the same cardinality as $X$.
+		\item \fbox{\em Symmetry} If $X$ has the same cardinality as $Y$, then $Y$ has the same cardinality as $X$.
+		\item \fbox{\em Transitivity} If If $X$ has the same cardinality as $Y$, and if $Y$ has the same cardinality as $Z$, then $X$ has the same cardinality as $Z$.
+	\end{enumerate}
+\end{exercise}
+\begin{proof}\leavevmode
+	\begin{enumerate}
+		\item $f: x \mapsto x$ is clearly bijective.
+		\item Denote $f: X \to Y$ as the bijection promised by the premise. By \exerciseref{3.3.6}, $f^{-1}$ is also bijection, and it's from $Y$ to $X$, as desired.
+		\item Denote $f: X \to Y$, $g: Y \to Z$ as the bijections promised by the premise. By \exerciseref{3.3.2}, $g \circ f$ is also bijective.
+	\end{enumerate}
 \end{proof}
 
-\paragraph{Lemma 3.6.9}
-Empty functions are not injective when the range is not empty (See \exerciseref{3.3.3}). 
-
-Now we show that $g$ is bijective:
+\begin{why}{59}
+	The set $M := \{i \in \setn : 1 \le i \le n\}$ and the set $N := \{i \in \setn : (0 \le)\, i < n\}$ have the same cardinality.
+\end{why}
 \begin{proof}
-Injectivity: $f$ being injective implies that 
-\[
-\forall x \forall x'((x \in X \wedge x' \in X) \Longrightarrow (f(x) = f(x') \Rightarrow x = x'))
-\]
-For $a,a' \in X - \{x\}$, they also $\in X$. If $g(a) = g(a')$, then either directly $f(a) = f(a')$ or 
-$f(a) - 1 = f(a') - 1$, which gives $f(a) = f(a')$. Thus $a = a'$. (Note that subtraction is not defined 
-yet, see the footnote about this in the book).
-
-Surjectivity: The surjectivity of $f$ gives 
-\[
-(\forall 1 \leq i \leq n)(\exists a(a \in X \wedge f(a) = i))
-\].
-
-If $f(x) = n$, then $g(a) = f(a)$ for all meaningful $a$. Then for $1 \leq i \leq n-1$, we can find $a$ 
-such that $a \in X \wedge a \neq x$, that is, $x \in X - \{x\}$. So $g(a)$ is meaningful, then $g$ is 
-surjective.
-
-If $f(x) \neq n$, then $f(x) < n$. For those $1 \leq i < f(x)$, $g$ is obviously surjective. For 
-$n-1 \geq i \geq f(x)$, since $S(i) \leq n$, $\exists a(a \in X \wedge f(a) = S(i))$. And we know that 
-$S(i) \neq f(x)$, then $a \in X - \{x\}$. So $g(a) = f(a) - 1 = i$.
+	Consider $f: M \to N,\ i \mapsto \successor{i}$. 
+	
+	By the property of the order, Proposition~2.2.12 (e), we know that $\successor{0} \le \successor{i}$ iff $0 < \successor{i}$, and thus iff $0 \le i$. Using the same property, we have $i < n$ iff $\successor{i} \le n$. 
+	
+	Therefore, $0 \le i < n$ iff $1 \le \successor{i} \le n$. $f$ is thus a surjection. By Axiom~2.4, $f$ is additionally an injection. 
 \end{proof}
 
-\declareexercise{3.6.2}
-\begin{proof}
-On one hand, if $X$ is empty, then we know that the empty function whose range is also empty is injective, 
-(See \exerciseref{3.3.3}) so its cardinality is $0$. 
+After showing that $M$ has the same cardinality as $N$, we may in general show that they have the same cardinality as $\{i \in \setn : 1+m \le i \le n+m\}$, by inductively applying the function $\successor{}$ and using Proposition~2.2.12 (d).
 
-On the other hand, if $\# X = 0$ but $X \neq \emptyset$, then there exists an bijection 
-$f:X \rightarrow \emptyset$, which is impossible.
+\begin{why}{59}
+	There is no bijection from the empty set to any non-empty set.
+\end{why}
+\begin{proof}
+	This is because such a function can never be surjective, although by \exerciseref{3.3.3} it is always injective.
 \end{proof}
 
-\declareexercise{3.6.3}
+\begin{exercise}{3.6.2}
+	$X$ has the cardinality 0 iff $X = \emptyset$.
+\end{exercise}
 \begin{proof}
-When $n = 0$, this is vacuously true. The base case then becomes $n=1$. We simply let $M = f(1)$.
+\myifbox Suppose $X$ is empty, then we know that the empty function whose range is also empty is bijective, according to \exerciseref{3.3.3}. Hence, its cardinality is $0$. 
 
-Suppose that the statement for $n$ is true. And for $1\leq i\leq n$ we have the number $M$. Then $f(S(n))$ 
-either $\geq$ or $<$ $M$. On the former case, let $f(S(n))$ be $M'$, and on the latter case, let $M' = M$. 
-It is east to verify that $M'$ is the number we want.
+\myoifbox Suppose $\# X = 0$, then there exists a bijection 
+$f: \emptyset \to X$, which is not surjective, unless $X = \emptyset$, by \exerciseref{3.3.3}.
 \end{proof}
 
-From now on we will denote $\{i\in \mathbb{N}:1\leq i \leq n\}$ as $\mathbb{N}_n$
-
-\declareexercise{3.6.4}
+\begin{exercise}{3.6.3}
+	Let $n$ be any natural number, and $f$ be any function from $S_n := \{i \in \setn: 1 \le i \le n\}$ to $\setn$.
+	
+	Then, $f(S_n)$ is bounded. That is, there exists a natural number $M$ such that $f(i) \le M$ for all $i \in S_n$.
+	
+	Also, give a proof to Theorem~3.6.12 using this exercise, without using Lemma~3.6.9.
+\end{exercise}
 \begin{proof}
+We induct on $n$.
+	
+\mybcbox When $n = 0$, this is vacuously true.
+
+\myisbox Suppose that the statement for some $n$ is true. 
+
+Let $f$ be a function from $S_{\successor{n}}$ to $\setn$. Thus, by the inductive hypothesis, $f(i) \le M$ for all $i \le n$, for some $M$.
+
+By the trichotomy of the order, $f(\successor{n})$ either is less than or equal to $M$, or is bigger than $M$. In the former case, set $M_{\successor{}} := M$, and in the latter case set $M_{\successor{}} := f(\successor{n})$. 
+
+Therefore, in all cases $f(i) \le M_{\successor{}}$, for all $i \le \successor{n}$. We can now close the induction.
+\end{proof}
+
+Now we give an alternative proof to Theorem~3.6.12 using \exerciseref{3.6.2}.
+\begin{proof}
+	Suppose for the sake of contradiction that $\#\setn = n$ for some $n$. Then, there is a bijection $f$ from $\{1 \le i \le n\}$ to $\setn$.
+	
+	By \exerciseref{3.6.2}, we have $f(i) \le M$ for all $i \le n$. However, by Axiom~2.5, there exists $\successor{M} \in \setn$, which is greater than $M$. Therefore, $f$ is not surjective, a contradiction.
+\end{proof}
+
+\begin{exercise}{3.6.4}
+	Prove proposition~3.6.14.
+\end{exercise}
+\begin{proof}\leavevmode
+
 (a) 
-Let $n = \#X$. There is an injective  $f$ from $X$ to $\{i\in \mathbb{N}:1\leq i\leq n\}$. Let $g$ be a 
-function from $X \cup \{x\}$ to $\{i\in \mathbb{N}:1\leq i\leq n+1\}$ such that $g(a) = f(a)$ if 
-$a\neq x$, and $g(x) = n+1$. Now we show that $g$ is bijective.
-
-Injectivity: We know that $\forall x \in X$, $g$ is already injective. Since that $g(x) = n+1 \neq g(a)$ 
-for all $a \in X$, so $g$ is injective on $X \cup \{x\}$.
-
-Surjectivity: We know that $\forall i \in \{i\in \mathbb{N}:1\leq i\leq n\}$, we can find 
-$a \in X \cup \{x\}$ such that $g(a) = i$. And we have $g(x) = n+1$, so 
-$\forall a \in \{i\in \mathbb{N}:1\leq i\leq n+1\}$, we can find $a \in X \cup \{x\}$ such that 
-$g(a) = i$. 
-
+	Let $n := \#X$. Let $f$ be a bijection from $\{1 \le i \le n\}$ to $X$. Define $g: \{1 \le i \le n+1\} \to X \cup \{x\}$ as 
+	\[
+		g(i) = 
+		\begin{cases}
+			f(i) &i \le n\\
+			x &i = \successor{n}
+		\end{cases}
+	\]
+	Because $f$ is bijective and $x \notin X$, we see that this definition of $g$ gives another bijection.
+	
 (b)
-First we prove that if $X,Y$ are disjoint, then $\#X + \#Y = \#(X\cup Y)$. Let $f$ be a bijection from $X$ 
-to $\mathbb{N}_{\#X}$, and $g$ be a bijection from $Y$ to $\mathbb{N}_{\#Y}$. According to 
-\hyperref[lem3.6.6]{this Lemma}, there exists a bijection $h$ from $\mathbb{N}_{\#Y}$ to 
-$\{i\in \mathbb{N}:\#X+1\leq i \leq \#X+\#Y\}$. Thus $h \circ g$ is also a bijection. Let $u$ be a 
-function from $X \cup Y$ to $\mathbb{N}_{\#X} \cup\{i\in \mathbb{N}:\#X+1\leq i \leq \#X+\#Y\}$. Now we 
-show that $u$ is bijective.
+	Let $m := \#X$ and $n := \#Y$. We use induction on $m$.
+	
+	\mybcbox Theoretically, proving when $m = 0$ suffices. However, we will also prove when $m = 1$, as it will be used in the inductive step.
+	
+	When $m = 0$, $X = \emptyset$. Then, $X \cup Y = Y$, which is finite, and its cardinality $\le \#Y$.
+	
+	When $m = 1$, $X = \{x\}$ for some object $x$. We have two situations.
+	\begin{enumerate}
+		\item If $x \in Y$, then $X \cup Y = Y$, which is finite, and its cardinality $\le \#Y$.
+		\item If $x \notin Y$, then according to (a), $X \cup Y = Y \cup \{x\}$ is finite, and its cardinality equals to $n+1 \le \#\{x\} + \#Y$.
+	\end{enumerate}
 
-Injectivity: For $x \neq x'$ in the domain. If $x,x'$ are both in $X$ or $Y$, then $f(x)\neq f(x')$ is 
-immediately given by the injectivity of $f$ and $h \circ g$. If one of them is in $X$, and the other is 
-in $Y$, then they can also never be equal because the ranges of the two functions are disjoint. 
-
-Surjectivity: It is easy to verify that the range is equal to $\mathbb{N}_{\#X + \#Y}$. For any $y$ in the 
-range, if $y \in$ the range of $f$, then $u$ is surjective since $f$ is, and if $y \in$ the range of $h 
-\circ g$, $u$ is surjective for the same reason. The range consists of only this two sets, so $u$ is 
-surjective on the whole range.
-
-The proof is over. This also implies that $X \cup Y$ is finite. Now we need only to show that 
-$\#(X \cup Y) < \#X + \#Y$ when $X,Y$ are not disjoint. It is easy to see that
-\begin{align*}
-\#A + \#B 
-&= \#(A - A \cap B) + \#(A \cap B) + \#(B - A \cap B) + \#(A \cap B) \\
-&= (\#(A - A \cap B) + \#(A \cap B) + \#(B - A \cap B)) + \#(A \cap B) \\
-&= \#(A \cup B) + \#(A \cap B) \\
-&> \#(A \cup B)
-\end{align*}
-
+	\myisbox Suppose we have already proven it from all $m = M$, for some $M$. Now consider when $\#X = M+1$.
+	
+	We can pick any $x \in X$, and we have $X = \{x\} \cup (X \setminus \{x\})$. Thus,
+	\[
+		X \cup Y = \{x\} \cup (X \setminus \{x\}) \cup Y = \{x\} \cup \bigl((X \setminus \{x\}) \cup Y\bigr)
+	\]
+	
+	By Lemma~3.6.9, $\#(X \setminus \{x\}) = \successor{M}-1 = M$. According to the inductive hypothesis, $\#\bigl((X \setminus \{x\}) \cup Y\bigr) \le \#(X \setminus \{x\}) + \#Y$. According to our base case where $m = 1$, we then have 
+	\[
+		\#\biggl[\{x\} \cup \bigl((X \setminus \{x\}) \cup Y\bigr)\biggr] \le \#\{x\} + \#\bigl((X \setminus \{x\}) \cup Y\bigr)
+	\]
+	And using the transitivity of the order, we have its cardinality $\le \#\{x\} + \#(X \setminus \{x\}) + \#Y$.
+	
+	Thus,
+	\[
+		\#\biggl[\{x\} \cup \bigl((X \setminus \{x\}) \cup Y\bigr)\biggr] \le 1+M+N
+	\]
+	, as desired.
+	
+	We can now close the induction.
+	
+	If $X \cap Y = \emptyset$, then we can follow the above induction procedure, just slightly modifying the base case when $m = 1$, and replace every $\le$ with $=$.
+	
 (c)
-If $X \subseteq Y \wedge X \neq Y$, then $\#(Y \setminus X) \neq 0$. 
-\[
-\#Y = \#X + \#(Y \setminus X) > \#X
-\].
+	 We induct on $\#X$.
+	
+	\mybcbox If $\#X = 0$, then its only subset is $\emptyset$, for which the statement is obviously true.
+	
+	\myisbox. Suppose for $\#X = n$ the statement is already true, then we consider when $\#X = \successor{n}$.
+	
+	Let $Y$ be any subset of $X$. We have two situations:
+	\begin{enumerate}
+		\item $Y = X$, for which case of course $Y$ is finite and $\#Y \le \#X$.
+		\item $Y \ne X$, then there exists $x \in X$ such that $x \notin Y$. Thus, $Y$ is a subset of $X \setminus \{x\}$. By Lemma~3.6.9, $\#(X \setminus \{x\}) = \successor{n}-1 = n$. Then, we can use our inductive hypothesis on it to conclude that $Y$, as a subset of it, is finite, and
+		\[
+			\#Y \le \#(X \setminus \{x\}) = n \le \#X
+		\]
+	\end{enumerate}
 
-If $X = Y$, then $\#(Y \setminus X) = 0$, and $\#Y$ becomes $\#X$.
-
+	We can now close the induction.
+	
 (d)
-$f: X \rightarrow f(X)$ is always surjective. If $f$ is also injective, then $f$ is bijective. On this 
-occasion, $\#f(X) = \#X$. If $f$ is not injective, we can select a set $X' \subseteq X \wedge X' \neq X$, 
-on which $f$ is bijective. Then $\#X' = \#f(X') = \#f(X)$. According to (c), $\#X' < \#X$, so 
-$\#f(X) < \#X$.
+	For any subset $S \subseteq X$, the property 
+	\[
+		Q(S) := f: S \to f(X) \hbox{ is a bijection}
+	\]
+	is either true or false.
+	
+	We can then use the axiom of specification on $2^Y$ to select such a set in which $Q$ is true. Let $S$ be any element in this specified set. Thus, $\#f(X) = \#S$.
+	
+	Because $S \in 2^X$, $S \subseteq X$. Thus, using (c), we see that $S$ is finite, and $\#S \le \#X$. Hence, $f(X)$ is finite and $\#f(X) \le \#X$.
+	
+	Now we suppose $f$ is injective. Note that $f: X \to f(X)$ is always surjective, so $X$ satisfies $Q$. Hence, we must have $\#f(X) = \#X$, as desired.
 
 (e)
-Suppose that $\#Y = n$. Use induction on $n$. 
-
-When $n=0$, $Y$ is empty, then $\#(X \times Y) = 0 = \#X \times 0$. Here we additionally prove that 
-when $n=1$, this is also true for further usage. When $n=1$, let $Y = \{a\}$. Then the bijection is 
-$f(x):=(x,a), X \rightarrow X \times \{a\}$.
-
-Suppose that we have proven for some $n$, $\#(X \times Y) = \#X \times \#Y$. Then when $\#Y = S(n)$, 
-let $Y = Y\setminus\{x\}\cup\{x\}$, where $x \in Y$. Lemma 3.6.9 tells us that 
-$\#(Y\setminus\{x\}) = S(n)-1 = n$. And \exerciseref{3.5.4} tells us that 
-$X \times Y = X \times (Y\setminus\{x\}) \cup X \times \{x\}$. 
-\begin{align*}
-\#(X \times Y) 
-&= \#(X \times (Y\setminus\{x\}) \cup X \times \{x\}) \\
-&= \#(X \times (Y\setminus\{x\})) + \#(X \times \{x\}) \\
-&= \#X \times n + \#X \\
-&= \#X \times S(n)
-\end{align*}
-
-We can now close the induction.
-
+	We induct on $\#X$.
+ 	
+ 	\textcolor{red}{TBD.}
+ 	
 (f)
 We should first define $m^n$ for natural numbers $m,n$. It has not been done yet. Exponentiation is 
 defined for rational numbers at Definition 4.3.9.
