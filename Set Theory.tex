@@ -555,7 +555,7 @@ These are logically equivalent:
 	The reason is, the property $P(x,y)$ obeys the axiom of substitution, and for the same $x$, the $y$ is unique.
 \end{proof}
 
-\begin{why}{43}
+\begin{why}{43} \label{why.empty.func.is.unique}
 	For the same set $X$, all functions from $\emptyset$ to $X$ are equal.
 \end{why}
 \begin{proof}\leavevmode
@@ -1967,11 +1967,11 @@ Using Prof.~Tao's hint, I show that,
 	
 	For condition \ref{exer.3.5.12.2nd.cond.6}, note that, $\successor{n} \ne 0$, by Axiom~2.3. By the definition of $B_0$, we thus have $\successor{n} \in B_0$. For condition \ref{exer.3.5.12.2nd.cond.7}, it is vacuously true.
 	
-	\textbf{Now we show that $A_0$ and $B_0$ are unique.} 
+	\textbf{Now we show that $A_0$ and $B_0$ are unique.}%
 	% A_0,B_0 will be \mathcal_{A}_0,\mathcal{B}_0 within this group	
 	\begingroup
-	\def\azro{{\cal A}_0}
-	\def\bzro{{\cal B}_0}
+	\def\azro{{\cal A}_0}%
+	\def\bzro{{\cal B}_0}%
 	We show that, for all pairs of sets $\azro,\bzro$ that satisfy such conditions, we have, for all $n \in \setn$, $n \in \bzro$ iff $n \ne 0$, by inducting on $n$.
 	\begin{enumerate}
 		\item \mybcbox When $n = 0$. The \myifbox part is vacuously true. For the \myoifbox part, note that $0 \in \azro$ by condition \ref{exer.3.5.12.2nd.cond.4}. Hence, by condition \ref{exer.3.5.12.2nd.cond.2}, we see that $n \in \bzro \to n \ne \azro \to n \ne 0$.
@@ -2017,7 +2017,7 @@ Using Prof.~Tao's hint, I show that,
 	
 	By definition, if $n \in B_{\successor{N}}$, then $n \in B_N$. By the inductive hypothesis, \ref{exer.3.5.12.2nd.cond.6} is clearly true.
 	
-	If $n \in A_{\successor{N}} \wedge n \ne \successor{N}$, then by definition $n \in A_N$. We have two situations:
+	If $n \in A_{\successor{N}} \wedge n \ne \successor{N}$, then by definition, $n \in A_N$. We have two situations:
 	\begin{enumerate}
 		\item $n = N$, then $\successor{n} = \successor{N} \in A_{\successor{N}}$.
 		\item $n \ne N$, then by condition \ref{exer.3.5.12.2nd.cond.7} and the inductive hypothesis, we have $\successor{n} \in A_N \in A_{\successor{N}}$.
@@ -2026,7 +2026,7 @@ Using Prof.~Tao's hint, I show that,
 	
 	We have proved all the conditions \ref{exer.3.5.12.2nd.cond.1}--\ref{exer.3.5.12.2nd.cond.7} for $A_{\successor{N}}$ and $B_{\successor{N}}$. 
 	
-	\textbf{Now we show that $A_{\successor{N}}$ and $B_{\successor{N}}$ are indeed unique.}
+	\textbf{Now we show that $A_{\successor{N}}$ and $B_{\successor{N}}$ are indeed unique.}%
 	% A_{N++},B_{N++} will be \mathcal_{A}_{N++},\mathcal{B}_{N++} within this group	
 	\begingroup
 	\def\anpp{{\cal A}_{\successor{N}}}%
@@ -2270,6 +2270,7 @@ Now we give an alternative proof to Theorem~3.6.12 using \exerciseref{3.6.2}.
 		\end{cases}
 	\]
 	Because $f$ is bijective and $x \notin X$, we see that this definition of $g$ gives another bijection.
+	\vskip\baselineskip
 	
 (b)
 	Let $m := \#X$ and $n := \#Y$. We use induction on $m$.
@@ -2306,6 +2307,7 @@ Now we give an alternative proof to Theorem~3.6.12 using \exerciseref{3.6.2}.
 	We can now close the induction.
 	
 	If $X \cap Y = \emptyset$, then we can follow the above induction procedure, just slightly modifying the base case when $m = 1$, and replace every $\le$ with $=$.
+	\vskip\baselineskip
 	
 (c)
 	 We induct on $\#X$.
@@ -2324,6 +2326,7 @@ Now we give an alternative proof to Theorem~3.6.12 using \exerciseref{3.6.2}.
 	\end{enumerate}
 
 	We can now close the induction.
+	\vskip\baselineskip
 	
 (d)
 	For any subset $S \subseteq X$, the property 
@@ -2337,85 +2340,68 @@ Now we give an alternative proof to Theorem~3.6.12 using \exerciseref{3.6.2}.
 	Because $S \in 2^X$, $S \subseteq X$. Thus, using (c), we see that $S$ is finite, and $\#S \le \#X$. Hence, $f(X)$ is finite and $\#f(X) \le \#X$.
 	
 	Now we suppose $f$ is injective. Note that $f: X \to f(X)$ is always surjective, so $X$ satisfies $Q$. Hence, we must have $\#f(X) = \#X$, as desired.
+	\vskip\baselineskip
 
 (e)
 	We induct on $\#X$.
  	
- 	\textcolor{red}{TBD.}
+ 	\mybcbox When $\#X = 0$, we have $X = \emptyset$, and hence $X \times Y = \emptyset$, by \exerciseref{3.5.8}. Obviously, it is empty, and $\#(X \times Y) = 0 \times \#Y$.
+ 	
+ 	We also prove it when $\#X = 1$, for use in the inductive step. In this case, $X = \{x\}$, and we define a bijection $X \times Y \to Y$ by $(x,y) \mapsto Y$. Hence, we have $\#(X \times Y) = 1\times \#Y$, as desired.
+ 	
+ 	\myisbox Suppose it is already true for $\#X = n$, for some $n$. 
+ 	
+ 	Now consider when $\#X = n+1$. Because $n+1 \ne 0$, $X$ is non-empty. Therefore, we are able to select $x \in X$. And $X = \{x\} \cup (X \setminus \{x\})$. Therefore,
+ 	\[
+ 		X \times Y = \bigl[\{x\} \times Y\bigr] \cup \bigl[(X \setminus \{x\}) \times Y\bigr]
+ 	\]
+ 	, by \exerciseref{3.5.4}.
+ 	
+ 	Because $\{x\} \cap (X \setminus \{x\}) = \emptyset$, by (b) and our inductive hypothesis, we have $X \times Y$ being finite, and
+ 	\[
+ 		\#(X \times Y) = \#\bigl[\{x\} \times Y\bigr] + \#\bigl[(X \setminus \{x\}) \times Y\bigr]
+ 	\]
+ 	, which, by our inductive hypothesis and the base case when $n = 1$, equals
+ 	\[
+ 		\#Y + n \times \#Y = (n+1)\times \#Y
+ 	\]
+ 	, as desired.
+ 	\vskip\baselineskip
  	
 (f)
-We should first define $m^n$ for natural numbers $m,n$. It has not been done yet. Exponentiation is 
-defined for rational numbers at Definition 4.3.9.
-\begin{defn}
-\begin{itemize}
-\item $m^0=1$,
-\item $m^{S(n)} = m^n \times m$
-\end{itemize}
-\end{defn}
+	We induct on $\#X$.
+	
+	\mybcbox When $\#X = 0$, $X = \emptyset$. Thus, $Y^X$ contains all functions from $\emptyset$ to $Y$, which turns out to be only one function, according to Why~\ref{why.empty.func.is.unique}. Therefore, $\#Y^X = 1 = m^0$ for all $m = \#Y$, as desired.
+	
+	We also prove it when $\#X = 1$, for use in the inductive step. In this case, $X = \{x\}$, and define a bijection from $Y$ to $Y^X$ by $y \mapsto \{X,Y,(x,y)\}$, where $\{X,Y,(x,y)\}$ is the graph of some function from $X \to Y$. Thus, $\#(Y^X) = \#Y = (\#Y)^1$.
+	
+	\myisbox Suppose it's already true for $\#X = n$ for some $n$. Now consider when $\#X = n+1$.
+	
+	As $n+1 \ne 0$, $X$ is non-empty, and we can choose $x \in X$. Now we try to define a bijection from $Y \times Y^{X \setminus \{x\}}$ to $Y^X$.
+	
+	Because of \exerciseref{3.5.10}, we can treat $Y^{X \setminus \{x\}}$ as containing $\{X \setminus X, Y, G\}$, where $G$ is the graph of some function from $X \setminus \{x\}$ to $Y$.
+	
+	Hence, define the bijection this way:
+	\[
+		(y,\ \{X \setminus \{x\}, Y, G\})\ \mapsto\ \{X,Y,G \cup \{(x,y)\}\}
+	\]
+	Because $G$ satisfies the vertical line test and $x \notin X \setminus \{x\}$, we can say that $G \cup \{(x,y)\}$ also satisfies the test. Also, since $\{x\} \cup (X \setminus \{x\}) = X$, we see that $G \cup \{(x,y)\}$ is a graph for some function from $X$ to $Y$.
+	
+	To prove what we defined is surjective, let $H$ be the graph of any function from $X$ to $Y$. Hence, there exists a unique $(x,y) \in H$, for the $x$ we chose, because the vertical line test. $H \setminus \{(x,y)\}$ is then the $G$ in our definition, so our definition is surjective.
+	
+	To prove what we defined is injective, consider $(y,G) \ne (y',G')$. We have two situations,
+	\begin{enumerate}
+		\item If $y \ne y'$, then obviously $(G \cup \{(x,y)\}) \ne (G \cup \{(x,y')\})$.
+		\item If instead $G \ne G'$, then also quite obviously $(G \cup \{(x,y)\}) \ne (G' \cup \{(x,y)\})$.
+	\end{enumerate}
 
-Suppose that $\#Y = m,\#X = n$. Use induction on $n$. 
-
-When $n=0$, $X$ is empty, then $Y^X$ has one function $f:\emptyset \rightarrow Y$.
-
-Suppose that we have proven the statement for some $n$. Before we proceed the proof, we need some lemmas.
-\begin{lem}
-If $X$ is not empty, 
-\[
-\#Y^{X\setminus\{x'\}\cup\{x'\}} = \#Y^{X\setminus\{x'\}} \times \#Y
-\], 
-where $x'$ is an element of $X$.
-\end{lem}
-\begin{proof}
-By (e) we know that 
-\[
-\#Y^{X\setminus\{x'\}} \times \#Y = \#(Y^{X\setminus\{x'\}} \times Y)
-\].
-
-Try to build a bijection between $Y^{X\setminus\{x'\}} \times Y$ and $Y^X$. Let $f' \in Y^X$.
-
-Let $h$ be a function from $Y^X$ to $Y^{X\setminus\{x'\}} \times Y$ such that
-\[
-h(f') = (f,f'(x')), 
-\]
-where $f(x):=f'(x)$ when $x \neq x'$. Now we show that $h$ is bijective.
-
-Injectivity: 
-If ${f_1}' \neq {f_2}'$, then 
-\[
-{f_1}'(x') \neq {f_2}'(x') \vee \exists x(x \neq x' \wedge {f_1}'(x) \neq {f_2}'(x))
-\]
-That is, 
-\[
-{f_1}'(x') \neq {f_2}'(x') \vee f_1 \neq f_2,
-\]
-which means 
-\[
-(f_1,{f_1}'(x')) \neq (f_2,{f_2}'(x')).
-\]
-
-Surjectivity:
-For any $(f,a) \in Y^{X\setminus\{x'\}} \times Y$, let $f'$ be $f$ if $x\neq x'$, and $f'(x') = a$. Then 
-$f' \in Y^X$ and $h(f') = (f,a)$.
-
-So, 
-\[
-\#Y^X = \#(Y^{X\setminus\{x'\}} \times Y)
-\], which gives the lemma.
-\end{proof}
-
-Now we proceed the proof. Suppose that $\#X = n+1$, then $\#(X \setminus\{x'\}) = n$. By induction 
-hypothesis, $\#(Y^{X \setminus\{x'\}}) = m^n$. 
-
-By the lemma, 
-\[
-\#Y^X = \#Y^{X\setminus\{x'\}\cup\{x'\}} = \#Y^{X\setminus\{x'\}} \times \#Y,
-\]
-which equals to $m^n \times m$.
-
-Now we can close the induction.
-
-We have proven that the cardinality of power sets obeys the definition of power. This ensures the 
-exercise.
+	Therefore, we have defined a bijection from $Y \times Y^{X \setminus \{x\}}$ to $Y^X$.
+	
+	By (a), $\#(X \setminus \{x\}) = n$. By our inductive hypothesis, $Y^{X \setminus \{x\}}$ is finite and $\#(Y^{X \setminus \{x\}}) = (\#Y)^n$. By (e), $Y \times Y^{X \setminus \{x\}}$ is thus finite, and
+	\[
+		\#(Y \times Y^{X \setminus \{x\}}) = \#Y \times (\#Y)^n = (\#Y)^{n+1}
+	\]
+	Because we have established a bijection from $Y^X$ to $Y \times Y^{X \setminus \{x\}}$, we see that the latter must also be finite and have the same cardinality, as desired.
 \end{proof}
 
 \declareexercise{3.6.5}
