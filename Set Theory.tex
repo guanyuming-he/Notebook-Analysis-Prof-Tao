@@ -2379,7 +2379,7 @@ Now we give an alternative proof to Theorem~3.6.12 using \exerciseref{3.6.2}.
 	
 	As $n+1 \ne 0$, $X$ is non-empty, and we can choose $x \in X$. Now we try to define a bijection from $Y \times Y^{X \setminus \{x\}}$ to $Y^X$.
 	
-	Because of \exerciseref{3.5.10}, we can treat $Y^{X \setminus \{x\}}$ as containing $\{X \setminus X, Y, G\}$, where $G$ is the graph of some function from $X \setminus \{x\}$ to $Y$.
+	Because of \exerciseref{3.5.10}, we can treat $Y^{X \setminus \{x\}}$ as containing $\{X \setminus \{x\}, Y, G\}$, where $G$ is the graph of some function from $X \setminus \{x\}$ to $Y$.
 	
 	Hence, define the bijection this way:
 	\[
@@ -2404,73 +2404,67 @@ Now we give an alternative proof to Theorem~3.6.12 using \exerciseref{3.6.2}.
 	Because we have established a bijection from $Y^X$ to $Y \times Y^{X \setminus \{x\}}$, we see that the latter must also be finite and have the same cardinality, as desired.
 \end{proof}
 
-\declareexercise{3.6.5}
+\begin{exercise}{3.6.5}
+	Show that $X \times Y$ and $Y \times X$ have the same cardinality, by constructing an explicit bijection between them.
+	
+	Then, conclude Lemma~2.3.2 (commutativity of multiplication for natural numbers), by using this statement and Proposition~3.6.14.
+\end{exercise}
 \begin{proof}
-Let $f((x,y)):= (y,x), A\times B \rightarrow B \times A$. The bijectivity is obvious. 
+If either $X$ or $Y$ is the $\emptyset$, then the explicit bijection is the empty function from $\emptyset$ to $\emptyset$, which is unique, thanks to Why~\ref{why.empty.func.is.unique}. 
 
-Now we are using set theory to prove the commutativity of multiplication of natural number. For any 
-natural number $m,n$, construct two sets: $M = \mathbb{N}_{m}, N = \mathbb{N}_{n}$. According to (e) in 
-Proposition 3.6.14, we have that $\#(M \times N) = \#M \times \#N$. Then by what we have just proven, 
+Now, suppose both $X$ and $Y$ are non-empty. Define $f: (x,y) \mapsto (y,x), X\times Y \rightarrow Y \times X$. 
+
+\fbox{\em Surjectivity} Let $(y,x)$ be any element in $Y \times X$, then $y \in Y$ and $x \in X$. Thus, $(x,y) \in X \times Y$, and by definition $f((x,y)) = (y,x)$.
+
+\fbox{\em Injectivity} Let $(x,y) \ne (x',y')$ be any two elements in $X \times Y$. By definition, 
 \[
-\#(M \times N) = \#(N \times M) \Longrightarrow \#M \times \#N = \#N \times \#M \Longrightarrow mn = nm
+	f((x,y)) = (y,x) \ne (y',x') = f((x',y'))
 \]
+
+Now we show Lemma~2.3.2 using what we have just proven. Let $m,n$ be any two natural numbers. Define $X := \{1 \le i \le m\}$ and $Y := \{1 \le i \le n\}$. By the definition of cardinality, we see that $\#X = m$ and $\#Y = n$.
+
+By Proposition~3.6.14 (e), 
+\begin{enumerate}
+	\item $X \times Y$ is finite and $\#(X \times Y) = m \times n$.
+	\item $Y \times X$ is finite and $\#(Y \times X) = n \times m$.
+\end{enumerate}
+
+By what we have proven, $\#(X \times Y) = \#(Y \times X)$. Therefore, $m \times n = n \times m$, as desired.
 \end{proof}
 
-\declareexercise{3.6.6}
+\begin{exercise}{3.6.6}
+	Show that $(A^B)^C$ and $A^{B\times C}$ have the same cardinality, by constructing an explicit bijection between them.
+	
+	Then, conclude, for natural numbers $a,b,c$,
+	\begin{enumerate}
+		\item $(a^b)^c = a^{(b\times c)}$, by using this statement and Proposition~3.6.14.
+		\item and $a^b \times a^c = a^{b+c}$, by using a similar argument.
+	\end{enumerate}
+\end{exercise}
 \begin{proof}
-Let $c \in C$, $f \in (A^B)^C$. Then $f(c)$ is a function $B\rightarrow A$. Let 
-$b \in B, h \in A^{B\times C}$. Let
-\[
-g:A^{B\times C} \rightarrow (A^B)^{C}
-\]
-be such a function that for all $b,c$,
-\[
-g(h) = f \equiv h(b,c) = (f(c))\,(b)
-\]
-. Now we show that $g$ is bijective.
-
-Injectivity: 
-If $h \neq h'$, then $\exists b_0,c_0(h(b_0,c_0) \neq h'(b_0,c_0))$. Let $g(h) =f, g(h') = f'$. Then we 
-know that $(f(c_0))\,(b_0) \neq (f'(c_0))\,(b_0)$, so $f(c_0) \neq f'(c_0) \Longrightarrow f \neq f'$. 
-That means, $g(h) \neq g(h')$.
-
-Surjectivity:
-For any $f \in (A^B)^{C}$, let $h$ be such a function $\in A^{B\times C}$ that for all $b \in B,c \in C$, 
-$h(b,c) := (f(c))\,(b)$. It is easy to see that $h$ is well-defined. So $g(h) = f$.
-
-Note that by Proposition 3.6.14 we have $\#M^N = m^n$ and $\#(M \times N) = mn$, where $\#M =m, \#N =n$. 
-Suppose that $\#A = a, \#B = b, \#C = c$, then
-\[
-\#(A^B)^C = (\#A^B)^{\#C} = (a^b)^c
-\]
-\[
-\#A^{B\times C} = \#A^{\#(B \times C)} = a^{bc}
-\]
-So we have proven that $(a^b)^c = a^{bc}$.
-
-Now we try to prove $a^b \times a^c = a^{b+c}$. Let $B,C$ be disjoint sets with the cardinality $b,c$ 
-respectively. What we need to show is that
-\[
-\#(A^B \times A^C) = \#(A^{B \cup C}).
-\]
-
-Similarly, let 
-\[
-f: (A^{B \cup C}) \rightarrow (A^B \times A^C)
-\]
-be such a function that 
-\[
-f(g) = (u,v) \equiv \forall x(x \in B \Rightarrow g(x) = u(x) \wedge x \in C \Rightarrow g(x) = v(x)),
-\]
-where $g\in A^{B \cup C}, (u,v) \in A^B \times A^C$.
-
-We can verify the bijectivity of $f$ nearly in the same way as way did previously. So I won't write it 
-down here.
-
-Then, we know $B \cap C = \emptyset \Rightarrow \#(B \cup C) = \#B + \#C$. So we can conclude that 
-\[
-a^b \times a^c = a^{b+c}
-\]
+	Thanks to \exerciseref{3.5.10}, we can assume that $(A^B)^C$ and $A^{B\times C}$ take these forms:
+	\begin{align*}
+		\{C, A^B, G_1\} &\in (A^B)^C \\
+		\{B \times C, A, G_2\} &\in A^{B\times C}
+	\end{align*}
+	, where elements in $G_1$ and $G_2$ take these forms, assuming $a \in A$, $b \in B$, and $c \in C$:
+	\begin{align*}
+		(c, \{B, A, G_3\}) &\in G_1 \\
+		((b,c), a) &\in G_2
+	\end{align*}
+	, where elements in $G_3$ take this form:
+	\[
+		(b,a) \in G_3
+	\]
+	
+	As the domains and codomains don't change, it suffices to construct a bijection between the set of all $G_1$'s and all $G_2$'s.
+	
+	We first define some auxiliary functions. Define \textcolor{red}{TBD.}
+	
+	First, define a bijection, $g_1$ that, using the axiom of replacement, maps each $G_2$ to a set $g_1(G_2)$, in which each element $((c,b),a)$ is obtained from replacing some element $((b,c),a) \in G_2$. Because of \exerciseref{3.6.5}, this is a bijection. Because any $G_2$ satisfies the vertical line test, $g_1(G_2)$ also satisfies the vertical line test.
+	
+	
+	
 \end{proof}
 
 \declareexercise{3.6.7}
