@@ -2197,7 +2197,7 @@ Now we show that $a$ is the function that we want.
 	\end{enumerate}
 \end{proof}
 
-\begin{why}{59}
+\begin{why}{59} \label{why.shifting.not.change.cardi}
 	The set $M := \{i \in \setn : 1 \le i \le n\}$ and the set $N := \{i \in \setn : (0 \le)\, i < n\}$ have the same cardinality.
 \end{why}
 \begin{proof}
@@ -2373,13 +2373,13 @@ Now we give an alternative proof to Theorem~3.6.12 using \exerciseref{3.6.2}.
 	
 	\mybcbox When $\#X = 0$, $X = \emptyset$. Thus, $Y^X$ contains all functions from $\emptyset$ to $Y$, which turns out to be only one function, according to Why~\ref{why.empty.func.is.unique}. Therefore, $\#Y^X = 1 = m^0$ for all $m = \#Y$, as desired.
 	
-	We also prove it when $\#X = 1$, for use in the inductive step. In this case, $X = \{x\}$, and define a bijection from $Y$ to $Y^X$ by $y \mapsto \{X,Y,(x,y)\}$, where $\{X,Y,(x,y)\}$ is the graph of some function from $X \to Y$. Thus, $\#(Y^X) = \#Y = (\#Y)^1$.
+	We also prove it when $\#X = 1$, for use in the inductive step. In this case, $X = \{x\}$, and define a bijection from $Y$ to $Y^X$ by $y \mapsto \{X,Y,\{(x,y)\}\}$, where $\{(x,y)\}$ is the graph of some function from $X \to Y$. Thus, $\#(Y^X) = \#Y = (\#Y)^1$.
 	
 	\myisbox Suppose it's already true for $\#X = n$ for some $n$. Now consider when $\#X = n+1$.
 	
 	As $n+1 \ne 0$, $X$ is non-empty, and we can choose $x \in X$. Now we try to define a bijection from $Y \times Y^{X \setminus \{x\}}$ to $Y^X$.
 	
-	Because of \exerciseref{3.5.10}, we can treat $Y^{X \setminus \{x\}}$ as containing $\{X \setminus \{x\}, Y, G\}$, where $G$ is the graph of some function from $X \setminus \{x\}$ to $Y$.
+	Because of \exerciseref{3.5.10}, we can treat $Y^{X \setminus \{x\}}$ as containing such elements: $\{X \setminus \{x\}, Y, G\}$, where $G$ is the graph of some function from $X \setminus \{x\}$ to $Y$.
 	
 	Hence, define the bijection this way:
 	\[
@@ -2442,62 +2442,117 @@ By what we have proven, $\#(X \times Y) = \#(Y \times X)$. Therefore, $m \times 
 	\end{enumerate}
 \end{exercise}
 \begin{proof}
-	Thanks to \exerciseref{3.5.10}, we can assume that $(A^B)^C$ and $A^{B\times C}$ take these forms:
-	\begin{align*}
-		\{C, A^B, G_1\} &\in (A^B)^C \\
-		\{B \times C, A, G_2\} &\in A^{B\times C}
-	\end{align*}
-	, where elements in $G_1$ and $G_2$ take these forms, assuming $a \in A$, $b \in B$, and $c \in C$:
-	\begin{align*}
-		(c, \{B, A, G_3\}) &\in G_1 \\
-		((b,c), a) &\in G_2
-	\end{align*}
-	, where elements in $G_3$ take this form:
+	Suppose $A$ is empty. Because there is no function from a non-empty set to the empty set, we have $(A^B)^C = A^{B \times C} = \emptyset$, if both $B$ and $C$ are non-empty.
+	
+	If $B$ is empty, then $A^B$ only contains an (unique, thanks to Why~\ref{why.empty.func.is.unique}) empty function $f: \emptyset \to A$. But $B \times C$ is also empty, thanks to \exerciseref{3.5.8}, so $A^{B \times C}$ also only contains the empty function $f: \emptyset \to A$. Hence, the bijection is obvious.
+	
+	If $C$ is empty, then we have $(A^B)^C = \{f: \emptyset \to A^B\}$ and $A^{B \times C} = \{g: \emptyset \to A\}$. The bijection is $f \mapsto g$.
+		
+	Now, suppose none of $A,B,C$ is empty. Thanks to \exerciseref{3.6.4} (f), both of $(A^B)^C$ and $A^{B\times C}$ are also non-empty. Let $f$ be any function in $(A^B)^C$. Define a function $g$ in $A^{B \times C}$ this way:
 	\[
-		(b,a) \in G_3
+		g(b,c) := \bigl(f(c)\bigr)(b)
 	\]
-	
-	As the domains and codomains don't change, it suffices to construct a bijection between the set of all $G_1$'s and all $G_2$'s.
-	
-	We first define some auxiliary functions. Define \textcolor{red}{TBD.}
-	
-	First, define a bijection, $g_1$ that, using the axiom of replacement, maps each $G_2$ to a set $g_1(G_2)$, in which each element $((c,b),a)$ is obtained from replacing some element $((b,c),a) \in G_2$. Because of \exerciseref{3.6.5}, this is a bijection. Because any $G_2$ satisfies the vertical line test, $g_1(G_2)$ also satisfies the vertical line test.
+	It is clear that it is defined for every $(b,c)$. For each unique $(b,c)$, $f(c)$ is unique, and this value $\bigl(f(c)\bigr)(b)$ is also unique, and it is in $A$. Hence, this definition is valid.
 	
 	
+	We show that $m:(A^B)^C \to A^{B \times C},\ f \mapsto g$ defined as above is a bijection.
 	
+	\fbox{\em Surjectivity} Let $g$ be any function in $A^{B \times C}$. By \exerciseref{3.5.10}, $g$ has a graph $G$, in which elements take the form $((b,c), a)$. 
+	
+	Given any fixed $c \in C$, then, $\forall b \in B$, the pair $(b,c)$ is unique. Hence, there exists a unique $a$ such that $((b,c),a) \in G$. If we keep this $c$ fixed, then this $a$ is uniquely determined by $b$, which works for all $b \in B$. This means we have a function in $A^B$. Because $a$ is the same for the same $b,c$, the function is unique for each $c$. Hence, we have a function $C \to A^B$. Let's call it $f$.
+	
+	Now we show that $m(f) = g$. By the definition of $m$, for all $b \in B, c \in C$, we have $\bigl(m(f)\bigr)(b,c) = \bigl(f(c)\bigr)(b)$. By how we constructed $f$ from $G$, we see that there exists a unique $a \in A$ such that $\bigl(f(c)\bigr)(b) = a$ and $((b,c), a) \in G$, which means $g(b,c) = a$, as desired.
+	
+	\fbox{\em Injectivity} Suppose that there are such $f,f' \in (A^B)^C$ that $f \ne f'$. Then, there exists a $c_0 \in C$ such that $f(c_0) \ne f'(c_0)$. Because both of them are a function in $A^B$, it means there exists a $b_0 \in B$ such that $\bigl(f(c_0)\bigr)(b_0) \ne \bigl(f'(c_0)\bigr)(b_0)$.
+	
+	Now we consider $m(f)$ and $m(f')$. By definition they are all functions in $B \times C$. Now consider the pair $(b_0, c_0) \in B \times C$. By the definition of $m$, we have
+	\[
+		\bigl(m(f)\bigr)(b_0,c_0) := \bigl(f(c_0)\bigr)(b_0) \hbox{ and }
+		\bigl(m(f')\bigr)(b_0,c_0) := \bigl(f'(c_0)\bigr)(b_0)
+	\]
+	By our choice of $b_0$ and $c_0$, we see that the two values are unequal. Hence,
+	$m(f) \ne m(f')$, as desired.
 \end{proof}
 
-\declareexercise{3.6.7}
-\begin{proof}
-On one hand, if $\#A = a \leq \#B = b$, we show that $A$ has lesser or equal cardinalty to $B$. Let $f$ 
-be a bijection from $A$ to $\mathbb{N}_{a}$, $g$ be a bijection from $B$ to $\mathbb{N}_b$. Let 
-$\iota(x):=x, \mathbb{N}_{a} \rightarrow \mathbb{N}_b$. Then $g^{-1} \circ \iota \circ f$ is an injection 
-from $A$ to $B$.
+Now we show that $(a^b)^c = a^{b \times c}$ for any natural numbers $a,b,c$. Define $A := \{1 \le i \le a\}$, $B := \{1 \le i \le b\}$, and $C := \{1 \le i \le c\}$. By \exerciseref{3.6.4} (f), twice, we see that $(A^B)^C$ is finite and $\#(A^B)^C = (a^b)^c$.
 
-On the other hand, suppose that there is an injection $f$ from $A$ to $B$. We know that 
-$f:A\rightarrow f(A)$ is bijective. So $\#A = \#f(A)$. Since $f(A) \subseteq B$, $\#f(A) \leq B$ (See (c) 
-in Proposition 3.6.14). That is, $\#A \leq \#B$
+By \exerciseref{3.6.4} (e) first and (f) second, we see that $A^{B \times C}$ is finite and $\#A^{B \times C} = a^{b \times c}$. By what we have proven, $\#(A^B)^C = \#A^{B \times C}$. Hence, $(a^b)^c = a^{b \times c}$.
+
+To show that $a^b \times a^c = a^{b+c}$, let $B,C$ be any such sets that $B \cap C = \emptyset$. We prove that $\#A^B \times A^C$ and $\#A^{B \cup C}$.
+
+\begin{proof}
+	If $A$ is empty, then both of the two sets are empty, if given $B,C$ are non-empty.
+	
+	If $B$ is empty, then $A^B$ reduces to a singleton containing the empty function $f: \emptyset \to A$. And $A^{B \cup C} = A^C$. Then, define the bijection as: $(f,g) \mapsto g$, for $g \in A^C$.
+	
+	Similarly, if $C$ is empty, then $A^C$ reduces to a singleton containing the empty function $f': \emptyset \to A$. And $A^{B \cup C} = A^B$. Then, define the bijection as: $(g,f') \mapsto g$, for $g \in A^B$.
+	
+	Now, suppose that none of $A,B,C$ is empty. Thanks to \exerciseref{3.6.4} (b), (e), and~(f), both of $A^B \times A^C$ and $A^{B \cup C}$ are non-empty.	
+	
+	Let $(f,g)$ be any element in $A^B \times A^C$. Define a function $h: B \cup C \to A$ such that $h(b) := f(b)$ for $b \in B$ and $h(c) := g(c)$ for $c \in C$. First, the definition of $h$ is valid. This is because $B \cap C = \emptyset$, so at one time, for any $x \in B \cup C$, we either have $x \in B$ or $x \in C$.
+	
+	Now, we show that the function that maps each $(f,g) \in A^B \times A^C$ to $h \in A^{B \cup C}$ is a bijection. Let's call it $\phi$.
+	
+	\fbox{\em Injectivity} Let $(f,g) \ne (f',g')$ be in $A^B \times A^C$. Let $h = \phi((f,g)), h' = \phi((f',g'))$. 
+	
+	By the definition of ordered pairs, $f \ne f'$ or $g \ne g'$. Then, either there exists a $b \in B$ such that $f(b) \ne f'(b)$ or a $c \in C$ that $g(c) \ne g'(c)$. Then, we either have $h(b) \ne h'(b)$ or $h(c) \ne h'(c)$, by the definition of $\phi$. Therefore, $h \ne h'$, as desired.
+	
+	\fbox{\em Surjectivity} Let $h$ be any function in $A^{B \cup C}$. Define $f: B \to A, f(b) := h(b)$ and $g: C \to A, f(c) := h(c)$. We need to show that $\phi((f,g)) = h$. Let's for now call $h' := \phi((f,g))$.
+	
+	By the definition of $\phi$, we know that $h' \in A^{B \cup C}$. We also know that $h'(b) = f(b), b \in B$ and $h'(c) = f(c), c \in C$. Because the domain of $h'$ is $B \cup C$, they cover all values in it. Because $h$ has the same values for the two situations, we see that $h' = h$, as desired.s
 \end{proof}
 
-\declareexercise{3.6.8}
+Now we show that $a^b \times a^c = a^{b+c}$, for any natural numbers $a,b,c$. Define $A := \{1 \le i \le a\}$, $B := \{a+1 \le i \le a+b\}$, and $C := \{1 \le i \le c\}$. By the definition of cardinality, $\#A = a, \#C = c$. By Why~\ref{why.shifting.not.change.cardi}, $\#B = b$. By the definition of $A,B$, we have $A \cap B = \emptyset$.
+
+By \exerciseref{3.6.4} (f) first and (e) second, we see that $A^B \times A^C$ is finite and $\#A^B \times A^C$ = $a^b \times a^c$.
+By \exerciseref{3.6.4} (b) first and (f) second, we see that $A^{B \cup C}$ is finite and $\#A^{B \cup C} = a^{b + c}$. 
+
+By what we have proven, $\#(A^B)^C = \#A^{B \times C}$. Hence, $a^b \times a^c = a^{b + c}$.
+
+\begin{exercise}{3.6.7}
+	Let $A,B$ be finite sets. Show that $\#A \le \#B$ iff there is an injection from $A$ to $B$.
+\end{exercise}
 \begin{proof}
-$f:A \rightarrow f(A)$ is bijective. So $f^{-1}: f(A) \rightarrow A$ is surjective. Let $g$ be defined as:
+Because $A,B$ is finite, then we can let $\#A = a$ and $\#B = b$ for natural numbers $a,b$.
+
+\myifbox Suppose there is an injection $f$ from $A$ to $B$. Then, $f: A \to f(A)$ is a bijection, and $\#A = \#f(A)$. Because $f(A) \subseteq B$, by \exerciseref{3.6.4} (c), $\#f(A) \le \#B$, as desired. Note that the fact that $B$ is finite is necessary to conclude this.
+
+\myoifbox Suppose that $a \le b$. By the definition of cardinality, there is a bijection $f: \{1 \le i \le a\} \to A$, and a bijection $g: \{1 \le i \le b\} \to B$. Because $a \le b$, the function $h: i \mapsto i$ is an injection from $\{1 \le i \le a\} \to \{1 \le i \le b\}$. Consider the function $g \circ h \circ f^{-1}$. It is a function from $A$ to $B$ by definition. And thanks to \exerciseref{3.3.2}, it is injective, too.
+\end{proof}
+
+\begin{exercise}{3.6.8}
+	Suppose that there is an injection from $A$ to $B$. Show that there is a surjection from $B$ to $A$.
+\end{exercise}
+\begin{proof}
+$f:A \rightarrow f(A)$ is bijective. So $f^{-1}: f(A) \rightarrow A$ is surjective. Because $A$ is non-empty, we can choose an element $a \in A$. Define $g: B \to A$ as 
 \begin{itemize}
-\item $b \in f(A) \Longrightarrow g(b) = f^{-1}(b)$
-\item $b \in B\setminus f(A) \Longrightarrow g(b)$ is any element of $A$.
+\item $g(b) = f^{-1}(b)$ if $b \in f(A)$.
+\item $g(b) = a$ if $b \notin f(A)$.
 \end{itemize}
 
-Then $g$ is surjective.
+Obviously, $g$ is surjective, as desired.
 \end{proof}
 
-\declareexercise{3.6.9}
+\begin{exercise}{3.6.9}
+	Let $X,Y$ be finite sets. Show that $X \cup Y$ and $X \cap Y$ are also finite.
+	
+	Also, show that $\#(X \cup Y) + \#(X \cap Y) = \#X + \#Y$
+\end{exercise}
 \begin{proof}
-\begin{align*}
-\#A + \#B 
-&= \#(A - A \cap B) + \#(A \cap B) + \#(B - A \cap B) + \#(A \cap B) \\
-&= (\#(A - A \cap B) + \#(A \cap B) + \#(B - A \cap B)) + \#(A \cap B) \\
-&= \#(A \cup B) + \#(A \cap B)
-\end{align*}
+	By \exerciseref{3.6.4} (b), $X \cup Y$ is finite. By definition, $X \cap Y \subseteq X$. By \exerciseref{3.6.4} (c), $X \cap Y$ is finite.
+	
+	Now we show that $\#(X \cup Y) + \#(X \cap Y) = \#X + \#Y$.
+	
+	Define $X' := X \setminus (X \cap Y)$. We have $X' \cap Y = \emptyset$. By \exerciseref{3.6.4} (b), we have $\#(X' \cup Y) = \#X' + \#Y$.
+	
+	First, we show that $X' \cup Y = X \cup Y$. Obviously, $X' \cup Y \subseteq X \cup Y$. We need only to show that $X \cup Y \subseteq X' \cup Y$. Suppose $a \in X \cup Y$, then either $a \in X$ or $a \in Y$, or both.
+	\begin{enumerate}
+		\item If both, then $a \in Y$, then $a \in X' \cup Y$.
+		\item If $a \in Y$, then $a \in X' \cup Y$.
+		\item If $a \in X$ but not both, then $a \in X \setminus Y$. By \exerciseref{3.1.12} (ii) (a special case of it where $A = A'$), we have $X \setminus Y \subseteq X \setminus (X \cap Y)$. Hence, $a \in X \setminus (X \cap Y) = X'$, as desired.
+	\end{enumerate}
+
+	Therefore, we now know that $\#(X \cup Y) = \#X' + \#Y$. We show that $\#X' + \#(X \cap Y) = \#X$. Observing that $X' \cap (X \cap Y) = \emptyset$, by definition. Then, we can use \exerciseref{3.6.4} (b) on it to conclude that $\#X = \#(X' \cup (X \cap Y)) = \#X' + \#(X \cap Y)$, as desired.
 \end{proof}
 
 \paragraph{Exercise 3.6.10} \label{exercise3.6.10}
