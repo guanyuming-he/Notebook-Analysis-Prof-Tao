@@ -1039,12 +1039,14 @@ Putting My Proposition~\ref{my.surj.image.prop} and My Proposition~\ref{my.inj.i
 		\item $f(A) \setminus f(B) \subseteq f(A \setminus B)$.
 		\item But $f(A \cup B) = f(A) \cup f(B)$.
 	\end{enumerate}
+	Also, explain, for each of the $\subseteq$ relation, when it can be improved to $=$.
 \end{exercise}
 \begin{proof}\leavevmode
 	\begin{enumerate}
-		\item For all $y \in f(A \cap B)$, we have $\exists x(x \in A \cap B \wedge f(x) = y)$. For such $x$, we have $x \in A$, thus $f(x) \in f(A)$, and $x \in B$, thus $f(x) \in f(B)$. Hence $y = f(x) \in f(A) \cap f(B)$, as desired.
+		\item 
+		For all $y \in f(A \cap B)$, we have $\exists x(x \in A \cap B \wedge f(x) = y)$. For such $x$, we have $x \in A$, thus $f(x) \in f(A)$, and $x \in B$, thus $f(x) \in f(B)$. Hence $y = f(x) \in f(A) \cap f(B)$, as desired.
 		
-		Note that the converse isn't generally true. If there exists $x \in A \setminus B, x' \in B \setminus A$ such that $x \ne x'$ and $f(x) = f(x')$, then we see that $x,x' \notin A \cap B$. Suppose that in addition that no other elements in $X$ can result in the value of $f = f(x)$, then we see that $f(A) \cap f(B)$ will contain $f(x)$, but $f(A \cap B)$ will not.
+		For the converse to be true, $f$ has to be injective. To prove it, assume that $f$ is injective. For all $y \in f(A) \cap f(B)$, there exists $a \in A$ and $b \in B$ such that $f(a) = f(b)$. Because of the injectivity, we must have $a = b$, and thus $a,b \in A \cap B$. Thus, $y \in f(A \cap B)$.
 		
 		\item For all $y \in f(A) \setminus f(B)$, we must have $y$ satisfy
 		\[
@@ -1057,8 +1059,8 @@ Putting My Proposition~\ref{my.surj.image.prop} and My Proposition~\ref{my.inj.i
 			\item $x_0 \notin B$. Then, $x \in A \setminus B$, and by definition, $y = f(x) \in f(A \setminus B)$.
 		\end{enumerate}
 	
-		The converse, generally is still not true. For a $x \in A \setminus B$, $f(x)$ might still equal to $f(x')$ for some $x' \in B$, if $f$ is not injective.
-	
+		For the converse to be true, $f$ has to be injective, too. To prove it, assume that $f$ is injective. For all $y \in f(A \setminus B)$, there exists $x \in A \setminus B$ such that $f(x) = y$. Then, because $x \in A$, $y \in f(A)$. If there was to be a $b \in B$ such that $f(b) = y$, then we have $b \ne x$ but $f(b) = f(x)$, a contradiction.
+
 		\item For all $y \in f(A \cup B)$, we have
 		\begin{equation}
 			\exists x(x \in A \cup B \wedge f(x) = y) \label{eq.1.exer.3.4.3}
@@ -2478,7 +2480,7 @@ Now we show that $(a^b)^c = a^{b \times c}$ for any natural numbers $a,b,c$. Def
 
 By \exerciseref{3.6.4} (e) first and (f) second, we see that $A^{B \times C}$ is finite and $\#A^{B \times C} = a^{b \times c}$. By what we have proven, $\#(A^B)^C = \#A^{B \times C}$. Hence, $(a^b)^c = a^{b \times c}$.
 
-To show that $a^b \times a^c = a^{b+c}$, let $B,C$ be any such sets that $B \cap C = \emptyset$. We prove that $\#A^B \times A^C$ and $\#A^{B \cup C}$.
+To show that $a^b \times a^c = a^{b+c}$, let $B,C$ be any such sets that $B \cap C = \emptyset$. We prove that $\#(A^B \times A^C)$ and $\#A^{B \cup C}$.
 
 \begin{proof}
 	If $A$ is empty, then both of the two sets are empty, if given $B,C$ are non-empty.
@@ -2553,28 +2555,181 @@ Obviously, $g$ is surjective, as desired.
 	\end{enumerate}
 
 	Therefore, we now know that $\#(X \cup Y) = \#X' + \#Y$. We show that $\#X' + \#(X \cap Y) = \#X$. Observing that $X' \cap (X \cap Y) = \emptyset$, by definition. Then, we can use \exerciseref{3.6.4} (b) on it to conclude that $\#X = \#(X' \cup (X \cap Y)) = \#X' + \#(X \cap Y)$, as desired.
+
+	Hence, we can add $\#(X \cap Y)$ to the both sides of $\#(X \cup Y) = \#X' + \#Y$ to get 
+	\[
+		\#(X \cup Y) + \#(X \cap Y) = (\#X' + \#(X \cap Y)) + \#Y = \#X + \#Y 
+	\]
 \end{proof}
 
-\paragraph{Exercise 3.6.10} \label{exercise3.6.10}
+\begin{exercise}{3.6.10}
+	Let $A_1, \dots, A_n$ be finite sets such that $\#(\bigcup_{1 \le i \le n}A_i) > n$. Show that there exists $1 \le i \le n$ such that $\#A_i \ge 2$.
+\end{exercise}
 \begin{proof}
-Presume the negation:
-\[
-\forall i(i \in \{1,\dots,n\} \Longrightarrow \#(A_i) < 2)
-\]
+	We induct on $n$.
 
-Use mathematical induction for (b) in Proposition 3.6.14, we can easily get:
-\[
-\#\bigcup_{i \in \{1,\dots,n\}}A_i \leq \sum_{i \in \{1,\dots,n\}} \#A_i
-\]
-We can also use mathematical induction to furthermore enhance what we proved while dealing with natural 
-numbers to:
-\[
-\bigwedge_{i} a_{i} \leq b_{i} \Longrightarrow \sum_{i} a_{i} \leq \sum_{i} b_i
-\].
+	\mybcbox When $n = 1$, then $\bigcup_{1 \le i \le n}A_i = A_1$. Hence, $\#A_1 > 1$, as desired.
 
-Then because $\# A_i \leq 1$, so 
-\[
-\sum_{i \in \{1,\dots,n\}} A_i \leq (\sum_{i \in \{1,\dots,n\}} 1 = n)
-\], 
-which is impossible.
+	\myisbox Suppose that it's true for some $n$. Let there be such sets $A_1, \dots, A_{\successor{n}}$ that $\bigcup_{1 \le i \le \successor{n}}A_i) > \successor{n}$. 
+
+	By the Axiom of Union, $\bigcup_{1 \le i \le \successor{n}}A_i = \bigcup_{1 \le i \le n}A_i \cup A_{\successor{n}}$. By \exerciseref{3.6.4} (b), we have 
+	\begin{align*}
+		\successor{n}	&<\#\left(\bigcup_{1 \le i \le \successor{n}}A_i\right) \\
+				&= \#\left(\bigcup_{1 \le i \le n}A_i \cup A_{\successor{n}}\right) \\
+				&\le \#\left(\bigcup_{1 \le i \le n}A_i\right) + \#A_{\successor{n}}
+	\end{align*}
+	Now we have two situations
+	\begin{enumerate}
+		\item If $\#A_{\successor{n}} \le 1$, then it equals either 0 or 1. In either case we have $\#\left(\bigcup_{1 \le i \le n}A_i\right) > n$, by Proposition~2.2.12.
+		By our inductive hypothesis, this means that there exists $1 \le i \le n$ such that $\#A_i \ge 2$.
+
+		\item If $\#A_{\successor{n}} > 1$, then $i = \successor{n}$ is the $i$ that we want.
+	\end{enumerate}
+
+	We can now close the induction.
+\end{proof}
+
+\begin{exercise}{3.6.11}
+	Let $f: X \to Y$ be a function. Show that the two statements are equivalent:
+	\begin{enumerate}
+		\item $f$ is injective.
+		\item Let $E$ be a subset of $X$. Whenever $\#E = 2$, $\#f(E) = 2$.
+	\end{enumerate}
+\end{exercise}
+\begin{proof}
+	If $\#X < 2$, then either $X = \emptyset$ or $X$ is a singleton. In either case, it is vacuously true that $f$ is injective, because there are no different elements in $X$. Also, $\#E = 2 \to \#f(E) = 2$ is vacuously true.
+
+	Suppose now that $\#X \ge 2$. 
+
+	\myifbox If $\forall E \subseteq X, (\#E = 2 \to \#f(E) = 2)$, then for all two $x \ne x'$, $\{x,x'\}$ is such an $E$. We have $f(\{x,x'\}) = \{f(x), f(x')\}$ by definition. Therefore, $\#\{f(x),f(x')\} = 2$, and consequently $f(x) \ne f(x')$, as desired.
+
+	\myoifbox If $f$ is injective, then $f: E \to f(E)$ is bijective. By the definition of cardinality we have $\#E = \#f(E)$, as desired.
+\end{proof}
+
+\begin{exercise}{3.6.12}
+	For any natural number $n$, let $S_n$ be the set of all bijections from $\{i \in \setn : 1 \le i \le n\}$ to itself. Show that
+	\begin{enumerate}
+		\item $S_n$ is finite, and $\#S_{\successor{n}} = (\successor{n}) \times \#S_n$.
+		\item $\#S_n = n!$, where $n!$ is defined as $0! := 1$ and $(\successor{n})! := (\successor{n})\times n!$.
+	\end{enumerate}
+\end{exercise}
+Before the formal proof, we give a few lemmas. For convenience, in the following text for the exercise, we let $N_n := \{1 \le i \le n\}$. 
+\begin{lem}\label{my.lem.exer.3.6.12.1}
+	For all $f \in S_{\successor{n}}$, the function $f'$ defined on $N_n$ as
+		\[
+			f'(m) := 
+			\begin{cases}
+				f(m), &\hbox{if } f(m) \in N_n \ \mathrm{i.e.}\ m \ne f^{-1}(\successor{n}) \\
+				f(\successor{n}), &\hbox{if } f(m) \notin N_n \ \mathrm{i.e.}\ m = f^{-1}(\successor{n}) 
+			\end{cases}
+		\]
+	is a bijection $N_n \to N_n$. That is, $f' \in S_n$.
+\end{lem}
+\begin{proof}
+	First, by definition, its domain is $N_n$. To see if its codomain is also $N_n$, we only need to check if $f(\successor{n})$ is in $N_n$ when $f(m) = \successor{n}$ for some $m \in N_n$. If there's no such $m$, then $f'$ simply is $\rvertsub{f}{N_n}$. Because $f$ is a bijection, if there is such a $m$, then $f(\successor{n}) \ne \successor{n}$. 
+
+		Now we know that $f'$ is indeed $N_n \to N_n$, we show that it is a bijection. If $f^{-1}(\successor{n}) = \successor{n}$, then $f'$ is $
+vertsub{f}{N_n}$, and is at least injective. Because $f$ is a bijection, by \exerciseref{3.4.3} (b), we know that $f(N_n) = f(N_{\successor{n}} \setminus \{\successor{n}\}) = f(N_{\successor{n}}) \setminus f(\{\successor{n}\})$. Because $f$ is a bijection, $f(N_{\successor{n}}) \setminus f(\{\successor{n}\}) = N_{\successor{n}} \setminus \{successor{n}\} = N_n$, as desired.
+
+		If $f^{-1}(\successor{n}) \ne \successor{n}$, then let $m = f^{-1}(\successor{n})$. We have $N_n \setminus \{m\}$ having a cardinality of $n-1$ (informally, as in Lemma~3.6.9). As $f$ is injective, according to \exerciseref{3.6.4} (d), $\#f(N_n \setminus \{m\})$, too. The injectivity also grants that $f(\successor{n}) \notin f(N_n)$, so we have 
+		\[
+			\#f(N_n \setminus \{m\} \cup \{\successor{n}\}) = n = \#N_n
+		\]
+		By \exerciseref{3.4.3}, we have $f(N_n \setminus \{m\} \cup \{\successor{n}\}) = f(N_n \setminus \{m\}) \cup f(\{\successor{n}\})$. By the uniqueness of $m$, both sides of the $\cup$ are subsets of $N_n$. Hence their union is also a subset of $N_n$. Now consider \exerciseref{3.6.4} (c), which states that, given $Y \subseteq X$, where $X$ is finite, then
+		\[
+			Y \ne X \to \#Y < \#X
+		\]
+		So, conversely, $\neg(\#Y < \#X) \to Y = X$. However, as we also have $\#Y \le \#X$ as a direct consequence of $Y \subseteq X$, we can say that $(\#Y = \#X)$ means $\neg(\#Y < \#X)$. Hence, we have $Y = X$, that is,
+		\[
+			f(N_n \setminus \{m\} \cup \{\successor{n}\}) = N_n
+		\]
+		Therefore, $f'$ is surjective.
+
+		Because $f$ is injective, $f(\successor{n}) \ne f(i)$ for all $i \in N_n$. Hence, $f'$ is also injective.
+\end{proof}
+\begin{lem}\label{my.lem.exer.3.6.12.2}
+	For all $f_1 , f_2 \in S_{\successor{n}}$, if $f_1 \ne f_2$, then either $f_1' \ne f_2'$ or $f_1^{-1}(\successor{n}) \ne f_2^{-1}(\successor{n})$, where $f_1'$ and $f_2'$ are defined as in My Lemma~\ref{my.lem.exer.3.6.12.1}.
+\end{lem}
+\begin{proof}
+	Suppose that $f_1^{-1}(\successor{n}) = f_2^{-1}(\successor{n}) = M$. We need to show that $f_1' \ne f_2'$. 
+
+	By definition, $f_1(N_{\successor{n}} \setminus \{M\}) = f_2(N_{\successor{n}} \setminus \{M\}) = N_n$. However, as $f_1 \ne f_2$, there must exist some $m \in N_{\successor{n}} \setminus \{M\}$ such that $f_1(m) \ne f_2(m)$. We have two situations:
+	\begin{enumerate}
+		\item 
+		If $m \in N_n$, then, since $m \ne M$, we have $f_1'(m) := f_1(m) \ne f_2(m) =: f_2'(m) $.
+
+		\item
+		If $m \notin N_n$, that is, $m = \successor{n}$, then, by injectivity, $M \ne \successor{n}$. Thus, $f_1'(M) := f_1(\successor{n}) = f_1(m) \ne f_2(m) = f_2(\successor{n}) =: f_2'(M)$.
+	\end{enumerate}
+
+	Therefore, in either of the two situations, we see that $f_1' \ne f_2'$, as desired.
+\end{proof}
+
+Now we can prove this exercise's statements.
+\begin{proof}\leavevmode
+\begin{enumerate}
+	\item 
+		By \exerciseref{3.6.4} (f), the set of all functions from $N_n$ to itself is finite. Hence, $S_n$, being a subset of it, is also finite, by (c).
+
+		To show that $\#S_{\successor{n}} = (\successor{n}) \times \#S_n$, we induct on $n$.
+
+		\mybcbox When $n = 0$, $S_n$ contains the empty function to the empty set, and $\#S_n = 1$. $S_{\successor{n}} = S_1$ contains the function $\{1\} \to \{1\}$, and $\#S_1 = 1$.
+
+		\myisbox Suppose that it's already true for some $n$. We try to construct a bijection from $S_{\successor{n}}$ to $S_n \times N_{\successor{n}}$.
+
+		Let $f$ be any element in $S_{\successor{n}}$. Define $f'$ based on $f$ as in My Lemma~\ref{my.lem.exer.3.6.12.1}. Map $f$ to $(f', f^{-1}(\successor{n}))$. It's clear that the mapped to element is in $S_n \times N_{\successor{n}}$. Now we show that such a mapping, let's call it $\phi$, on all $f \in S_{\successor{n}}$ is a bijection.
+
+		By My Lemma~\ref{my.lem.exer.3.6.12.2}, $\phi$ is injective. Now we show that it is surjective. Let $(f',m)$ be any element in $S_n \times N_{\successor{n}}$, then we define $f$ as (using the graph representation)
+		\begin{enumerate}
+			\item If $m = \successor{n}$, then
+			\[ 
+				G(f) := G(f') \cup \{(\successor{n}, \successor{n})\}
+			\]
+			\item If $m \ne \successor{n}$, \label{exer.3.6.12.fp.con.2}
+			then 
+			\[
+				G(f) := \bigl(G(f') \setminus \{(m, f'(m))\}\bigr) \cup \{(m, \successor{n}), (\successor{n}, f'(m))\}
+			\]
+		\end{enumerate}
+		
+		In the first case, it is quite obvious that $f$ is bijective.
+
+		In the second case, the range of $f$ equals $f'(N_n) \setminus \{f'(m)\} \cup \{\successor{n}, f'(m)\}$, which then equals
+		$f'(N_n) \cup \{\successor{n}\}$, and equals $N_{\successor{n}}$. Hence, $f$ is surjective.
+
+		Also, because $\successor{n} \notin f'(N_n)$, then inclusion of $(m, \successor{n})$ in the graph does not break the injectivity.
+		Neither does the inclusion of $(\successor{n}, f'(m))$, as $f'(m)$ has been removed from the range first. Hence, $f$ is injective.
+
+		In conclusion, in both cases of the definition, $f$ is bijection. Now we show that $\phi(f) = (f', m)$ to conclude that $\phi$ is surjective.
+
+		By definition, the second element in the pair, $\phi(f)[1]$ (we are using Python's notation here), is $f^{-1}(\successor{n})$, which turns out to be $m$, by how $f$ is constructed.
+		How $f'$ is obtained from $f$ by $\phi$ is defined in My Lemma~\ref{my.lem.exer.3.6.12.1}. 
+		\begin{enumerate}
+			\item If $f^{-1}(\successor{n}) = m = \successor{n}$, then by definition $\phi(f)[0] := 
+vertsub{f}{N_n} = f'$, as desired.
+			\item If $f^{-1}(\successor{n}) = m \ne \successor{n}$, then $\phi(f)[0]$, that is, $f'$, is defined as (using graph)
+			\begin{align*}
+				G(\phi(f)[0]) := &\bigl(G(\rvertsub{f}{N_n})) \setminus \{(m, \successor{n})\}\bigr)\,\cup \\ 
+						 &\{(m, f(\successor{n}))\}
+			\end{align*}
+			By how we constructed $f$ in the \ref{exer.3.6.12.fp.con.2} from $f'$, we see that $f(\successor{n}) := f'(m)$. This means that,
+			$(G(\phi(f)[0])(m) = f'(m)$. Also, $f(x) := f'(x)$, when $x \in N_n \land x \ne m$. Hence, $\phi(f)[0] = f'$, as desired.
+		\end{enumerate}
+
+		In conclusion, we have shown that there's an explicit bijection between $S_{\successor{n}}$ and $S_n \times N_{\successor{n}}$. By
+		\exerciseref{3.6.4} (e), we have $\#(S_n \times N_{\successor{n}}) = \#S_n \times \successor{n}$, as desired.
+
+		We can now close the induction.
+
+	\item 
+		We induct on $n$.
+
+		\mybcbox When $n = 0$, $N_n = \emptyset$, so $S_n$ contains only one element, the empty bijection. Hence $\#S_n = 1$.
+
+		\myisbox Suppose it's already true that $\#S_n = n!$ for some $n$. We have shown in (i) that $\#S_{\successor{n}} = \successor{n} \times \#S_n$.
+		By our inductive hypothesis, it then equals $\successor{n} \times n!$, and then equals $(\successor{n})!$, by the definition of factorial.
+
+		We can now close the induciton.
+
+\end{enumerate}
 \end{proof}

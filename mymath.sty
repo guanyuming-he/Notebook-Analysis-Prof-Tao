@@ -4,6 +4,17 @@
 \RequirePackage{amsmath}
 \RequirePackage{amssymb}
 
+% Logical true and false.
+\newcommand\true{\mathbf{T}}
+\newcommand\false{\mathbf{F}}
+
+% Restrict a function to some domain
+% or substitute some number into a formula
+% this form has so many uses.
+\newcommand{\rvertsub}[2]{%
+	\ensuremath{\left.#1\right|_{#2}}%
+}
+
 
 \newcommand{\DefineDelimiters}[3]{%
 \expandafter\newcommand\csname#1\endcsname[2][]{%
@@ -14,9 +25,6 @@
 \fi%
 }%
 }
-
-\newcommand\true{\mathbf{T}}
-\newcommand\false{\mathbf{F}}
 
 \DefineDelimiters{rbra}{(}{)}
 \DefineDelimiters{sbra}{[}{]}
