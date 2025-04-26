@@ -2702,11 +2702,13 @@ Now we can prove this exercise's statements.
 
 		In conclusion, in both cases of the definition, $f$ is bijection. Now we show that $\phi(f) = (f', m)$ to conclude that $\phi$ is surjective.
 
-		By definition, the second element in the pair, $\phi(f)[1]$ (we are using Python's notation here), is $f^{-1}(\successor{n})$, which turns out to be $m$, by how $f$ is constructed.
+		By definition, the second element in the pair, $\phi(f)[1]$ (we are
+		using Python notation here), is $f^{-1}(\successor{n})$, which turns
+		out to be $m$, by how $f$ is constructed.
 		How $f'$ is obtained from $f$ by $\phi$ is defined in My Lemma~\ref{my.lem.exer.3.6.12.1}. 
 		\begin{enumerate}
-			\item If $f^{-1}(\successor{n}) = m = \successor{n}$, then by definition $\phi(f)[0] := 
-vertsub{f}{N_n} = f'$, as desired.
+			\item If $f^{-1}(\successor{n}) = m = \successor{n}$, then by
+				definition $\phi(f)[0] := \rvertsub{f}{N_n} = f'$, as desired.
 			\item If $f^{-1}(\successor{n}) = m \ne \successor{n}$, then $\phi(f)[0]$, that is, $f'$, is defined as (using graph)
 			\begin{align*}
 				G(\phi(f)[0]) := &\bigl(G(\rvertsub{f}{N_n})) \setminus \{(m, \successor{n})\}\bigr)\,\cup \\ 
